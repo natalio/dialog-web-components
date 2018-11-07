@@ -33,6 +33,7 @@
   user-select: none;
   cursor: inherit;
   vertical-align: middle;
+  font-weight: 500;
 }
 
 .clickable {

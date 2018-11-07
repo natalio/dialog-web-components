@@ -1,4 +1,4 @@
-Avatar:
+Avatar with image:
 
 ```jsx
 <div>
@@ -57,45 +57,28 @@ Avatar without image:
 
 ```jsx
 <div>
-  <Avatar
-    title="Valera Kotovski"
-    placeholder="empty"
-    size={50}
-  />
-  <Avatar
-    title="Hello World"
-    placeholder="lblue"
-    size={50}
-  />
-  <Avatar
-    title="Bad Timmy"
-    placeholder="blue"
-    size={50}
-  />
-  <Avatar
-    title="Ashley Simpson"
-    placeholder="purple"
-    size={50}
-  />
-  <Avatar
-    title="Ray Charles"
-    placeholder="red"
-    size={50}
-  />
-  <Avatar
-    title="Someone Else"
-    placeholder="orange"
-    size={50}
-  />
-  <Avatar
-    title="Net Vdohnoveniya"
-    placeholder="yellow"
-    size={50}
-  />
-  <Avatar
-    title="Vladimir Vladimirovich"
-    placeholder="green"
-    size={50}
-  />
+  <Avatar title="Valera Kotovski" placeholder="empty" size={50} />
+  <Avatar title="Hello World" placeholder="lblue" size={50} />
+  <Avatar title="Bad Timmy" placeholder="blue" size={50} />
+  <Avatar title="Ashley Simpson" placeholder="purple" size={50} />
+  <Avatar title="Ray Charles" placeholder="red" size={50} />
+  <Avatar title="Someone Else" placeholder="orange" size={50} />
+  <Avatar title="Net Vdohnoveniya" placeholder="yellow" size={50} />
+  <Avatar title="Vladimir Vladimirovich" placeholder="green" size={50} />
+</div>
+```
+
+Avatar without title:
+
+```jsx
+<div>
+  <Avatar placeholder="empty" size={50} />
+  <Avatar placeholder="lblue" size={50} />
+  <Avatar placeholder="blue" size={50} />
+  <Avatar placeholder="purple" size={50} />
+  <Avatar placeholder="red" size={50} />
+  <Avatar placeholder="orange" size={50} />
+  <Avatar placeholder="yellow" size={50} />
+  <Avatar placeholder="green" size={50} />
 </div>
 ```
