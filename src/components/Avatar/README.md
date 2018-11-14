@@ -82,3 +82,37 @@ Avatar without title:
   <Avatar placeholder="green" size={50} />
 </div>
 ```
+
+Avatar image change test:
+
+```jsx
+initialState = {
+  image: null,
+};
+
+const handleImageChange = () => {
+  setState({
+    image: `https://picsum.photos/500/500/?${Math.floor(Math.random() * 20)}`,
+  });
+};
+
+const handleImageRemove = () => {
+  setState({ image: null });
+};
+
+<div>
+  <Button onClick={handleImageChange} theme="primary" size="small">
+    Change image
+  </Button>
+  <Button onClick={handleImageRemove} theme="danger" size="small">
+    Remove image
+  </Button>
+  <hr />
+  <Avatar
+    placeholder="empty"
+    size={150}
+    image={state.image}
+    title="Valera Kotovski"
+  />
+</div>;
+```

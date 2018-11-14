@@ -10,6 +10,7 @@ import getAvatarText from './utils/getAvatarText';
 import getAvatarColor from './utils/getAvatarColor';
 import createSequence from '../../utils/createSequence';
 import styles from './Avatar.css';
+import fetchImage from '../../utils/fetchImage';
 
 export type Props = {
   title: ?string,
@@ -20,13 +21,18 @@ export type Props = {
   onClick?: (event: SyntheticMouseEvent<>) => mixed,
 };
 
+export type State = {
+  isImageLoaded: boolean,
+  currentImage: ?string,
+};
+
 const seq = createSequence();
 
 /*
  * A component for displaying the user avatar.
  * If there is no image, it shows the initials from `title` on the gradient background
  */
-class Avatar extends PureComponent<Props> {
+class Avatar extends PureComponent<Props, State> {
   id: string;
 
   static defaultProps = {
@@ -40,12 +46,42 @@ class Avatar extends PureComponent<Props> {
     super(props);
 
     this.id = 'avatar_' + seq.next();
+    this.state = {
+      isImageLoaded: false,
+      currentImage: null,
+    };
+
+    if (props.image) {
+      fetchImage(props.image).then(this.handleImageLoaded);
+    }
   }
 
-  renderDefs() {
-    const { image, placeholder } = this.props;
+  componentWillReceiveProps(nextProps: Props) {
+    if (this.props.image !== nextProps.image) {
+      if (nextProps.image) {
+        this.setState({ isImageLoaded: false });
+        fetchImage(nextProps.image).then(this.handleImageLoaded);
+      } else {
+        this.setState({
+          isImageLoaded: false,
+          currentImage: null,
+        });
+      }
+    }
+  }
 
-    if (image) {
+  handleImageLoaded = (): void => {
+    this.setState({
+      isImageLoaded: true,
+      currentImage: this.props.image,
+    });
+  };
+
+  renderDefs() {
+    const { placeholder } = this.props;
+    const { isImageLoaded, currentImage } = this.state;
+
+    if (isImageLoaded || currentImage !== null) {
       return (
         <defs>
           <pattern
@@ -59,7 +95,7 @@ class Avatar extends PureComponent<Props> {
               y="0"
               width="100%"
               height="100%"
-              xlinkHref={image}
+              xlinkHref={currentImage}
               preserveAspectRatio="xMidYMid slice"
             />
           </pattern>
@@ -87,9 +123,10 @@ class Avatar extends PureComponent<Props> {
   }
 
   renderText() {
-    const { title, size, image } = this.props;
+    const { title, size } = this.props;
+    const { isImageLoaded, currentImage } = this.state;
 
-    if (image || !title) {
+    if (isImageLoaded || currentImage !== null || !title) {
       return null;
     }
 
