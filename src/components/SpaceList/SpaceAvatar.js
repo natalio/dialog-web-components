@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import createSequence from '../../utils/createSequence';
 import getAvatarText from '../Avatar/utils/getAvatarText';
 import getAvatarColor from '../Avatar/utils/getAvatarColor';
-import styles from './SpaceAvatar.css';
+import styles from './SpaceList.css';
 
 export type Props = {
   id: string,
@@ -133,7 +133,7 @@ class SpaceAvatar extends PureComponent<Props> {
   render() {
     const { size, id, title, active } = this.props;
     const className = classNames(
-      styles.container,
+      styles.spaceAvatarContainer,
       this.props.className, {
         [styles.active]: active,
         [styles.nonactive]: !active
