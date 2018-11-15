@@ -83,9 +83,10 @@ Avatar without title:
 </div>
 ```
 
-Avatar image change test:
+Avatar change props test:
 
 ```jsx
+const status = ['away', 'unset', 'invisible', 'do_not_disturb'];
 initialState = {
   image: null,
 };
@@ -100,19 +101,30 @@ const handleImageRemove = () => {
   setState({ image: null });
 };
 
+const handleStatusChange = () => {
+  setState({ status: status[Math.floor(Math.random() * status.length)] });
+};
+
 <div>
-  <Button onClick={handleImageChange} theme="primary" size="small">
-    Change image
-  </Button>
-  <Button onClick={handleImageRemove} theme="danger" size="small">
-    Remove image
-  </Button>
-  <hr />
+  <div className="styleguide__buttons">
+    <Button onClick={handleImageChange} theme="primary" size="small">
+      Change image
+    </Button>
+    <Button onClick={handleImageRemove} theme="danger" size="small">
+      Remove image
+    </Button>
+    <Button onClick={handleStatusChange} theme="warning" size="small">
+      Randomize status
+    </Button>
+  </div>
+  <br />
   <Avatar
     placeholder="empty"
     size={150}
     image={state.image}
     title="Valera Kotovski"
+    onClick={console.log}
+    status={state.status}
   />
 </div>;
 ```

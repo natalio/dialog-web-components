@@ -7,6 +7,9 @@
 :root {
   --avatar-text-color: #fff;
   --avatar-text-font-size: 32px;
+  --avatar-unset-color: var(--color-success);
+  --avatar-away-color: var(--color-warning);
+  --avatar-dnd-color: var(--color-danger);
 }
 
 /* Reset */
@@ -17,10 +20,19 @@
 /* Styles */
 .container {
   display: inline-block;
-  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.05);
   border-radius: 100%;
   line-height: 0;
-  overflow: hidden;
+  position: relative;
+}
+
+.svg {
+  z-index: 3000;
+}
+
+.mask,
+.status {
+  transition: opacity var(--default-transition-duration) ease-in-out;
+  opacity: 1;
 }
 
 .text {
@@ -34,14 +46,56 @@
   cursor: inherit;
   vertical-align: middle;
   font-weight: 500;
+  pointer-events: none;
 }
 
-.clickable {
-  cursor: pointer;
-  pointer-events: auto;
-  transition: opacity var(--default-transition-duration) ease-in-out;
-
-  &:hover {
+.hovered {
+  & .mask,
+  & .status {
     opacity: 0.9;
   }
+}
+
+/* Status color */
+.unset {
+  fill: var(--avatar-unset-color);
+}
+
+.away {
+  fill: var(--avatar-away-color);
+}
+
+.do_not_disturb {
+  fill: var(--avatar-dnd-color);
+}
+
+/* Clicker */
+.clickerWrapper {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 3005;
+}
+
+.clickerStatus {
+  position: absolute;
+  width: 29.8%;
+  height: 29.8%;
+  border-radius: 100%;
+  bottom: 1.2%;
+  right: 1.2%;
+  cursor: pointer;
+}
+
+.clickerMask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 100%;
+  cursor: pointer;
 }
