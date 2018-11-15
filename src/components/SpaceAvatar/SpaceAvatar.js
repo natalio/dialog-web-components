@@ -34,7 +34,7 @@ class SpaceAvatar extends PureComponent<Props> {
   svgId: string;
 
   static defaultProps = {
-    size: 68,
+    size: 40,
     placeholder: 'empty'
   };
 

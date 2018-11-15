@@ -1,0 +1,48 @@
+/*
+ * Copyright 2018 dialog LLC <info@dlg.im>
+ * @flow
+ */
+
+import React, { PureComponent } from 'react';
+import classNames from 'classnames';
+import styles from './SpaceList.css';
+
+export type Props = {
+  size: number,
+  className?: string,
+  onClick: (event => SyntheticMouseEvent<>) => mixed
+};
+
+class SpaceAvatar extends PureComponent<Props> {
+  handleClick = (): void => {
+    this.props.onClick(this.props.id);
+  };
+
+  svgShape = () => {
+    return 'M 50 15    A 0 0 0 0 1 50 15 ' +
+      'L 67.5 15  A 17 17 0 0 1 85 32.5  L 85 50  A 0 0 0 0 1 85 50 ' +
+      'L 85 67.5  A 17 17 0 0 1 67.5 85  L 50 85  A 0 0 0 0 1 50 85 ' +
+      'L 32.5 85  A 17 17 0 0 1 15 67.5  L 15 50  A 0 0 0 0 1 15 50 ' +
+      'L 15 32.5  A 17 17 0 0 1 32.5 15  L 50 15  Z';
+  };
+
+  render() {
+    const { size } = this.props;
+    const className = classNames(styles.spaceAdd, this.props.className);
+
+    return (
+      <svg
+        className={className}
+        viewBox="0 0 100 100"
+        width={size}
+        height={size}
+        shapeRendering="auto"
+        onClick={this.handleClick}
+      >
+        <path d={this.svgShape()} />
+      </svg>
+    );
+  }
+}
+
+export default SpaceAvatar;
