@@ -41,8 +41,13 @@ class SpaceList extends PureComponent<Props> {
     const { current, variants, size, width } = this.props;
     const className = classNames(styles.container, this.props.className);
 
-    // in pixels
-    const DEFAULT_GAP_UNDER_SPACE_ROW = 15;
+    /**
+     * in pixels
+     * at this moment I don't know,
+     * how this will be displayed with custom scrollbar.
+     * will fix later
+     */
+    const DEFAULT_GAP_UNDER_SPACE_ROW = 20;
 
     const spaceAvatars = variants.map((variant) => {
       const { id, title, image, placeholder } = variant;

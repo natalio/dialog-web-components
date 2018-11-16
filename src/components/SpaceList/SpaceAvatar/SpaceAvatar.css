@@ -6,13 +6,9 @@
 @import '../../../styles/colors.css';
 
 :root {
-  --space-list-space-add-default-color: var(--violet-blue);
-  --space-list-space-add-hover: color(var(--space-list-space-add-default-color)) tint 10%;
-  --space-list-space-add-active: color(var(--space-list-space-add-default-color)) shade 10%;
-
-  --space-list-space-avatar-text-color: #fff;
-  --space-list-space-avatar-font-size: 20px;
-  --space-list-space-avatar-font-size-active: 30px;
+  --space-avatar-text-color: #fff;
+  --space-avatar-font-size: 20px;
+  --space-avatar-font-size-active: 30px;
 }
 
 /* Reset */
@@ -26,16 +22,12 @@
   line-height: 0;
 }
 
-.container.active g {
-  cursor: default;
-}
-
 .container.nonactive g {
   cursor: pointer;
 
-&:hover {
-   opacity: 0.9;
- }
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 .container g {
@@ -48,7 +40,7 @@
 
 .text {
   font-family: var(--default-font-family);
-  color: var(--space-list-space-avatar-text-color);
+  color: var(--space-avatar-text-color);
   letter-spacing: 2px;
   fill: currentColor;
   text-transform: uppercase;
@@ -59,9 +51,9 @@
 }
 
 .active text {
-  font-size: var(--space-list-space-avatar-font-size-active);
+  font-size: var(--space-avatar-font-size-active);
 }
 
 .nonactive text {
-  font-size: var(--space-list-space-avatar-font-size);
+  font-size: var(--space-avatar-font-size);
 }

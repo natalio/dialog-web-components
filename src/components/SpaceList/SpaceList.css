@@ -9,10 +9,7 @@
   --space-list-space-add-default-color: var(--violet-blue);
   --space-list-space-add-hover: color(var(--space-list-space-add-default-color)) tint 10%;
   --space-list-space-add-active: color(var(--space-list-space-add-default-color)) shade 10%;
-
-  --space-list-space-avatar-text-color: #fff;
-  --space-list-space-avatar-font-size: 20px;
-  --space-list-space-avatar-font-size-active: 30px;
+  --space-list-space-add-icon-color: #ffffff;
 }
 
 /* Reset */
@@ -48,6 +45,10 @@
 
 .spaceAdd path {
   fill: var(--space-list-space-add-default-color);
+}
+
+.spaceAdd rect {
+  fill: var(--space-list-space-add-icon-color);
 }
 
 .text {

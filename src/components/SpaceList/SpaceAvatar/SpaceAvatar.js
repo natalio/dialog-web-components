@@ -152,6 +152,10 @@ class SpaceAvatar extends PureComponent<Props> {
           height={size}
           shapeRendering="auto"
         >
+          <defs>
+            {this.renderDefs()}
+          </defs>
+
           <g onClick={this.handleClick}>
             <path
               fill={`url(#${this.svgId})`}
@@ -160,9 +164,6 @@ class SpaceAvatar extends PureComponent<Props> {
             />
             {this.renderText()}
           </g>
-          <defs>
-            {this.renderDefs()}
-          </defs>
         </svg>
       </div>
     );
