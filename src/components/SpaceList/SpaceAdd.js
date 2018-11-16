@@ -5,6 +5,7 @@
 
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+import Icon from '../Icon/Icon';
 import styles from './SpaceList.css';
 
 export type Props = {
@@ -31,16 +32,35 @@ class SpaceAvatar extends PureComponent<Props> {
     const className = classNames(styles.spaceAdd, this.props.className);
 
     return (
-      <svg
+      <div
         className={className}
-        viewBox="0 0 100 100"
-        width={size}
-        height={size}
-        shapeRendering="auto"
-        onClick={this.handleClick}
+        style={{ position: 'relative', width: size, height: size }}
       >
-        <path d={this.svgShape()} />
-      </svg>
+        <svg
+          viewBox="0 0 100 100"
+          shapeRendering="auto"
+        >
+          <g onClick={this.handleClick}>
+            <path d={this.svgShape()} />
+            <rect
+              fill="#ffffff"
+              width="4"
+              height="30"
+              x="48"
+              y="35"
+              rx="2"
+            />
+            <rect
+              fill="#ffffff"
+              height="4"
+              width="30"
+              y="48"
+              x="35"
+              ry="2"
+            />
+          </g>
+        </svg>
+      </div>
     );
   }
 }

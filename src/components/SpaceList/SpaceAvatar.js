@@ -15,7 +15,7 @@ import styles from './SpaceList.css';
 export type Props = {
   id: string,
   title: string,
-  size?: number,
+  size: number,
   placeholder: AvatarPlaceholder,
   image?: string,
   className?: string,
@@ -34,7 +34,6 @@ class SpaceAvatar extends PureComponent<Props> {
   svgId: string;
 
   static defaultProps = {
-    size: 40,
     placeholder: 'empty'
   };
 
@@ -144,7 +143,6 @@ class SpaceAvatar extends PureComponent<Props> {
       <div
         id={`space_avatars_space_avatar_${id}`}
         className={className}
-        onClick={this.handleClick}
         title={title}
       >
         <svg
@@ -154,16 +152,17 @@ class SpaceAvatar extends PureComponent<Props> {
           height={size}
           shapeRendering="auto"
         >
+          <g onClick={this.handleClick}>
+            <path
+              fill={`url(#${this.svgId})`}
+              x="50%" y="50%"
+              d={this.svgShape()}
+            />
+            {this.renderText()}
+          </g>
           <defs>
             {this.renderDefs()}
           </defs>
-
-          <path
-            fill={`url(#${this.svgId})`}
-            x="50%" y="50%"
-            d={this.svgShape()}
-          />
-          {this.renderText()}
         </svg>
       </div>
     );

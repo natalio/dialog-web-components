@@ -14,6 +14,7 @@ import styles from './SpaceList.css';
 export type Props = {
   className?: string,
   current: string,
+  width?: number,
   variants: Array<{
     id: string,
     title: string,
@@ -28,7 +29,8 @@ export type Props = {
 
 class SpaceList extends PureComponent<Props> {
   static defaultProps = {
-    size: 40
+    size: 40,
+    width: 240
   };
 
   handleSpaceAddClick = () => {
@@ -36,8 +38,11 @@ class SpaceList extends PureComponent<Props> {
   };
 
   render() {
-    const { current, variants, size } = this.props;
+    const { current, variants, size, width } = this.props;
     const className = classNames(styles.container, this.props.className);
+
+    // in pixels
+    const DEFAULT_GAP_UNDER_SPACE_ROW = 15;
 
     const spaceAvatars = variants.map((variant) => {
       const { id, title, image, placeholder } = variant;
@@ -58,12 +63,22 @@ class SpaceList extends PureComponent<Props> {
     });
 
     return (
-      <div className={className} style={{ height: size }}>
+      <div
+        className={className}
+        style={{
+          maxHeight: size + DEFAULT_GAP_UNDER_SPACE_ROW,
+          height: size + DEFAULT_GAP_UNDER_SPACE_ROW,
+          width
+        }}
+      >
         <div className={styles.wrapper}>
           {spaceAvatars}
         </div>
 
-        <SpaceAdd size={size} onClick={this.handleSpaceAddClick} />
+        <SpaceAdd
+          size={size}
+          onClick={this.handleSpaceAddClick}
+        />
       </div>
     );
   }

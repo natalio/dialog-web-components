@@ -28,7 +28,6 @@
 .container {
   display: flex;
   line-height: 0;
-  width: 240px;
 }
 
 .wrapper {
@@ -39,9 +38,9 @@
   overflow-y: hidden;
 }
 
-.spaceAdd {
-  transition: opacity var(--default-transition-duration) ease-in-out;
+.spaceAdd g {
   cursor: pointer;
+  transition: opacity var(--default-transition-duration) ease-in-out;
 
   &:hover {
     opacity: 0.9;
@@ -52,29 +51,28 @@
   fill: var(--space-list-space-add-default-color);
 }
 
-/* Styles */
 .spaceAvatarContainer {
   display: inline-block;
   line-height: 0;
 }
 
-.spaceAvatarContainer.active {
+.spaceAvatarContainer.active g {
   cursor: default;
 
-&:hover .image {
+&:hover {
    opacity: 1;
  }
 }
 
-.spaceAvatarContainer.nonactive {
+.spaceAvatarContainer.nonactive g {
   cursor: pointer;
 
-&:hover .image {
+&:hover {
    opacity: 0.9;
  }
 }
 
-.image {
+.spaceAvatarContainer g {
   transition: opacity var(--default-transition-duration) ease-in-out;
 }
 
