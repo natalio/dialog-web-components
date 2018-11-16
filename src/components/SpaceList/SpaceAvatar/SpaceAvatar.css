@@ -2,8 +2,8 @@
  * Copyright 2018 dialog LLC <info@dlg.im>
  */
 
-@import '../../styles/variables.css';
-@import '../../styles/colors.css';
+@import '../../../styles/variables.css';
+@import '../../../styles/colors.css';
 
 :root {
   --space-list-space-add-default-color: var(--violet-blue);
@@ -22,32 +22,28 @@
 
 /* Styles */
 .container {
-  display: flex;
+  display: inline-block;
   line-height: 0;
 }
 
-.wrapper {
-  white-space: nowrap;
-  display: inline-block;
-  overflow-x: auto;
-  overflow-y: hidden;
+.container.active g {
+  cursor: default;
 }
 
-.spaceAdd {
-  position: relative;
-}
-
-.spaceAdd g {
+.container.nonactive g {
   cursor: pointer;
-  transition: opacity var(--default-transition-duration) ease-in-out;
 
-  &:hover {
-    opacity: 0.9;
-  }
+&:hover {
+   opacity: 0.9;
+ }
 }
 
-.spaceAdd path {
-  fill: var(--space-list-space-add-default-color);
+.container g {
+  transition: opacity var(--default-transition-duration) ease-in-out;
+}
+
+.image path {
+  transition: d var(--default-transition-duration) ease-in-out;
 }
 
 .text {

@@ -34,7 +34,7 @@ class SpaceAvatar extends PureComponent<Props> {
     return (
       <div
         className={className}
-        style={{ position: 'relative', width: size, height: size }}
+        style={{ minWidth: size, width: size, height: size }}
       >
         <svg
           viewBox="0 0 100 100"
