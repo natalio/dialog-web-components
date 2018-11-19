@@ -116,13 +116,13 @@ const handleStatusChange = () => {
     </Button>
     <Button
       onClick={handleImageRemove}
-      theme="danger"
+      theme="warning"
       size="small"
       disabled={!state.image}
     >
       Remove image
     </Button>
-    <Button onClick={handleStatusChange} theme="warning" size="small">
+    <Button onClick={handleStatusChange} theme="primary" size="small">
       Randomize status
     </Button>
   </div>

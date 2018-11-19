@@ -20,7 +20,7 @@ export type Props = {
   placeholder: AvatarPlaceholder,
   className?: string,
   onClick?: (event: SyntheticMouseEvent<>) => mixed,
-  status: ?UserStatusType,
+  status?: ?UserStatusType,
 };
 
 export type State = {
@@ -39,7 +39,7 @@ class Avatar extends PureComponent<Props, State> {
     title: null,
     size: 32,
     placeholder: 'empty',
-    status: 'invisible',
+    status: null,
   };
 
   constructor(props: Props) {

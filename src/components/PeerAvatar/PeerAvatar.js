@@ -12,7 +12,7 @@ export type Props = {
   className?: string,
   peer: PeerInfo,
   size: number,
-  status: ?UserStatusType,
+  status?: ?UserStatusType,
   onClick?: (event: SyntheticMouseEvent<>) => mixed,
 };
 

@@ -3,12 +3,10 @@
  * @flow
  */
 
-import type { AvatarPlaceholder, PeerInfo } from '@dlghq/dialog-types';
-import type { AvatarSize } from '../Avatar/utils/getAvatarSize';
+import type { AvatarPlaceholder } from '@dlghq/dialog-types';
 import type { Gradient } from '../Avatar/utils/getAvatarColor';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import getAvatarSize from '../Avatar/utils/getAvatarSize';
 import getAvatarText from '../Avatar/utils/getAvatarText';
 import getAvatarColor from '../Avatar/utils/getAvatarColor';
 import createSequence from '../../utils/createSequence';
@@ -254,7 +252,7 @@ class AvatarDouble extends PureComponent<Props, State> {
 
   renderPeerBigText() {
     const {
-      big: { image, title },
+      big: { title },
     } = this.props;
     const { isBigImageLoaded, currentBigImage } = this.state;
 
@@ -286,7 +284,7 @@ class AvatarDouble extends PureComponent<Props, State> {
 
   renderPeerSmallText() {
     const {
-      small: { image, title },
+      small: { title },
     } = this.props;
     const { isSmallImageLoaded, currentSmallImage } = this.state;
 
@@ -365,13 +363,7 @@ class AvatarDouble extends PureComponent<Props, State> {
     return (
       <div style={{ width: size, height: size }} className={className}>
         {this.renderClicker()}
-        <svg
-          viewBox="0 0 109 109"
-          // width={size}
-          // height={size}
-          shapeRendering="auto"
-          className={styles.svg}
-        >
+        <svg viewBox="0 0 109 109" shapeRendering="auto" className={styles.svg}>
           {this.renderDefs()}
           {this.renderBig()}
           {this.renderSmall()}
