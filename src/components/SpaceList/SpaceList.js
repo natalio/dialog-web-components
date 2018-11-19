@@ -15,11 +15,11 @@ export type Props = {
   className?: string,
   current: string,
   width?: number,
+  size?: number,
   variants: Array<{
     id: string,
     title: string,
     image?: string,
-    size?: string,
     placeholder?:AvatarPlaceholder,
     className?: string
   }>,

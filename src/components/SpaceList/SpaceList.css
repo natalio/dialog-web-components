@@ -3,12 +3,9 @@
  */
 
 @import '../../styles/variables.css';
-@import '../../styles/colors.css';
 
 :root {
-  --space-list-space-add-default-color: var(--violet-blue);
-  --space-list-space-add-hover: color(var(--space-list-space-add-default-color)) tint 10%;
-  --space-list-space-add-active: color(var(--space-list-space-add-default-color)) shade 10%;
+  --space-list-space-add-default-color: var(--color-primary);
   --space-list-space-add-icon-color: #ffffff;
 }
 
@@ -43,10 +40,12 @@
   }
 }
 
+/* path === shape */
 .spaceAdd path {
   fill: var(--space-list-space-add-default-color);
 }
 
+/* rect === plus sign */
 .spaceAdd rect {
   fill: var(--space-list-space-add-icon-color);
 }

@@ -17,8 +17,7 @@ const handlePick = (current) => setState({ current });
       },
       {
         id: '3',
-        title: 'Gandalf the White',
-        placeholder: 'lblue'
+        title: 'Gandalf the White'
       }
     ]}
   onPick={handlePick}
