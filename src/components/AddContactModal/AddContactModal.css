@@ -62,7 +62,7 @@
 
 .found {
   composes: hint;
-  color: color(var(--modal-add-contact-font-color) alpha(80%));
+  color: color-mod(var(--modal-add-contact-font-color) alpha(80%));
 }
 
 .foundAvatar {

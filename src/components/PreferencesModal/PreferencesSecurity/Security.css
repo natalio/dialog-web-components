@@ -45,7 +45,7 @@
   font-size: var(--default-font-size-small);
   line-height: 20px;
   flex: 0 0 auto;
-  color: color(#000 alpha(70%));
+  color: color-mod(#000 alpha(70%));
   @apply --text-overflow-ellipsis;
 }
 

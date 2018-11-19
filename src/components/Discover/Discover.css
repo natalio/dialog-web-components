@@ -15,7 +15,7 @@
   --discover-padding-right: 20px;
   --discover-padding-bottom: 10px;
   --discover-padding-left: 20px;
-  --discover-border-color: color(#000 alpha(14%));
+  --discover-border-color: color-mod(#000 alpha(14%));
 }
 
 /* Reset */

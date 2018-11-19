@@ -9,8 +9,8 @@
   --activity-header-font-family: var(--default-font-family);
   --activity-header-transition-duration: var(--default-transition-duration);
   --activity-header-font-size: var(--default-font-size-large);
-  --activity-header-icon-color: color(#000 alpha(40%));
-  --activity-header-icon-color-hover: color(#000 alpha(60%));
+  --activity-header-icon-color: color-mod(#000 alpha(40%));
+  --activity-header-icon-color-hover: color-mod(#000 alpha(60%));
   --activity-header-z-index: var(--z-index-chat);
 }
 

@@ -6,7 +6,7 @@
 
 :root {
   --admin-modal-user-list-item-height: 36px;
-  --admin-modal-user-list-item-border-color: color(#000 alpha(10%));
+  --admin-modal-user-list-item-border-color: color-mod(#000 alpha(10%));
   --admin-modal-user-list-item-hover-background: #f2f2f2;
 }
 
