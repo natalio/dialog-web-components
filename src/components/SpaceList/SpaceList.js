@@ -15,26 +15,22 @@ export type Props = {
   className?: string,
   current: string,
   width?: number,
-  size?: number,
+  size: number,
   variants: Array<{
     id: string,
     title: string,
     image?: string,
-    placeholder?:AvatarPlaceholder,
+    placeholder?: AvatarPlaceholder,
     className?: string
   }>,
   onPick: (current: string) => mixed,
-  onClick: (event: SyntheticMouseEvent<>) => mixed
+  onClick: () => mixed
 };
 
 class SpaceList extends PureComponent<Props> {
   static defaultProps = {
     size: 40,
     width: 240
-  };
-
-  handleSpaceAddClick = () => {
-    this.props.onClick();
   };
 
   render() {
@@ -82,7 +78,7 @@ class SpaceList extends PureComponent<Props> {
 
         <SpaceAdd
           size={size}
-          onClick={this.handleSpaceAddClick}
+          onClick={this.props.onClick}
         />
       </div>
     );

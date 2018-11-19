@@ -41,6 +41,7 @@ export { default as CustomProfile } from './components/CustomProfile/CustomProfi
 export { default as UserStatus } from './components/UserStatus/UserStatus';
 export { default as SidebarMenuProfile } from './components/SidebarMenuProfile/SidebarMenuProfile';
 export { default as Markdown } from './components/Markdown/Markdown';
+export { default as SpaceList } from './components/SpaceList/SpaceList';
 
 // Calls
 export { default as Call } from './components/Call/Call';

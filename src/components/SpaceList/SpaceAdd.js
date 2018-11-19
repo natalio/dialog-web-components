@@ -10,12 +10,12 @@ import styles from './SpaceList.css';
 export type Props = {
   size: number,
   className?: string,
-  onClick: (event => SyntheticMouseEvent<>) => mixed
+  onClick: () => mixed
 };
 
 class SpaceAvatar extends PureComponent<Props> {
   handleClick = (): void => {
-    this.props.onClick(this.props.id);
+    this.props.onClick();
   };
 
   svgShape = () => {

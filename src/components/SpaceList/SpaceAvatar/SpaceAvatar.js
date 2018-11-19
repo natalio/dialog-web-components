@@ -20,7 +20,7 @@ export type Props = {
   image?: string,
   className?: string,
   active: boolean,
-  onPick?: (event => SyntheticMouseEvent<>) => mixed
+  onPick: (current: string) => mixed
 };
 
 const seq = createSequence();
@@ -41,10 +41,6 @@ class SpaceAvatar extends PureComponent<Props> {
     super(props);
 
     this.svgId = 'space_avatar_' + seq.next();
-
-    this.state = {
-      active: false
-    };
   }
 
   handleClick = (): void => {
