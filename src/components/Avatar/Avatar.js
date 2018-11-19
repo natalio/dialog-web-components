@@ -31,10 +31,6 @@ export type State = {
 
 const seq = createSequence();
 
-/*
- * A component for displaying the user avatar.
- * If there is no image, it shows the initials from `title` on the gradient background
- */
 class Avatar extends PureComponent<Props, State> {
   id: string;
 
@@ -192,6 +188,10 @@ class Avatar extends PureComponent<Props, State> {
   }
 
   renderClicker() {
+    if (!this.props.onClick) {
+      return null;
+    }
+
     return (
       <div className={styles.clickerWrapper}>
         <Hover

@@ -1,3 +1,6 @@
+A component for displaying the user avatar.
+If there is no image, it shows the initials from `title` on the gradient background.
+
 Avatar with image:
 
 ```jsx
@@ -86,10 +89,11 @@ Avatar without title:
 Avatar change props test:
 
 ```jsx
-const status = ['away', 'unset', 'invisible', 'do_not_disturb'];
 initialState = {
   image: null,
 };
+
+const status = ['away', 'unset', 'invisible', 'do_not_disturb'];
 
 const handleImageChange = () => {
   setState({
@@ -110,7 +114,12 @@ const handleStatusChange = () => {
     <Button onClick={handleImageChange} theme="primary" size="small">
       Change image
     </Button>
-    <Button onClick={handleImageRemove} theme="danger" size="small">
+    <Button
+      onClick={handleImageRemove}
+      theme="danger"
+      size="small"
+      disabled={!state.image}
+    >
       Remove image
     </Button>
     <Button onClick={handleStatusChange} theme="warning" size="small">

@@ -5,11 +5,9 @@
 
 // Interface
 export { default as Avatar } from './components/Avatar/Avatar';
+export { default as AvatarDouble } from './components/AvatarDouble/AvatarDouble';
 export { default as PeerAvatar } from './components/PeerAvatar/PeerAvatar';
-export {
-  default as PeerAvatarWithStatus
-} from './components/PeerAvatarWithStatus/PeerAvatarWithStatus';
-export { default as DoublePeerAvatar } from './components/DoublePeerAvatar/DoublePeerAvatar';
+export { default as PeerAvatarDouble } from './components/PeerAvatarDouble/PeerAvatarDouble';
 export { default as PeerInfoTitle } from './components/PeerInfoTitle/PeerInfoTitle';
 export { default as Scroller } from './components/Scroller/Scroller';
 export { default as Dropdown } from './components/Dropdown/Dropdown';
