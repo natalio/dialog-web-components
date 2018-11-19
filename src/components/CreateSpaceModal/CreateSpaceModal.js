@@ -5,7 +5,7 @@
 
 
 import type { PeerInfo } from '@dlghq/dialog-types';
-import type { Props } from '../CreateNewModal/types';
+import type { Props } from './types';
 import type { SelectorState } from '../../entities';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
@@ -17,8 +17,7 @@ import ModalBody from '../Modal/ModalBody';
 import ModalFooter from '../Modal/ModalFooter';
 import Icon from '../Icon/Icon';
 import Button from '../Button/Button';
-import CreateGroupTypeForm from '../CreateNewModal/CreateGroupTypeForm';
-import CreateGroupInfoForm from '../CreateNewModal/CreateGroupInfoForm';
+import CreateSpaceInfoForm from './CreateSpaceInfoForm';
 import CreateGroupMembersForm from '../CreateNewModal/CreateGroupMembersForm';
 import ImageEdit from '../ImageEdit/ImageEdit';
 import styles from './CreateSpaceModal.css';
@@ -26,8 +25,7 @@ import HotKeys from '../HotKeys/HotKeys';
 
 class CreateSpaceModal extends PureComponent<Props> {
   static defaultProps = {
-    id: 'create_new_space_modal',
-    isPublicGroupsEnabled: true
+    id: 'create_space_modal'
   };
 
   handlePrevStepClick = (): void => {
@@ -127,22 +125,22 @@ class CreateSpaceModal extends PureComponent<Props> {
   }
 
   renderInfoStep() {
-    const { id, step, request: { type, about, title, shortname, avatar }, shortnamePrefix } = this.props;
+    const {
+      id,
+      step,
+      request: { type, about, title, shortname, avatar },
+      shortnamePrefix
+    } = this.props;
 
     return (
       <div className={styles.wrapper}>
         <ModalHeader className={styles.header} withBorder>
-          <Icon
-            glyph="arrow_back"
-            onClick={this.handlePrevStepClick}
-            className={styles.back}
-          />
-          <Text id={`CreateNewModal.${type}.title`} />
+          <Text id="CreateSpaceModal.title" />
           <ModalClose pending={this.props.pending} onClick={this.props.onClose} id={`${this.props.id}_close_button`} />
         </ModalHeader>
         {this.renderError()}
         <ModalBody className={styles.body}>
-          <CreateGroupInfoForm
+          <CreateSpaceInfoForm
             vertical
             id={id}
             type={type}
@@ -167,7 +165,7 @@ class CreateSpaceModal extends PureComponent<Props> {
             rounded={false}
             onClick={this.handleNextStepClick}
           >
-            <Text id={`CreateNewModal.next.${step}`} />
+            <Text id={`CreateSpaceModal.next.${step}`} />
           </Button>
         </ModalFooter>
       </div>
@@ -187,7 +185,7 @@ class CreateSpaceModal extends PureComponent<Props> {
               className={styles.back}
               id={`${this.props.id}_back_button`}
             />
-            <Text id="CreateNewModal.avatar_edit" />
+            <Text id="CreateSpaceModal.avatar_edit" />
             <ModalClose
               pending={this.props.pending}
               onClick={this.props.onClose}
@@ -212,7 +210,7 @@ class CreateSpaceModal extends PureComponent<Props> {
   }
 
   renderMembersStep() {
-    const { id, request: { type, members } } = this.props;
+    const { id, request: { members } } = this.props;
 
     return (
       <div className={styles.wrapper}>
@@ -223,7 +221,7 @@ class CreateSpaceModal extends PureComponent<Props> {
             className={styles.back}
             id={`${id}_back_button`}
           />
-          <Text id={`CreateNewModal.${type}.title`} />
+          <Text id="CreateSpaceModal.title" />
           <ModalClose
             pending={this.props.pending}
             onClick={this.props.onClose}
@@ -252,7 +250,7 @@ class CreateSpaceModal extends PureComponent<Props> {
             id={`${id}_finish_button`}
             wide
           >
-            <Text id={`CreateNewModal.${type}.finish`} />
+            <Text id="CreateSpaceModal.finish" />
           </Button>
         </ModalFooter>
       </div>
