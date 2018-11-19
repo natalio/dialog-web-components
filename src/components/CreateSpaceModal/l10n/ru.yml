@@ -4,7 +4,9 @@ info:
   title:
     label: Название спейса
     placeholder: Назовите этот спейс
-  shortname: Ссылка на спейс
+  shortname:
+    label: Ссылка на спейс
+    placeholder: link
 finish: Создать спейс
 
 next:

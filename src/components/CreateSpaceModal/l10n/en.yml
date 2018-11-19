@@ -4,7 +4,9 @@ info:
   title:
     label: Space title
     placeholder: Name this space
-  shortname: Space link
+  shortname:
+    label: Space link
+    placeholder: link
 finish: Create space
 
 next:

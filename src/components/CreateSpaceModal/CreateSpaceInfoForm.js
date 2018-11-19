@@ -33,8 +33,6 @@ export type State = {
 export type Context = ProviderContext;
 
 class CreateSpaceInfoForm extends PureComponent<Props, State> {
-  shortnameInput: ?InputNext;
-
   static contextTypes = {
     l10n: LocalizationContextType
   };
@@ -65,24 +63,10 @@ class CreateSpaceInfoForm extends PureComponent<Props, State> {
     }
   }
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    if (this.shortnameInput) {
-      if (prevState.isPublic !== this.state.isPublic && this.state.isPublic) {
-        this.shortnameInput.focus();
-      }
-    }
-  }
-
   handleSubmit = (event: SyntheticEvent<>) => {
     event.preventDefault();
 
     this.props.onSubmit(event);
-  };
-
-  setShortnameInput = (shortnameInput: ?InputNext): void => {
-    if (shortnameInput) {
-      this.shortnameInput = shortnameInput;
-    }
   };
 
   renderAvatar() {
@@ -103,24 +87,8 @@ class CreateSpaceInfoForm extends PureComponent<Props, State> {
     );
   }
 
-  renderShortname() {
-    const { shortname, id } = this.props;
-
-    return (
-      <InputNext
-        id={`${id}_shortname`}
-        name="shortname"
-        value={shortname || ''}
-        prefix={this.props.shortnamePrefix}
-        label="CreateSpaceModal.info.shortname"
-        ref={this.setShortnameInput}
-        onChange={this.props.onChange}
-      />
-    );
-  }
-
   render() {
-    const { id, title, vertical } = this.props;
+    const { id, title, vertical, shortname } = this.props;
     const { l10n } = this.context;
     const className = classNames(
       styles.info,
@@ -144,7 +112,15 @@ class CreateSpaceInfoForm extends PureComponent<Props, State> {
             value={title}
             htmlAutoFocus
           />
-          {this.renderShortname()}
+          <InputNext
+            id={`${id}_shortname`}
+            name="shortname"
+            value={shortname || ''}
+            prefix={this.props.shortnamePrefix}
+            label="CreateSpaceModal.info.shortname.label"
+            placeholder="CreateSpaceModal.info.shortname.placeholder"
+            onChange={this.props.onChange}
+          />
         </form>
       </div>
     );

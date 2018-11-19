@@ -3,13 +3,11 @@ const { PeerInfoSelectorState } = require('../../entities');
 const contacts = require('../../fixtures/contacts.json');
 
 const initial = {
-  isOpen: true,
+  isOpen: false,
   step: 'info',
   request: {
-    type: 'group',
     title: '',
     shortname: '',
-    about: '',
     avatar: null,
     members: PeerInfoSelectorState.create(contacts),
   }
