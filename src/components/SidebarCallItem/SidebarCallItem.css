@@ -75,13 +75,13 @@
   flex: 1 1 auto;
   height: var(--sidebar-call-item-text-height);
   position: relative;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .state {
   line-height: 20px;
   font-size: var(--sidebar-call-item-font-size);
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .stateActive {
@@ -103,7 +103,7 @@
   font-size: var(--sidebar-call-item-time-font-size);
   vertical-align: middle;
   letter-spacing: -0.25px;
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 
   &:first-letter {
     text-transform: capitalize;

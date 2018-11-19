@@ -93,7 +93,7 @@
   font-size: var(--sidebar-peer-item-font-size);
   font-weight: 500;
   line-height: 20px;
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .counter {

@@ -92,7 +92,7 @@
 .replyContent {
   width: 100%;
   display: block;
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .forward {

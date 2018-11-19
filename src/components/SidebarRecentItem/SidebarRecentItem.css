@@ -125,7 +125,7 @@
   vertical-align: middle;
   flex: 1 1 auto;
   position: relative;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .title {
@@ -135,8 +135,8 @@
   font-weight: 500;
   line-height: 20px;
   flex: 0 1 auto;
-  @apply --flex-fix;
-  @apply --text-overflow-ellipsis;
+  @mixin flex-fix;
+  @mixin text-overflow-ellipsis;
 }
 
 .header {
@@ -179,7 +179,7 @@
   line-height: 17px;
   height: 17px;
   color: var(--sidebar-recent-item-message-color);
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .sender,

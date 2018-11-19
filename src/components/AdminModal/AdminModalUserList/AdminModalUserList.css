@@ -46,5 +46,5 @@
   line-height: 20px;
   height: 20px;
   font-size: var(--default-font-size);
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }

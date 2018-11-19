@@ -89,7 +89,7 @@
 
 .wrapper {
   flex: 1 1 auto;
-  @apply --flex-fix;
+  @mixin flex-fix;
   display: flex;
   flex-flow: column nowrap;
 }

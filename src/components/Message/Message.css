@@ -78,7 +78,7 @@
   flex: 1 1 100%;
   align-content: flex-start;
   justify-content: flex-start;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .header {
@@ -97,7 +97,7 @@
 .title {
   font-size: 16px;
   font-weight: 500;
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .username {

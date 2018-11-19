@@ -55,7 +55,7 @@
   & .wrapper {
     width: 100%;
     flex: 1 1 auto;
-    @apply --flex-fix;
+    @mixin flex-fix;
   }
 }
 
@@ -84,7 +84,7 @@
   justify-content: flex-start;
   cursor: pointer;
   flex: 1 1 auto;
-  @apply --flex-fix;
+  @mixin flex-fix;
   transition: box-shadow var(--select-transition-dudarion) linear;
 }
 

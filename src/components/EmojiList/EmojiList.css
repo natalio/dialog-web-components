@@ -94,7 +94,7 @@
   font-weight: 500;
   line-height: 1.6;
   color: color-mod(#000 alpha(50%));
-  @apply --no-select;
+  @mixin no-select;
 }
 
 .categoryList {

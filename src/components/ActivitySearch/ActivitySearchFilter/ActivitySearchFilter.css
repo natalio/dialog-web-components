@@ -21,7 +21,7 @@
 
 .filterBlock {
   flex: 1 1 auto;
-  @apply --flex-fix;
+  @mixin flex-fix;
   color: #7a7a7a;
 
   & span {

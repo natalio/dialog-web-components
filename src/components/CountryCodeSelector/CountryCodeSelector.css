@@ -172,7 +172,7 @@
 }
 
 .label {
-  @apply --no-select;
+  @mixin no-select;
   color: var(--country-code-selector-label-color);
   font-family: var(--country-code-selector-label-font-family);
   font-size: var(--country-code-selector-label-font-size);
@@ -215,12 +215,12 @@
   flex: 1 1 auto;
   padding: 0 8px 0 10px;
   overflow: hidden;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .optionCountry {
   font-size: var(--default-font-size);
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .optionCode {

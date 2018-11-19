@@ -51,7 +51,7 @@
   align-items: center;
   justify-content: center;
   color: #fff;
-  @apply --no-select;
+  @mixin no-select;
 }
 
 .chipText {
@@ -62,7 +62,7 @@
   height: 20px;
   letter-spacing: -0.3px;
   max-width: var(--contact-selector-chip-text-max-width);
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .chipAvatar {

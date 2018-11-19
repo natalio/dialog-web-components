@@ -79,7 +79,7 @@
 
 .footerButton {
   flex: 1 1 auto;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .fieldset {

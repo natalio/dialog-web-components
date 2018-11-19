@@ -99,7 +99,7 @@
 }
 
 .label {
-  @apply --no-select;
+  @mixin no-select;
   color: var(--input-next-label-color);
   font-family: var(--input-next-font-family);
   font-size: var(--input-next-label-font-size);
@@ -137,7 +137,7 @@
   line-height: var(--input-next-hint-line-height);
   color: var(--input-next-hint-color);
   margin-top: calc(var(--default-padding-small) / 2);
-  @apply --no-select;
+  @mixin no-select;
 }
 
 .disabled {
@@ -338,7 +338,7 @@
   font-family: var(--input-next-length-font-family);
   font-size: var(--input-next-length-font-size);
 
-  @apply --no-select;
+  @mixin no-select;
   line-height: 1.4;
   display: inline-block;
   margin-bottom: calc(var(--default-padding-small) / 2);

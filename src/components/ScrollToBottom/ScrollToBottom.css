@@ -64,5 +64,5 @@
   text-align: center;
   border-radius: 1000px;
   color: var(--scroll-to-bottom-counter-text-color);
-  @apply --no-select;
+  @mixin no-select;
 }

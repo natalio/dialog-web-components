@@ -42,7 +42,7 @@
 
 .button {
   flex: 1 1 auto;
-  @apply --flex-fix;
+  @mixin flex-fix;
   cursor: pointer;
   display: flex;
   align-content: center;
@@ -76,7 +76,7 @@
 .tooltip {
   flex: 1 1 auto;
   display: inline-flex;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .wrapper {

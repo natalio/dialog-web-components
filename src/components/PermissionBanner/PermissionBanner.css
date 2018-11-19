@@ -40,7 +40,7 @@
   color: var(--permission-banner-text-color);
   display: inline-block;
   line-height: 20px;
-  @apply --no-select;
+  @mixin no-select;
 
   & b {
     font-weight: 500;
@@ -57,7 +57,7 @@
   border-bottom: 1px dotted
     color-mod(var(--permission-banner-text-color) alpha(70%));
   display: inline-block;
-  @apply --no-select;
+  @mixin no-select;
   cursor: pointer;
 
   &:hover {

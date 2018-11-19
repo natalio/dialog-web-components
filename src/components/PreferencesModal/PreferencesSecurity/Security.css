@@ -22,8 +22,8 @@
   display: flex;
   flex: 1 1 auto;
   flex-flow: column;
-  @apply --flex-fix;
-  @apply --no-select;
+  @mixin flex-fix;
+  @mixin no-select;
 }
 
 .sessionTitle {
@@ -38,7 +38,7 @@
   line-height: 20px;
   flex: 0 0 auto;
   color: var(--default-font-color-light);
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .sessionDeviceTitle {
@@ -46,7 +46,7 @@
   line-height: 20px;
   flex: 0 0 auto;
   color: color-mod(#000 alpha(70%));
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .terminateButton {

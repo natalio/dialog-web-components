@@ -25,7 +25,7 @@
   justify-content: center;
   box-sizing: border-box;
   width: 100%;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .wrapper {
@@ -40,7 +40,7 @@
   color: var(--call-info-caller-color);
   line-height: 30px;
   height: 30px;
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .state {

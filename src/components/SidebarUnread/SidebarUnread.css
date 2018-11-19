@@ -73,7 +73,7 @@
   align-content: center;
   align-items: center;
   justify-content: center;
-  @apply --no-select;
+  @mixin no-select;
   cursor: pointer;
 }
 

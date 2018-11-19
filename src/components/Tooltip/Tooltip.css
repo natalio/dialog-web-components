@@ -46,7 +46,7 @@
   line-height: 20px;
   color: var(--tooltip-color);
   pointer-events: none;
-  @apply --no-select;
+  @mixin no-select;
 
   & strong {
     font-weight: 500;

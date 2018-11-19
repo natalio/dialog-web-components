@@ -39,7 +39,7 @@
   padding: 0 var(--contact-list-item-padding);
   cursor: pointer;
 
-  @apply --no-select;
+  @mixin no-select;
 
   &:active {
     & .selector {
@@ -61,7 +61,7 @@
   align-content: center;
   justify-content: flex-start;
   align-items: center;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .avatar {
@@ -84,7 +84,7 @@
 
 .nameWrapper {
   width: 100%;
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .nameText {

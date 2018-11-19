@@ -64,7 +64,7 @@
   width: 100%;
   line-height: 22px;
   height: 22px;
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .name {
@@ -80,7 +80,7 @@
   line-height: 18px;
   height: 18px;
   color: var(--toolbar-status-color);
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .avatar {

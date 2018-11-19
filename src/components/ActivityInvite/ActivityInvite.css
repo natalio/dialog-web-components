@@ -43,7 +43,7 @@
 
 .text {
   flex: 1 1 auto;
-  @apply --flex-fix;
+  @mixin flex-fix;
   font-size: var(--activity-invite-font-size);
 }
 

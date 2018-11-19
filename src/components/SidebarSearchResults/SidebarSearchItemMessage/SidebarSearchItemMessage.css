@@ -107,7 +107,7 @@
 
 .wrapper {
   flex: 1 1 auto;
-  @apply --flex-fix;
+  @mixin flex-fix;
   display: flex;
   flex-flow: column nowrap;
 }
@@ -130,7 +130,7 @@
   font-size: var(--sidebar-search-item-message-title-font-size);
   margin-right: 6px;
   flex: 0 1 auto;
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .titleClickable {

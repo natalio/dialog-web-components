@@ -202,7 +202,7 @@
   user-select: none;
   font-family: var(--switcher-label-font-family);
   font-size: var(--switcher-label-font-size);
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 
   & b,
   & strong {

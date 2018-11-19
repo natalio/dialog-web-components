@@ -95,7 +95,7 @@
   align-content: center;
   align-items: center;
   justify-content: center;
-  @apply --clearfix;
+  @mixin clearfix;
 }
 
 .stick {

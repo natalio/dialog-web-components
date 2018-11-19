@@ -32,7 +32,7 @@
   padding: 15px 40px;
   text-align: center;
   letter-spacing: -0.3px;
-  @apply --no-select;
+  @mixin no-select;
   box-sizing: border-box;
   width: 100%;
   z-index: var(--activity-header-z-index);

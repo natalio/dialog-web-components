@@ -53,7 +53,7 @@
   flex: 1 1 auto;
   box-sizing: border-box;
   padding: var(--default-padding);
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .side {
@@ -73,7 +73,7 @@
   line-height: 24px;
   height: 24px;
   margin-top: 2px;
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .icon {
@@ -147,8 +147,8 @@
   line-height: 20px;
   color: var(--discover-card-creator-color);
   flex: 1 1 auto;
-  @apply --flex-fix;
-  @apply --text-overflow-ellipsis;
+  @mixin flex-fix;
+  @mixin text-overflow-ellipsis;
 }
 
 .creatorTitle {

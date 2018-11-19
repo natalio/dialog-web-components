@@ -17,7 +17,7 @@
 .player {
   display: flex;
   flex: 1 1 auto;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .playerControls {
@@ -25,12 +25,12 @@
   flex-direction: column;
   padding-top: 20px;
   flex: 1 1 auto;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .playerControlsText {
   flex: 1 1 auto;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .playerTime {
@@ -44,7 +44,7 @@
   flex: 1 1 auto;
   font-family: var(--audio-player-font-family);
   color: color-mod(#000 alpha(60%));
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }
 
 .seeker {
