@@ -15,14 +15,14 @@ const whitelist = [
   resolve('node_modules/@dlghq/react-l10n'),
   resolve('node_modules/@dlghq/dialog-types'),
   resolve('node_modules/@dlghq/dialog-utils'),
-  resolve('node_modules/@dlghq/country-codes')
+  resolve('node_modules/@dlghq/country-codes'),
 ];
 
 module.exports = {
   resolve: {
     alias: {
-      'rsg-components/Wrapper': resolve('src/styleguide/Wrapper.js')
-    }
+      'rsg-components/Wrapper': resolve('src/styleguide/Wrapper.js'),
+    },
   },
   module: {
     rules: [
@@ -39,11 +39,11 @@ module.exports = {
               {
                 modules: false,
                 runtime: false,
-                development: true
-              }
-            ]
-          ]
-        }
+                development: true,
+              },
+            ],
+          ],
+        },
       },
       {
         test: /\.css$/,
@@ -53,29 +53,33 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: false,
-              importLoaders: 1
-            }
+              importLoaders: 1,
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
               plugins() {
                 return require('@dlghq/postcss-dialog')({ initial: false });
-              }
-            }
-          }
+              },
+            },
+          },
         ],
         include: [
           resolve('src/styles/global.css'),
-          resolve('src/components/MessageMediaInteractive/example/CodeMirror.css')
-        ]
+          resolve(
+            'src/components/MessageMediaInteractive/example/CodeMirror.css',
+          ),
+        ],
       },
       {
         test: /\.css$/,
         include: whitelist,
         exclude: [
           resolve('src/styles/global.css'),
-          resolve('src/components/MessageMediaInteractive/example/CodeMirror.css')
+          resolve(
+            'src/components/MessageMediaInteractive/example/CodeMirror.css',
+          ),
         ],
         use: [
           'style-loader',
@@ -84,45 +88,49 @@ module.exports = {
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]'
-            }
+              localIdentName: '[name]__[local]',
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
               plugins() {
-                return require('@dlghq/postcss-dialog')();
-              }
-            }
-          }
-        ]
+                return require('@dlghq/postcss-dialog')({
+                  debug: true,
+                  report: true,
+                  stage: 0,
+                });
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.json$/,
         include: [...whitelist, path.join(__dirname, 'node_modules/entities')],
-        use: ['json-loader']
+        use: ['json-loader'],
       },
       {
         test: /\.yml$/,
         include: whitelist,
-        use: ['yml-loader']
+        use: ['yml-loader'],
       },
       {
         test: /\.(jpg|png|svg|gif)$/,
         include: /./,
         exclude: resolve('src/components/Icon/svg'),
-        use: ['file-loader']
+        use: ['file-loader'],
       },
       {
         test: /\.(svg)$/,
         include: resolve('src/components/Icon/svg'),
-        loader: 'svg-sprite-loader'
+        loader: 'svg-sprite-loader',
       },
       {
         test: /\.txt$/,
         include: whitelist,
-        use: ['raw-loader']
-      }
-    ]
-  }
+        use: ['raw-loader'],
+      },
+    ],
+  },
 };
