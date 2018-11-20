@@ -3,7 +3,7 @@
  * @flow
  */
 
-function fetchImage(url: string): Promise<any> {
+function preloadImage(url: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const image = document.createElement('img');
 
@@ -17,4 +17,4 @@ function fetchImage(url: string): Promise<any> {
   });
 }
 
-export default fetchImage;
+export default preloadImage;

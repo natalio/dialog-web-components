@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import getAvatarText from '../Avatar/utils/getAvatarText';
 import getAvatarColor from '../Avatar/utils/getAvatarColor';
 import createSequence from '../../utils/createSequence';
-import fetchImage from '../../utils/fetchImage';
+import preloadImage from '../../utils/preloadImage';
 import Hover from '../Hover/Hover';
 import styles from './AvatarDouble.css';
 
@@ -31,8 +31,8 @@ export type Props = {
 export type State = {
   isBigImageLoaded: boolean,
   isSmallImageLoaded: boolean,
-  currentBigImage: ?string,
-  currentSmallImage: ?string,
+  bigImage: ?string,
+  smallImage: ?string,
   isHovered: boolean,
 };
 
@@ -72,36 +72,52 @@ class AvatarDouble extends PureComponent<Props, State> {
     this.state = {
       isBigImageLoaded: false,
       isSmallImageLoaded: false,
-      currentBigImage: null,
-      currentSmallImage: null,
+      bigImage: props.big.image,
+      smallImage: props.small.image,
       isHovered: false,
     };
 
     if (props.big.image) {
-      fetchImage(props.big.image).then(this.handleBigImageLoaded);
+      preloadImage(props.big.image).then(this.handleBigImageLoaded);
     }
 
     if (props.small.image) {
-      fetchImage(props.small.image).then(this.handleSmallImageLoaded);
+      preloadImage(props.small.image).then(this.handleSmallImageLoaded);
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (this.props.big.image !== nextProps.big.image) {
-      this.setState({ isBigImageLoaded: false });
-      if (nextProps.big.image) {
-        fetchImage(nextProps.big.image).then(this.handleBigImageLoaded);
-      } else {
-        this.setState({ currentBigImage: null });
+  static getDerivedStateFromProps(nextProps: Props, prevState: State): ?State {
+    return {
+      ...prevState,
+      bigImage: nextProps.big.image === null ? null : prevState.bigImage,
+      smallImage: nextProps.small.image === null ? null : prevState.smallImage,
+      isBigImageLoaded:
+        nextProps.big.image === prevState.smallImage
+          ? prevState.isBigImageLoaded
+          : false,
+      isSmallImageLoaded:
+        nextProps.small.image === prevState.smallImage
+          ? prevState.isSmallImageLoaded
+          : false,
+    };
+  }
+
+  componentDidUpdate(prevProps: Props): void {
+    if (this.props.big.image) {
+      if (this.props.big.image !== prevProps.big.image) {
+        if (!this.state.isBigImageLoaded) {
+          preloadImage(this.props.big.image).then(this.handleBigImageLoaded);
+        }
       }
     }
 
-    if (this.props.small.image !== nextProps.small.image) {
-      this.setState({ isSmallImageLoaded: false });
-      if (nextProps.small.image) {
-        fetchImage(nextProps.small.image).then(this.handleSmallImageLoaded);
-      } else {
-        this.setState({ currentSmallImage: null });
+    if (this.props.small.image) {
+      if (this.props.small.image !== prevProps.small.image) {
+        if (!this.state.isSmallImageLoaded) {
+          preloadImage(this.props.small.image).then(
+            this.handleSmallImageLoaded,
+          );
+        }
       }
     }
   }
@@ -109,30 +125,28 @@ class AvatarDouble extends PureComponent<Props, State> {
   handleBigImageLoaded = (): void => {
     this.setState({
       isBigImageLoaded: true,
-      currentBigImage: this.props.big.image,
+      bigImage: this.props.big.image,
     });
   };
 
   handleSmallImageLoaded = (): void => {
     this.setState({
       isSmallImageLoaded: true,
-      currentSmallImage: this.props.small.image,
+      smallImage: this.props.small.image,
     });
   };
 
-  handleHover = (hover: boolean) => {
-    this.setState({
-      isHovered: hover,
-    });
+  handleHover = (hover: boolean): void => {
+    this.setState({ isHovered: hover });
   };
 
   renderDefsBig() {
     const {
-      big: { image, placeholder },
+      big: { placeholder },
     } = this.props;
-    const { isBigImageLoaded, currentBigImage } = this.state;
+    const { isBigImageLoaded, bigImage } = this.state;
 
-    if (isBigImageLoaded || currentBigImage !== null) {
+    if (isBigImageLoaded || bigImage !== null) {
       return (
         <pattern
           id={this.ids.big}
@@ -145,7 +159,7 @@ class AvatarDouble extends PureComponent<Props, State> {
             y="0"
             width="100px"
             height="100px"
-            xlinkHref={currentBigImage}
+            xlinkHref={bigImage}
             preserveAspectRatio="xMidYMid slice"
           />
         </pattern>
@@ -182,11 +196,11 @@ class AvatarDouble extends PureComponent<Props, State> {
 
   renderDefsSmall() {
     const {
-      small: { image, placeholder },
+      small: { placeholder },
     } = this.props;
-    const { isSmallImageLoaded, currentSmallImage } = this.state;
+    const { isSmallImageLoaded, smallImage } = this.state;
 
-    if (isSmallImageLoaded || currentSmallImage !== null) {
+    if (isSmallImageLoaded || smallImage !== null) {
       return (
         <pattern
           id={this.ids.small}
@@ -201,7 +215,7 @@ class AvatarDouble extends PureComponent<Props, State> {
             y="0"
             width="100px"
             height="100px"
-            xlinkHref={currentSmallImage}
+            xlinkHref={smallImage}
             transform="scale(0.507046569,0.507046569)"
             preserveAspectRatio="xMidYMid slice"
           />
@@ -254,9 +268,9 @@ class AvatarDouble extends PureComponent<Props, State> {
     const {
       big: { title },
     } = this.props;
-    const { isBigImageLoaded, currentBigImage } = this.state;
+    const { isBigImageLoaded, bigImage } = this.state;
 
-    if (isBigImageLoaded || currentBigImage !== null || !title) {
+    if (isBigImageLoaded || bigImage !== null || !title) {
       return null;
     }
 
@@ -286,9 +300,9 @@ class AvatarDouble extends PureComponent<Props, State> {
     const {
       small: { title },
     } = this.props;
-    const { isSmallImageLoaded, currentSmallImage } = this.state;
+    const { isSmallImageLoaded, smallImage } = this.state;
 
-    if (isSmallImageLoaded || currentSmallImage !== null || !title) {
+    if (isSmallImageLoaded || smallImage !== null || !title) {
       return null;
     }
 

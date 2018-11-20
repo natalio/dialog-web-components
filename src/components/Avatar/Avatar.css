@@ -10,6 +10,8 @@
   --avatar-unset-color: var(--color-success);
   --avatar-away-color: var(--color-warning);
   --avatar-dnd-color: var(--color-danger);
+  --avatar-hovered-opacity: 0.9;
+  --avatar-active-opacity: 0.85;
 }
 
 /* Reset */
@@ -23,16 +25,20 @@
   border-radius: 100%;
   line-height: 0;
   position: relative;
+  transform: translateZ(1);
+  transition: opacity var(--default-transition-duration) ease-in-out;
+  opacity: 1;
+  user-select: none;
 }
 
 .svg {
   z-index: 3000;
 }
 
-.mask,
+.mask {
+}
+
 .status {
-  transition: opacity var(--default-transition-duration) ease-in-out;
-  opacity: 1;
 }
 
 .text {
@@ -50,9 +56,10 @@
 }
 
 .hovered {
-  & .mask,
-  & .status {
-    opacity: 0.9;
+  opacity: var(--avatar-hovered-opacity);
+
+  &:active {
+    opacity: var(--avatar-active-opacity);
   }
 }
 

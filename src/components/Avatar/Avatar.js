@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import getAvatarText from './utils/getAvatarText';
 import getAvatarColor from './utils/getAvatarColor';
 import createSequence from '../../utils/createSequence';
-import fetchImage from '../../utils/fetchImage';
+import preloadImage from '../../utils/preloadImage';
 import Hover from '../Hover/Hover';
 import styles from './Avatar.css';
 
@@ -24,8 +24,8 @@ export type Props = {
 };
 
 export type State = {
-  isImageLoaded: boolean,
-  currentImage: ?string,
+  isLoaded: boolean,
+  image: ?string,
   isHovered: boolean,
 };
 
@@ -47,45 +47,51 @@ class Avatar extends PureComponent<Props, State> {
 
     this.id = 'avatar_' + seq.next();
     this.state = {
-      isImageLoaded: false,
-      currentImage: null,
+      isLoaded: false,
+      image: props.image,
       isHovered: false,
     };
 
     if (props.image) {
-      fetchImage(props.image).then(this.handleImageLoaded);
+      preloadImage(props.image).then(this.handleImageLoaded);
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (this.props.image !== nextProps.image) {
-      this.setState({ isImageLoaded: false });
-      if (nextProps.image) {
-        fetchImage(nextProps.image).then(this.handleImageLoaded);
-      } else {
-        this.setState({ currentImage: null });
+  static getDerivedStateFromProps(nextProps: Props, prevState: State): ?State {
+    return {
+      ...prevState,
+      image: nextProps.image === null ? null : prevState.image,
+      isLoaded:
+        nextProps.image === prevState.image ? prevState.isLoaded : false,
+    };
+  }
+
+  componentDidUpdate(prevProps: Props): void {
+    if (this.props.image) {
+      if (this.props.image !== prevProps.image) {
+        if (!this.state.isLoaded) {
+          preloadImage(this.props.image).then(this.handleImageLoaded);
+        }
       }
     }
   }
 
   handleImageLoaded = (): void => {
     this.setState({
-      isImageLoaded: true,
-      currentImage: this.props.image,
+      image: this.props.image,
+      isLoaded: true,
     });
   };
 
-  handleHover = (hover: boolean) => {
-    this.setState({
-      isHovered: hover,
-    });
+  handleHover = (hover: boolean): void => {
+    this.setState({ isHovered: hover });
   };
 
   renderDefs() {
     const { placeholder } = this.props;
-    const { isImageLoaded, currentImage } = this.state;
+    const { isLoaded, image } = this.state;
 
-    if (isImageLoaded || currentImage !== null) {
+    if (isLoaded || image !== null) {
       return (
         <defs>
           <pattern
@@ -99,7 +105,7 @@ class Avatar extends PureComponent<Props, State> {
               y="0"
               width="100%"
               height="100%"
-              xlinkHref={currentImage}
+              xlinkHref={image}
               preserveAspectRatio="xMidYMid slice"
             />
           </pattern>
@@ -128,9 +134,9 @@ class Avatar extends PureComponent<Props, State> {
 
   renderText() {
     const { title, size } = this.props;
-    const { isImageLoaded, currentImage } = this.state;
+    const { isLoaded, image } = this.state;
 
-    if (isImageLoaded || currentImage !== null || !title) {
+    if (isLoaded || image !== null || !title) {
       return null;
     }
 
@@ -155,7 +161,9 @@ class Avatar extends PureComponent<Props, State> {
   }
 
   renderMask() {
-    if (!this.props.status || this.props.status === 'invisible') {
+    const { status } = this.props;
+
+    if (!status || status === 'invisible') {
       return (
         <circle
           fill={`url(#${this.id})`}
@@ -178,13 +186,13 @@ class Avatar extends PureComponent<Props, State> {
   }
 
   renderStatus() {
-    if (!this.props.status || this.props.status === 'invisible') {
+    const { status } = this.props;
+
+    if (!status || status === 'invisible') {
       return null;
     }
 
-    return (
-      <circle cx="84" cy="84" r="15" className={styles[this.props.status]} />
-    );
+    return <circle cx="84" cy="84" r="15" className={styles[status]} />;
   }
 
   renderClicker() {
