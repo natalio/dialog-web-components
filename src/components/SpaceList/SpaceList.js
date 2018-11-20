@@ -4,9 +4,9 @@
  */
 
 import type { AvatarPlaceholder } from '@dlghq/dialog-types';
-
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+
 import SpaceAvatar from './SpaceAvatar/SpaceAvatar.js';
 import SpaceAdd from './SpaceAdd';
 import styles from './SpaceList.css';

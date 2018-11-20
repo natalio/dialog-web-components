@@ -5,6 +5,7 @@
 
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+
 import styles from './SpaceList.css';
 
 export type Props = {
@@ -14,10 +15,6 @@ export type Props = {
 };
 
 class SpaceAvatar extends PureComponent<Props> {
-  handleClick = (): void => {
-    this.props.onClick();
-  };
-
   svgShape = () => {
     return 'M 50 15    A 0 0 0 0 1 50 15 ' +
            'L 67.5 15  A 17 17 0 0 1 85 32.5  L 85 50  A 0 0 0 0 1 85 50 ' +
@@ -39,7 +36,7 @@ class SpaceAvatar extends PureComponent<Props> {
           viewBox="0 0 100 100"
           shapeRendering="auto"
         >
-          <g onClick={this.handleClick}>
+          <g onClick={this.props.onClick}>
             <path d={this.svgShape()} />
             <rect
               width="4"

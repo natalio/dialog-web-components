@@ -4,9 +4,9 @@
  */
 
 import type { AvatarPlaceholder } from '@dlghq/dialog-types';
-
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+
 import createSequence from '../../../utils/createSequence';
 import getAvatarText from '../../Avatar/utils/getAvatarText';
 import getAvatarColor from '../../Avatar/utils/getAvatarColor';
