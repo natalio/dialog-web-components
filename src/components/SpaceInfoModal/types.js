@@ -7,6 +7,7 @@
 export type Step = 'info' | 'addMembers' | 'members' | 'edit' | 'avatar';
 
 
+
 export type Props = {
   id: string,
   className?: string,
