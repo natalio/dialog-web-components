@@ -128,7 +128,7 @@ class CreateSpaceModal extends PureComponent<Props> {
     const {
       id,
       step,
-      request: { type, title, shortname, avatar },
+      request: { title, shortname, avatar },
       shortnamePrefix
     } = this.props;
 
@@ -143,7 +143,6 @@ class CreateSpaceModal extends PureComponent<Props> {
           <CreateSpaceInfoForm
             vertical
             id={id}
-            type={type}
             title={title}
             avatar={avatar}
             shortname={shortname}

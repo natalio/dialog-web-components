@@ -97,6 +97,7 @@ export { default as PreferencesModal } from './components/PreferencesModal/Prefe
 export { default as AddMembersModal } from './components/AddMembersModal/AddMembersModal';
 export { default as FeedbackModal } from './components/FeedbackModal/FeedbackModal';
 export { default as AdminModal } from './components/AdminModal/AdminModal';
+export { default as CreateSpaceModal } from './components/CreateSpaceModal/CreateSpaceModal';
 
 // Sidebar
 export { default as SidebarHeader } from './components/SidebarHeader/SidebarHeader';
