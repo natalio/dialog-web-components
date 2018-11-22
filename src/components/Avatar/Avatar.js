@@ -6,15 +6,19 @@
 import type { AvatarPlaceholder, UserStatusType } from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+
 import getAvatarText from './utils/getAvatarText';
 import getAvatarColor from './utils/getAvatarColor';
 import createSequence from '../../utils/createSequence';
-import preloadImage from '../../utils/preloadImage';
+import ImagePreloader, {
+  type State as ImagePreloaderState,
+  STATE_SUCCESS,
+} from '../ImagePreloader/ImagePreloader';
 import Hover from '../Hover/Hover';
 import styles from './Avatar.css';
 
 export type Props = {
-  title: ?string,
+  title: string | null,
   image: ?string,
   size: number,
   placeholder: AvatarPlaceholder,
@@ -24,8 +28,6 @@ export type Props = {
 };
 
 export type State = {
-  isLoaded: boolean,
-  image: ?string,
   isHovered: boolean,
 };
 
@@ -47,96 +49,61 @@ class Avatar extends PureComponent<Props, State> {
 
     this.id = 'avatar_' + seq.next();
     this.state = {
-      isLoaded: false,
-      image: props.image,
       isHovered: false,
     };
-
-    if (props.image) {
-      preloadImage(props.image).then(this.handleImageLoaded);
-    }
   }
-
-  static getDerivedStateFromProps(nextProps: Props, prevState: State): ?State {
-    return {
-      ...prevState,
-      image: nextProps.image === null ? null : prevState.image,
-      isLoaded:
-        nextProps.image === prevState.image ? prevState.isLoaded : false,
-    };
-  }
-
-  componentDidUpdate(prevProps: Props): void {
-    if (this.props.image) {
-      if (this.props.image !== prevProps.image) {
-        if (!this.state.isLoaded) {
-          preloadImage(this.props.image).then(this.handleImageLoaded);
-        }
-      }
-    }
-  }
-
-  handleImageLoaded = (): void => {
-    this.setState({
-      image: this.props.image,
-      isLoaded: true,
-    });
-  };
 
   handleHover = (hover: boolean): void => {
     this.setState({ isHovered: hover });
   };
 
-  renderDefs() {
+  renderGradient() {
     const { placeholder } = this.props;
-    const { isLoaded, image } = this.state;
-
-    if (isLoaded || image !== null) {
-      return (
-        <defs>
-          <pattern
-            id={this.id}
-            width="100%"
-            height="100%"
-            patternUnits="objectBoundingBox"
-          >
-            <image
-              x="0"
-              y="0"
-              width="100%"
-              height="100%"
-              xlinkHref={image}
-              preserveAspectRatio="xMidYMid slice"
-            />
-          </pattern>
-        </defs>
-      );
-    }
-
     const colors = getAvatarColor(placeholder);
 
     return (
-      <defs>
-        <linearGradient
-          id={this.id}
-          gradientUnits="userSpaceOnUse"
-          x1="100%"
-          y1="100%"
-          x2="0%"
-          y2="0%"
-        >
-          <stop offset="0%" stopColor={colors.payload.from} />
-          <stop offset="100%" stopColor={colors.payload.to} />
-        </linearGradient>
-      </defs>
+      <linearGradient
+        id={this.id}
+        gradientUnits="userSpaceOnUse"
+        x1="100%"
+        y1="100%"
+        x2="0%"
+        y2="0%"
+      >
+        <stop offset="0%" stopColor={colors.payload.from} />
+        <stop offset="100%" stopColor={colors.payload.to} />
+      </linearGradient>
     );
   }
 
-  renderText() {
-    const { title, size } = this.props;
-    const { isLoaded, image } = this.state;
+  renderDefs({ state, src }: ImagePreloaderState) {
+    if (state === STATE_SUCCESS || src !== null) {
+      return (
+        <pattern
+          id={this.id}
+          width="100%"
+          height="100%"
+          patternUnits="objectBoundingBox"
+        >
+          <image
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            xlinkHref={src}
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </pattern>
+      );
+    }
 
-    if (isLoaded || image !== null || !title) {
+    return this.renderGradient();
+  }
+
+  renderText({ state, src }: ImagePreloaderState) {
+    const { title, size } = this.props;
+
+    if (state === STATE_SUCCESS || src !== null || !title) {
       return null;
     }
 
@@ -200,6 +167,8 @@ class Avatar extends PureComponent<Props, State> {
       return null;
     }
 
+    const { status } = this.props;
+
     return (
       <div className={styles.clickerWrapper}>
         <Hover
@@ -207,7 +176,7 @@ class Avatar extends PureComponent<Props, State> {
           className={styles.clickerMask}
           onClick={this.props.onClick}
         />
-        {!this.props.status || this.props.status === 'invisible' ? null : (
+        {!status || status === 'invisible' ? null : (
           <Hover
             onHover={this.handleHover}
             className={styles.clickerStatus}
@@ -217,6 +186,17 @@ class Avatar extends PureComponent<Props, State> {
       </div>
     );
   }
+
+  renderAvatar = (imageState: ImagePreloaderState) => {
+    return (
+      <g>
+        <defs>{this.renderDefs(imageState)}</defs>
+        {this.renderMask()}
+        {this.renderText(imageState)}
+        {this.renderStatus()}
+      </g>
+    );
+  };
 
   render() {
     const { size } = this.props;
@@ -240,10 +220,9 @@ class Avatar extends PureComponent<Props, State> {
           shapeRendering="auto"
           className={styles.svg}
         >
-          {this.renderDefs()}
-          {this.renderMask()}
-          {this.renderText()}
-          {this.renderStatus()}
+          <ImagePreloader src={this.props.image}>
+            {this.renderAvatar}
+          </ImagePreloader>
         </svg>
       </div>
     );

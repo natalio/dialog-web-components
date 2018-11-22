@@ -5,6 +5,7 @@
 
 import type { PeerInfo, UserStatusType } from '@dlghq/dialog-types';
 import React from 'react';
+
 import Avatar from '../Avatar/Avatar';
 import getAvatarPlaceholder from '../../utils/getAvatarPlaceholder';
 

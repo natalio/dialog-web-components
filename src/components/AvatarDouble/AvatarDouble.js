@@ -7,10 +7,14 @@ import type { AvatarPlaceholder } from '@dlghq/dialog-types';
 import type { Gradient } from '../Avatar/utils/getAvatarColor';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+
 import getAvatarText from '../Avatar/utils/getAvatarText';
 import getAvatarColor from '../Avatar/utils/getAvatarColor';
 import createSequence from '../../utils/createSequence';
-import preloadImage from '../../utils/preloadImage';
+import ImagePreloader, {
+  type State as ImagePreloaderState,
+  STATE_SUCCESS,
+} from '../ImagePreloader/ImagePreloader';
 import Hover from '../Hover/Hover';
 import styles from './AvatarDouble.css';
 
@@ -29,10 +33,6 @@ export type Props = {
 };
 
 export type State = {
-  isBigImageLoaded: boolean,
-  isSmallImageLoaded: boolean,
-  bigImage: ?string,
-  smallImage: ?string,
   isHovered: boolean,
 };
 
@@ -70,102 +70,18 @@ class AvatarDouble extends PureComponent<Props, State> {
       small: `${this.id}_small`,
     };
     this.state = {
-      isBigImageLoaded: false,
-      isSmallImageLoaded: false,
-      bigImage: props.big.image,
-      smallImage: props.small.image,
       isHovered: false,
     };
-
-    if (props.big.image) {
-      preloadImage(props.big.image).then(this.handleBigImageLoaded);
-    }
-
-    if (props.small.image) {
-      preloadImage(props.small.image).then(this.handleSmallImageLoaded);
-    }
   }
-
-  static getDerivedStateFromProps(nextProps: Props, prevState: State): ?State {
-    return {
-      ...prevState,
-      bigImage: nextProps.big.image === null ? null : prevState.bigImage,
-      smallImage: nextProps.small.image === null ? null : prevState.smallImage,
-      isBigImageLoaded:
-        nextProps.big.image === prevState.smallImage
-          ? prevState.isBigImageLoaded
-          : false,
-      isSmallImageLoaded:
-        nextProps.small.image === prevState.smallImage
-          ? prevState.isSmallImageLoaded
-          : false,
-    };
-  }
-
-  componentDidUpdate(prevProps: Props): void {
-    if (this.props.big.image) {
-      if (this.props.big.image !== prevProps.big.image) {
-        if (!this.state.isBigImageLoaded) {
-          preloadImage(this.props.big.image).then(this.handleBigImageLoaded);
-        }
-      }
-    }
-
-    if (this.props.small.image) {
-      if (this.props.small.image !== prevProps.small.image) {
-        if (!this.state.isSmallImageLoaded) {
-          preloadImage(this.props.small.image).then(
-            this.handleSmallImageLoaded,
-          );
-        }
-      }
-    }
-  }
-
-  handleBigImageLoaded = (): void => {
-    this.setState({
-      isBigImageLoaded: true,
-      bigImage: this.props.big.image,
-    });
-  };
-
-  handleSmallImageLoaded = (): void => {
-    this.setState({
-      isSmallImageLoaded: true,
-      smallImage: this.props.small.image,
-    });
-  };
 
   handleHover = (hover: boolean): void => {
     this.setState({ isHovered: hover });
   };
 
-  renderDefsBig() {
+  renderBigGradient() {
     const {
       big: { placeholder },
     } = this.props;
-    const { isBigImageLoaded, bigImage } = this.state;
-
-    if (isBigImageLoaded || bigImage !== null) {
-      return (
-        <pattern
-          id={this.ids.big}
-          width="100%"
-          height="100%"
-          patternUnits="userSpaceOnUse"
-        >
-          <image
-            x="0"
-            y="0"
-            width="100px"
-            height="100px"
-            xlinkHref={bigImage}
-            preserveAspectRatio="xMidYMid slice"
-          />
-        </pattern>
-      );
-    }
-
     const colors: Gradient = getAvatarColor(placeholder);
 
     return (
@@ -183,46 +99,10 @@ class AvatarDouble extends PureComponent<Props, State> {
     );
   }
 
-  renderClipMaskBig() {
-    return (
-      <clipPath id={this.ids.clip}>
-        <path
-          // eslint-disable-next-line
-          d="M58.2070074,99.3297063 C55.5367715,99.7706374 52.795171,100 50,100 C22.3857625,100 0,77.6142375 0,50 C0,22.3857625 22.3857625,0 50,0 C77.6142375,0 100,22.3857625 100,50 C100,52.795171 99.7706374,55.5367715 99.3297063,58.2070074 C94.8434182,55.5348957 89.6009561,54 84,54 C67.4314575,54 54,67.4314575 54,84 C54,89.6009561 55.5348957,94.8434182 58.2070074,99.3297063 Z"
-        />
-      </clipPath>
-    );
-  }
-
-  renderDefsSmall() {
+  renderSmallGradient() {
     const {
       small: { placeholder },
     } = this.props;
-    const { isSmallImageLoaded, smallImage } = this.state;
-
-    if (isSmallImageLoaded || smallImage !== null) {
-      return (
-        <pattern
-          id={this.ids.small}
-          width="100%"
-          height="100%"
-          x="58"
-          y="58"
-          patternUnits="userSpaceOnUse"
-        >
-          <image
-            x="0"
-            y="0"
-            width="100px"
-            height="100px"
-            xlinkHref={smallImage}
-            transform="scale(0.507046569,0.507046569)"
-            preserveAspectRatio="xMidYMid slice"
-          />
-        </pattern>
-      );
-    }
-
     const colors: Gradient = getAvatarColor(placeholder);
 
     return (
@@ -240,17 +120,69 @@ class AvatarDouble extends PureComponent<Props, State> {
     );
   }
 
-  renderDefs() {
+  renderBigDefs({ state, src }: ImagePreloaderState) {
+    if (state === STATE_SUCCESS || src !== null) {
+      return (
+        <pattern
+          id={this.ids.big}
+          width="100%"
+          height="100%"
+          patternUnits="userSpaceOnUse"
+        >
+          <image
+            x="0"
+            y="0"
+            width="100px"
+            height="100px"
+            xlinkHref={src}
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </pattern>
+      );
+    }
+
+    return this.renderBigGradient();
+  }
+
+  renderBigClipMask() {
     return (
-      <defs>
-        {this.renderDefsBig()}
-        {this.renderDefsSmall()}
-        {this.renderClipMaskBig()}
-      </defs>
+      <clipPath id={this.ids.clip}>
+        <path
+          // eslint-disable-next-line
+          d="M58.2070074,99.3297063 C55.5367715,99.7706374 52.795171,100 50,100 C22.3857625,100 0,77.6142375 0,50 C0,22.3857625 22.3857625,0 50,0 C77.6142375,0 100,22.3857625 100,50 C100,52.795171 99.7706374,55.5367715 99.3297063,58.2070074 C94.8434182,55.5348957 89.6009561,54 84,54 C67.4314575,54 54,67.4314575 54,84 C54,89.6009561 55.5348957,94.8434182 58.2070074,99.3297063 Z"
+        />
+      </clipPath>
     );
   }
 
-  renderBigAvatar() {
+  renderSmallDefs({ state, src }: ImagePreloaderState) {
+    if (state === STATE_SUCCESS || src !== null) {
+      return (
+        <pattern
+          id={this.ids.small}
+          width="100%"
+          height="100%"
+          x="58"
+          y="58"
+          patternUnits="userSpaceOnUse"
+        >
+          <image
+            x="0"
+            y="0"
+            width="100px"
+            height="100px"
+            xlinkHref={src}
+            transform="scale(0.507046569,0.507046569)"
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </pattern>
+      );
+    }
+
+    return this.renderSmallGradient();
+  }
+
+  renderBigImage() {
     return (
       <path
         // eslint-disable-next-line
@@ -260,17 +192,15 @@ class AvatarDouble extends PureComponent<Props, State> {
     );
   }
 
-  renderSmallAvatar() {
+  renderSmallImage() {
     return <circle cx="84" cy="84" r="25" fill={`url(#${this.ids.small})`} />;
   }
 
-  renderPeerBigText() {
+  renderBigText({ state, src }: ImagePreloaderState) {
     const {
       big: { title },
     } = this.props;
-    const { isBigImageLoaded, bigImage } = this.state;
-
-    if (isBigImageLoaded || bigImage !== null || !title) {
+    if (state === STATE_SUCCESS || src !== null || !title) {
       return null;
     }
 
@@ -296,13 +226,11 @@ class AvatarDouble extends PureComponent<Props, State> {
     );
   }
 
-  renderPeerSmallText() {
+  renderSmallText({ state, src }: ImagePreloaderState) {
     const {
       small: { title },
     } = this.props;
-    const { isSmallImageLoaded, smallImage } = this.state;
-
-    if (isSmallImageLoaded || smallImage !== null || !title) {
+    if (state === STATE_SUCCESS || src !== null || !title) {
       return null;
     }
 
@@ -327,23 +255,28 @@ class AvatarDouble extends PureComponent<Props, State> {
     );
   }
 
-  renderBig() {
+  renderBigAvatar = (imageState: ImagePreloaderState) => {
     return (
       <g className={styles.avatarBig}>
-        {this.renderBigAvatar()}
-        {this.renderPeerBigText()}
+        <defs>
+          {this.renderBigDefs(imageState)}
+          {this.renderBigClipMask()}
+        </defs>
+        {this.renderBigImage()}
+        {this.renderBigText(imageState)}
       </g>
     );
-  }
+  };
 
-  renderSmall() {
+  renderSmallAvatar = (imageState: ImagePreloaderState) => {
     return (
-      <g className={styles.avatarSmall}>
-        {this.renderSmallAvatar()}
-        {this.renderPeerSmallText()}
+      <g className={styles.avatarBig}>
+        <defs>{this.renderSmallDefs(imageState)}</defs>
+        {this.renderSmallImage()}
+        {this.renderSmallText(imageState)}
       </g>
     );
-  }
+  };
 
   renderClicker() {
     if (!this.props.onClick) {
@@ -378,9 +311,12 @@ class AvatarDouble extends PureComponent<Props, State> {
       <div style={{ width: size, height: size }} className={className}>
         {this.renderClicker()}
         <svg viewBox="0 0 109 109" shapeRendering="auto" className={styles.svg}>
-          {this.renderDefs()}
-          {this.renderBig()}
-          {this.renderSmall()}
+          <ImagePreloader src={this.props.big.image}>
+            {this.renderBigAvatar}
+          </ImagePreloader>
+          <ImagePreloader src={this.props.small.image}>
+            {this.renderSmallAvatar}
+          </ImagePreloader>
         </svg>
       </div>
     );
