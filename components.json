@@ -159,7 +159,14 @@
   },
   {
     "name": "Helpers",
-    "components": ["Timer", "Trigger", "Alert", "Confirm", "CopyButton"]
+    "components": [
+      "Timer",
+      "Trigger",
+      "Alert",
+      "Confirm",
+      "CopyButton",
+      "ImagePreloader"
+    ]
   },
   {
     "name": "Banners",
