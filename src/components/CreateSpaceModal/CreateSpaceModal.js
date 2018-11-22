@@ -172,7 +172,7 @@ class CreateSpaceModal extends PureComponent<Props> {
   renderAvatarStep() {
     const { request: { avatar } } = this.props;
 
-    if (avatar && typeof avatar !== 'string') {
+    if (typeof avatar !== 'string' && avatar) {
       return (
         <div className={styles.wrapper}>
           <ModalHeader className={styles.header} withBorder>

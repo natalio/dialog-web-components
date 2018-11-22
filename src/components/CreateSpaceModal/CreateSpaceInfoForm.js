@@ -15,7 +15,7 @@ import styles from './CreateSpaceModal.css';
 export type Props = {
   id: string,
   title: string,
-  shortname: ?string,
+  shortname: string,
   shortnamePrefix: ?string,
   avatar: ?File,
   className?: string,
@@ -55,11 +55,9 @@ class CreateSpaceInfoForm extends PureComponent<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.avatar) {
-      fileToBase64(nextProps.avatar, (avatar) => this.setState({ avatar }));
-    } else {
-      this.setState({ avatar: nextProps.avatar });
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.avatar !== this.props.avatar && this.props.avatar) {
+      fileToBase64(this.props.avatar, (avatar) => this.setState({ avatar }));
     }
   }
 
@@ -73,18 +71,22 @@ class CreateSpaceInfoForm extends PureComponent<Props, State> {
     const { title } = this.props;
     const { avatar } = this.state;
 
-    return (
-      <div className={styles.avatarBlock}>
-        <AvatarSelector
-          name={title}
-          placeholder="empty"
-          avatar={avatar}
-          size={140}
-          onRemove={this.props.onAvatarRemove}
-          onChange={this.props.onAvatarChange}
-        />
-      </div>
-    );
+    if (avatar) {
+      return (
+        <div className={styles.avatarBlock}>
+          <AvatarSelector
+            name={title}
+            placeholder="empty"
+            avatar={avatar}
+            size={140}
+            onRemove={this.props.onAvatarRemove}
+            onChange={this.props.onAvatarChange}
+          />
+        </div>
+      );
+    }
+
+    return null;
   }
 
   render() {
