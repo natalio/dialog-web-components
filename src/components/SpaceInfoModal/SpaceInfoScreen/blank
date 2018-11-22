@@ -1,0 +1,40 @@
+const group = {
+  name: 'American Option Buddies',
+  shortname: null,
+  creator: 'Steve Rodgers',
+  about: null,
+  avatar: null,
+  bigAvatar: null,
+  placeholder: 'lblue',
+  adminId: 1001
+};
+const online = {
+  message: '2 hours ago'
+};
+const onAboutEdit = () => console.debug('Edit about action');
+
+<div style={{ background: '#fff', width: 320 }}>
+  <ActivityProfile info={group} onAboutEdit={onAboutEdit} online={online} type="group">
+  <div style={{ margin: '0px 5px', display: 'inline-block' }}>
+    <IconButton
+      glyph="star"
+      key="more"
+      size="large"
+    />
+  </div>
+  <div style={{ margin: '0px 5px', display: 'inline-block' }}>
+    <IconButton
+      glyph="add_member"
+      key="more"
+      size="large"
+    />
+  </div>
+  <div style={{ margin: '0px 5px', display: 'inline-block' }}>
+    <IconButton
+      glyph="more_outline"
+      key="more"
+      size="large"
+    />
+  </div>
+  </ActivityProfile>
+</div>

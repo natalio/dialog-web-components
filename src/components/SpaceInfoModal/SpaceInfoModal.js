@@ -14,6 +14,9 @@ import ModalBody from '../Modal/ModalBody';
 import ModalFooter from '../Modal/ModalFooter';
 import ModalClose from '../Modal/ModalClose';
 import HotKeys from '../HotKeys/HotKeys';
+import SpaceInfoScreen from './SpaceInfoScreen/SpaceInfoScreen';
+import SpaceAddMembersScreen from './SpaceAddMembersScreen/SpaceAddMembersScreen';
+import AddMembersModal from '../AddMembersModal/AddMembersModal';
 import styles from './SpaceInfoModal.css';
 
 class SpaceInfoModal extends PureComponent<Props> {
@@ -27,7 +30,7 @@ class SpaceInfoModal extends PureComponent<Props> {
     this.state = {
       screen: 'info',
       /**
-       * our info component and confirmation screen component are both modal;
+       * our info component and confirmation component are both modal;
        * render only one of them;
        */
       confirmationScreen: false,
@@ -51,54 +54,41 @@ class SpaceInfoModal extends PureComponent<Props> {
     });
   };
 
-  renderHeader() {
-    const { screen } = this.state;
+  handlePrevScreenClick = (): void => {
+    this.setState({
+      screen: 'info'
+    });
+  };
 
-    switch (screen) {
-      case 'info':
-        return null;
-      case 'members':
-        return null;
-      case 'addMembers':
-        return null;
-      case 'edit':
-        return null;
-      case 'avatar':
-        return null;
-      default:
-        return null;
-    }
-  }
-
-  renderBody() {
-    const { screen } = this.state;
-
-    switch (screen) {
-      case 'info':
-        return 123321;
-      case 'members':
-        return null;
-      case 'addMembers':
-        return null;
-      case 'edit':
-        return null;
-      case 'avatar':
-        return null;
-      default:
-        return null;
-    }
-  }
+  handleAddMembersScreenClick = (): void => {
+    this.setState({
+      screen: 'addMembers'
+    });
+  };
 
   renderMainScreen() {
     const { screen } = this.state;
 
     switch (screen) {
       case 'info':
-        return 123321;
+        return (
+          <SpaceInfoScreen
+            isCreator={false} //this
+            onClose={this.props.onClose}
+            onAddMemberClick={this.handleAddMembersScreenClick}
+          />
+        );
       case 'members':
         return null;
       case 'addMembers':
-        return null;
+        return (
+          <SpaceAddMembersScreen
+            selector={this.props.membersSelector}
+            onChange={this.props.onMembersChange}
+            onPrevScreen={this.handlePrevScreenClick}
+            onClose={this.props.onClose}
+          />
+        );
       case 'edit':
         return null;
       case 'avatar':

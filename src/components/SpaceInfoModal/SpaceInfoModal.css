@@ -8,11 +8,6 @@
   --space-info-modal-font-family: var(--default-font-family);
 }
 
-/* Reset */
-.container {
-  all: initial;
-}
-
 /* Styles */
 .container {
   font-family: var(--space-info-modal-font-family);

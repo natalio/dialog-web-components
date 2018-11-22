@@ -2,6 +2,8 @@
  * Copyright 2018 dialog LLC <info@dlg.im>
  * @flow
  */
+import type { SelectorState } from '../../entities';
+import type { PeerInfo, Group } from '@dlghq/dialog-types';
 
 export type Screen = 'info' | 'members' | 'addMembers' | 'avatar' | 'edit';
 
@@ -24,7 +26,10 @@ type Space = {
 export type Props = {
   id: string,
   className?: string,
-  space: Space
+  space: Space,
+  onClose: () => void,
+  membersSelector: SelectorState<PeerInfo>,
+  onMembersChange: (selector: SelectorState<PeerInfo>) => mixed
 }
 
 export type State = {

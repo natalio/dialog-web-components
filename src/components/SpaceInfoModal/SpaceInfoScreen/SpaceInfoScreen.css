@@ -1,0 +1,38 @@
+/**
+ * Copyright 2018 dialog LLC <info@dlg.im>
+ */
+
+@import '../../../styles/variables.css';
+
+:root {
+  --space-info-modal-font-family: var(--default-font-family);
+}
+
+/* Reset */
+.container {
+  all: initial;
+}
+
+/* Styles */
+.container {
+  font-family: var(--space-info-modal-font-family);
+  background-color: #ffffff;
+}
+
+.modalClose {
+  position: absolute;
+  top: 16px;
+  right: 32px;
+}
+
+.modalBody {
+  position: relative;
+}
+
+.modalFooter {
+  padding: 0;
+}
+
+.activityProfileWrapper {
+  width: 320px;
+}
