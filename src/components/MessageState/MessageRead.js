@@ -27,7 +27,7 @@ class MessageRead extends Component<Props> {
         key={peerToString(reader.peer)}
         className={styles.avatar}
         peer={reader}
-        size="tiny"
+        size={14}
       />
     ));
   }
