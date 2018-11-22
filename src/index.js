@@ -167,6 +167,7 @@ export {
 export {
   default as SelectCertificateModal,
 } from './components/SelectCertificateModal/SelectCertificateModal';
+export { default as SpaceInfoModal } from './components/SpaceInfoModal/SpaceInfoModal';
 
 // Sidebar
 export {
