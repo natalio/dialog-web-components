@@ -5,12 +5,14 @@
 
 import { Component, type Node } from 'react';
 
-export const STATE_LOADING = 1;
-export const STATE_SUCCESS = 2;
-export const STATE_ERROR = 3;
+export const STATE_PENDING = 'pending';
+export const STATE_SUCCESS = 'success';
+export const STATE_ERROR = 'error';
+
+export type ImageState = 'pending' | 'success' | 'error';
 
 export type State = {
-  state: 1 | 2 | 3,
+  state: ImageState,
   src: ?string,
   error: ?mixed,
 };
@@ -29,7 +31,7 @@ class ImagePreloader extends Component<Props, State> {
     super(props);
 
     this.state = {
-      state: STATE_LOADING,
+      state: STATE_PENDING,
       src: null,
       error: null,
     };
@@ -47,7 +49,7 @@ class ImagePreloader extends Component<Props, State> {
   ): $Shape<State> {
     return {
       src: nextProps.src === null ? null : prevState.src,
-      state: nextProps.src === prevState.src ? prevState.state : STATE_LOADING,
+      state: nextProps.src === prevState.src ? prevState.state : STATE_PENDING,
     };
   }
 
@@ -59,7 +61,7 @@ class ImagePreloader extends Component<Props, State> {
     if (
       this.props.src &&
       this.props.src !== prevProps.src &&
-      !this.state.state !== STATE_LOADING
+      !this.state.state !== STATE_PENDING
     ) {
       this.handleStartFetch(this.props.src);
     }
