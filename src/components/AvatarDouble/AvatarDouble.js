@@ -19,7 +19,7 @@ import Hover from '../Hover/Hover';
 import styles from './AvatarDouble.css';
 
 type AvatarProps = {
-  title: ?string,
+  title: string | null,
   image: ?string,
   placeholder: AvatarPlaceholder,
 };
