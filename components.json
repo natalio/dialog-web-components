@@ -3,9 +3,9 @@
     "name": "Interface",
     "components": [
       "Avatar",
+      "AvatarDouble",
       "PeerAvatar",
-      "PeerAvatarWithStatus",
-      "DoublePeerAvatar",
+      "PeerAvatarDouble",
       "PeerInfoTitle",
       "Scroller",
       "Dropdown",
@@ -37,7 +37,13 @@
   },
   {
     "name": "Buttons",
-    "components": ["Button", "ButtonNext", "LinkButton", "IconButton", "LinkIconButton"]
+    "components": [
+      "Button",
+      "ButtonNext",
+      "LinkButton",
+      "IconButton",
+      "LinkIconButton"
+    ]
   },
   {
     "name": "Forms",
@@ -159,7 +165,8 @@
       "Trigger",
       "Alert",
       "Confirm",
-      "CopyButton"
+      "CopyButton",
+      "ImagePreloader"
     ]
   },
   {
