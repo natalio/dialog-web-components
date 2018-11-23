@@ -13,9 +13,12 @@ import ModalHeader from '../Modal/ModalHeader';
 import ModalBody from '../Modal/ModalBody';
 import ModalFooter from '../Modal/ModalFooter';
 import ModalClose from '../Modal/ModalClose';
+import Confirm from '../Confirm/Confirm';
 import HotKeys from '../HotKeys/HotKeys';
 import SpaceInfoScreen from './SpaceInfoScreen/SpaceInfoScreen';
 import SpaceAddMembersScreen from './SpaceAddMembersScreen/SpaceAddMembersScreen';
+import SpaceInvitationLinkScreen from './SpaceInvitationLinkScreen';
+import SpaceMembersScreen from './SpaceMembersScreen/SpaceMembersScreen';
 import AddMembersModal from '../AddMembersModal/AddMembersModal';
 import styles from './SpaceInfoModal.css';
 
@@ -29,11 +32,16 @@ class SpaceInfoModal extends PureComponent<Props> {
 
     this.state = {
       screen: 'info',
+      confirmScreen: 'leave',
       /**
        * our info component and confirmation component are both modal;
        * render only one of them;
        */
-      confirmationScreen: false,
+      confirmEnabled: false,
+      notificationEnabled: false,
+      invitationLink: 'someLink',
+      invitationLinkPending: false,
+      onlineMessage: '9 members, 3 online',
       space: {
         name: props.space.name,
         shortname: props.space.shortname,
@@ -42,29 +50,99 @@ class SpaceInfoModal extends PureComponent<Props> {
     };
   }
 
-  handleConfirmationShow = () => {
+  handleNotificationChange = (): void => {
+    const { notificationEnabled } = this.state;
+
     this.setState({
-      confirmationScreen: true
+      notificationEnabled: !notificationEnabled
     });
   };
 
-  handleConfirmationHide = () => {
+  handleConfirmShow = () => {
     this.setState({
-      confirmationScreen: false
+      confirmEnabled: true
     });
   };
 
-  handlePrevScreenClick = (): void => {
+  handleConfirmHide = () => {
+    this.setState({
+      confirmEnabled: false
+    });
+  };
+
+  handleLeaveSpaceConfirmScreen = (): void => {
+    this.setState({ confirmScreen: 'leave' }, () => {
+      this.handleConfirmShow();
+    });
+  };
+
+  handleDeleteSpaceConfirmScreen = (): void => {
+    this.setState({ confirmScreen: 'delete' }, () => {
+      this.handleConfirmShow();
+    });
+  };
+
+  handlePrevScreen = (): void => {
     this.setState({
       screen: 'info'
     });
   };
 
-  handleAddMembersScreenClick = (): void => {
+  handleAddMembersScreen = (): void => {
     this.setState({
       screen: 'addMembers'
     });
   };
+
+  handleInvitationLinkScreen = (): void => {
+    this.setState({
+      screen: 'invitationLink'
+    });
+  };
+
+  handleMembersScreen = (): void => {
+    this.setState({
+      screen: 'members'
+    });
+  };
+
+  handleRevoke = (): void => {
+    console.log('revoke link');
+  };
+
+  handleLeaveSpace = (): void => {
+    console.log('leave');
+  };
+
+  handleDeleteSpace = (): void => {
+    console.log('delete');
+  };
+
+  renderConfirmLeave() {
+    return (
+      <Confirm
+        message="Are you going to leave this space?"
+        submit="Leave"
+        cancel="Cancel"
+        theme="danger"
+        onSubmit={this.handleLeaveSpace}
+        onClose={this.handleConfirmHide}
+      />
+    );
+  }
+
+  renderConfirmDelete() {
+    return (
+      <Confirm
+        message="Are you going to delete this space?"
+        submit="Delete"
+        cancel="Cancel"
+        theme="danger"
+        onSubmit={this.handleDeleteSpace}
+        onClose={this.handleConfirmHide}
+      />
+    );
+  }
 
   renderMainScreen() {
     const { screen } = this.state;
@@ -74,18 +152,31 @@ class SpaceInfoModal extends PureComponent<Props> {
         return (
           <SpaceInfoScreen
             isCreator={false} //this
+            onlineMessage={this.state.onlineMessage}
             onClose={this.props.onClose}
-            onAddMemberClick={this.handleAddMembersScreenClick}
+            notificationEnabled={this.state.notificationEnabled}
+            onAddMemberClick={this.handleAddMembersScreen}
+            onInvitationLinkClick={this.handleInvitationLinkScreen}
+            onMembersScreenClick={this.handleMembersScreen}
+            onNotificationChange={this.handleNotificationChange}
+            onLeaveSpaceConfirmClick={this.handleLeaveSpaceConfirmScreen}
+            onDeleteSpaceConfirmClick={this.handleDeleteSpaceConfirmScreen}
           />
         );
       case 'members':
-        return null;
+        return (
+          <SpaceMembersScreen
+            onlineMessage={this.state.onlineMessage}
+            onPrevScreen={this.handlePrevScreen}
+            onClose={this.props.onClose}
+          />
+        );
       case 'addMembers':
         return (
           <SpaceAddMembersScreen
             selector={this.props.membersSelector}
             onChange={this.props.onMembersChange}
-            onPrevScreen={this.handlePrevScreenClick}
+            onPrevScreen={this.handlePrevScreen}
             onClose={this.props.onClose}
           />
         );
@@ -93,20 +184,39 @@ class SpaceInfoModal extends PureComponent<Props> {
         return null;
       case 'avatar':
         return null;
+      case 'invitationLink':
+        return (
+          <SpaceInvitationLinkScreen
+            onPrevScreen={this.handlePrevScreen}
+            onClose={this.props.onClose}
+            onRevoke={this.handleRevoke}
+            link={this.state.invitationLink}
+            pending={this.state.invitationLinkPending}
+          />
+        );
       default:
         return null;
     }
   }
 
-  renderConfirmationScreen() {
-    return null;
+  renderConfirm() {
+    const { confirmScreen } = this.state;
+
+    switch (confirmScreen) {
+      case 'leave':
+        return this.renderConfirmLeave();
+      case 'delete':
+        return this.renderConfirmDelete();
+      default:
+        return null;
+    }
   }
 
   renderModal() {
-    const { confirmationScreen } = this.state;
+    const { confirmEnabled } = this.state;
 
-    if (confirmationScreen) {
-      return this.renderConfirmationScreen();
+    if (confirmEnabled) {
+      return this.renderConfirm();
     }
 
     return this.renderMainScreen();

@@ -10,7 +10,13 @@ import ModalHeader from '../../Modal/ModalHeader';
 import ModalBody from '../../Modal/ModalBody';
 import ModalFooter from '../../Modal/ModalFooter';
 import ModalClose from '../../Modal/ModalClose';
+import Trigger from '../../Trigger/Trigger';
+import Dropdown from '../../Dropdown/Dropdown';
+import DropdownItem from '../../Dropdown/DropdownItem';
 import ActivityProfile from '../../ActivityProfile/ActivityProfile';
+import ActivityList from '../../ActivityList/ActivityList';
+import ActivityListItem from '../../ActivityList/ActivityListItem';
+import ActivityListSwitcher from '../../ActivityList/ActivityListSwitcher';
 import IconButton from '../../IconButton/IconButton';
 import Button from '../../Button/Button';
 import styles from './SpaceInfoScreen.css';
@@ -18,10 +24,18 @@ import styles from './SpaceInfoScreen.css';
 type Props = {
   onClose: () => void,
   isCreator: boolean,
-  onAddMemberClick: () => void
+  onlineMessage: string,
+  notificationEnabled: boolean,
+  onAddMemberClick: () => void,
+  onInvitationLinkClick: () => void,
+  onMembersScreenClick: () => void,
+  onNotificationChange: () => void,
+  onLeaveSpaceConfirmClick: () => void,
+  onDeleteSpaceConfirmClick: () => void
 }
 
 class SpaceInfoScreen extends PureComponent<Props> {
+
   renderFooter() {
     const { isCreator } = this.props;
 
@@ -33,7 +47,7 @@ class SpaceInfoScreen extends PureComponent<Props> {
           rounded={false}
           // loading={this.isPending()}
           // disabled={!this.isChanged() || this.isPending()}
-          onClick={this.handleSubmit}
+          onClick={this.props.onDeleteSpaceConfirmClick}
           id="space_info_screen_delete_space_button"
         >
           <Text id="SpaceInfoModal.delete" />
@@ -48,7 +62,7 @@ class SpaceInfoScreen extends PureComponent<Props> {
         rounded={false}
         // loading={this.isPending()}
         // disabled={!this.isChanged() || this.isPending()}
-        onClick={this.handleSubmit}
+        onClick={this.props.onLeaveSpaceConfirmClick}
         id="space_info_screen_leave_space_button"
       >
         <Text id="SpaceInfoModal.leave" />
@@ -61,7 +75,6 @@ class SpaceInfoScreen extends PureComponent<Props> {
       name: 'Sub space',
       shortname: 'subspace',
       creator: 'Steve Rodgers',
-      about: 'some about',
       avatar: null,
       bigAvatar: null,
       placeholder: 'lblue',
@@ -93,7 +106,45 @@ class SpaceInfoScreen extends PureComponent<Props> {
                   onClick={this.props.onAddMemberClick}
                 />
               </div>
+              <div style={{ margin: '0px 5px', display: 'inline-block' }}>
+                <IconButton
+                  glyph="edit"
+                  key="more"
+                  size="large"
+                  onClick={this.props.onAddMemberClick}
+                />
+              </div>
+              <div style={{ margin: '0px 5px', display: 'inline-block' }}>
+                <IconButton
+                  glyph="more_outline"
+                  key="more"
+                  size="large"
+                  onClick={this.props.onAddMemberClick}
+                />
+              </div>
             </ActivityProfile>
+            <ActivityList>
+              <ActivityListSwitcher
+                value={this.props.notificationEnabled}
+                onChange={this.props.onNotificationChange}
+                icon={{ glyph: 'notifications', theme: 'danger' }}
+              >
+                Notifications
+              </ActivityListSwitcher>
+              <ActivityListItem
+                onClick={this.props.onInvitationLinkClick}
+                icon={{ glyph: 'link', theme: 'success' }}
+              >
+                Invitation link
+              </ActivityListItem>
+              <ActivityListItem
+                onClick={this.props.onMembersScreenClick}
+                icon={{ glyph: 'person', theme: 'warning' }}
+                id="activity_list_members"
+              >
+                {this.props.onlineMessage}
+              </ActivityListItem>
+            </ActivityList>
           </div>
         </ModalBody>
         <ModalFooter className={styles.modalFooter}>

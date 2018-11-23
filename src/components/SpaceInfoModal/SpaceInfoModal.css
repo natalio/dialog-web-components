@@ -12,3 +12,24 @@
 .container {
   font-family: var(--space-info-modal-font-family);
 }
+
+.back {
+  width: var(--modal-create-new-close-size);
+  height: var(--modal-create-new-close-size);
+  margin-right: 16px;
+  transition: color var(--modal-create-new-transition-duration) linear;
+  line-height: var(--modal-create-new-close-size);
+  color: var(--modal-create-new-close-color);
+
+&:hover {
+   color: var(--modal-create-new-close-color-hover);
+ }
+}
+
+.invitationWrapper {
+  width: 320px;
+}
+
+.invitationBody {
+  padding: 0;
+}
