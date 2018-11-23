@@ -102,20 +102,10 @@
   }
 }
 
-.withDoubleAvatar {
-  padding-bottom: var(--sidebar-recent-item-bottom-padding);
-}
-
 .avatar {
   margin-right: 11px;
   flex: 0 0 auto;
   align-self: auto;
-}
-
-.doubleAvatar {
-  flex: 0 0 auto;
-  align-self: auto;
-  margin-right: 8px;
 }
 
 .text {
