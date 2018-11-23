@@ -18,12 +18,14 @@ const whitelist = [
   resolve('node_modules/@dlghq/country-codes'),
 ];
 
+const globalStyles = [
+  resolve('src/styles/global.css'),
+  resolve('src/components/MessageMediaInteractive/example/CodeMirror.css'),
+  resolve('src/styleguide/styles.css'),
+];
+
 module.exports = {
-  resolve: {
-    alias: {
-      'rsg-components/Wrapper': resolve('src/styleguide/Wrapper.js'),
-    },
-  },
+  mode: 'development',
   module: {
     rules: [
       {
@@ -35,7 +37,7 @@ module.exports = {
           cacheDirectory: true,
           presets: [
             [
-              '@dlghq/dialog',
+              '@dlghq/babel-preset-dialog',
               {
                 modules: false,
                 runtime: false,
@@ -60,27 +62,22 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               plugins() {
-                return require('@dlghq/postcss-dialog')({ initial: false });
+                return require('@dlghq/postcss-dialog')({
+                  initial: false,
+                  debug: true,
+                  report: true,
+                  stage: 0,
+                });
               },
             },
           },
         ],
-        include: [
-          resolve('src/styles/global.css'),
-          resolve(
-            'src/components/MessageMediaInteractive/example/CodeMirror.css',
-          ),
-        ],
+        include: globalStyles,
       },
       {
         test: /\.css$/,
         include: whitelist,
-        exclude: [
-          resolve('src/styles/global.css'),
-          resolve(
-            'src/components/MessageMediaInteractive/example/CodeMirror.css',
-          ),
-        ],
+        exclude: globalStyles,
         use: [
           'style-loader',
           {
@@ -106,25 +103,19 @@ module.exports = {
         ],
       },
       {
-        test: /\.json$/,
-        include: [...whitelist, path.join(__dirname, 'node_modules/entities')],
-        use: ['json-loader'],
-      },
-      {
         test: /\.yml$/,
         include: whitelist,
         use: ['yml-loader'],
       },
       {
         test: /\.(jpg|png|svg|gif)$/,
-        include: /./,
         exclude: resolve('src/components/Icon/svg'),
         use: ['file-loader'],
       },
       {
         test: /\.(svg)$/,
         include: resolve('src/components/Icon/svg'),
-        loader: 'svg-sprite-loader',
+        use: ['svg-sprite-loader'],
       },
       {
         test: /\.txt$/,
