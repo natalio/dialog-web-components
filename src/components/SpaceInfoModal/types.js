@@ -5,7 +5,7 @@
 import type { SelectorState } from '../../entities';
 import type { PeerInfo, Group } from '@dlghq/dialog-types';
 
-export type Screen = 'info' | 'members' | 'addMembers' | 'avatar' | 'edit' | 'invitationLink';
+export type Screen = 'info' | 'members' | 'addMembers' | 'invitationLink';
 export type ConfirmScreen = 'leave' | 'delete';
 
 type SpaceUpdate = {
@@ -30,7 +30,9 @@ export type Props = {
   space: Space,
   onClose: () => void,
   membersSelector: SelectorState<PeerInfo>,
-  onMembersChange: (selector: SelectorState<PeerInfo>) => mixed
+  onMembersChange: (selector: SelectorState<PeerInfo>) => mixed,
+  notificationEnabled: boolean,
+  onNotificationChange: () => void
 }
 
 export type State = {

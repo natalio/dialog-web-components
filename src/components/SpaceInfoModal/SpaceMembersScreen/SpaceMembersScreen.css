@@ -20,17 +20,26 @@
   width: 320px;
 }
 
-.modalClose {
+.back {
+  width: var(--modal-create-new-close-size);
+  height: var(--modal-create-new-close-size);
+  margin-right: 16px;
+  transition: color var(--modal-create-new-transition-duration) linear;
+  line-height: var(--modal-create-new-close-size);
+  color: var(--modal-create-new-close-color);
+
+&:hover {
+   color: var(--modal-create-new-close-color-hover);
+ }
+}
+
+.close {
   position: absolute;
   top: 16px;
   right: 32px;
 }
 
-.modalBody {
+.body {
   position: relative;
-  padding: 16px 0 1px;
-}
-
-.modalFooter {
-  padding: 0;
+  padding: 0 0 1px;
 }

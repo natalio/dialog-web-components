@@ -10,14 +10,10 @@ import ModalHeader from '../../Modal/ModalHeader';
 import ModalBody from '../../Modal/ModalBody';
 import ModalFooter from '../../Modal/ModalFooter';
 import ModalClose from '../../Modal/ModalClose';
-import Trigger from '../../Trigger/Trigger';
-import Dropdown from '../../Dropdown/Dropdown';
-import DropdownItem from '../../Dropdown/DropdownItem';
 import ActivityProfile from '../../ActivityProfile/ActivityProfile';
 import ActivityList from '../../ActivityList/ActivityList';
 import ActivityListItem from '../../ActivityList/ActivityListItem';
 import ActivityListSwitcher from '../../ActivityList/ActivityListSwitcher';
-import IconButton from '../../IconButton/IconButton';
 import Button from '../../Button/Button';
 import styles from './SpaceInfoScreen.css';
 
@@ -35,7 +31,6 @@ type Props = {
 }
 
 class SpaceInfoScreen extends PureComponent<Props> {
-
   renderFooter() {
     const { isCreator } = this.props;
 
@@ -97,32 +92,7 @@ class SpaceInfoScreen extends PureComponent<Props> {
               info={group}
               onAboutEdit={onAboutEdit}
               type="group"
-            >
-              <div style={{ margin: '0px 5px', display: 'inline-block' }}>
-                <IconButton
-                  glyph="add_member"
-                  key="more"
-                  size="large"
-                  onClick={this.props.onAddMemberClick}
-                />
-              </div>
-              <div style={{ margin: '0px 5px', display: 'inline-block' }}>
-                <IconButton
-                  glyph="edit"
-                  key="more"
-                  size="large"
-                  onClick={this.props.onAddMemberClick}
-                />
-              </div>
-              <div style={{ margin: '0px 5px', display: 'inline-block' }}>
-                <IconButton
-                  glyph="more_outline"
-                  key="more"
-                  size="large"
-                  onClick={this.props.onAddMemberClick}
-                />
-              </div>
-            </ActivityProfile>
+            />
             <ActivityList>
               <ActivityListSwitcher
                 value={this.props.notificationEnabled}
@@ -136,6 +106,12 @@ class SpaceInfoScreen extends PureComponent<Props> {
                 icon={{ glyph: 'link', theme: 'success' }}
               >
                 Invitation link
+              </ActivityListItem>
+              <ActivityListItem
+                onClick={this.props.onAddMemberClick}
+                icon={{ glyph: 'add_member', theme: 'info' }}
+              >
+                Add members
               </ActivityListItem>
               <ActivityListItem
                 onClick={this.props.onMembersScreenClick}

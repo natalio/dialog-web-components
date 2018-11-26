@@ -13,12 +13,12 @@ import ModalClose from '../../Modal/ModalClose';
 import ActivityInvite from '../../ActivityInvite/ActivityInvite';
 import Button from '../../Button/Button';
 import Icon from '../../Icon/Icon';
-import styles from '../SpaceInfoModal.css';
 import ActivityProfile from '../../ActivityProfile/ActivityProfile';
 import IconButton from '../../IconButton/IconButton';
 import ActivityList from '../../ActivityList/ActivityList';
 import ActivityListSwitcher from '../../ActivityList/ActivityListSwitcher';
 import ActivityListItem from '../../ActivityList/ActivityListItem';
+import styles from './SpaceMembersScreen.css';
 
 type Props = {
   onClose: () => void,
@@ -26,10 +26,10 @@ type Props = {
   onlineMessage: string
 }
 
-class SpaceInfoScreen extends PureComponent<Props> {
+class SpaceMembersScreen extends PureComponent<Props> {
   render() {
     return (
-      <div className={styles.invitationWrapper}>
+      <div className={styles.container}>
         <ModalHeader withBorder>
           <Icon
             glyph="arrow_back"
@@ -39,21 +39,20 @@ class SpaceInfoScreen extends PureComponent<Props> {
           <Text id="SpaceInfoModal.members" />
           <ModalClose onClick={this.props.onClose} id="space_add_members_close_button" />
         </ModalHeader>
-        <ModalBody className={styles.invitationBody}>
-          <div className={styles.activityProfileWrapper}>
-            <ActivityList>
-              <ActivityListItem
-                icon={{ glyph: 'person', theme: 'warning' }}
-                id="activity_list_members"
-              >
-                {this.props.onlineMessage}
-              </ActivityListItem>
-            </ActivityList>
-          </div>
+        <ModalBody className={styles.body}>
+          <ActivityList>
+            <ActivityListItem
+              icon={{ glyph: 'person', theme: 'warning' }}
+              id="activity_list_members"
+            >
+              {this.props.onlineMessage}
+            </ActivityListItem>
+            {this.props.children}
+          </ActivityList>
         </ModalBody>
       </div>
     );
   }
 }
 
-export default SpaceInfoScreen;
+export default SpaceMembersScreen;

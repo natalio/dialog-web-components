@@ -6,6 +6,7 @@ const contacts = require('../../fixtures/contacts.json');
 const initial = {
   isOpen: true,
   selector: PeerInfoSelectorState.create(contacts),
+  notificationEnbaled: false,
   request: {
     type: 'group',
     title: '',
@@ -21,6 +22,7 @@ const handleOpen = () => setState({ isOpen: true });
 const handleClose = () => setState({ isOpen: false });
 const handleRequestChange = (request) => setState({ request });
 const handleStepChange = (step) => setState({ step });
+const handleNotificationChange = () => setState({ notificationEnbaled: !state.notificationEnbaled })
 const handleSubmit = (request) => {
   console.debug(request);
   setState(initial);
@@ -43,6 +45,9 @@ const space = {
         space={space}
         membersSelector={state.selector}
         onMembersChange={(selector) => setState({ selector })}
+        notificationEnbaled={state.notificationEnbaled}
+        onNotificationChange={handleNotificationChange}
+        membersList={123312}
       />
     ) : null
   }

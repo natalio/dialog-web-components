@@ -7,19 +7,13 @@ import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 
 import type { Props } from './types';
-import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
-import ModalHeader from '../Modal/ModalHeader';
-import ModalBody from '../Modal/ModalBody';
-import ModalFooter from '../Modal/ModalFooter';
-import ModalClose from '../Modal/ModalClose';
 import Confirm from '../Confirm/Confirm';
 import HotKeys from '../HotKeys/HotKeys';
 import SpaceInfoScreen from './SpaceInfoScreen/SpaceInfoScreen';
 import SpaceAddMembersScreen from './SpaceAddMembersScreen/SpaceAddMembersScreen';
 import SpaceInvitationLinkScreen from './SpaceInvitationLinkScreen';
 import SpaceMembersScreen from './SpaceMembersScreen/SpaceMembersScreen';
-import AddMembersModal from '../AddMembersModal/AddMembersModal';
 import styles from './SpaceInfoModal.css';
 
 class SpaceInfoModal extends PureComponent<Props> {
@@ -31,14 +25,13 @@ class SpaceInfoModal extends PureComponent<Props> {
     super(props);
 
     this.state = {
-      screen: 'info',
+      screen: 'members',
       confirmScreen: 'leave',
       /**
        * our info component and confirmation component are both modal;
        * render only one of them;
        */
       confirmEnabled: false,
-      notificationEnabled: false,
       invitationLink: 'someLink',
       invitationLinkPending: false,
       onlineMessage: '9 members, 3 online',
@@ -154,11 +147,11 @@ class SpaceInfoModal extends PureComponent<Props> {
             isCreator={false} //this
             onlineMessage={this.state.onlineMessage}
             onClose={this.props.onClose}
-            notificationEnabled={this.state.notificationEnabled}
+            notificationEnabled={this.props.notificationEnabled}
+            onNotificationChange={this.props.onNotificationChange}
             onAddMemberClick={this.handleAddMembersScreen}
             onInvitationLinkClick={this.handleInvitationLinkScreen}
             onMembersScreenClick={this.handleMembersScreen}
-            onNotificationChange={this.handleNotificationChange}
             onLeaveSpaceConfirmClick={this.handleLeaveSpaceConfirmScreen}
             onDeleteSpaceConfirmClick={this.handleDeleteSpaceConfirmScreen}
           />
@@ -169,7 +162,9 @@ class SpaceInfoModal extends PureComponent<Props> {
             onlineMessage={this.state.onlineMessage}
             onPrevScreen={this.handlePrevScreen}
             onClose={this.props.onClose}
-          />
+          >
+            {this.props.membersList}
+          </SpaceMembersScreen>
         );
       case 'addMembers':
         return (
@@ -180,10 +175,6 @@ class SpaceInfoModal extends PureComponent<Props> {
             onClose={this.props.onClose}
           />
         );
-      case 'edit':
-        return null;
-      case 'avatar':
-        return null;
       case 'invitationLink':
         return (
           <SpaceInvitationLinkScreen
