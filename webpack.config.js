@@ -63,10 +63,11 @@ module.exports = {
             options: {
               plugins() {
                 return require('@dlghq/postcss-dialog')({
-                  initial: false,
-                  debug: true,
-                  report: true,
-                  stage: 0,
+                  env: {
+                    features: {
+                      'all-property': false,
+                    },
+                  },
                 });
               },
             },
@@ -92,11 +93,7 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               plugins() {
-                return require('@dlghq/postcss-dialog')({
-                  debug: true,
-                  report: true,
-                  stage: 0,
-                });
+                return require('@dlghq/postcss-dialog')();
               },
             },
           },
