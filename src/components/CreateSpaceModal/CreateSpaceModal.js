@@ -172,38 +172,38 @@ class CreateSpaceModal extends PureComponent<Props> {
   renderAvatarStep() {
     const { request: { avatar } } = this.props;
 
-    if (typeof avatar !== 'string' && avatar) {
-      return (
-        <div className={styles.wrapper}>
-          <ModalHeader className={styles.header} withBorder>
-            <Icon
-              glyph="arrow_back"
-              onClick={this.handleCancelAvatarEdit}
-              className={styles.back}
-              id={`${this.props.id}_back_button`}
-            />
-            <Text id="CreateSpaceModal.avatar_edit" />
-            <ModalClose
-              pending={this.props.pending}
-              onClick={this.props.onClose}
-              id={`${this.props.id}_close_button`}
-            />
-          </ModalHeader>
-          {this.renderError()}
-          <ModalBody className={styles.body}>
-            <ImageEdit
-              image={avatar}
-              type="circle"
-              size={250}
-              height={400}
-              onSubmit={this.handleAvatarChange}
-            />
-          </ModalBody>
-        </div>
-      );
+    if (!avatar) {
+      return null;
     }
 
-    return null;
+    return (
+      <div className={styles.wrapper}>
+        <ModalHeader className={styles.header} withBorder>
+          <Icon
+            glyph="arrow_back"
+            onClick={this.handleCancelAvatarEdit}
+            className={styles.back}
+            id={`${this.props.id}_back_button`}
+          />
+          <Text id="CreateSpaceModal.avatar_edit" />
+          <ModalClose
+            pending={this.props.pending}
+            onClick={this.props.onClose}
+            id={`${this.props.id}_close_button`}
+          />
+        </ModalHeader>
+        {this.renderError()}
+        <ModalBody className={styles.body}>
+          <ImageEdit
+            image={avatar}
+            type="circle"
+            size={250}
+            height={400}
+            onSubmit={this.handleAvatarChange}
+          />
+        </ModalBody>
+      </div>
+    );
   }
 
   renderMembersStep() {

@@ -117,7 +117,7 @@ class CreateSpaceInfoForm extends PureComponent<Props, State> {
           <InputNext
             id={`${id}_shortname`}
             name="shortname"
-            value={shortname || ''}
+            value={shortname}
             prefix={this.props.shortnamePrefix}
             label="CreateSpaceModal.info.shortname.label"
             placeholder="CreateSpaceModal.info.shortname.placeholder"
