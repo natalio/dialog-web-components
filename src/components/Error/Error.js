@@ -9,17 +9,13 @@ import styles from './Error.css';
 
 export type Props = {
   className?: string,
-  children?: Node
+  children?: Node,
 };
 
 function Error(props: Props) {
   const className = classNames(styles.container, props.className);
 
-  return (
-    <div className={className}>
-      {props.children}
-    </div>
-  );
+  return <div className={className}>{props.children}</div>;
 }
 
 export default Error;

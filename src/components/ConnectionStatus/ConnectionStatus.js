@@ -12,11 +12,11 @@ import styles from './ConnectionStatus.css';
 
 export type Props = {
   className?: string,
-  status: ?ConnectionStatusType
+  status: ?ConnectionStatusType,
 };
 
 export type State = {
-  show: boolean
+  show: boolean,
 };
 
 class ConnectionStatus extends PureComponent<Props, State> {
@@ -26,14 +26,14 @@ class ConnectionStatus extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      show: false
+      show: false,
     };
   }
 
   componentWillReceiveProps(nextProps: Props): void {
     this.clearTimeout();
     this.setState({
-      show: Boolean(nextProps.status)
+      show: Boolean(nextProps.status),
     });
   }
 
@@ -57,12 +57,19 @@ class ConnectionStatus extends PureComponent<Props, State> {
   }
 
   renderContent() {
-    const { props: { status }, state: { show } } = this;
+    const {
+      props: { status },
+      state: { show },
+    } = this;
     if (!(show && status)) {
       return null;
     }
 
-    const className = classNames(styles.container, styles[status], this.props.className);
+    const className = classNames(
+      styles.container,
+      styles[status],
+      this.props.className,
+    );
 
     return (
       <CSSTransition
@@ -70,11 +77,15 @@ class ConnectionStatus extends PureComponent<Props, State> {
           enter: styles.enter,
           enterActive: styles.enterActive,
           exit: styles.leave,
-          exitActive: styles.leaveActive
+          exitActive: styles.leaveActive,
         }}
         timeout={{ enter: 150, exit: 150 }}
       >
-        <Text tagName="div" className={className} id={`ConnectionStatus.${status}`} />
+        <Text
+          tagName="div"
+          className={className}
+          id={`ConnectionStatus.${status}`}
+        />
       </CSSTransition>
     );
   }
@@ -82,9 +93,7 @@ class ConnectionStatus extends PureComponent<Props, State> {
   render() {
     return (
       <div className={styles.wrapper}>
-        <TransitionGroup>
-          {this.renderContent()}
-        </TransitionGroup>
+        <TransitionGroup>{this.renderContent()}</TransitionGroup>
       </div>
     );
   }

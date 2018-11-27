@@ -22,12 +22,12 @@ export type Props = {
   theme: ColorTheme,
   action: mixed,
   onSubmit: (action: mixed) => void,
-  onClose: () => mixed
+  onClose: () => mixed,
 };
 
 class Confirm extends PureComponent<Props> {
   static defaultProps = {
-    theme: 'default'
+    theme: 'default',
   };
 
   handleSuccess = (): void => {
@@ -49,7 +49,7 @@ class Confirm extends PureComponent<Props> {
         this.handleCancel();
         break;
       default:
-        // do nothing
+      // do nothing
     }
   };
 
@@ -61,7 +61,11 @@ class Confirm extends PureComponent<Props> {
         <Modal isOpen className={className} overlayClassName={styles.overlay}>
           <div className={modalStyles.wrapper}>
             <ModalBody className={styles.body}>
-              <Text id={this.props.message} tagName="h3" className={styles.message} />
+              <Text
+                id={this.props.message}
+                tagName="h3"
+                className={styles.message}
+              />
             </ModalBody>
             <ModalFooter className={styles.footer}>
               <Button

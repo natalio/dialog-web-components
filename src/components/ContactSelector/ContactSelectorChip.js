@@ -13,7 +13,7 @@ import styles from './ContactSelector.css';
 
 export type Props = {
   className?: string,
-  contact: PeerInfo
+  contact: PeerInfo,
 };
 
 class ContactSelectorChip extends PureComponent<Props> {
@@ -24,7 +24,11 @@ class ContactSelectorChip extends PureComponent<Props> {
     return (
       <div className={className}>
         <PeerAvatar className={styles.chipAvatar} size={28} peer={contact} />
-        <PeerInfoTitle title={contact.title} className={styles.chipText} emojiSize={18} />
+        <PeerInfoTitle
+          title={contact.title}
+          className={styles.chipText}
+          emojiSize={18}
+        />
       </div>
     );
   }

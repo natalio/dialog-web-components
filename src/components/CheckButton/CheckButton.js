@@ -16,14 +16,14 @@ export type Props = {
   theme: ColorTheme,
   size: number,
   stopPropagation: boolean,
-  onClick?: (checked: boolean) => mixed
+  onClick?: (checked: boolean) => mixed,
 };
 
 class CheckButton extends PureComponent<Props> {
   static defaultProps = {
     size: 26,
     theme: 'primary',
-    stopPropagation: false
+    stopPropagation: false,
   };
 
   handleClick = (event: SyntheticMouseEvent<>) => {
@@ -43,22 +43,29 @@ class CheckButton extends PureComponent<Props> {
       styles.container,
       styles[theme],
       {
-        [styles.checked]: checked
+        [styles.checked]: checked,
       },
-      this.props.className
+      this.props.className,
     );
 
     const padding = 4;
-    const tickSize = this.props.size - (padding * 2);
+    const tickSize = this.props.size - padding * 2;
     const style = {
       width: `${size}px`,
       height: `${size}px`,
-      padding: `${padding}px`
+      padding: `${padding}px`,
     };
 
     return (
-      <div className={className} onClick={this.handleClick} style={style} id={id}>
-        {checked ? <Icon className={styles.icon} glyph="done" size={tickSize} /> : null}
+      <div
+        className={className}
+        onClick={this.handleClick}
+        style={style}
+        id={id}
+      >
+        {checked ? (
+          <Icon className={styles.icon} glyph="done" size={tickSize} />
+        ) : null}
       </div>
     );
   }

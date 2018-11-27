@@ -27,7 +27,7 @@ type Props = {
   preferredCountryCodes: string[],
   onChange: (value: string, country: ?Country) => mixed,
   onFocus?: (event: SyntheticFocusEvent<>) => mixed,
-  onBlur?: (event: SyntheticFocusEvent<>) => mixed
+  onBlur?: (event: SyntheticFocusEvent<>) => mixed,
 };
 
 class PhoneInput extends PureComponent<Props> {
@@ -35,14 +35,14 @@ class PhoneInput extends PureComponent<Props> {
 
   static defaultProps = {
     preferredCountryCodes: getPreferredCountryCodes(),
-    size: 'normal'
+    size: 'normal',
   };
 
   handleChange = (value: string): void => {
     const phone = normalize(value) || '+';
     this.props.onChange(
       phone,
-      getCountryByPhone(phone, this.props.preferredCountryCodes)
+      getCountryByPhone(phone, this.props.preferredCountryCodes),
     );
   };
 

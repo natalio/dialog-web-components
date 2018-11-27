@@ -21,23 +21,30 @@ type Props = {
   preview: ?string,
   duration: ?number,
   date?: ?Date,
-  sender: ?string
+  sender: ?string,
 };
 
 class ActivityMediaVideo extends PureComponent<Props> {
   context: ProviderContext;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   renderPreview() {
     const className = classNames(styles.preview, {
-      [styles.previewEmpty]: !this.props.preview
+      [styles.previewEmpty]: !this.props.preview,
     });
 
     return (
-      <div className={className} style={this.props.preview ? { backgroundImage: `url(${this.props.preview})` } : {}}>
+      <div
+        className={className}
+        style={
+          this.props.preview
+            ? { backgroundImage: `url(${this.props.preview})` }
+            : {}
+        }
+      >
         <Icon glyph="play_arrow" size={22} className={styles.play} />
       </div>
     );
@@ -47,14 +54,12 @@ class ActivityMediaVideo extends PureComponent<Props> {
     const { title } = this.props;
 
     if (!title || title === '') {
-      return <Text id="ActivityMedia.video" className={styles.title} tagName="div" />;
+      return (
+        <Text id="ActivityMedia.video" className={styles.title} tagName="div" />
+      );
     }
 
-    return (
-      <div className={styles.title}>
-        {title}
-      </div>
-    );
+    return <div className={styles.title}>{title}</div>;
   }
 
   renderDuration() {
@@ -64,11 +69,7 @@ class ActivityMediaVideo extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <span>
-        {getHumanTime(duration * 10)}
-      </span>
-    );
+    return <span>{getHumanTime(duration * 10)}</span>;
   }
 
   renderSize() {
@@ -78,11 +79,7 @@ class ActivityMediaVideo extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <span>
-        {size}
-      </span>
-    );
+    return <span>{size}</span>;
   }
 
   renderTimestamp() {
@@ -122,22 +119,12 @@ class ActivityMediaVideo extends PureComponent<Props> {
           {this.renderTitle()}
           <div className={styles.info}>
             {this.renderDuration()}
-            {duration && date ? (
-              <span>
-                {'\u00A0-\u00A0'}
-              </span>
-            ) : null}
+            {duration && date ? <span>{'\u00A0-\u00A0'}</span> : null}
             {this.renderTimestamp()}
-            {date && size ? (
-              <span>
-                {'\u00A0-\u00A0'}
-              </span>
-            ) : null}
+            {date && size ? <span>{'\u00A0-\u00A0'}</span> : null}
             {this.renderSize()}
             {(date || size || duration) && sender ? (
-              <span>
-                {'\u00A0-\u00A0'}
-              </span>
+              <span>{'\u00A0-\u00A0'}</span>
             ) : null}
             {this.renderSender()}
           </div>

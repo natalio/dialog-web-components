@@ -13,7 +13,7 @@ import SelectList from '../../SelectList/SelectList';
 
 type Props = {
   selector: SelectorState<GroupMember>,
-  onChange: (selector: SelectorState<GroupMember>) => mixed
+  onChange: (selector: SelectorState<GroupMember>) => mixed,
 };
 
 class AdminModalUserList extends PureComponent<Props> {
@@ -22,12 +22,7 @@ class AdminModalUserList extends PureComponent<Props> {
   };
 
   renderRow = ({ item, hovered }: *) => {
-    return (
-      <AdminModalUserListItem
-        user={item}
-        hovered={hovered}
-      />
-    );
+    return <AdminModalUserListItem user={item} hovered={hovered} />;
   };
 
   render() {

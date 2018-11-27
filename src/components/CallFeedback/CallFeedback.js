@@ -21,21 +21,21 @@ import HotKeys from '../HotKeys/HotKeys';
 type Feedback = {
   text: string,
   addLogs: boolean,
-  rating: number
+  rating: number,
 };
 
 type Props = {
   id: string,
   className?: string,
   onSubmit: (feedback: Feedback) => mixed,
-  onClose: () => mixed
+  onClose: () => mixed,
 };
 
 type State = Feedback;
 
 class CallFeedback extends PureComponent<Props, State> {
   static defaultProps = {
-    id: 'call_feedback_modal'
+    id: 'call_feedback_modal',
   };
 
   constructor(props: Props) {
@@ -44,7 +44,7 @@ class CallFeedback extends PureComponent<Props, State> {
     this.state = {
       text: '',
       addLogs: true,
-      rating: 0
+      rating: 0,
     };
   }
 
@@ -77,14 +77,17 @@ class CallFeedback extends PureComponent<Props, State> {
     }
   };
 
-
   render() {
     const className = classNames(styles.container, this.props.className);
 
     return (
       <HotKeys onHotKey={this.handleHotkey}>
         <Modal className={className} onClose={this.props.onClose}>
-          <form id={this.props.id} autoComplete="off" onSubmit={this.handleSubmit}>
+          <form
+            id={this.props.id}
+            autoComplete="off"
+            onSubmit={this.handleSubmit}
+          >
             <ModalHeader withBorder>
               <Text id="CallFeedback.title" />
               <ModalClose onClick={this.props.onClose} />
@@ -115,7 +118,10 @@ class CallFeedback extends PureComponent<Props, State> {
             </ModalBody>
             <ModalFooter className={styles.footer}>
               <Button
-                wide type="submit" theme="success" rounded={false}
+                wide
+                type="submit"
+                theme="success"
+                rounded={false}
                 id="call_feedback_submit_button"
               >
                 <Text id="CallFeedback.submit" />

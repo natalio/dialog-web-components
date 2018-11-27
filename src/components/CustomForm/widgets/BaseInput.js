@@ -23,7 +23,7 @@ export type Props = {
   rawErrors?: string[],
   onChange: (value: mixed) => mixed,
   onBlur: (id: string, value: mixed) => mixed,
-  onFocus: (id: string, value: mixed) => mixed
+  onFocus: (id: string, value: mixed) => mixed,
 };
 
 class BaseInput extends PureComponent<Props> {
@@ -32,7 +32,7 @@ class BaseInput extends PureComponent<Props> {
     required: false,
     disabled: false,
     readonly: false,
-    autofocus: false
+    autofocus: false,
   };
 
   handleChange = (value: *) => {
@@ -62,7 +62,10 @@ class BaseInput extends PureComponent<Props> {
   };
 
   getHint = (): ?string => {
-    const { rawErrors, options: { help } } = this.props;
+    const {
+      rawErrors,
+      options: { help },
+    } = this.props;
 
     if (rawErrors) {
       return rawErrors.toString();
@@ -76,7 +79,18 @@ class BaseInput extends PureComponent<Props> {
   };
 
   render() {
-    const { id, label, placeholder, value, readonly, disabled, autofocus, options, required, type } = this.props;
+    const {
+      id,
+      label,
+      placeholder,
+      value,
+      readonly,
+      disabled,
+      autofocus,
+      options,
+      required,
+      type,
+    } = this.props;
 
     return (
       <Input

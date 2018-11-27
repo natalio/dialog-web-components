@@ -10,7 +10,7 @@ export type Props = {
   index: number,
   style: { [key: string]: string },
   onHover: (index: number) => void,
-  onSelect: (index: number) => void
+  onSelect: (index: number) => void,
 };
 
 class SelectRow extends PureComponent<Props> {

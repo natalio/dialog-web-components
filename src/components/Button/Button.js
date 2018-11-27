@@ -22,7 +22,7 @@ export type Props = {
   type: 'submit' | 'reset' | 'button' | 'menu',
   theme: ColorTheme,
   size: 'small' | 'normal' | 'large',
-  onClick?: (event: SyntheticEvent<>) => mixed
+  onClick?: (event: SyntheticEvent<>) => mixed,
 };
 
 class Button extends PureComponent<Props> {
@@ -34,7 +34,7 @@ class Button extends PureComponent<Props> {
     wide: false,
     rounded: true,
     loading: false,
-    disabled: false
+    disabled: false,
   };
 
   renderLoading() {
@@ -48,7 +48,19 @@ class Button extends PureComponent<Props> {
   }
 
   render() {
-    const { id, type, form, disabled, theme, size, wide, rounded, children, view, loading } = this.props;
+    const {
+      id,
+      type,
+      form,
+      disabled,
+      theme,
+      size,
+      wide,
+      rounded,
+      children,
+      view,
+      loading,
+    } = this.props;
     const className = classNames(
       styles.container,
       styles[theme],
@@ -57,9 +69,9 @@ class Button extends PureComponent<Props> {
       {
         [styles.wide]: wide,
         [styles.rounded]: rounded,
-        [styles.pending]: loading
+        [styles.pending]: loading,
       },
-      this.props.className
+      this.props.className,
     );
 
     return (

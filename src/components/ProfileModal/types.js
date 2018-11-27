@@ -13,7 +13,7 @@ export type Profile = {
   nick: ?string,
   about: ?string,
   avatar: ?(string | File),
-  customProfile: ?string
+  customProfile: ?string,
 };
 
 export type Props = {
@@ -23,11 +23,11 @@ export type Props = {
     name: Field<string>,
     nick: Field<?string>,
     about: Field<?string>,
-    avatar: Field<?(string | File)>
+    avatar: Field<?(string | File)>,
   },
   schema: ?string,
   onClose: () => void,
-  onSubmit: (profile: Profile) => mixed
+  onSubmit: (profile: Profile) => mixed,
 };
 
 export type State = {
@@ -37,6 +37,6 @@ export type State = {
     nick: ?string,
     about: ?string,
     avatar: ?(string | File),
-    customProfile: ?JSONValue
-  }
+    customProfile: ?JSONValue,
+  },
 };

@@ -18,7 +18,7 @@ export type Props = {
   onGoToPeer?: (peer: Peer) => mixed,
   onGoToMessage?: (peer: Peer, message: Message) => mixed,
   onDeleteMessage?: (message: Message) => mixed,
-  onLightboxOpen?: (message: Message) => mixed
+  onLightboxOpen?: (message: Message) => mixed,
 };
 
 class ActivityPinned extends PureComponent<Props> {
@@ -52,9 +52,7 @@ class ActivityPinned extends PureComponent<Props> {
     const className = classNames(styles.container, this.props.className);
 
     return (
-      <ActivityList className={className}>
-        {this.renderMessages()}
-      </ActivityList>
+      <ActivityList className={className}>{this.renderMessages()}</ActivityList>
     );
   }
 }

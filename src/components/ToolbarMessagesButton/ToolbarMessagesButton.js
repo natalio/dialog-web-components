@@ -11,13 +11,17 @@ import styles from './ToolbarMessagesButton.css';
 export type Props = {
   className?: string,
   onClick: () => void,
-  active: boolean
+  active: boolean,
 };
 
 function ToolbarMessagesButton(props: Props) {
-  const className = classNames(styles.container, {
-    [styles.active]: props.active
-  }, props.className);
+  const className = classNames(
+    styles.container,
+    {
+      [styles.active]: props.active,
+    },
+    props.className,
+  );
 
   return (
     <Icon

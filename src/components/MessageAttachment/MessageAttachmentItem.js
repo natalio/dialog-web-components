@@ -29,14 +29,14 @@ type Props = {
   maxWidth: number,
   onGoToPeer: (peer: Peer) => mixed,
   onGoToMessage: (message: Message) => mixed,
-  onLightboxOpen?: (message: Message) => mixed
+  onLightboxOpen?: (message: Message) => mixed,
 };
 
 class MessageAttachmentItem extends Component<Props> {
   context: ProviderContext;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   handleGoToPeer = (event: SyntheticEvent<>): void => {
@@ -70,7 +70,11 @@ class MessageAttachmentItem extends Component<Props> {
   };
 
   renderHeader() {
-    const { message: { sender }, short, type } = this.props;
+    const {
+      message: { sender },
+      short,
+      type,
+    } = this.props;
 
     if (short || !sender) {
       return null;
@@ -101,7 +105,10 @@ class MessageAttachmentItem extends Component<Props> {
     const locale = getDateFnsLocale(this.context.l10n.locale);
 
     return (
-      <time className={styles.timestamp} dateTime={message.fullDate.toISOString()}>
+      <time
+        className={styles.timestamp}
+        dateTime={message.fullDate.toISOString()}
+      >
         {formatDate(message.fullDate, format, locale)}
       </time>
     );
@@ -113,23 +120,35 @@ class MessageAttachmentItem extends Component<Props> {
     const locale = getDateFnsLocale(this.context.l10n.locale);
 
     return (
-      <time className={styles.fulltime} dateTime={message.fullDate.toISOString()}>
+      <time
+        className={styles.fulltime}
+        dateTime={message.fullDate.toISOString()}
+      >
         {formatDate(message.fullDate, format, locale)}
       </time>
     );
   }
 
   renderReply() {
-    const { message: { content, rid }, maxWidth, maxHeight } = this.props;
+    const {
+      message: { content, rid },
+      maxWidth,
+      maxHeight,
+    } = this.props;
     const className = classNames(styles.message, {
-      [styles.replyContent]: content.type === 'text' || content.type === 'service'
+      [styles.replyContent]:
+        content.type === 'text' || content.type === 'service',
     });
 
     switch (content.type) {
       case 'text':
         return (
           <div className={className}>
-            <TextMessagePreview content={content} emojiSize={16} decorators={decorators} />
+            <TextMessagePreview
+              content={content}
+              emojiSize={16}
+              decorators={decorators}
+            />
           </div>
         );
 
@@ -205,7 +224,11 @@ class MessageAttachmentItem extends Component<Props> {
   }
 
   renderForward() {
-    const { message: { content, rid }, maxWidth, maxHeight } = this.props;
+    const {
+      message: { content, rid },
+      maxWidth,
+      maxHeight,
+    } = this.props;
 
     return (
       <MessageContent
@@ -241,18 +264,16 @@ class MessageAttachmentItem extends Component<Props> {
       styles.itemContainer,
       styles[type],
       {
-        [styles.short]: short
+        [styles.short]: short,
       },
-      this.props.className
+      this.props.className,
     );
 
     return (
       <div className={className} onClick={this.handleGoToMessage}>
         {this.renderHeader()}
         <div className={styles.content}>
-          <div className={styles.messageWrapper}>
-            {this.renderContent()}
-          </div>
+          <div className={styles.messageWrapper}>{this.renderContent()}</div>
           {type === 'forward' ? (
             <div className={styles.timeWrapper}>
               {this.renderForwardTimestamp()}

@@ -9,17 +9,13 @@ import styles from './Dropdown.css';
 
 type Props = {
   className?: string,
-  children: React.Node
+  children: React.Node,
 };
 
 function DropdownHeader(props: Props) {
   const className = classNames(styles.header, props.className);
 
-  return (
-    <div className={className}>
-      {props.children}
-    </div>
-  );
+  return <div className={className}>{props.children}</div>;
 }
 
 export default DropdownHeader;

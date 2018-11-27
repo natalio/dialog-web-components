@@ -19,12 +19,14 @@ export type Props = {
   className?: string,
   schema?: ?string,
   children: Node,
-  onAvatarClick?: () => mixed
+  onAvatarClick?: () => mixed,
 };
 
 class ActivityUserProfile extends PureComponent<Props> {
   renderAvatar() {
-    const { info: { name, bigAvatar, placeholder } } = this.props;
+    const {
+      info: { name, bigAvatar, placeholder },
+    } = this.props;
 
     return (
       <Avatar
@@ -39,7 +41,9 @@ class ActivityUserProfile extends PureComponent<Props> {
   }
 
   renderTitle() {
-    const { info: { name, nick } } = this.props;
+    const {
+      info: { name, nick },
+    } = this.props;
 
     return (
       <PeerInfoTitle
@@ -59,15 +63,13 @@ class ActivityUserProfile extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <div className={styles.online}>
-        {online.message}
-      </div>
-    );
+    return <div className={styles.online}>{online.message}</div>;
   }
 
   renderAbout() {
-    const { info: { about } } = this.props;
+    const {
+      info: { about },
+    } = this.props;
 
     if (!about) {
       return null;
@@ -75,7 +77,11 @@ class ActivityUserProfile extends PureComponent<Props> {
 
     return (
       <div className={styles.wrapper}>
-        <Text className={styles.title} tagName="div" id="ActivityProfile.about" />
+        <Text
+          className={styles.title}
+          tagName="div"
+          id="ActivityProfile.about"
+        />
         <Markdown text={about} className={styles.about} />
       </div>
     );
@@ -88,11 +94,7 @@ class ActivityUserProfile extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <div className={styles.actions}>
-        {children}
-      </div>
-    );
+    return <div className={styles.actions}>{children}</div>;
   }
 
   renderProfileContacts() {
@@ -122,13 +124,21 @@ class ActivityUserProfile extends PureComponent<Props> {
       <div className={styles.wrapper}>
         {phones.length ? (
           <div className={styles.contactContent}>
-            <Text className={styles.title} tagName="div" id="ActivityProfile.phone" />
+            <Text
+              className={styles.title}
+              tagName="div"
+              id="ActivityProfile.phone"
+            />
             {phones}
           </div>
         ) : null}
         {emails.length ? (
           <div className={styles.contactContent}>
-            <Text className={styles.title} tagName="div" id="ActivityProfile.email" />
+            <Text
+              className={styles.title}
+              tagName="div"
+              id="ActivityProfile.email"
+            />
             {emails}
           </div>
         ) : null}
@@ -137,13 +147,22 @@ class ActivityUserProfile extends PureComponent<Props> {
   }
 
   renderCustomProfile() {
-    const { schema, info: { customProfile } } = this.props;
+    const {
+      schema,
+      info: { customProfile },
+    } = this.props;
 
     if (!schema || !customProfile) {
       return null;
     }
 
-    return <CustomProfile value={customProfile} schema={schema} className={styles.wrapper} />;
+    return (
+      <CustomProfile
+        value={customProfile}
+        schema={schema}
+        className={styles.wrapper}
+      />
+    );
   }
 
   render() {

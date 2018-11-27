@@ -3,7 +3,12 @@
  * @flow
  */
 
-import type { Field, Group, GroupMember, GroupMemberPermission } from '@dlghq/dialog-types';
+import type {
+  Field,
+  Group,
+  GroupMember,
+  GroupMemberPermission,
+} from '@dlghq/dialog-types';
 import type { Permission } from './types';
 import { Set } from 'immutable';
 import React, { PureComponent } from 'react';
@@ -29,14 +34,18 @@ type Props = {
   group: Group,
   members: GroupMember[],
   action: Field<void>,
-  onAddAdmin: (gid: number, uid: number, permissions: GroupMemberPermission[]) => mixed,
+  onAddAdmin: (
+    gid: number,
+    uid: number,
+    permissions: GroupMemberPermission[],
+  ) => mixed,
   onTransferOwnership: (gid: number, uid: number) => mixed,
-  onClose: () => mixed
+  onClose: () => mixed,
 };
 
 type State = {
   selector: SelectorState<GroupMember>,
-  permissions: Set<Permission>
+  permissions: Set<Permission>,
 };
 
 class AdminModal extends PureComponent<Props, State> {
@@ -45,7 +54,7 @@ class AdminModal extends PureComponent<Props, State> {
 
     this.state = {
       selector: MemberSelectorState.create(props.members),
-      permissions: Set()
+      permissions: Set(),
     };
   }
 
@@ -53,7 +62,7 @@ class AdminModal extends PureComponent<Props, State> {
     if (this.props.members !== nextProps.members) {
       this.setState(({ selector }) => {
         return {
-          selector: selector.replaceItems(nextProps.members)
+          selector: selector.replaceItems(nextProps.members),
         };
       });
     }
@@ -63,7 +72,7 @@ class AdminModal extends PureComponent<Props, State> {
     this.setState(({ selector, permissions }) => {
       return {
         selector: selector.clearSelection(),
-        permissions: permissions.clear()
+        permissions: permissions.clear(),
       };
     });
   };
@@ -75,7 +84,11 @@ class AdminModal extends PureComponent<Props, State> {
       if (this.state.permissions.has('transfer_ownership')) {
         this.props.onTransferOwnership(group.id, member.peerInfo.peer.id);
       } else {
-        this.props.onAddAdmin(group.id, member.peerInfo.peer.id, this.state.permissions.toArray());
+        this.props.onAddAdmin(
+          group.id,
+          member.peerInfo.peer.id,
+          this.state.permissions.toArray(),
+        );
       }
     }
   };
@@ -142,9 +155,15 @@ class AdminModal extends PureComponent<Props, State> {
 
     return (
       <ModalBody className={styles.body}>
-        <AdminModalUserSearch selector={this.state.selector} onChange={this.handleChange} />
+        <AdminModalUserSearch
+          selector={this.state.selector}
+          onChange={this.handleChange}
+        />
         <div className={styles.list}>
-          <AdminModalUserList selector={this.state.selector} onChange={this.handleChange} />
+          <AdminModalUserList
+            selector={this.state.selector}
+            onChange={this.handleChange}
+          />
         </div>
       </ModalBody>
     );
@@ -156,11 +175,7 @@ class AdminModal extends PureComponent<Props, State> {
       return null;
     }
 
-    return (
-      <div className={styles.error}>
-        {action.error.message}
-      </div>
-    );
+    return <div className={styles.error}>{action.error.message}</div>;
   }
 
   render() {
@@ -171,7 +186,14 @@ class AdminModal extends PureComponent<Props, State> {
     return (
       <Modal className={className} onClose={this.props.onClose}>
         <ModalHeader withBorder>
-          {member ? <Icon glyph="arrow_back" onClick={this.handleCancel} className={styles.back} size={28} /> : null}
+          {member ? (
+            <Icon
+              glyph="arrow_back"
+              onClick={this.handleCancel}
+              className={styles.back}
+              size={28}
+            />
+          ) : null}
           <Text id="AdminModal.title" />
           <ModalClose pending={action.pending} onClick={this.props.onClose} />
         </ModalHeader>

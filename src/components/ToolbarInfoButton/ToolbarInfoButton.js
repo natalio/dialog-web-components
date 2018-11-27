@@ -10,15 +10,19 @@ import styles from './ToolbarInfoButton.css';
 export type Props = {
   className?: string,
   onClick: () => void,
-  active: boolean
+  active: boolean,
 };
 
 function ToolbarInfoButton(props: Props) {
   const { active } = props;
-  const className = classNames(styles.container, {
-    [styles.outline]: !active,
-    [styles.active]: active
-  }, props.className);
+  const className = classNames(
+    styles.container,
+    {
+      [styles.outline]: !active,
+      [styles.active]: active,
+    },
+    props.className,
+  );
 
   return (
     <div className={className} onClick={props.onClick} id="toolbar_info_button">

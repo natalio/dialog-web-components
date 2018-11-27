@@ -15,7 +15,7 @@ export type Props = {
   members: SelectorState<PeerInfo>,
   onSubmit: (event: SyntheticEvent<>) => void,
   onChange: (members: SelectorState<PeerInfo>) => mixed,
-}
+};
 
 class CreateGroupMembersForm extends PureComponent<Props> {
   handleSubmit = (event: SyntheticEvent<>) => {

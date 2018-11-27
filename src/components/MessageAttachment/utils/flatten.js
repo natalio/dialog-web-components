@@ -15,7 +15,10 @@ function isEmpty(attach: MessageAttachment): boolean {
 function flattenTree(tree: MessageAttachment[], result: MessageAttachment[]) {
   tree.forEach((attach) => {
     if (attach.messages) {
-      const childTree = mapNotNull(attach.messages, (message) => message.attachment);
+      const childTree = mapNotNull(
+        attach.messages,
+        (message) => message.attachment,
+      );
       flattenTree(childTree, result);
     }
 
@@ -25,7 +28,9 @@ function flattenTree(tree: MessageAttachment[], result: MessageAttachment[]) {
   });
 }
 
-function filterDuplicates(attachments: MessageAttachment[]): MessageAttachment[] {
+function filterDuplicates(
+  attachments: MessageAttachment[],
+): MessageAttachment[] {
   const mids = new Set();
   const result = [];
   attachments.forEach((attach) => {
@@ -48,7 +53,9 @@ function filterDuplicates(attachments: MessageAttachment[]): MessageAttachment[]
   return result;
 }
 
-function flattenMessageAttachment(attach: MessageAttachment): MessageAttachment[] {
+function flattenMessageAttachment(
+  attach: MessageAttachment,
+): MessageAttachment[] {
   const result = [];
   flattenTree([attach], result);
 

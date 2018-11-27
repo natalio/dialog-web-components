@@ -5,7 +5,7 @@
 
 import type {
   MessageMediaInteractiveStyle,
-  MessageMediaInteractiveSelect
+  MessageMediaInteractiveSelect,
 } from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
@@ -16,11 +16,11 @@ export type Props = {
   className?: string,
   style?: ?MessageMediaInteractiveStyle,
   widget: MessageMediaInteractiveSelect,
-  onSubmit: (value: string) => mixed
+  onSubmit: (value: string) => mixed,
 };
 
 type State = {
-  value?: string
+  value?: string,
 };
 
 class MessageMediaInteractiveWidgetSelect extends PureComponent<Props, State> {
@@ -42,7 +42,7 @@ class MessageMediaInteractiveWidgetSelect extends PureComponent<Props, State> {
     const options = widget.options.map((option) => {
       return {
         value: option.value,
-        title: option.label
+        title: option.label,
       };
     });
 

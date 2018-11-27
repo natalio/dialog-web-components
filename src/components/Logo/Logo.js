@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import styles from './Logo.css';
 
 type Props = {
-  className?: string
+  className?: string,
 };
 
 function Logo(props: Props) {
@@ -17,13 +17,7 @@ function Logo(props: Props) {
   return (
     <svg viewBox="0 0 360 360" className={className} shapeRendering="auto">
       <defs>
-        <linearGradient
-          id="logoGradient"
-          x1="0%"
-          y1="100%"
-          x2="100%"
-          y2="0%"
-        >
+        <linearGradient id="logoGradient" x1="0%" y1="100%" x2="100%" y2="0%">
           <stop stopColor="#3D01A4" offset="0%" />
           <stop stopColor="#8601B0" offset="100%" />
         </linearGradient>

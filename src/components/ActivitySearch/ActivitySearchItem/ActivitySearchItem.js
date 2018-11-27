@@ -21,11 +21,11 @@ type Props = {
   before: Message[],
   after: Message[],
   onGoToPeer: (peer: Peer) => mixed,
-  onGoToMessage: (peer: Peer, message: Message) => mixed
-}
+  onGoToMessage: (peer: Peer, message: Message) => mixed,
+};
 
 type State = {
-  collapsed: boolean
+  collapsed: boolean,
 };
 
 class ActivitySearchItem extends PureComponent<Props, State> {
@@ -33,7 +33,7 @@ class ActivitySearchItem extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      collapsed: true
+      collapsed: true,
     };
   }
 
@@ -49,7 +49,7 @@ class ActivitySearchItem extends PureComponent<Props, State> {
     if (!hasSelection()) {
       this.setState(({ collapsed }) => {
         return {
-          collapsed: !collapsed
+          collapsed: !collapsed,
         };
       });
     }
@@ -68,14 +68,9 @@ class ActivitySearchItem extends PureComponent<Props, State> {
           />
         </div>
         <div className={styles.headerInfo} onClick={this.handleJumpToMessage}>
-          <time dateTime={focus.fullDate.toISOString()}>
-            {messageDate}
-          </time>
+          <time dateTime={focus.fullDate.toISOString()}>{messageDate}</time>
           {'・'}
-          <Text
-            id="ActivitySearch.jump"
-            className={styles.headerInfoJump}
-          />
+          <Text id="ActivitySearch.jump" className={styles.headerInfoJump} />
         </div>
       </div>
     );
@@ -169,7 +164,9 @@ class ActivitySearchItem extends PureComponent<Props, State> {
 
   render() {
     const className = classNames(styles.container, this.props.className);
-    const messagesClassName = classNames(this.state.collapsed ? styles.messagesCollapsed : styles.messages);
+    const messagesClassName = classNames(
+      this.state.collapsed ? styles.messagesCollapsed : styles.messages,
+    );
 
     return (
       <div className={className}>

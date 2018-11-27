@@ -13,7 +13,7 @@ export type Props = {
   char: string,
   count: number,
   active: boolean,
-  onClick: (char: string) => mixed
+  onClick: (char: string) => mixed,
 };
 
 class EmojiButton extends PureComponent<Props> {
@@ -25,16 +25,23 @@ class EmojiButton extends PureComponent<Props> {
   };
 
   render() {
-    const className = classNames(styles.container, {
-      [styles.active]: this.props.active
-    }, this.props.className);
+    const className = classNames(
+      styles.container,
+      {
+        [styles.active]: this.props.active,
+      },
+      this.props.className,
+    );
 
     return (
       <button className={className} type="button" onClick={this.handleClick}>
-        <Emoji className={styles.emoji} char={this.props.char} size={16} inline />
-        <span className={styles.counter}>
-          {this.props.count}
-        </span>
+        <Emoji
+          className={styles.emoji}
+          char={this.props.char}
+          size={16}
+          inline
+        />
+        <span className={styles.counter}>{this.props.count}</span>
       </button>
     );
   }

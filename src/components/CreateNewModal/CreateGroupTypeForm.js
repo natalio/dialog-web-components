@@ -13,7 +13,7 @@ type Props = {
   id: string,
   type: 'group' | 'channel',
   onSubmit: (event: SyntheticEvent<>) => void,
-  onChange: (value: string, event: SyntheticInputEvent<>) => void
+  onChange: (value: string, event: SyntheticInputEvent<>) => void,
 };
 
 class CreateGroupTypeForm extends PureComponent<Props> {
@@ -25,10 +25,21 @@ class CreateGroupTypeForm extends PureComponent<Props> {
 
   render() {
     return (
-      <form id={this.props.id} className={styles.type} onSubmit={this.handleSubmit}>
-        <RadioGroup name="type" value={this.props.type} onChange={this.props.onChange}>
+      <form
+        id={this.props.id}
+        className={styles.type}
+        onSubmit={this.handleSubmit}
+      >
+        <RadioGroup
+          name="type"
+          value={this.props.type}
+          onChange={this.props.onChange}
+        >
           <Radio value="group" htmlAutoFocus id={`${this.props.id}_type_group`}>
-            <Text id="CreateNewModal.group.type.title" className={styles.typeLabel} />
+            <Text
+              id="CreateNewModal.group.type.title"
+              className={styles.typeLabel}
+            />
           </Radio>
           <Text
             className={styles.typeHint}
@@ -37,7 +48,10 @@ class CreateGroupTypeForm extends PureComponent<Props> {
           />
           <br />
           <Radio value="channel" id={`${this.props.id}_type_channel`}>
-            <Text id="CreateNewModal.channel.type.title" className={styles.typeLabel} />
+            <Text
+              id="CreateNewModal.channel.type.title"
+              className={styles.typeLabel}
+            />
           </Radio>
           <Text
             className={styles.typeHint}

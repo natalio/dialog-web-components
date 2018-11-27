@@ -9,8 +9,8 @@ import Field from '../../Field/Field';
 
 export type Props = {
   onChange: (value: string) => void,
-  placeholder: string
-}
+  placeholder: string,
+};
 
 class SearchInput extends PureComponent<Props> {
   handleChange: () => void;

@@ -21,14 +21,14 @@ type Props = {
   isEdited?: boolean,
   hover: boolean,
   compact: boolean,
-  onClick: () => mixed
+  onClick: () => mixed,
 };
 
 class MessageState extends PureComponent<Props> {
   context: ProviderContext;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   handleClick = (event: SyntheticMouseEvent<>): void => {
@@ -47,7 +47,11 @@ class MessageState extends PureComponent<Props> {
     const locale = getDateFnsLocale(this.context.l10n.locale);
 
     const time = (
-      <time className={styles.time} onClick={this.handleClick} dateTime={this.props.fullTime.toISOString()}>
+      <time
+        className={styles.time}
+        onClick={this.handleClick}
+        dateTime={this.props.fullTime.toISOString()}
+      >
         {formatDate(this.props.fullTime, format, locale)}
       </time>
     );
@@ -57,7 +61,10 @@ class MessageState extends PureComponent<Props> {
     }
 
     return (
-      <Tooltip text={`MessageState.${this.props.state}`} className={styles.tooltip}>
+      <Tooltip
+        text={`MessageState.${this.props.state}`}
+        className={styles.tooltip}
+      >
         {time}
       </Tooltip>
     );
@@ -68,7 +75,9 @@ class MessageState extends PureComponent<Props> {
       return null;
     }
 
-    return <Text key="edited" className={styles.edited} id="MessageState.edited" />;
+    return (
+      <Text key="edited" className={styles.edited} id="MessageState.edited" />
+    );
   }
 
   render() {
@@ -77,9 +86,10 @@ class MessageState extends PureComponent<Props> {
     }
 
     const className = classNames(styles.container, this.props.className, {
-      [styles.compact]: this.props.compact
+      [styles.compact]: this.props.compact,
     });
-    const spacebars = this.props.isEdited && !this.props.compact ? '\u00A0\u00A0' : null;
+    const spacebars =
+      this.props.isEdited && !this.props.compact ? '\u00A0\u00A0' : null;
 
     return (
       <div className={className}>

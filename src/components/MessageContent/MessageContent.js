@@ -3,7 +3,10 @@
  * @flow
  */
 
-import type { MessageContent as MessageContentTypes, MessageMediaInteractiveConfirm } from '@dlghq/dialog-types';
+import type {
+  MessageContent as MessageContentTypes,
+  MessageMediaInteractiveConfirm,
+} from '@dlghq/dialog-types';
 import * as React from 'react';
 import Text from './Text/Text';
 import Service from './Text/Service';
@@ -24,7 +27,11 @@ export type Props = {
   maxHeight: number,
   maxWidth: number,
   onLightboxOpen?: (event: SyntheticMouseEvent<>) => mixed,
-  onInteractiveAction?: (id: string, value: string, confirm?: ?MessageMediaInteractiveConfirm) => mixed
+  onInteractiveAction?: (
+    id: string,
+    value: string,
+    confirm?: ?MessageMediaInteractiveConfirm,
+  ) => mixed,
 };
 
 function MessageContent({
@@ -35,7 +42,7 @@ function MessageContent({
   maxHeight,
   maxWidth,
   onLightboxOpen,
-  onInteractiveAction
+  onInteractiveAction,
 }: Props) {
   switch (content.type) {
     case 'text':
@@ -52,7 +59,13 @@ function MessageContent({
       );
 
     case 'service':
-      return <Service className={className} text={content.text} isPending={isPending} />;
+      return (
+        <Service
+          className={className}
+          text={content.text}
+          isPending={isPending}
+        />
+      );
 
     case 'photo':
       return (
@@ -126,7 +139,13 @@ function MessageContent({
       );
 
     case 'location':
-      return <Location latitude={content.latitude} longitude={content.longitude} maxWidth={maxWidth} />;
+      return (
+        <Location
+          latitude={content.latitude}
+          longitude={content.longitude}
+          maxWidth={maxWidth}
+        />
+      );
 
     case 'contact':
       return (
@@ -143,7 +162,12 @@ function MessageContent({
       return <Deleted maxWidth={maxWidth} />;
 
     default:
-      return <Service className={className} text={`Unsupported message content (${content.type}).`} />;
+      return (
+        <Service
+          className={className}
+          text={`Unsupported message content (${content.type}).`}
+        />
+      );
   }
 }
 

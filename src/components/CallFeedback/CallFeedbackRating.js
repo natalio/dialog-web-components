@@ -11,7 +11,7 @@ type Props = {
   id: string,
   value: number,
   maxRating: number,
-  onChange: (value: number) => mixed
+  onChange: (value: number) => mixed,
 };
 
 class CallFeedbackRating extends PureComponent<Props> {
@@ -26,7 +26,7 @@ class CallFeedbackRating extends PureComponent<Props> {
           value={i}
           active={i <= value}
           onChange={this.props.onChange}
-        />
+        />,
       );
     }
 
@@ -34,11 +34,7 @@ class CallFeedbackRating extends PureComponent<Props> {
   }
 
   render() {
-    return (
-      <div className={styles.rating}>
-        {this.renderStars()}
-      </div>
-    );
+    return <div className={styles.rating}>{this.renderStars()}</div>;
   }
 }
 

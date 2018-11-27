@@ -18,28 +18,26 @@ type Props = {
   sender: ?string,
   title: ?string,
   date?: ?Date,
-  onClick: () => mixed
+  onClick: () => mixed,
 };
 
 class ActivityMediaPhoto extends PureComponent<Props> {
   context: ProviderContext;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   renderTitle() {
     const { title } = this.props;
 
     if (!title || title === '') {
-      return <Text id="ActivityMedia.photo" className={styles.title} tagName="div" />;
+      return (
+        <Text id="ActivityMedia.photo" className={styles.title} tagName="div" />
+      );
     }
 
-    return (
-      <div className={styles.title}>
-        {title}
-      </div>
-    );
+    return <div className={styles.title}>{title}</div>;
   }
 
   renderTimestamp() {
@@ -75,19 +73,22 @@ class ActivityMediaPhoto extends PureComponent<Props> {
     return (
       <div className={styles.container}>
         {photo && preview ? (
-          <div className={styles.preview} style={{ backgroundImage: `url(${preview})` }} onClick={this.props.onClick}>
-            <div className={styles.photo} style={{ backgroundImage: `url(${photo})` }} />
+          <div
+            className={styles.preview}
+            style={{ backgroundImage: `url(${preview})` }}
+            onClick={this.props.onClick}
+          >
+            <div
+              className={styles.photo}
+              style={{ backgroundImage: `url(${photo})` }}
+            />
           </div>
         ) : null}
         <div className={styles.meta}>
           {this.renderTitle()}
           <div className={styles.info}>
             {this.renderTimestamp()}
-            {sender && date ? (
-              <span>
-                {'\u00A0-\u00A0'}
-              </span>
-            ) : null}
+            {sender && date ? <span>{'\u00A0-\u00A0'}</span> : null}
             {this.renderSender()}
           </div>
         </div>

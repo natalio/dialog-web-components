@@ -10,21 +10,17 @@ import styles from './Modal.css';
 export type Props = {
   className?: string,
   withBorder?: boolean,
-  children: React.Node
+  children: React.Node,
 };
 
 function ModalFooter(props: Props) {
   const className = classNames(
     styles.footer,
     { [styles.border]: props.withBorder },
-    props.className
+    props.className,
   );
 
-  return (
-    <footer className={className}>
-      {props.children}
-    </footer>
-  );
+  return <footer className={className}>{props.children}</footer>;
 }
 
 export default ModalFooter;

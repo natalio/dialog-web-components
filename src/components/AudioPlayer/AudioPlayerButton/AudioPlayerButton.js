@@ -13,7 +13,7 @@ export type Props = {
   isPlaying: boolean,
   onPlay: () => mixed,
   onPause: () => mixed,
-  className?: string
+  className?: string,
 };
 
 class AudioPlayerButton extends PureComponent<Props> {
@@ -36,7 +36,11 @@ class AudioPlayerButton extends PureComponent<Props> {
 
     if (!isPlaying) {
       return (
-        <polygon className={styles.icon} transform="translate(1,0)" points="20 18 20 32 31 25" />
+        <polygon
+          className={styles.icon}
+          transform="translate(1,0)"
+          points="20 18 20 32 31 25"
+        />
       );
     }
 
@@ -51,11 +55,16 @@ class AudioPlayerButton extends PureComponent<Props> {
   render() {
     const className = classNames(styles.container, this.props.className, {
       [styles.error]: this.props.error,
-      [styles.pending]: this.props.pending
+      [styles.pending]: this.props.pending,
     });
 
     return (
-      <svg viewBox="0 0 50 50" className={className} onClick={this.handleButtonClick} shapeRendering="auto">
+      <svg
+        viewBox="0 0 50 50"
+        className={className}
+        onClick={this.handleButtonClick}
+        shapeRendering="auto"
+      >
         {this.renderIcon()}
         <circle
           className={styles.border}

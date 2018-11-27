@@ -3,7 +3,10 @@
  * @flow
  */
 
-import type { MessageMedia as MessageMediaType, MessageMediaInteractiveConfirm } from '@dlghq/dialog-types';
+import type {
+  MessageMedia as MessageMediaType,
+  MessageMediaInteractiveConfirm,
+} from '@dlghq/dialog-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import MessageMedia from '../../MessageMedia/MessageMedia';
@@ -17,7 +20,11 @@ export type Props = {|
   isPending?: boolean,
   maxWidth: number,
   maxHeight: number,
-  onInteractiveAction?: (id: string, value: string, confirm?: ?MessageMediaInteractiveConfirm) => mixed
+  onInteractiveAction?: (
+    id: string,
+    value: string,
+    confirm?: ?MessageMediaInteractiveConfirm,
+  ) => mixed,
 |};
 
 class Text extends Component<Props> {
@@ -34,10 +41,16 @@ class Text extends Component<Props> {
 
   render() {
     const { maxWidth, maxHeight } = this.props;
-    const className = classNames(styles.container, this.props.className, this.props.isPending ? styles.pending : null);
+    const className = classNames(
+      styles.container,
+      this.props.className,
+      this.props.isPending ? styles.pending : null,
+    );
 
     const markdown =
-      this.props.text === '' ? null : <Markdown className={className} text={this.props.text} emojiSize={18} />;
+      this.props.text === '' ? null : (
+        <Markdown className={className} text={this.props.text} emojiSize={18} />
+      );
 
     if (this.props.media && this.props.media.length) {
       const media = this.props.media.map((item, key) => {

@@ -19,8 +19,8 @@ export const interactive: MessageMediaInteractive = {
           widget: {
             type: 'button',
             value: 'yes',
-            label: 'Yes, sure'
-          }
+            label: 'Yes, sure',
+          },
         },
         {
           id: 'no',
@@ -28,8 +28,8 @@ export const interactive: MessageMediaInteractive = {
           widget: {
             type: 'button',
             value: 'no',
-            label: 'No, thanks'
-          }
+            label: 'No, thanks',
+          },
         },
         {
           id: 'address',
@@ -40,17 +40,17 @@ export const interactive: MessageMediaInteractive = {
             options: [
               {
                 value: 'address_1_value',
-                label: 'InteractiveMessage.select.label1'
+                label: 'InteractiveMessage.select.label1',
               },
               {
                 value: 'address_2_value',
-                label: 'InteractiveMessage.select.label2'
-              }
-            ]
-          }
-        }
-      ]
-    }
+                label: 'InteractiveMessage.select.label2',
+              },
+            ],
+          },
+        },
+      ],
+    },
   ],
   messages: {
     en: {
@@ -58,14 +58,15 @@ export const interactive: MessageMediaInteractive = {
       'InteractiveMessage.description':
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit.\nFacere necessitatibus ullam, sed vel consectetur odit.\nEt, sit, quas. Ad optio facere eligendi corporis ratione repellendus consectetur sunt iusto, itaque nam?',
       'InteractiveMessage.select.label1': 'Interactive message label 1',
-      'InteractiveMessage.select.label2': 'Interactive message label 2'
+      'InteractiveMessage.select.label2': 'Interactive message label 2',
     },
     ru: {
-      'InteractiveMessage.title': 'Это заголовок интерактивного сообщения на русском',
+      'InteractiveMessage.title':
+        'Это заголовок интерактивного сообщения на русском',
       'InteractiveMessage.description':
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit.\nFacere necessitatibus ullam, sed vel consectetur odit.\nEt, sit, quas. Ad optio facere eligendi corporis ratione repellendus consectetur sunt iusto, itaque nam?',
       'InteractiveMessage.select.label1': 'Лейбл интерактивного сообщения 1',
-      'InteractiveMessage.select.label2': 'Лейбл интерактивного сообщения 2'
-    }
-  }
+      'InteractiveMessage.select.label2': 'Лейбл интерактивного сообщения 2',
+    },
+  },
 };

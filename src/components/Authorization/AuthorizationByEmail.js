@@ -18,7 +18,7 @@ export type Props = {
   errors: ?{ [field: string]: AuthError },
   autoFocus?: boolean,
   onRetry: () => mixed,
-  onChange: (value: EmailValue) => mixed
+  onChange: (value: EmailValue) => mixed,
 };
 
 class AuthorizationByEmail extends PureComponent<Props> {
@@ -27,8 +27,8 @@ class AuthorizationByEmail extends PureComponent<Props> {
       type: this.props.value.type,
       credentials: {
         ...this.props.value.credentials,
-        [target.name]: value
-      }
+        [target.name]: value,
+      },
     });
   };
 
@@ -40,7 +40,7 @@ class AuthorizationByEmail extends PureComponent<Props> {
 
       return {
         hint: error.message,
-        status: 'error'
+        status: 'error',
       };
     }
 

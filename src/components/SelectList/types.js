@@ -5,12 +5,12 @@
 
 export type AutoSizerState = {
   width: number,
-  height: number
+  height: number,
 };
 
 export type ListRowProps = {
   index: number,
   key: string,
   style: { [key: string]: string },
-  isScrolling: boolean
+  isScrolling: boolean,
 };

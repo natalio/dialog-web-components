@@ -19,7 +19,7 @@ export type TriggerHandler =
 
 export type Point = {
   x: number,
-  y: number
+  y: number,
 };
 
 export type Props = {
@@ -64,12 +64,12 @@ export type Props = {
   /*
    * Called whenever child is mounting or unmounting.
    */
-  onChange?: (active: boolean) => void
+  onChange?: (active: boolean) => void,
 };
 
 export type State = {
   isOpen: boolean,
-  position: Point
+  position: Point,
 };
 
 class Trigger extends Component<Props, State> {
@@ -78,7 +78,7 @@ class Trigger extends Component<Props, State> {
   static defaultProps = {
     closeOnDocumentClick: false,
     closeOnDocumentScroll: false,
-    closeOnChildClick: true
+    closeOnChildClick: true,
   };
 
   constructor(props: Props): void {
@@ -88,8 +88,8 @@ class Trigger extends Component<Props, State> {
       isOpen: false,
       position: {
         x: 0,
-        y: 0
-      }
+        y: 0,
+      },
     };
   }
 
@@ -117,11 +117,15 @@ class Trigger extends Component<Props, State> {
 
       this.listeners = [];
       if (this.props.closeOnDocumentClick) {
-        this.listeners.push(listen(document, 'click', this.handleClose, { passive: true }));
+        this.listeners.push(
+          listen(document, 'click', this.handleClose, { passive: true }),
+        );
       }
 
       if (this.props.closeOnDocumentScroll) {
-        this.listeners.push(listen(document, 'scroll', this.handleClose, { passive: true }));
+        this.listeners.push(
+          listen(document, 'scroll', this.handleClose, { passive: true }),
+        );
       }
 
       if (this.props.onChange) {
@@ -130,7 +134,7 @@ class Trigger extends Component<Props, State> {
 
       return {
         isOpen: true,
-        position: { x, y }
+        position: { x, y },
       };
     });
   };
@@ -147,8 +151,8 @@ class Trigger extends Component<Props, State> {
         isOpen: false,
         position: {
           x: 0,
-          y: 0
-        }
+          y: 0,
+        },
       };
     });
   };
@@ -182,7 +186,9 @@ class Trigger extends Component<Props, State> {
   renderTrigger() {
     const { isOpen } = this.state;
     const handler = isOpen ? this.handleClose : this.handleOpen;
-    const activeHandlers = isOpen ? this.props.closeHandler : this.props.openHandler;
+    const activeHandlers = isOpen
+      ? this.props.closeHandler
+      : this.props.openHandler;
 
     const props = {};
     activeHandlers.forEach((eventName) => {

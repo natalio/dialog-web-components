@@ -15,7 +15,7 @@ export type Props = {
   count: number,
   onDelete?: () => mixed,
   onForward?: () => mixed,
-  onReply?: () => mixed
+  onReply?: () => mixed,
 };
 
 class SelectedMessagesActions extends PureComponent<Props> {
@@ -34,11 +34,18 @@ class SelectedMessagesActions extends PureComponent<Props> {
             className={styles.button}
           >
             <Icon glyph="delete" className={styles.buttonIcon} />
-            <Text id="SelectedMessagesActions.delete" className={styles.buttonText} />
+            <Text
+              id="SelectedMessagesActions.delete"
+              className={styles.buttonText}
+            />
           </Button>
         ) : null}
         <div className={styles.text}>
-          <Text id="SelectedMessagesActions.text" values={{ count: this.props.count.toString() }} html />
+          <Text
+            id="SelectedMessagesActions.text"
+            values={{ count: this.props.count.toString() }}
+            html
+          />
         </div>
         {this.props.onReply ? (
           <Button
@@ -50,7 +57,10 @@ class SelectedMessagesActions extends PureComponent<Props> {
             className={styles.button}
           >
             <Icon glyph="reply" className={styles.buttonIcon} />
-            <Text id="SelectedMessagesActions.reply" className={styles.buttonText} />
+            <Text
+              id="SelectedMessagesActions.reply"
+              className={styles.buttonText}
+            />
           </Button>
         ) : null}
         {this.props.onForward ? (
@@ -63,7 +73,10 @@ class SelectedMessagesActions extends PureComponent<Props> {
             className={styles.button}
           >
             <Icon glyph="forward" className={styles.buttonIcon} />
-            <Text id="SelectedMessagesActions.forward" className={styles.buttonText} />
+            <Text
+              id="SelectedMessagesActions.forward"
+              className={styles.buttonText}
+            />
           </Button>
         ) : null}
       </div>

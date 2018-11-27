@@ -18,7 +18,7 @@ export type Props = {
   className?: string,
   value: string,
   schema: string,
-  uiSchema?: ?Object
+  uiSchema?: ?Object,
 };
 
 class CustomProfile extends PureComponent<Props> {
@@ -61,7 +61,14 @@ class CustomProfile extends PureComponent<Props> {
         return null;
       }
 
-      return <CustomProfileProperty key={propName} value={propValue} type={type} title={title} />;
+      return (
+        <CustomProfileProperty
+          key={propName}
+          value={propValue}
+          type={type}
+          title={title}
+        />
+      );
     });
   }
 
@@ -72,11 +79,7 @@ class CustomProfile extends PureComponent<Props> {
 
     const className = classNames(styles.container, this.props.className);
 
-    return (
-      <div className={className}>
-        {this.renderProperties()}
-      </div>
-    );
+    return <div className={className}>{this.renderProperties()}</div>;
   }
 }
 

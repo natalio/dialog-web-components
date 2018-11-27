@@ -9,5 +9,5 @@ export type ClientRect = {
   right: number,
   bottom: number,
   width: number,
-  height: number
+  height: number,
 };

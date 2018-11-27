@@ -11,14 +11,16 @@ import styles from './Text.css';
 export type Props = {|
   className?: string,
   text: string,
-  isPending?: boolean
+  isPending?: boolean,
 |};
 
 class Service extends Component<Props> {
   shouldComponentUpdate(nextProps: Props): boolean {
-    return this.props.text !== nextProps.text ||
-           this.props.isPending !== nextProps.isPending ||
-           this.props.className !== nextProps.className;
+    return (
+      this.props.text !== nextProps.text ||
+      this.props.isPending !== nextProps.isPending ||
+      this.props.className !== nextProps.className
+    );
   }
 
   render() {
@@ -26,12 +28,10 @@ class Service extends Component<Props> {
       styles.container,
       styles.service,
       this.props.className,
-      this.props.isPending ? styles.pending : null
+      this.props.isPending ? styles.pending : null,
     );
 
-    return (
-      <Markdown className={className} text={this.props.text} />
-    );
+    return <Markdown className={className} text={this.props.text} />;
   }
 }
 

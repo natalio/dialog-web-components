@@ -22,7 +22,7 @@ type Props = {
   peers: PeerInfo[],
   messages: Field<SearchEntity[]>,
   onGoToMessage: (peer: Peer, message: Message) => mixed,
-  onGoToPeer: (peer: Peer) => mixed
+  onGoToPeer: (peer: Peer) => mixed,
 };
 
 class ActivitySearchMessages extends PureComponent<Props> {

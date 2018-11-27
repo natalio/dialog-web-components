@@ -11,7 +11,7 @@ import styles from './ActivitySearchItemPeer.css';
 
 type Props = {
   info: PeerInfo,
-  onGoToPeer: (peer: Peer) => mixed
+  onGoToPeer: (peer: Peer) => mixed,
 };
 
 class ActivitySearchItemMessage extends PureComponent<Props> {
@@ -27,15 +27,8 @@ class ActivitySearchItemMessage extends PureComponent<Props> {
 
     return (
       <div className={styles.peer} onClick={this.handleGoToPeer}>
-        <PeerAvatar
-          className={styles.avatar}
-          peer={info}
-          size={30}
-        />
-        <PeerInfoTitle
-          className={styles.title}
-          title={info.title}
-        />
+        <PeerAvatar className={styles.avatar} peer={info} size={30} />
+        <PeerInfoTitle className={styles.title} title={info.title} />
       </div>
     );
   }

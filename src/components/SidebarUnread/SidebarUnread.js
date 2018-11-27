@@ -11,7 +11,7 @@ import styles from './SidebarUnread.css';
 export type Props = {
   className?: string,
   position: 'top' | 'bottom',
-  onClick: () => mixed
+  onClick: () => mixed,
 };
 
 class SidebarUnread extends PureComponent<Props> {
@@ -19,13 +19,9 @@ class SidebarUnread extends PureComponent<Props> {
     const { position } = this.props;
 
     if (position === 'top') {
-      return (
-        <Icon glyph="keyboard_arrow_up" className={styles.icon} />
-      );
+      return <Icon glyph="keyboard_arrow_up" className={styles.icon} />;
     } else if (position === 'bottom') {
-      return (
-        <Icon glyph="keyboard_arrow_down" className={styles.icon} />
-      );
+      return <Icon glyph="keyboard_arrow_down" className={styles.icon} />;
     }
 
     return null;
@@ -33,13 +29,15 @@ class SidebarUnread extends PureComponent<Props> {
 
   render() {
     const { position } = this.props;
-    const className = classNames(styles.container, styles[position], this.props.className);
+    const className = classNames(
+      styles.container,
+      styles[position],
+      this.props.className,
+    );
 
     return (
       <div className={className} onClick={this.props.onClick}>
-        <div className={styles.wrapper}>
-          {this.renderArrow()}
-        </div>
+        <div className={styles.wrapper}>{this.renderArrow()}</div>
       </div>
     );
   }

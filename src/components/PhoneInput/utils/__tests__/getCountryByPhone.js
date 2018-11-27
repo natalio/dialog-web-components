@@ -10,7 +10,7 @@ describe('Detect country by phone number', () => {
     expect(getCountryByPhone('+7495', [])).toEqual({
       alpha: 'RU',
       code: '+7',
-      flag: '🇷🇺'
+      flag: '🇷🇺',
     });
   });
 
@@ -18,7 +18,7 @@ describe('Detect country by phone number', () => {
     expect(getCountryByPhone('+77', [])).toEqual({
       alpha: 'KZ',
       code: '+7 7',
-      flag: '🇰🇿'
+      flag: '🇰🇿',
     });
   });
 
@@ -26,7 +26,7 @@ describe('Detect country by phone number', () => {
     expect(getCountryByPhone('+1', ['US', 'CA'])).toEqual({
       alpha: 'CA',
       code: '+1',
-      flag: '🇨🇦'
+      flag: '🇨🇦',
     });
   });
 });

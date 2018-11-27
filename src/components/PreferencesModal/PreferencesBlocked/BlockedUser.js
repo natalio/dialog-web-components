@@ -13,7 +13,7 @@ import styles from './Blocked.css';
 
 export type Props = {
   user: User,
-  onUnblockUser: (id: number) => mixed
+  onUnblockUser: (id: number) => mixed,
 };
 
 class BlockedUser extends PureComponent<Props> {
@@ -43,14 +43,8 @@ class BlockedUser extends PureComponent<Props> {
             placeholder={user.placeholder}
           />
           <div className={styles.userInfo}>
-            <p className={styles.userName}>
-              {user.name}
-            </p>
-            {user.nick && (
-              <p className={styles.userNick}>
-                {`@${user.nick}`}
-              </p>
-            )}
+            <p className={styles.userName}>{user.name}</p>
+            {user.nick && <p className={styles.userNick}>{`@${user.nick}`}</p>}
           </div>
         </div>
 

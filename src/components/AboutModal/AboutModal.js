@@ -22,24 +22,23 @@ type Props = {
   onCheck: () => mixed,
   onUpdate: () => mixed,
   onClose: () => mixed,
-  onVersionClick: () => mixed
-}
+  onVersionClick: () => mixed,
+};
 
 class AboutModal extends PureComponent<Props> {
   renderState() {
     const { appName, updateState } = this.props;
 
     if (updateState.error) {
-      return (
-        <div className={styles.error}>
-          {updateState.error.message}
-        </div>
-      );
+      return <div className={styles.error}>{updateState.error.message}</div>;
     }
 
     if (updateState.pending) {
       return (
-        <Text id={`AboutModal.pending.${updateState.value}`} values={{ appName }} />
+        <Text
+          id={`AboutModal.pending.${updateState.value}`}
+          values={{ appName }}
+        />
       );
     }
 
@@ -93,9 +92,7 @@ class AboutModal extends PureComponent<Props> {
             className={styles.close}
           />
           <Logo className={styles.logo} />
-          <h1 className={styles.appName}>
-            {appName}
-          </h1>
+          <h1 className={styles.appName}>{appName}</h1>
           <Text
             id="AboutModal.version"
             values={{ appVersion }}
@@ -103,13 +100,10 @@ class AboutModal extends PureComponent<Props> {
             onClick={this.props.onVersionClick}
             className={styles.version}
           />
-          <div className={styles.state}>
-            {this.renderState()}
-          </div>
+          <div className={styles.state}>{this.renderState()}</div>
           {this.renderUpdateButton()}
         </ModalBody>
       </Modal>
-
     );
   }
 }

@@ -4,7 +4,11 @@
  */
 
 import type { Set } from 'immutable';
-import type { Group, GroupType, GroupMemberPermission } from '@dlghq/dialog-types';
+import type {
+  Group,
+  GroupType,
+  GroupMemberPermission,
+} from '@dlghq/dialog-types';
 import type { Permission } from './types';
 import React, { PureComponent } from 'react';
 import { hasPermission } from '../../utils/acl';
@@ -17,8 +21,8 @@ type PermissionConfig = {
   label: string,
   danger?: ?boolean,
   hintYes?: ?string,
-  hintNo?: ?string
-}
+  hintNo?: ?string,
+};
 
 type Props = {
   id: string,
@@ -27,7 +31,7 @@ type Props = {
   permissions: Set<Permission>,
   renderOrder: { [type: GroupType]: PermissionConfig[] },
   onChange: (permissions: Set<Permission>) => mixed,
-  onSubmit: () => mixed
+  onSubmit: () => mixed,
 };
 
 class AdminModalForm extends PureComponent<Props> {
@@ -39,21 +43,27 @@ class AdminModalForm extends PureComponent<Props> {
         { type: 'invite', label: 'AdminModal.invite' },
         { type: 'update_info', label: 'AdminModal.group.update_info' },
         { type: 'edit_shortname', label: 'AdminModal.group.edit_shortname' },
-        { type: 'get_integration_token', label: 'AdminModal.get_integration_token' },
+        {
+          type: 'get_integration_token',
+          label: 'AdminModal.get_integration_token',
+        },
         { type: 'edit_message', label: 'AdminModal.edit_message' },
         { type: 'delete_message', label: 'AdminModal.delete_message' },
         {
           type: 'set_permissions',
           label: 'AdminModal.set_permissions',
           hintYes: 'AdminModal.set_permissions_hint.yes',
-          hintNo: 'AdminModal.set_permissions_hint.no'
-        }
+          hintNo: 'AdminModal.set_permissions_hint.no',
+        },
       ],
       channel: [
         { type: 'invite', label: 'AdminModal.invite' },
         { type: 'update_info', label: 'AdminModal.channel.update_info' },
         { type: 'edit_shortname', label: 'AdminModal.channel.edit_shortname' },
-        { type: 'get_integration_token', label: 'AdminModal.get_integration_token' },
+        {
+          type: 'get_integration_token',
+          label: 'AdminModal.get_integration_token',
+        },
         { type: 'send_message', label: 'AdminModal.send_message' },
         { type: 'edit_message', label: 'AdminModal.edit_message' },
         { type: 'delete_message', label: 'AdminModal.delete_message' },
@@ -61,10 +71,10 @@ class AdminModalForm extends PureComponent<Props> {
           type: 'set_permissions',
           label: 'AdminModal.set_permissions',
           hintYes: 'AdminModal.set_permissions_hint.yes',
-          hintNo: 'AdminModal.set_permissions_hint.no'
-        }
-      ]
-    }
+          hintNo: 'AdminModal.set_permissions_hint.no',
+        },
+      ],
+    },
   };
 
   handleSubmit = (event: SyntheticEvent<>) => {
@@ -117,7 +127,10 @@ class AdminModalForm extends PureComponent<Props> {
     }
 
     return (
-      <Fieldset legend="AdminModal.transfer_ownership_legend" className={styles.fieldset}>
+      <Fieldset
+        legend="AdminModal.transfer_ownership_legend"
+        className={styles.fieldset}
+      >
         <AdminModalSwitcher
           danger
           id={id}

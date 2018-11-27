@@ -10,20 +10,32 @@ import styles from './DownloadButton.css';
 
 export type Props = {
   isUploading: boolean,
-  className?: string
+  className?: string,
 };
 
 class DownloadButton extends PureComponent<Props> {
   render() {
     const { isUploading } = this.props;
-    const className = classNames(styles.container, {
-      [styles.uploading]: isUploading
-    }, this.props.className);
+    const className = classNames(
+      styles.container,
+      {
+        [styles.uploading]: isUploading,
+      },
+      this.props.className,
+    );
 
     return (
       <div className={className}>
-        <Icon glyph={isUploading ? 'arrow_up' : 'arrow_down'} className={styles.arrow} size={26} />
-        <svg viewBox="0 0 50 50" className={styles.button} shapeRendering="auto">
+        <Icon
+          glyph={isUploading ? 'arrow_up' : 'arrow_down'}
+          className={styles.arrow}
+          size={26}
+        />
+        <svg
+          viewBox="0 0 50 50"
+          className={styles.button}
+          shapeRendering="auto"
+        >
           <circle
             className={styles.border}
             cx="25"

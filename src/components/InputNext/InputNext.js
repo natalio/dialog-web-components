@@ -17,7 +17,15 @@ export type Props = {
   wrapperClassName?: string,
   prefixClassName?: string,
   id: string,
-  type: 'text' | 'number' | 'email' | 'search' | 'tel' | 'url' | 'password' | 'textarea',
+  type:
+    | 'text'
+    | 'number'
+    | 'email'
+    | 'search'
+    | 'tel'
+    | 'url'
+    | 'password'
+    | 'textarea',
   value: string | number,
   name?: string,
   label?: ?string,
@@ -37,16 +45,23 @@ export type Props = {
   required: boolean,
   description?: ?string,
   autoComplete?: ?string,
-  onChange: (value: string, event: SyntheticInputEvent<HTMLAbstractInputElement>) => mixed,
+  onChange: (
+    value: string,
+    event: SyntheticInputEvent<HTMLAbstractInputElement>,
+  ) => mixed,
   onFocus?: (event: SyntheticFocusEvent<HTMLAbstractInputElement>) => mixed,
   onBlur?: (event: SyntheticFocusEvent<HTMLAbstractInputElement>) => mixed,
   onKeyUp?: (event: SyntheticKeyboardEvent<HTMLAbstractInputElement>) => mixed,
-  onKeyDown?: (event: SyntheticKeyboardEvent<HTMLAbstractInputElement>) => mixed,
-  onKeyPress?: (event: SyntheticKeyboardEvent<HTMLAbstractInputElement>) => mixed
+  onKeyDown?: (
+    event: SyntheticKeyboardEvent<HTMLAbstractInputElement>,
+  ) => mixed,
+  onKeyPress?: (
+    event: SyntheticKeyboardEvent<HTMLAbstractInputElement>,
+  ) => mixed,
 };
 
 export type State = {
-  isFocused: boolean
+  isFocused: boolean,
 };
 
 export type Context = ProviderContext;
@@ -56,7 +71,7 @@ class InputNext extends PureComponent<Props, State> {
   input: ?HTMLAbstractInputElement;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   static defaultProps = {
@@ -64,14 +79,14 @@ class InputNext extends PureComponent<Props, State> {
     status: 'default',
     size: 'normal',
     spellcheck: false,
-    required: false
+    required: false,
   };
 
   constructor(props: Props, context: Context) {
     super(props, context);
 
     this.state = {
-      isFocused: false
+      isFocused: false,
     };
   }
 
@@ -83,11 +98,15 @@ class InputNext extends PureComponent<Props, State> {
     this.autoFocus();
   }
 
-  handleChange = (event: SyntheticInputEvent<HTMLAbstractInputElement>): void => {
+  handleChange = (
+    event: SyntheticInputEvent<HTMLAbstractInputElement>,
+  ): void => {
     this.props.onChange(event.target.value, event);
   };
 
-  handleFocus = (event: SyntheticFocusEvent<HTMLAbstractInputElement>): void => {
+  handleFocus = (
+    event: SyntheticFocusEvent<HTMLAbstractInputElement>,
+  ): void => {
     this.setState({ isFocused: true });
 
     if (this.props.onFocus) {
@@ -156,9 +175,15 @@ class InputNext extends PureComponent<Props, State> {
     }
 
     return (
-      <label className={styles.label} htmlFor={id} onMouseDown={this.handleLabelMouseDown}>
+      <label
+        className={styles.label}
+        htmlFor={id}
+        onMouseDown={this.handleLabelMouseDown}
+      >
         <Text id={label} />
-        {this.props.required ? <Text id="InputNext.required" tagName="small" /> : null}
+        {this.props.required ? (
+          <Text id="InputNext.required" tagName="small" />
+        ) : null}
       </label>
     );
   }
@@ -186,7 +211,10 @@ class InputNext extends PureComponent<Props, State> {
       return null;
     }
 
-    const prefixClassName = classNames(styles.prefix, this.props.prefixClassName);
+    const prefixClassName = classNames(
+      styles.prefix,
+      this.props.prefixClassName,
+    );
 
     return (
       <div className={prefixClassName} onMouseDown={this.handleLabelMouseDown}>
@@ -196,10 +224,7 @@ class InputNext extends PureComponent<Props, State> {
   }
 
   renderLengthLimitCounter() {
-    const {
-      maxLength,
-      lengthLimitCounter
-    } = this.props;
+    const { maxLength, lengthLimitCounter } = this.props;
 
     if (!maxLength && !lengthLimitCounter) {
       return null;
@@ -211,9 +236,7 @@ class InputNext extends PureComponent<Props, State> {
     const length = value.length;
 
     return (
-      <div
-        className={styles.lengthLimitCounter}
-      >
+      <div className={styles.lengthLimitCounter}>
         {`${length} ${maxLength ? `/ ${maxLength}` : ''}`}
       </div>
     );
@@ -233,17 +256,18 @@ class InputNext extends PureComponent<Props, State> {
       onKeyDown,
       onKeyPress,
       prefix,
-      maxLength
+      maxLength,
     } = this.props;
-    const { l10n: { formatText } } = this.context;
+    const {
+      l10n: { formatText },
+    } = this.context;
 
     const inputClassName = classNames(styles.input, this.props.inputClassName, {
       [styles.textarea]: type === 'textarea',
-      [styles.prefixed]: Boolean(prefix)
+      [styles.prefixed]: Boolean(prefix),
     });
 
     const TagName = type === 'textarea' ? 'textarea' : 'input';
-
 
     return (
       <TagName
@@ -273,13 +297,7 @@ class InputNext extends PureComponent<Props, State> {
   }
 
   render() {
-    const {
-      value,
-      disabled,
-      status,
-      size,
-      readOnly
-    } = this.props;
+    const { value, disabled, status, size, readOnly } = this.props;
     const { isFocused } = this.state;
 
     const className = classNames(
@@ -290,9 +308,12 @@ class InputNext extends PureComponent<Props, State> {
       disabled ? styles.disabled : null,
       readOnly ? styles.readonly : null,
       styles[size],
-      this.props.className
+      this.props.className,
     );
-    const wrapperClassName = classNames(styles.inputWrapper, this.props.wrapperClassName);
+    const wrapperClassName = classNames(
+      styles.inputWrapper,
+      this.props.wrapperClassName,
+    );
 
     return (
       <div className={className}>

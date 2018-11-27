@@ -8,7 +8,7 @@ import styles from './CopyOnly.css';
 
 type Props = {
   block?: boolean,
-  children?: Node
+  children?: Node,
 };
 
 function CopyOnly(props: Props) {
@@ -21,11 +21,7 @@ function CopyOnly(props: Props) {
     );
   }
 
-  return (
-    <span className={styles.inline}>
-      {props.children}
-    </span>
-  );
+  return <span className={styles.inline}>{props.children}</span>;
 }
 
 export default CopyOnly;

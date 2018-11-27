@@ -11,7 +11,7 @@ import { Text } from '@dlghq/react-l10n';
 import styles from './EmptyChat.css';
 
 export type EmptyChatProps = {
-  className?: string
+  className?: string,
 };
 
 function EmptyChat(props: EmptyChatProps) {

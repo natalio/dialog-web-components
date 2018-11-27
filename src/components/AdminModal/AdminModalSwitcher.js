@@ -17,7 +17,7 @@ type Props = {
   hintNo?: ?string,
   value: boolean,
   disabled?: boolean,
-  onChange: (value: boolean, event: SyntheticInputEvent<>) => mixed
+  onChange: (value: boolean, event: SyntheticInputEvent<>) => mixed,
 };
 
 function AdminModalSwitcher(props: Props) {

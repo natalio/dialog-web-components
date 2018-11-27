@@ -14,7 +14,7 @@ type Props = {
   peer: PeerInfo,
   size: number,
   animated: boolean,
-  onClick?: ?() => mixed
+  onClick?: (event: SyntheticMouseEvent<>) => mixed,
 };
 
 class CallAvatar extends PureComponent<Props> {
@@ -28,7 +28,7 @@ class CallAvatar extends PureComponent<Props> {
     const indent = isSmall ? 6 : 12;
     const mod = isSmall ? 10 : 20;
 
-    return size + indent + (mod * position);
+    return size + indent + mod * position;
   };
 
   renderRings() {
@@ -39,17 +39,12 @@ class CallAvatar extends PureComponent<Props> {
       const style = {
         width: size,
         height: size,
-        marginLeft: 0 - (size / 2),
-        marginTop: 0 - (size / 2),
-        animationDelay: `${125 * i}ms`
+        marginLeft: 0 - size / 2,
+        marginTop: 0 - size / 2,
+        animationDelay: `${125 * i}ms`,
       };
 
-      rings.push(
-        <div
-          style={style}
-          key={`ring_${i}`}
-        />
-      );
+      rings.push(<div style={style} key={`ring_${i}`} />);
     }
 
     return rings;
@@ -58,11 +53,11 @@ class CallAvatar extends PureComponent<Props> {
   renderAnimation() {
     const { animated, size } = this.props;
     const className = classNames(styles.animation, {
-      [styles.animationEnded]: !animated
+      [styles.animationEnded]: !animated,
     });
     const style = {
       width: size,
-      height: size
+      height: size,
     };
 
     return (

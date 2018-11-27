@@ -5,7 +5,7 @@
 
 import type {
   MessageMediaInteractiveStyle,
-  MessageMediaInteractiveWidget as MessageMediaInteractiveWidgetType
+  MessageMediaInteractiveWidget as MessageMediaInteractiveWidgetType,
 } from '@dlghq/dialog-types';
 import * as React from 'react';
 import MessageMediaInteractiveWidgetButton from './MessageMediaInteractiveWidgetButton';
@@ -14,7 +14,7 @@ import MessageMediaInteractiveWidgetSelect from './MessageMediaInteractiveWidget
 export type Props = {
   style?: ?MessageMediaInteractiveStyle,
   widget: MessageMediaInteractiveWidgetType,
-  onSubmit: (value: string) => mixed
+  onSubmit: (value: string) => mixed,
 };
 
 function MessageMediaInteractiveWidget(props: Props) {

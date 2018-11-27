@@ -11,7 +11,7 @@ import styles from './CallFeedback.css';
 type Props = {
   value: number,
   active: boolean,
-  onChange: (value: number) => mixed
+  onChange: (value: number) => mixed,
 };
 
 class CallFeedbackRatingStar extends PureComponent<Props> {
@@ -22,7 +22,7 @@ class CallFeedbackRatingStar extends PureComponent<Props> {
   render() {
     const { active } = this.props;
     const className = classNames(styles.star, {
-      [styles.starActive]: active
+      [styles.starActive]: active,
     });
     const glyph = active ? 'star' : 'star_outline';
 

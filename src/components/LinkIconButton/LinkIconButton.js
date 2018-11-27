@@ -19,14 +19,14 @@ export type Props = {
   flat: boolean,
   active: boolean,
   target?: string,
-  href: string
+  href: string,
 };
 
 class LinkIconButton extends PureComponent<Props> {
   static defaultProps = {
     size: 'normal',
     flat: false,
-    theme: 'default'
+    theme: 'default',
   };
 
   getIconSize = (): number => {
@@ -50,7 +50,17 @@ class LinkIconButton extends PureComponent<Props> {
   }
 
   render() {
-    const { theme, size, flat, style, active, href, target, id, ...otherProps } = this.props;
+    const {
+      theme,
+      size,
+      flat,
+      style,
+      active,
+      href,
+      target,
+      id,
+      ...otherProps
+    } = this.props;
 
     const className = classNames(
       styles.container,
@@ -59,19 +69,21 @@ class LinkIconButton extends PureComponent<Props> {
         [styles.defaultStyle]: !flat,
         [styles.flat]: flat,
         [styles[theme]]: flat,
-        [styles.active]: active
+        [styles.active]: active,
       },
-      this.props.className
+      this.props.className,
     );
 
     return (
       <a
-        href={href} target={target} className={className} style={style}
-        id={id} {...otherProps}
+        href={href}
+        target={target}
+        className={className}
+        style={style}
+        id={id}
+        {...otherProps}
       >
-        <span className={styles.fix}>
-          {this.renderIcon()}
-        </span>
+        <span className={styles.fix}>{this.renderIcon()}</span>
       </a>
     );
   }

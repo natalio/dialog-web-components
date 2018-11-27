@@ -10,7 +10,7 @@ import styles from './CallVideo.css';
 
 export type Props = {
   ownVideos?: CallVideoType[],
-  theirVideos: CallVideoType[]
+  theirVideos: CallVideoType[],
 };
 
 class CallVideo extends PureComponent<Props> {
@@ -49,19 +49,13 @@ class CallVideo extends PureComponent<Props> {
       );
     });
 
-    return (
-      <div className={styles.ownVideos}>
-        {videos}
-      </div>
-    );
+    return <div className={styles.ownVideos}>{videos}</div>;
   }
 
   render() {
     return (
       <div className={styles.container}>
-        <div className={styles.videoContainer}>
-          {this.renderTheirVideos()}
-        </div>
+        <div className={styles.videoContainer}>{this.renderTheirVideos()}</div>
         {this.renderOwnVideos()}
       </div>
     );
