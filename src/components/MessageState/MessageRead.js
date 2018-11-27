@@ -4,7 +4,7 @@
  */
 
 import type { PeerInfo } from '@dlghq/dialog-types';
-import React, { Component } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import classNames from 'classnames';
 import { Text } from '@dlghq/react-l10n';
 import { peerToString } from '@dlghq/dialog-types/utils';
@@ -15,8 +15,8 @@ type Props = {
   readBy?: PeerInfo[],
 };
 
-class MessageRead extends Component<Props> {
-  renderAvatars() {
+class MessageRead extends PureComponent<Props> {
+  renderAvatars(): Node {
     const { readBy } = this.props;
     if (!readBy) {
       return null;
