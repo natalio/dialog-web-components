@@ -88,6 +88,29 @@ class SpaceInfoModal extends PureComponent<Props> {
     });
   };
 
+  handleHotkey = (hotkey: string, event: KeyboardEvent): void => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const { screen } = this.state;
+
+    switch (hotkey) {
+      case 'Escape':
+        if (screen === 'invitationLink' ||
+          screen === 'members' ||
+          screen === 'addMembers') {
+          this.handlePrevScreen();
+          break;
+        }
+
+        this.props.onClose();
+        break;
+
+      default:
+      // do nothing
+    }
+  };
+
   renderConfirmLeave() {
     return (
       <Confirm
@@ -156,11 +179,11 @@ class SpaceInfoModal extends PureComponent<Props> {
       case 'invitationLink':
         return (
           <SpaceInvitationLinkScreen
+            link={this.props.invitationLink}
+            pending={this.props.invitationLinkPending}
             onPrevScreen={this.handlePrevScreen}
             onClose={this.props.onClose}
             onRevoke={this.props.onRevoke}
-            link={this.props.invitationLink}
-            pending={this.props.invitationLinkPending}
           />
         );
       default:
@@ -188,19 +211,19 @@ class SpaceInfoModal extends PureComponent<Props> {
       return this.renderConfirm();
     }
 
-    return this.renderMainScreen();
-  }
-
-  render() {
     const className = classNames(styles.container, this.props.className);
 
     return (
       <HotKeys onHotKey={this.handleHotkey}>
         <Modal className={className} onClose={this.props.onClose}>
-          {this.renderModal()}
+          {this.renderMainScreen()}
         </Modal>
       </HotKeys>
     );
+  }
+
+  render() {
+    return this.renderModal();
   }
 }
 
