@@ -21,7 +21,7 @@ type Props = {
   onGoToMessage: (peer: ?Peer, message: Message) => mixed,
   onLightboxOpen?: (message: Message) => mixed,
   maxHeight: number,
-  maxWidth: number
+  maxWidth: number,
 };
 
 class MessageAttachmentForward extends PureComponent<Props> {
@@ -53,7 +53,10 @@ class MessageAttachmentForward extends PureComponent<Props> {
       <div className={styles.from}>
         <Text id="MessageAttachment.from" />
         <Button
-          theme="primary" view="link" onClick={this.handleGoToPeer} size="small"
+          theme="primary"
+          view="link"
+          onClick={this.handleGoToPeer}
+          size="small"
           className={styles.fromButton}
         >
           {from.type === 'channel' || from.type === 'group' ? (
@@ -70,7 +73,9 @@ class MessageAttachmentForward extends PureComponent<Props> {
     let lastSenderId = 0;
 
     return messages.map((message) => {
-      const isShort = message.sender ? message.sender.peer.id === lastSenderId : false;
+      const isShort = message.sender
+        ? message.sender.peer.id === lastSenderId
+        : false;
       lastSenderId = message.sender ? message.sender.peer.id : 0;
 
       return (
@@ -95,9 +100,7 @@ class MessageAttachmentForward extends PureComponent<Props> {
     return (
       <div className={className}>
         {this.renderHeader()}
-        <div className={styles.messages}>
-          {this.renderMessages()}
-        </div>
+        <div className={styles.messages}>{this.renderMessages()}</div>
       </div>
     );
   }

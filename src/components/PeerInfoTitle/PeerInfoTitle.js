@@ -19,24 +19,32 @@ type Props = {
   onUserNameClick?: ?(event: SyntheticMouseEvent<>) => mixed,
   addSpacebars: boolean,
   emojiSize?: number,
-  isVerified?: ?boolean
+  isVerified?: ?boolean,
 };
 
 class PeerInfoTitle extends PureComponent<Props> {
   static defaultProps = {
-    addSpacebars: false
+    addSpacebars: false,
   };
 
   renderVerified() {
     if (this.props.isVerified) {
-      return <Icon glyph="verified" size={this.props.emojiSize} className={styles.verifiedIcon} />;
+      return (
+        <Icon
+          glyph="verified"
+          size={this.props.emojiSize}
+          className={styles.verifiedIcon}
+        />
+      );
     }
 
     return null;
   }
 
   render() {
-    const titleStyle = this.props.onTitleClick ? { cursor: 'pointer' } : undefined;
+    const titleStyle = this.props.onTitleClick
+      ? { cursor: 'pointer' }
+      : undefined;
     const spacebars = this.props.addSpacebars ? '\u00A0\u00A0' : null;
     const title = (
       <span
@@ -45,13 +53,20 @@ class PeerInfoTitle extends PureComponent<Props> {
         onClick={this.props.onTitleClick}
         title={this.props.title}
       >
-        <Markdown inline emojiSize={this.props.emojiSize} decorators={decorators} text={this.props.title} />
+        <Markdown
+          inline
+          emojiSize={this.props.emojiSize}
+          decorators={decorators}
+          text={this.props.title}
+        />
         {spacebars}
       </span>
     );
 
     if (this.props.userName) {
-      const userNameStyle = this.props.onUserNameClick ? { cursor: 'pointer' } : undefined;
+      const userNameStyle = this.props.onUserNameClick
+        ? { cursor: 'pointer' }
+        : undefined;
 
       return (
         <span className={this.props.className}>

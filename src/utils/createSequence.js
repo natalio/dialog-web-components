@@ -9,7 +9,7 @@ function createSequence() {
   return {
     next(): string {
       return String(start++);
-    }
+    },
   };
 }
 

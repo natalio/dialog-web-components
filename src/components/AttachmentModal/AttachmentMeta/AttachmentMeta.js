@@ -19,12 +19,16 @@ class AttachmentMeta extends PureComponent<Props> {
 
   renderMethod() {
     const {
-      attachment: { isDocument }
+      attachment: { isDocument },
     } = this.props;
 
     return (
       <td className={styles.block}>
-        <Text id="AttachmentModal.sending_method" tagName="div" className={styles.heading} />
+        <Text
+          id="AttachmentModal.sending_method"
+          tagName="div"
+          className={styles.heading}
+        />
         <div className={styles.text}>
           <Switcher
             id="attachment_send_as_file"
@@ -42,7 +46,7 @@ class AttachmentMeta extends PureComponent<Props> {
 
   render() {
     const {
-      attachment: { file }
+      attachment: { file },
     } = this.props;
 
     const name = typeof file.name === 'string' ? file.name : '';
@@ -54,24 +58,30 @@ class AttachmentMeta extends PureComponent<Props> {
         <tbody>
           <tr>
             <td className={styles.block}>
-              <Text id="AttachmentModal.filename" tagName="div" className={styles.heading} />
-              <div className={styles.text}>
-                {name}
-              </div>
+              <Text
+                id="AttachmentModal.filename"
+                tagName="div"
+                className={styles.heading}
+              />
+              <div className={styles.text}>{name}</div>
             </td>
             <td className={styles.block}>
-              <Text id="AttachmentModal.filesize" tagName="div" className={styles.heading} />
-              <div className={styles.text}>
-                {size}
-              </div>
+              <Text
+                id="AttachmentModal.filesize"
+                tagName="div"
+                className={styles.heading}
+              />
+              <div className={styles.text}>{size}</div>
             </td>
           </tr>
           <tr>
             <td className={styles.block}>
-              <Text id="AttachmentModal.filetype" tagName="div" className={styles.heading} />
-              <div className={styles.type}>
-                {extension}
-              </div>
+              <Text
+                id="AttachmentModal.filetype"
+                tagName="div"
+                className={styles.heading}
+              />
+              <div className={styles.type}>{extension}</div>
             </td>
             {this.renderMethod()}
           </tr>

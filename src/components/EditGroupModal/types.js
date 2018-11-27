@@ -9,8 +9,8 @@ type GroupUpdate = {
   name: string,
   about: ?string,
   shortname: ?string,
-  avatar: ?(string | File)
-}
+  avatar: ?(string | File),
+};
 
 export type Props = {
   group: Group,
@@ -18,16 +18,16 @@ export type Props = {
     name: Field<string>,
     about: Field<string>,
     shortname: Field<string>,
-    avatar: Field<string>
+    avatar: Field<string>,
   },
   className?: string,
   shortnamePrefix?: ?string,
   isPublicGroupsEnabled: boolean,
   onClose: () => void,
-  onSubmit: (group: Group, update: GroupUpdate) => mixed
+  onSubmit: (group: Group, update: GroupUpdate) => mixed,
 };
 
 export type State = {
   screen: 'info' | 'avatar',
-  group: GroupUpdate
-}
+  group: GroupUpdate,
+};

@@ -3,7 +3,11 @@
  * @flow
  */
 
-import type { AuthorizationProps as Props, AuthValue, SignupInfo } from './types';
+import type {
+  AuthorizationProps as Props,
+  AuthValue,
+  SignupInfo,
+} from './types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { Text } from '@dlghq/react-l10n';
@@ -14,14 +18,21 @@ import AuthorizationByUsername from './AuthorizationByUsername';
 import AuthorizationByCertificate from './AuthorizationByCertificate';
 import Registration from '../Registration/Registration';
 import ButtonNext from '../ButtonNext/ButtonNext';
-import { LOGIN_SENT, CODE_REQUESTED, CODE_SENT, SIGNUP_STARTED, NAME_SENT, AUTH_FINISHED } from './constants';
+import {
+  LOGIN_SENT,
+  CODE_REQUESTED,
+  CODE_SENT,
+  SIGNUP_STARTED,
+  NAME_SENT,
+  AUTH_FINISHED,
+} from './constants';
 import styles from './Authorization.css';
 
 class Authorization extends PureComponent<Props> {
   static defaultProps = {
     id: 'authorization_form',
     autoFocus: true,
-    allowed: ['phone', 'email', 'username', 'cert']
+    allowed: ['phone', 'email', 'username', 'cert'],
   };
 
   handleChange = (value: AuthValue) => {
@@ -49,7 +60,10 @@ class Authorization extends PureComponent<Props> {
   }
 
   renderButtonText() {
-    const { step, value: { type } } = this.props;
+    const {
+      step,
+      value: { type },
+    } = this.props;
 
     if (type === 'username' || type === 'cert') {
       return <Text id="Authorization.sign_in" />;
@@ -129,9 +143,7 @@ class Authorization extends PureComponent<Props> {
         );
 
       case 'cert':
-        return (
-          <AuthorizationByCertificate id={id} errors={errors} />
-        );
+        return <AuthorizationByCertificate id={id} errors={errors} />;
 
       default:
         console.warn('Unsupported auth type');
@@ -165,11 +177,20 @@ class Authorization extends PureComponent<Props> {
     const className = classNames(styles.container, this.props.className);
 
     return (
-      <form id={id} className={className} autoComplete="off" onSubmit={this.handleSubmit}>
+      <form
+        id={id}
+        className={className}
+        autoComplete="off"
+        onSubmit={this.handleSubmit}
+      >
         {this.renderTypeSelector()}
         {this.renderForm()}
         {this.renderSignupForm()}
-        <ButtonNext type="submit" loading={this.isLoading()} id={`${id}_step_${step}_button`}>
+        <ButtonNext
+          type="submit"
+          loading={this.isLoading()}
+          id={`${id}_step_${step}_button`}
+        >
           {this.renderButtonText()}
         </ButtonNext>
       </form>

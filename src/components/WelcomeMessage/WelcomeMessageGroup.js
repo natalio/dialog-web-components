@@ -18,7 +18,7 @@ export type Props = {
   about?: string,
   creator?: ?string,
   createdAt?: ?string,
-  renderActions?: () => Node
+  renderActions?: () => Node,
 };
 
 class WelcomeMessageGroup extends PureComponent<Props> {
@@ -29,11 +29,7 @@ class WelcomeMessageGroup extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <span className={styles.createdDate}>
-        {createdAt}
-      </span>
-    );
+    return <span className={styles.createdDate}>{createdAt}</span>;
   }
 
   renderCreated() {
@@ -42,7 +38,10 @@ class WelcomeMessageGroup extends PureComponent<Props> {
     if (isOwner) {
       return (
         <div className={styles.created}>
-          <Text id="WelcomeMessage.group.created_by_you" className={styles.createdText} />
+          <Text
+            id="WelcomeMessage.group.created_by_you"
+            className={styles.createdText}
+          />
           {this.renderCreatedAt()}
         </div>
       );
@@ -51,7 +50,10 @@ class WelcomeMessageGroup extends PureComponent<Props> {
     if (creator) {
       return (
         <div className={styles.created}>
-          <Text id="WelcomeMessage.group.created" className={styles.createdText} />
+          <Text
+            id="WelcomeMessage.group.created"
+            className={styles.createdText}
+          />
           <PeerInfoTitle title={creator} emojiSize={18} />
           {this.renderCreatedAt()}
         </div>
@@ -76,11 +78,7 @@ class WelcomeMessageGroup extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <div className={styles.actions}>
-        {this.props.renderActions()}
-      </div>
-    );
+    return <div className={styles.actions}>{this.props.renderActions()}</div>;
   }
 
   renderHint() {
@@ -92,7 +90,11 @@ class WelcomeMessageGroup extends PureComponent<Props> {
 
     return (
       <div className={styles.hint}>
-        <Text id="WelcomeMessage.group.hint" className={styles.hintText} tagName="div" />
+        <Text
+          id="WelcomeMessage.group.hint"
+          className={styles.hintText}
+          tagName="div"
+        />
       </div>
     );
   }
@@ -104,7 +106,11 @@ class WelcomeMessageGroup extends PureComponent<Props> {
       <div className={className}>
         <div className={styles.group}>
           {this.renderHint()}
-          <PeerInfoTitle title={title} titleClassName={styles.title} emojiSize={36} />
+          <PeerInfoTitle
+            title={title}
+            titleClassName={styles.title}
+            emojiSize={36}
+          />
           {this.renderCreated()}
           {this.renderAbout()}
         </div>

@@ -15,7 +15,7 @@ import styles from './ContactList.css';
 export type Props = {
   className?: string,
   selector: SelectorState<PeerInfo>,
-  onChange: (selector: SelectorState<PeerInfo>) => mixed
+  onChange: (selector: SelectorState<PeerInfo>) => mixed,
 };
 
 function ContactList(props: Props) {

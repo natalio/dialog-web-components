@@ -13,12 +13,12 @@ type Props = {
   glyph: string,
   active: boolean,
   disabled: ?boolean,
-  onClick: (name: string) => mixed
+  onClick: (name: string) => mixed,
 };
 
 class EmojiTab extends PureComponent<Props> {
   static defaultProps = {
-    disabled: false
+    disabled: false,
   };
 
   handleClick = (event: SyntheticMouseEvent<>) => {
@@ -34,12 +34,16 @@ class EmojiTab extends PureComponent<Props> {
   render() {
     const className = classNames(styles.footerTabIcon, {
       [styles.active]: this.props.active,
-      [styles.disabled]: this.props.disabled
+      [styles.disabled]: this.props.disabled,
     });
 
     return (
       <div title={this.props.name} className={styles.footerTab}>
-        <Icon glyph={this.props.glyph} className={className} onClick={this.handleClick} />
+        <Icon
+          glyph={this.props.glyph}
+          className={className}
+          onClick={this.handleClick}
+        />
       </div>
     );
   }

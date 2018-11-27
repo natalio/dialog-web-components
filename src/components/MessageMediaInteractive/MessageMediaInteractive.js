@@ -5,7 +5,7 @@
 
 import type {
   MessageMediaInteractive as MessageMediaInteractiveType,
-  MessageMediaInteractiveConfirm
+  MessageMediaInteractiveConfirm,
 } from '@dlghq/dialog-types';
 import type { ProviderContext as Context } from '@dlghq/react-l10n';
 import React, { PureComponent } from 'react';
@@ -17,7 +17,11 @@ import MessageMediaInteractiveGroup from './MessageMediaInteractiveGroup/Message
 type Props = {
   className?: string,
   media: MessageMediaInteractiveType,
-  onSubmit?: (id: string, value: string, confirm?: ?MessageMediaInteractiveConfirm) => mixed
+  onSubmit?: (
+    id: string,
+    value: string,
+    confirm?: ?MessageMediaInteractiveConfirm,
+  ) => mixed,
 };
 
 class MessageMediaInteractive extends PureComponent<Props> {
@@ -25,7 +29,7 @@ class MessageMediaInteractive extends PureComponent<Props> {
   context: Context;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   renderContent() {
@@ -47,10 +51,11 @@ class MessageMediaInteractive extends PureComponent<Props> {
     const className = classNames(styles.container, this.props.className);
 
     return (
-      <Provider locale={this.context.l10n.locale} messages={this.props.media.messages}>
-        <div className={className}>
-          {this.renderContent()}
-        </div>
+      <Provider
+        locale={this.context.l10n.locale}
+        messages={this.props.media.messages}
+      >
+        <div className={className}>{this.renderContent()}</div>
       </Provider>
     );
   }

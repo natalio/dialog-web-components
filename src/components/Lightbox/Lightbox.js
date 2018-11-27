@@ -7,7 +7,11 @@ import '!style-loader!css-loader!photoswipe/dist/photoswipe.css';
 import '!style-loader!css-loader!photoswipe/dist/default-skin/default-skin.css';
 
 import type { ProviderContext } from '@dlghq/react-l10n';
-import type { PhotoSwipeItem, PhotoSwipeOptions, PhotoSwipeThumbBounds } from 'photoswipe';
+import type {
+  PhotoSwipeItem,
+  PhotoSwipeOptions,
+  PhotoSwipeThumbBounds,
+} from 'photoswipe';
 import { LocalizationContextType } from '@dlghq/react-l10n';
 import React, { Component } from 'react';
 import cx from 'classnames';
@@ -21,11 +25,11 @@ export type Props = {
   startIndex: number,
   items: PhotoSwipeItem[],
   options: $Shape<PhotoSwipeOptions>,
-  onClose: () => mixed
+  onClose: () => mixed,
 };
 
 type State = {
-  current: ?PhotoSwipeItem
+  current: ?PhotoSwipeItem,
 };
 
 type Context = ProviderContext;
@@ -35,31 +39,36 @@ class Lightbox extends Component<Props, State> {
   photoSwipe: ?PhotoSwipe;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   constructor(props: Props, context: Context) {
     super(props, context);
 
     this.state = {
-      current: props.items[props.startIndex]
+      current: props.items[props.startIndex],
     };
   }
 
   componentDidMount(): void {
     if (this.container) {
-      const photoSwipe = new PhotoSwipe(this.container, PhotoSwipeUI, this.props.items, {
-        ...this.props.options,
-        index: this.props.startIndex,
-        history: false,
-        closeOnScroll: false,
-        hideAnimationDuration: 0,
-        showAnimationDuration: 0,
-        bgOpacity: 0.8,
-        // UI options
-        shareEl: false,
-        getThumbBoundsFn: this.getThumbBounds
-      });
+      const photoSwipe = new PhotoSwipe(
+        this.container,
+        PhotoSwipeUI,
+        this.props.items,
+        {
+          ...this.props.options,
+          index: this.props.startIndex,
+          history: false,
+          closeOnScroll: false,
+          hideAnimationDuration: 0,
+          showAnimationDuration: 0,
+          bgOpacity: 0.8,
+          // UI options
+          shareEl: false,
+          getThumbBoundsFn: this.getThumbBounds,
+        },
+      );
 
       photoSwipe.listen('close', this.handleClose);
       photoSwipe.listen('afterChange', this.handleIndexChange);
@@ -110,7 +119,7 @@ class Lightbox extends Component<Props, State> {
           return {
             x: rect.left,
             y: rect.top + pageYScroll,
-            w: rect.width
+            w: rect.width,
           };
         }
       }
@@ -158,7 +167,6 @@ class Lightbox extends Component<Props, State> {
         <div className={cx('pswp__bg', styles.background)} />
 
         <div className={cx('pswp__scroll-wrap', styles.scroll)}>
-
           <div className={cx('pswp__container', styles.wrapper)}>
             <div className={cx('pswp__item', styles.item)} />
             <div className={cx('pswp__item', styles.item)} />
@@ -201,24 +209,33 @@ class Lightbox extends Component<Props, State> {
               <div className="pswp__share-tooltip" />
             </div>
             <button
-              className={cx('pswp__button pswp__button--arrow--left', styles.button)}
+              className={cx(
+                'pswp__button pswp__button--arrow--left',
+                styles.button,
+              )}
               type="button"
               title={l10n.formatText('Lightbox.prev')}
             >
               <Icon glyph="arrow_left" className={styles.arrowIcon} size={42} />
             </button>
             <button
-              className={cx('pswp__button pswp__button--arrow--right', styles.button)}
+              className={cx(
+                'pswp__button pswp__button--arrow--right',
+                styles.button,
+              )}
               type="button"
               title={l10n.formatText('Lightbox.next')}
             >
-              <Icon glyph="arrow_right" className={styles.arrowIcon} size={42} />
+              <Icon
+                glyph="arrow_right"
+                className={styles.arrowIcon}
+                size={42}
+              />
             </button>
             <div className="pswp__caption">
               <div className="pswp__caption__center" />
             </div>
           </div>
-
         </div>
       </div>
     );

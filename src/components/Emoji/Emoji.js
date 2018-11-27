@@ -21,13 +21,13 @@ export type Props = {
   char: string,
   size: number,
   children?: Node,
-  inline: boolean
+  inline: boolean,
 };
 
 class Emoji extends PureComponent<Props> {
   static defaultProps = {
     size: 20,
-    inline: false
+    inline: false,
   };
 
   render() {
@@ -39,7 +39,7 @@ class Emoji extends PureComponent<Props> {
 
     let isShouldUseImage = shouldUseImage(emoji.char);
     // TODO: remove the hack when electron updates chrome
-    if (!isShouldUseImage && isElectron() && (/♀️|♂️/).test(emoji.char)) {
+    if (!isShouldUseImage && isElectron() && /♀️|♂️/.test(emoji.char)) {
       isShouldUseImage = true;
     }
 
@@ -50,12 +50,13 @@ class Emoji extends PureComponent<Props> {
         width: `${this.props.size + 2}px`,
         height: `${this.props.size + 2}px`,
         backgroundImage: SPRITE_IMAGE,
-        backgroundPosition: `${SPRITE_POSITION_MUL * emoji.x}% ${SPRITE_POSITION_MUL * emoji.y}%`,
+        backgroundPosition: `${SPRITE_POSITION_MUL *
+          emoji.x}% ${SPRITE_POSITION_MUL * emoji.y}%`,
         backgroundSize: `${SPRITE_BG_SIZE}%`,
         marginBottom: this.props.inline ? this.props.size * 0.17 : 0,
         marginRight: this.props.inline ? 1 : 0,
         marginLeft: this.props.inline ? 1 : 0,
-        verticalAlign: this.props.inline ? 'middle' : 'sub'
+        verticalAlign: this.props.inline ? 'middle' : 'sub',
       };
 
       return (
@@ -66,12 +67,14 @@ class Emoji extends PureComponent<Props> {
     }
 
     const className = classNames(styles.char, this.props.className);
-    const charStyle = this.props.inline ? {} : {
-      fontSize: this.props.size,
-      lineHeight: '1.2em',
-      display: 'inline-block',
-      marginBottom: '-0.2em'
-    };
+    const charStyle = this.props.inline
+      ? {}
+      : {
+          fontSize: this.props.size,
+          lineHeight: '1.2em',
+          display: 'inline-block',
+          marginBottom: '-0.2em',
+        };
 
     return (
       <span className={className} title={emoji.name} style={charStyle}>

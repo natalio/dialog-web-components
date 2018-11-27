@@ -15,20 +15,22 @@ class SidebarFooter extends PureComponent<Props> {
   rendereFooterButtons() {
     const { current, variants } = this.props;
 
-    return variants.map(({ id, title, glyph, pending, counter }: SidebarFooterButtonVariant) => {
-      return (
-        <SidebarFooterButton
-          id={id}
-          key={id}
-          title={title}
-          glyph={glyph}
-          pending={pending}
-          active={id === current}
-          counter={counter}
-          onPick={this.props.onPick}
-        />
-      );
-    });
+    return variants.map(
+      ({ id, title, glyph, pending, counter }: SidebarFooterButtonVariant) => {
+        return (
+          <SidebarFooterButton
+            id={id}
+            key={id}
+            title={title}
+            glyph={glyph}
+            pending={pending}
+            active={id === current}
+            counter={counter}
+            onPick={this.props.onPick}
+          />
+        );
+      },
+    );
   }
 
   renderUpdateButton() {
@@ -45,7 +47,7 @@ class SidebarFooter extends PureComponent<Props> {
           timeout={{ appear: 100 }}
           classNames={{
             appear: styles.appear,
-            appearActive: styles.appearActive
+            appearActive: styles.appearActive,
           }}
         >
           <SidebarUpdateButton onClick={this.props.onUpdate} />

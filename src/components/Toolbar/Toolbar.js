@@ -9,17 +9,13 @@ import styles from './Toolbar.css';
 
 export type Props = {
   className?: string,
-  children: React.Node
+  children: React.Node,
 };
 
 function Toolbar(props: Props) {
   const className = classNames(styles.container, props.className);
 
-  return (
-    <header className={className}>
-      {props.children}
-    </header>
-  );
+  return <header className={className}>{props.children}</header>;
 }
 
 export default Toolbar;

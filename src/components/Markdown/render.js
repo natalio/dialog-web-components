@@ -8,7 +8,11 @@ import * as React from 'react';
 import Emoji from '../Emoji/Emoji';
 import styles from './Markdown.css';
 
-export function renderText(tokens: TextToken[], emojiSize?: number = 16, isInline?: boolean) {
+export function renderText(
+  tokens: TextToken[],
+  emojiSize?: number = 16,
+  isInline?: boolean,
+) {
   const result = [];
 
   for (let index = 0; index < tokens.length; index++) {
@@ -28,7 +32,7 @@ export function renderText(tokens: TextToken[], emojiSize?: number = 16, isInlin
             rel={target === '_blank' ? 'noopener noreferrer' : undefined}
           >
             {content}
-          </a>
+          </a>,
         );
 
         break;
@@ -44,7 +48,7 @@ export function renderText(tokens: TextToken[], emojiSize?: number = 16, isInlin
             href={`mailto:${content}`}
           >
             {content}
-          </a>
+          </a>,
         );
 
         break;
@@ -57,7 +61,7 @@ export function renderText(tokens: TextToken[], emojiSize?: number = 16, isInlin
             size={emojiSize}
             inline={isInline}
             className={styles.emoji}
-          />
+          />,
         );
 
         break;
@@ -68,13 +72,17 @@ export function renderText(tokens: TextToken[], emojiSize?: number = 16, isInlin
         result.push(
           <span key={index} className={className}>
             {content.split(/( {2,})/).map((string: string) => {
-              if (string.length >= 2 && string[0] === ' ' && string[1] === ' ') {
-                return string.split('').map((char, key) => ['\u00A0', <wbr key={key} />]);
+              if (
+                string.length >= 2 &&
+                string[0] === ' ' &&
+                string[1] === ' '
+              ) {
+                return string.split('').map(() => ['\u00A0', '\u2063']);
               }
 
               return string;
             })}
-          </span>
+          </span>,
         );
         break;
       }
@@ -98,7 +106,7 @@ function containsOnlyEmoji(tokens: BlockToken[]): boolean {
 export function renderBlocks(
   tokens: BlockToken[],
   emojiSize?: number = 16,
-  renderBigEmoji: boolean
+  renderBigEmoji: boolean,
 ) {
   const result = [];
 
@@ -112,8 +120,11 @@ export function renderBlocks(
         if (token.content.length) {
           result.push(
             <p key={i} className={styles.paragraph}>
-              {renderText(token.content, isOnlyEmoji && renderBigEmoji ? 44 : emojiSize)}
-            </p>
+              {renderText(
+                token.content,
+                isOnlyEmoji && renderBigEmoji ? 44 : emojiSize,
+              )}
+            </p>,
           );
         } else {
           result.push(<br key={i} className={styles.break} />);
@@ -123,10 +134,8 @@ export function renderBlocks(
       case 'code_block':
         result.push(
           <pre key={i} className={styles.pre}>
-            <code>
-              {token.content}
-            </code>
-          </pre>
+            <code>{token.content}</code>
+          </pre>,
         );
         break;
 
@@ -134,7 +143,7 @@ export function renderBlocks(
         result.push(
           <blockquote key={i} className={styles.blockquote}>
             {renderBlocks(token.content, emojiSize, renderBigEmoji)}
-          </blockquote>
+          </blockquote>,
         );
         break;
 

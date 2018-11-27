@@ -18,7 +18,7 @@ class ContextMenu extends PureComponent<Props> {
   context: Context;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   renderMenuItems() {
@@ -37,7 +37,10 @@ class ContextMenu extends PureComponent<Props> {
     return (
       <Dropdown
         className={styles.container}
-        style={{ left: window.pageXOffset + position.x, top: window.pageYOffset + position.y }}
+        style={{
+          left: window.pageXOffset + position.x,
+          top: window.pageYOffset + position.y,
+        }}
       >
         {this.renderMenuItems()}
       </Dropdown>
@@ -45,11 +48,7 @@ class ContextMenu extends PureComponent<Props> {
   };
 
   renderTrigger = (newProps: Object) => {
-    return (
-      <span {...newProps}>
-        {this.props.children}
-      </span>
-    );
+    return <span {...newProps}>{this.props.children}</span>;
   };
 
   render() {
@@ -60,9 +59,9 @@ class ContextMenu extends PureComponent<Props> {
       constraints: [
         {
           to: 'window',
-          attachment: 'together'
-        }
-      ]
+          attachment: 'together',
+        },
+      ],
     };
 
     return (

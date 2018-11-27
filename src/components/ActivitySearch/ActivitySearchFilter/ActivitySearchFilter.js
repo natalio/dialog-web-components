@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import styles from './ActivitySearchFilter.css';
 
 type Props = {
-  className?: string
+  className?: string,
 };
 
 class ActivitySearchFilter extends PureComponent<Props> {
@@ -18,15 +18,11 @@ class ActivitySearchFilter extends PureComponent<Props> {
     return (
       <div className={className}>
         <div className={styles.filterRel}>
-          <span>
-            {'Relevant'}
-          </span>
+          <span>{'Relevant'}</span>
         </div>
         <div className={styles.filterInc}>
           {'Includes: '}
-          <span>
-            {'Everything'}
-          </span>
+          <span>{'Everything'}</span>
         </div>
       </div>
     );

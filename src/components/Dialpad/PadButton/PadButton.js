@@ -10,7 +10,7 @@ import styles from './PadButton.css';
 type Props = {
   className?: string,
   value: string,
-  onClick: (value: string) => mixed
+  onClick: (value: string) => mixed,
 };
 
 class PadButton extends PureComponent<Props> {

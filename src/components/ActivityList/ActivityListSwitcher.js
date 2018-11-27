@@ -16,10 +16,10 @@ export type Props = {
   children: Node,
   icon?: ?{
     glyph: string,
-    theme: ColorTheme
+    theme: ColorTheme,
   },
   value: boolean,
-  onChange: (value: boolean) => void
+  onChange: (value: boolean) => void,
 };
 
 class ActivityListSwitcher extends PureComponent<Props> {
@@ -47,14 +47,16 @@ class ActivityListSwitcher extends PureComponent<Props> {
   }
 
   render() {
-    const className = classNames(styles.item, styles.clickable, this.props.className);
+    const className = classNames(
+      styles.item,
+      styles.clickable,
+      this.props.className,
+    );
 
     return (
       <div className={className} onClick={this.handleClick} id={this.props.id}>
         {this.renderIcon()}
-        <div className={styles.content}>
-          {this.props.children}
-        </div>
+        <div className={styles.content}>{this.props.children}</div>
         <Switcher
           id={`${this.props.id}_switcher`}
           name={`${this.props.id}_switcher`}

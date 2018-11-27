@@ -12,7 +12,7 @@ import styles from './AdminModalUserSearch.css';
 
 type Props = {
   selector: SelectorState<GroupMember>,
-  onChange: (selector: SelectorState<GroupMember>) => void
+  onChange: (selector: SelectorState<GroupMember>) => void,
 };
 
 type Context = ProviderContext;
@@ -21,19 +21,15 @@ class AdminModalUserSearch extends PureComponent<Props> {
   context: Context;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   handleChange = (event: SyntheticInputEvent<>) => {
-    this.props.onChange(
-      this.props.selector.setQuery(event.target.value)
-    );
+    this.props.onChange(this.props.selector.setQuery(event.target.value));
   };
 
   handleKeyDown = (event: SyntheticKeyboardEvent<>): void => {
-    this.props.onChange(
-      this.props.selector.handleKeyboardEvent(event)
-    );
+    this.props.onChange(this.props.selector.handleKeyboardEvent(event));
   };
 
   getPlaceholder = (): string => {

@@ -19,7 +19,7 @@ export type Props = {
   onBlur: () => mixed,
   onCancel: () => mixed,
   onChange: (query: string) => mixed,
-  onSearch: (query: string) => mixed
+  onSearch: (query: string) => mixed,
 };
 
 class ToolbarSearchInput extends PureComponent<Props> {
@@ -72,14 +72,10 @@ class ToolbarSearchInput extends PureComponent<Props> {
     const { pending } = this.props;
 
     if (pending) {
-      return (
-        <Spinner size="small" className={styles.spinner} />
-      );
+      return <Spinner size="small" className={styles.spinner} />;
     }
 
-    return (
-      <Icon glyph="search" className={styles.icon} size={22} />
-    );
+    return <Icon glyph="search" className={styles.icon} size={22} />;
   }
 
   renderClearIcon() {

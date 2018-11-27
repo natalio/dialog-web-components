@@ -5,7 +5,12 @@
 
 /* eslint-disable complexity */
 
-export type DocumentType = 'unknown' | 'document' | 'media' | 'picture' | 'compressed';
+export type DocumentType =
+  | 'unknown'
+  | 'document'
+  | 'media'
+  | 'picture'
+  | 'compressed';
 
 function getDocumentType(mime: string): DocumentType {
   const [type, subtype] = mime.split('/');

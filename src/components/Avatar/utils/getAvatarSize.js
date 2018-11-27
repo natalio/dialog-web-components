@@ -9,7 +9,7 @@ const SIZES = {
   medium: 28,
   large: 36,
   big: 100,
-  super: 150
+  super: 150,
 };
 
 export type AvatarSize = $Enum<typeof SIZES> | number;

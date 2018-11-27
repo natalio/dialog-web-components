@@ -10,7 +10,7 @@ import TimeTimer from '../Timer/TimeTimer';
 
 type Props = {
   state: CallState,
-  startTime: number
+  startTime: number,
 };
 
 function CallInfoState(props: Props) {
@@ -21,19 +21,13 @@ function CallInfoState(props: Props) {
     case 'ringing_incoming':
     case 'connecting':
     case 'ended':
-      return (
-        <Text id={`Call.${props.state}`} />
-      );
+      return <Text id={`Call.${props.state}`} />;
 
     case 'in_progress':
-      return (
-        <TimeTimer start={props.startTime} />
-      );
+      return <TimeTimer start={props.startTime} />;
 
     default:
-      return (
-        <Text id="Call.unknown" />
-      );
+      return <Text id="Call.unknown" />;
   }
 }
 

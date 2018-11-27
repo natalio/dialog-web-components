@@ -9,17 +9,13 @@ import styles from './Modal.css';
 
 export type Props = {
   className?: string,
-  children: React.Node
+  children: React.Node,
 };
 
 function ModalBody(props: Props) {
   const className = classNames(styles.body, props.className);
 
-  return (
-    <section className={className}>
-      {props.children}
-    </section>
-  );
+  return <section className={className}>{props.children}</section>;
 }
 
 export default ModalBody;

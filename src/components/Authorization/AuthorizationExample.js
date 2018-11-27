@@ -10,28 +10,28 @@ import {
   CODE_SENT,
   SIGNUP_STARTED,
   NAME_SENT,
-  AUTH_FINISHED
+  AUTH_FINISHED,
 } from './constants';
 
 const defaultAuthCredentials = {
   email: {
     email: '',
-    code: ''
+    code: '',
   },
   phone: {
     phone: '',
     country: null,
-    code: ''
+    code: '',
   },
   username: {
     login: '',
-    password: ''
-  }
+    password: '',
+  },
 };
 
 const defaultInfo = {
   name: '',
-  gender: 'unknown'
+  gender: 'unknown',
 };
 
 class AuthorizationExample extends Component {
@@ -42,10 +42,10 @@ class AuthorizationExample extends Component {
       step: AUTH_STARTED,
       value: {
         type: 'phone',
-        credentials: defaultAuthCredentials.phone
+        credentials: defaultAuthCredentials.phone,
       },
       info: defaultInfo,
-      errors: {}
+      errors: {},
     };
   }
 
@@ -54,8 +54,8 @@ class AuthorizationExample extends Component {
       step: AUTH_STARTED,
       value: {
         type,
-        credentials: defaultAuthCredentials[type]
-      }
+        credentials: defaultAuthCredentials[type],
+      },
     });
   };
 
@@ -64,7 +64,10 @@ class AuthorizationExample extends Component {
   };
 
   handleSubmit = () => {
-    const { step, value: { type } } = this.state;
+    const {
+      step,
+      value: { type },
+    } = this.state;
 
     if (type === 'username') {
       this.setState({ step: AUTH_FINISHED });
@@ -108,8 +111,8 @@ class AuthorizationExample extends Component {
       info: defaultInfo,
       value: {
         type: 'phone',
-        credentials: defaultAuthCredentials.phone
-      }
+        credentials: defaultAuthCredentials.phone,
+      },
     });
   };
 

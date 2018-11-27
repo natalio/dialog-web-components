@@ -15,7 +15,7 @@ export type Props = {
   className?: string,
   uid: number,
   info: PeerInfo,
-  message: Message
+  message: Message,
 };
 
 class MessagePreview extends PureComponent<Props> {
@@ -42,23 +42,29 @@ class MessagePreview extends PureComponent<Props> {
   }
 
   render() {
-    const { className, message: { attachment, content } } = this.props;
+    const {
+      className,
+      message: { attachment, content },
+    } = this.props;
 
     switch (content.type) {
       case 'text':
         return (
           <div className={className}>
             {this.renderStatusSender()}
-            <TextMessagePreview attachment={attachment} content={content} className={styles.preview} emojiSize={15} />
+            <TextMessagePreview
+              attachment={attachment}
+              content={content}
+              className={styles.preview}
+              emojiSize={15}
+            />
           </div>
         );
 
       case 'service':
         return (
           <div className={className}>
-            <span className={styles.service}>
-              {content.text}
-            </span>
+            <span className={styles.service}>{content.text}</span>
           </div>
         );
 
@@ -69,7 +75,10 @@ class MessagePreview extends PureComponent<Props> {
         return (
           <div className={className}>
             {this.renderStatusSender()}
-            <Text className={styles.highlight} id={`SidebarRecentItem.${content.type}`} />
+            <Text
+              className={styles.highlight}
+              id={`SidebarRecentItem.${content.type}`}
+            />
           </div>
         );
     }

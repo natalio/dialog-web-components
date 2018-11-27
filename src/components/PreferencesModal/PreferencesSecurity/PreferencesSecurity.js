@@ -16,13 +16,15 @@ import styles from './Security.css';
 export type Props = {
   sessions: AuthSession[],
   onSessionTerminate: (id: number) => mixed,
-  onAllSessionsTerminate: () => mixed
+  onAllSessionsTerminate: () => mixed,
 };
 
 class PreferencesSecurity extends PureComponent<Props> {
   renderCurrentSessions() {
     const { sessions } = this.props;
-    const current = sessions.find((session) => session.holder === 'THIS_DEVICE');
+    const current = sessions.find(
+      (session) => session.holder === 'THIS_DEVICE',
+    );
 
     return (
       <Fieldset legend="PreferencesModal.security.legend.current_session">
@@ -57,24 +59,31 @@ class PreferencesSecurity extends PureComponent<Props> {
 
   renderActiveSessions() {
     const { sessions } = this.props;
-    const activeSessions = sessions.filter((session) => session.holder === 'OTHER_DEVICE');
+    const activeSessions = sessions.filter(
+      (session) => session.holder === 'OTHER_DEVICE',
+    );
 
     if (!activeSessions.length) {
       return null;
     }
 
     // Sessions sorted by date descending
-    const children = activeSessions.sort((session1, session2) => {
-      return new Date(session1.authTime).getTime() - new Date(session2.authTime).getTime();
-    }).map((session) => {
-      return (
-        <Session
-          key={session.id}
-          session={session}
-          onSessionTerminate={this.props.onSessionTerminate}
-        />
-      );
-    });
+    const children = activeSessions
+      .sort((session1, session2) => {
+        return (
+          new Date(session1.authTime).getTime() -
+          new Date(session2.authTime).getTime()
+        );
+      })
+      .map((session) => {
+        return (
+          <Session
+            key={session.id}
+            session={session}
+            onSessionTerminate={this.props.onSessionTerminate}
+          />
+        );
+      });
 
     return (
       <Fieldset legend="PreferencesModal.security.legend.active_sessions">

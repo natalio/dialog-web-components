@@ -8,11 +8,11 @@ import { PureComponent, type Node } from 'react';
 type Props = {
   start: number,
   delay: number,
-  renderTime: (time: number) => Node
+  renderTime: (time: number) => Node,
 };
 
 type State = {
-  time: number
+  time: number,
 };
 
 function diffTime(time): number {
@@ -25,14 +25,14 @@ class Timer extends PureComponent<Props, State> {
   timer: ?IntervalID;
 
   static defaultProps = {
-    delay: 1000
+    delay: 1000,
   };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      time: diffTime(props.start)
+      time: diffTime(props.start),
     };
   }
 
@@ -44,7 +44,7 @@ class Timer extends PureComponent<Props, State> {
     if (this.props.start !== nextProps.start) {
       this.stopTimer();
       this.setState({
-        time: diffTime(nextProps.start)
+        time: diffTime(nextProps.start),
       });
       this.startTimer();
     }
@@ -57,7 +57,7 @@ class Timer extends PureComponent<Props, State> {
   startTimer() {
     const onTick = () => {
       this.setState({
-        time: diffTime(this.props.start)
+        time: diffTime(this.props.start),
       });
     };
 

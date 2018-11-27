@@ -21,26 +21,26 @@ export type Props = {
   type: 'circle' | 'square',
   size: number,
   height: number,
-  onSubmit: (image: File) => mixed
+  onSubmit: (image: File) => mixed,
 };
 
 export type State = {
   zoom: {
     min: number,
     max: number,
-    current: number
-  }
+    current: number,
+  },
 };
 
 class ImageEdit extends PureComponent<Props, State> {
   croppieElement: ?HTMLElement;
   croppie: ?Object;
-  listeners: ?{ remove(): void }[];
+  listeners: ?({ remove(): void }[]);
 
   static defaultProps = {
     type: 'circle',
     size: 250,
-    height: 400
+    height: 400,
   };
 
   constructor(props: Props) {
@@ -50,8 +50,8 @@ class ImageEdit extends PureComponent<Props, State> {
       zoom: {
         min: 0,
         max: 1.5,
-        current: 0
-      }
+        current: 0,
+      },
     };
 
     this.croppie = null;
@@ -64,11 +64,11 @@ class ImageEdit extends PureComponent<Props, State> {
         viewport: {
           width: this.props.size,
           height: this.props.size,
-          type: this.props.type
+          type: this.props.type,
         },
         showZoomer: false,
         enableOrientation: true,
-        customClass: styles.cropper
+        customClass: styles.cropper,
       });
 
       fileToBase64(this.props.image, (image) => {
@@ -76,18 +76,20 @@ class ImageEdit extends PureComponent<Props, State> {
           this.croppie
             .bind({
               url: image,
-              zoom: 0
+              zoom: 0,
             })
             .then(() => {
               this.setState(({ zoom }) => {
-                const currentZoom = this.croppie ? this.croppie._currentZoom : zoom.current;
+                const currentZoom = this.croppie
+                  ? this.croppie._currentZoom
+                  : zoom.current;
 
                 return {
                   zoom: {
                     ...zoom,
                     min: currentZoom,
-                    current: currentZoom
-                  }
+                    current: currentZoom,
+                  },
                 };
               });
             });
@@ -97,8 +99,8 @@ class ImageEdit extends PureComponent<Props, State> {
       this.listeners = [
         listen(this.croppieElement, 'update', this.handleCroppieUpdate, {
           capture: false,
-          passive: true
-        })
+          passive: true,
+        }),
       ];
     }
   }
@@ -118,7 +120,7 @@ class ImageEdit extends PureComponent<Props, State> {
           type: 'blob',
           size: 'viewport',
           format: 'jpeg',
-          circle: false
+          circle: false,
         })
         .then((blob) => {
           const fileName = format(new Date(), 'YYYY.MM.DD-HH:mm:ss.SSS');
@@ -147,8 +149,8 @@ class ImageEdit extends PureComponent<Props, State> {
       return {
         zoom: {
           ...zoom,
-          current: event.detail.zoom
-        }
+          current: event.detail.zoom,
+        },
       };
     });
   };
@@ -218,7 +220,12 @@ class ImageEdit extends PureComponent<Props, State> {
             {this.renderControls()}
           </div>
           <div className={styles.footer}>
-            <Button wide theme="primary" rounded={false} onClick={this.handleSubmit}>
+            <Button
+              wide
+              theme="primary"
+              rounded={false}
+              onClick={this.handleSubmit}
+            >
               <Text id="ImageEdit.save" />
             </Button>
           </div>

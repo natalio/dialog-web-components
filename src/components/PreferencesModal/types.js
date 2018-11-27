@@ -5,21 +5,26 @@
 
 import type { User, ProfileSettings, AuthSession } from '@dlghq/dialog-types';
 
-export type PreferencesScreen = 'general' | 'notifications' | 'security' | 'shortcuts' | 'blocked';
+export type PreferencesScreen =
+  | 'general'
+  | 'notifications'
+  | 'security'
+  | 'shortcuts'
+  | 'blocked';
 
 export type Props = {
   className?: string,
   screen: string,
   settings: ProfileSettings,
   sessions: {
-    value: ?AuthSession[],
+    value: ?(AuthSession[]),
     error: ?Error,
-    pending: boolean
+    pending: boolean,
   },
   blocked: {
-    value: ?User[],
+    value: ?(User[]),
     error: ?Error,
-    pending: boolean
+    pending: boolean,
   },
   onClose: close,
   onScreenChange: (screen: string) => mixed,
@@ -28,5 +33,5 @@ export type Props = {
   onSessionTerminate: (id: number) => mixed,
   onAllSessionsTerminate: () => mixed,
   onBlockedLoad: () => mixed,
-  onUnblockUser: (id: number) => mixed
+  onUnblockUser: (id: number) => mixed,
 };

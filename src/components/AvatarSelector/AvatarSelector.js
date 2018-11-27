@@ -13,21 +13,21 @@ import styles from './AvatarSelector.css';
 
 export type Props = {
   className?: string,
-  name: string,
+  title: string,
   placeholder: AvatarPlaceholder,
   size: number,
   avatar: ?(string | File),
   onChange: (avatar: File) => void,
-  onRemove?: () => void
+  onRemove?: () => void,
 };
 
 type State = {
-  avatar: ?string
+  avatar: ?string,
 };
 
 class AvatarSelector extends PureComponent<Props, State> {
   static defaultProps = {
-    size: 140
+    size: 140,
   };
 
   constructor(props: Props) {
@@ -35,11 +35,11 @@ class AvatarSelector extends PureComponent<Props, State> {
 
     if (!props.avatar || typeof props.avatar === 'string') {
       this.state = {
-        avatar: props.avatar
+        avatar: props.avatar,
       };
     } else {
       this.state = {
-        avatar: null
+        avatar: null,
       };
       fileToBase64(props.avatar, (avatar) => {
         this.setState({ avatar });
@@ -65,7 +65,7 @@ class AvatarSelector extends PureComponent<Props, State> {
         }
       },
       false,
-      'image/*'
+      'image/*',
     );
   };
 
@@ -84,7 +84,7 @@ class AvatarSelector extends PureComponent<Props, State> {
   }
 
   render() {
-    const { name, placeholder, size } = this.props;
+    const { title, placeholder, size } = this.props;
     const { avatar } = this.state;
     const className = classNames(styles.container, this.props.className);
 
@@ -93,13 +93,21 @@ class AvatarSelector extends PureComponent<Props, State> {
         <Avatar
           className={styles.avatar}
           size={size}
-          title={name}
+          title={title}
           image={avatar}
           placeholder={placeholder}
           onClick={this.handleAvatarChangerClick}
         />
-        <div onClick={this.handleAvatarChangerClick} className={styles.avatarChanger} id="avatar_selector_button">
-          <Icon glyph="photo_camera" className={styles.avatarChangerIcon} size={22} />
+        <div
+          onClick={this.handleAvatarChangerClick}
+          className={styles.avatarChanger}
+          id="avatar_selector_button"
+        >
+          <Icon
+            glyph="photo_camera"
+            className={styles.avatarChangerIcon}
+            size={22}
+          />
         </div>
         {this.renderRemoveIcon()}
       </div>

@@ -12,7 +12,7 @@ import styles from './ScrollToBottom.css';
 export type Props = {
   className?: string,
   counter?: number,
-  onClick: () => mixed
+  onClick: () => mixed,
 };
 
 class ScrollToBottom extends PureComponent<Props> {
@@ -23,11 +23,7 @@ class ScrollToBottom extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <div className={styles.counter}>
-        {counter}
-      </div>
-    );
+    return <div className={styles.counter}>{counter}</div>;
   }
 
   render() {
@@ -35,13 +31,13 @@ class ScrollToBottom extends PureComponent<Props> {
 
     return (
       <Tooltip text="ScrollToBottom.text">
-        <div className={className} onClick={this.props.onClick} id="scroll_to_bottom_button">
+        <div
+          className={className}
+          onClick={this.props.onClick}
+          id="scroll_to_bottom_button"
+        >
           {this.renderCounter()}
-          <Icon
-            className={styles.icon}
-            size={26}
-            glyph="arrow_down"
-          />
+          <Icon className={styles.icon} size={26} glyph="arrow_down" />
         </div>
       </Tooltip>
     );

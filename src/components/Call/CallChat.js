@@ -20,7 +20,7 @@ import styles from './Call.css';
 
 type State = {
   isFullScreen: boolean,
-  isControlsVisible: boolean
+  isControlsVisible: boolean,
 };
 
 class CallChat extends PureComponent<Props, State> {
@@ -31,7 +31,7 @@ class CallChat extends PureComponent<Props, State> {
 
     this.state = {
       isFullScreen: false,
-      isControlsVisible: true
+      isControlsVisible: true,
     };
   }
 
@@ -48,7 +48,7 @@ class CallChat extends PureComponent<Props, State> {
       fullScreen.toggle(this.container);
       this.setState((state) => {
         return {
-          isFullScreen: !state.isFullScreen
+          isFullScreen: !state.isFullScreen,
         };
       });
     }

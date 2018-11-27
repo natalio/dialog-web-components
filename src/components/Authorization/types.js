@@ -10,8 +10,8 @@ export type EmailValue = {
   type: 'email',
   credentials: {
     code: string,
-    email: string
-  }
+    email: string,
+  },
 };
 
 export type PhoneValue = {
@@ -19,20 +19,20 @@ export type PhoneValue = {
   credentials: {
     code: string,
     country: ?Country,
-    phone: string
-  }
+    phone: string,
+  },
 };
 
 export type UserNameValue = {
   type: 'username',
   credentials: {
     login: string,
-    password: string
-  }
+    password: string,
+  },
 };
 
 export type CertValue = {
-  type: 'cert'
+  type: 'cert',
 };
 
 export type AuthValue = EmailValue | PhoneValue | UserNameValue | CertValue;
@@ -40,12 +40,12 @@ export type AuthType = $PropertyType<AuthValue, 'type'>;
 
 export type SignupInfo = {
   name: string,
-  gender: string
+  gender: string,
 };
 
 export type InputState = {
   hint: string,
-  status: 'error'
+  status: 'error',
 };
 
 export type AuthorizationProps = {
@@ -62,7 +62,7 @@ export type AuthorizationProps = {
   onSubmit: (value: AuthValue, info: SignupInfo) => mixed,
   onTypeChange: (type: string) => mixed,
   onRetry: () => mixed,
-  onResendCode: () => mixed
+  onResendCode: () => mixed,
 };
 
 export type RegistrationProps = {
@@ -73,5 +73,5 @@ export type RegistrationProps = {
   autoFocus?: boolean,
   pending: boolean,
   isGenderEnabled: boolean,
-  onChange: (info: SignupInfo) => mixed
+  onChange: (info: SignupInfo) => mixed,
 };

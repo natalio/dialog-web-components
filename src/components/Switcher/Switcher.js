@@ -19,7 +19,7 @@ export type SwitcherProps = {
   tabIndex?: number,
   label?: ?string,
   description?: ?string,
-  onChange: (value: boolean, event: SyntheticInputEvent<>) => mixed
+  onChange: (value: boolean, event: SyntheticInputEvent<>) => mixed,
 };
 
 class Switcher extends PureComponent<SwitcherProps> {
@@ -28,7 +28,7 @@ class Switcher extends PureComponent<SwitcherProps> {
   static defaultProps = {
     value: false,
     danger: false,
-    disabled: false
+    disabled: false,
   };
 
   handleChange = (event: SyntheticInputEvent<>): void => {
@@ -60,7 +60,9 @@ class Switcher extends PureComponent<SwitcherProps> {
       return null;
     }
 
-    return <Text className={styles.label} id={label} tagName="label" htmlFor={id} />;
+    return (
+      <Text className={styles.label} id={label} tagName="label" htmlFor={id} />
+    );
   }
 
   renderHint() {
@@ -80,7 +82,9 @@ class Switcher extends PureComponent<SwitcherProps> {
       return null;
     }
 
-    return <Text className={styles.description} id={description} tagName="div" />;
+    return (
+      <Text className={styles.description} id={description} tagName="div" />
+    );
   }
 
   render() {
@@ -88,7 +92,7 @@ class Switcher extends PureComponent<SwitcherProps> {
     const className = classNames(styles.container, this.props.className, {
       [styles.checked]: value,
       [styles.disabled]: disabled,
-      [styles.danger]: danger
+      [styles.danger]: danger,
     });
 
     return (

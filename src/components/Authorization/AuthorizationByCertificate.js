@@ -11,7 +11,7 @@ import styles from './Authorization.css';
 
 export type Props = {
   id: string,
-  errors: ?{ [field: string]: AuthError }
+  errors: ?{ [field: string]: AuthError },
 };
 
 class AuthorizationByCertificate extends PureComponent<Props> {

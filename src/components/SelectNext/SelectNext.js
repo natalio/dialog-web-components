@@ -19,11 +19,11 @@ class SelectNext extends PureComponent<Props> {
     theme: 'default',
     clearable: false,
     multi: false,
-    searchable: false
+    searchable: false,
   };
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   handleChange = (option: SelectOption): void => {
@@ -44,7 +44,7 @@ class SelectNext extends PureComponent<Props> {
     return this.props.options.map((option: Option) => {
       return {
         value: option.value,
-        label: option.title
+        label: option.title,
       };
     });
   };
@@ -87,9 +87,7 @@ class SelectNext extends PureComponent<Props> {
   }
 
   renderOption = (option: SelectOption) => {
-    return (
-      <Text id={option.label} />
-    );
+    return <Text id={option.label} />;
   };
 
   renderArrow = ({ onMouseDown, isOpen }: $FlowIssue) => {
@@ -105,10 +103,26 @@ class SelectNext extends PureComponent<Props> {
   };
 
   render() {
-    const { id, name, disabled, size, theme, value, clearable, multi, searchable } = this.props;
-    const className = classNames(styles.container, styles[size], styles[theme], {
-      [styles.disabled]: disabled
-    }, this.props.className);
+    const {
+      id,
+      name,
+      disabled,
+      size,
+      theme,
+      value,
+      clearable,
+      multi,
+      searchable,
+    } = this.props;
+    const className = classNames(
+      styles.container,
+      styles[size],
+      styles[theme],
+      {
+        [styles.disabled]: disabled,
+      },
+      this.props.className,
+    );
 
     return (
       <div className={className}>

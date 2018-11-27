@@ -10,26 +10,29 @@ import Call from './Call';
 
 type Props = {
   withVideo?: boolean,
-  withScreenSharing?: boolean
+  withScreenSharing?: boolean,
 };
 
 type State = {
   call: ?CallType,
-  small: boolean
+  small: boolean,
 };
 
 function getVideoStream(callback) {
   if (navigator.mediaDevices) {
-    navigator.mediaDevices.getUserMedia({
-      video: true
-    }).then((stream) => {
-      callback({
-        stream,
-        isMirrored: true
+    navigator.mediaDevices
+      .getUserMedia({
+        video: true,
+      })
+      .then((stream) => {
+        callback({
+          stream,
+          isMirrored: true,
+        });
+      })
+      .catch((error) => {
+        console.error(error); // eslint-disable-line
       });
-    }).catch((error) => {
-      console.error(error); // eslint-disable-line
-    });
   }
 }
 
@@ -37,7 +40,7 @@ class CallExample extends PureComponent<Props, State> {
   static getInitialState(): State {
     return {
       call: null,
-      small: false
+      small: false,
     };
   }
 
@@ -48,48 +51,54 @@ class CallExample extends PureComponent<Props, State> {
   }
 
   handleCall = () => {
-    this.setState({
-      call: {
-        id: String(Math.random()),
-        state: 'ringing_outgoing',
-        peer: {
+    this.setState(
+      {
+        call: {
+          id: String(Math.random()),
+          state: 'ringing_outgoing',
           peer: {
-            id: 1,
-            type: 'user'
+            peer: {
+              id: 1,
+              type: 'user',
+            },
+            type: 'user',
+            avatar: 'https://avatars0.githubusercontent.com/u/3505878',
+            bigAvatar: null,
+            placeholder: 'green',
+            title: 'Nikita',
+            userName: 'nkt',
           },
-          type: 'user',
-          avatar: 'https://avatars0.githubusercontent.com/u/3505878',
-          bigAvatar: null,
-          placeholder: 'green',
-          title: 'Nikita',
-          userName: 'nkt'
+          startTime: 0,
+          members: [],
+          ownVideos: [],
+          theirVideos: [],
+          isMuted: false,
+          isOutgoing: true,
+          isCameraOn: false,
+          isScreenSharingOn: false,
+          fingerprint: null,
         },
-        startTime: 0,
-        members: [],
-        ownVideos: [],
-        theirVideos: [],
-        isMuted: false,
-        isOutgoing: true,
-        isCameraOn: false,
-        isScreenSharingOn: false,
-        fingerprint: null
-      }
-    }, () => {
-      setTimeout(this.handleConnecting, 2000);
-    });
+      },
+      () => {
+        setTimeout(this.handleConnecting, 2000);
+      },
+    );
   };
 
   handleConnecting = () => {
-    this.setState(({ call }) => {
-      return {
-        call: {
-          ...call,
-          state: 'connecting'
-        }
-      };
-    }, () => {
-      setTimeout(this.handleInProgress, 1000);
-    });
+    this.setState(
+      ({ call }) => {
+        return {
+          call: {
+            ...call,
+            state: 'connecting',
+          },
+        };
+      },
+      () => {
+        setTimeout(this.handleInProgress, 1000);
+      },
+    );
   };
 
   handleEnd = () => {
@@ -125,8 +134,8 @@ class CallExample extends PureComponent<Props, State> {
           ...call,
           state: 'in_progress',
           startTime: Date.now(),
-          fingerprint: '🦄🦖🐓☎️'
-        }
+          fingerprint: '🦄🦖🐓☎️',
+        },
       };
     });
   };
@@ -138,8 +147,8 @@ class CallExample extends PureComponent<Props, State> {
       this.setState({
         call: {
           ...call,
-          isMuted: !call.isMuted
-        }
+          isMuted: !call.isMuted,
+        },
       });
     }
   };
@@ -153,28 +162,31 @@ class CallExample extends PureComponent<Props, State> {
           call: {
             ...call,
             isCameraOn: false,
-            ownVideos: []
-          }
+            ownVideos: [],
+          },
         });
       } else {
-        this.setState({
-          call: {
-            ...call,
-            isCameraOn: true
-          }
-        }, () => {
-          getVideoStream((stream) => {
-            this.setState((prevState) => {
-              return {
-                call: {
-                  ...prevState.call,
-                  ownVideos: [stream],
-                  theirVideos: [stream, stream]
-                }
-              };
+        this.setState(
+          {
+            call: {
+              ...call,
+              isCameraOn: true,
+            },
+          },
+          () => {
+            getVideoStream((stream) => {
+              this.setState((prevState) => {
+                return {
+                  call: {
+                    ...prevState.call,
+                    ownVideos: [stream],
+                    theirVideos: [stream, stream],
+                  },
+                };
+              });
             });
-          });
-        });
+          },
+        );
       }
     }
   };
@@ -187,15 +199,15 @@ class CallExample extends PureComponent<Props, State> {
         this.setState({
           call: {
             ...call,
-            isScreenSharingOn: false
-          }
+            isScreenSharingOn: false,
+          },
         });
       } else {
         this.setState({
           call: {
             ...call,
-            isScreenSharingOn: true
-          }
+            isScreenSharingOn: true,
+          },
         });
       }
     }
@@ -208,7 +220,7 @@ class CallExample extends PureComponent<Props, State> {
   handleSizeToggle = () => {
     this.setState(({ small }) => {
       return {
-        small: !small
+        small: !small,
       };
     });
   };
@@ -250,9 +262,7 @@ class CallExample extends PureComponent<Props, State> {
         <Button onClick={this.handleSizeToggle} theme="primary" size="small">
           {'Toggle size'}
         </Button>
-        <div style={{ height: 500, width: '100%' }}>
-          {this.renderCall()}
-        </div>
+        <div style={{ height: 500, width: '100%' }}>{this.renderCall()}</div>
       </div>
     );
   }

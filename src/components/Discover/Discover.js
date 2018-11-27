@@ -16,7 +16,7 @@ export type Props = {
   className?: string,
   items: Card[],
   onCreateNew: () => mixed,
-  onGoToPeer: (peer: Peer) => mixed
+  onGoToPeer: (peer: Peer) => mixed,
 };
 
 class Discover extends PureComponent<Props> {
@@ -40,7 +40,11 @@ class Discover extends PureComponent<Props> {
         <header className={styles.header}>
           <div className={styles.headerText}>
             <Text id="Discover.title" tagName="h1" className={styles.title} />
-            <Text id="Discover.subtitle" tagName="h3" className={styles.subTitle} />
+            <Text
+              id="Discover.subtitle"
+              tagName="h3"
+              className={styles.subTitle}
+            />
           </div>
           <div className={styles.headerControls}>
             <Button
@@ -56,10 +60,7 @@ class Discover extends PureComponent<Props> {
           </div>
         </header>
 
-        <div className={styles.cards}>
-          {this.renderCards()}
-        </div>
-
+        <div className={styles.cards}>{this.renderCards()}</div>
       </div>
     );
   }

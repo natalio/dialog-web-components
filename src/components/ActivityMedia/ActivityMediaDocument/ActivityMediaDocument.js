@@ -17,14 +17,14 @@ type Props = {
   size: ?string,
   sender?: ?string,
   extension: ?string,
-  date?: ?Date
+  date?: ?Date,
 };
 
 class ActivityMediaDocument extends PureComponent<Props> {
   context: ProviderContext;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   renderPreview() {
@@ -32,9 +32,7 @@ class ActivityMediaDocument extends PureComponent<Props> {
 
     return (
       <div className={styles.preview} title={extension}>
-        <span className={styles.extension}>
-          {extension}
-        </span>
+        <span className={styles.extension}>{extension}</span>
       </div>
     );
   }
@@ -43,14 +41,16 @@ class ActivityMediaDocument extends PureComponent<Props> {
     const { title } = this.props;
 
     if (!title || title === '') {
-      return <Text id="ActivityMedia.document" className={styles.title} tagName="div" />;
+      return (
+        <Text
+          id="ActivityMedia.document"
+          className={styles.title}
+          tagName="div"
+        />
+      );
     }
 
-    return (
-      <div className={styles.title}>
-        {title}
-      </div>
-    );
+    return <div className={styles.title}>{title}</div>;
   }
 
   renderSender() {
@@ -74,11 +74,7 @@ class ActivityMediaDocument extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <span>
-        {size}
-      </span>
-    );
+    return <span>{size}</span>;
   }
 
   renderTimestamp() {
@@ -108,17 +104,9 @@ class ActivityMediaDocument extends PureComponent<Props> {
           {this.renderTitle()}
           <div className={styles.info}>
             {this.renderSize()}
-            {size && date ? (
-              <span>
-                {'\u00A0-\u00A0'}
-              </span>
-            ) : null}
+            {size && date ? <span>{'\u00A0-\u00A0'}</span> : null}
             {this.renderTimestamp()}
-            {(size || date) && sender ? (
-              <span>
-                {'\u00A0-\u00A0'}
-              </span>
-            ) : null}
+            {(size || date) && sender ? <span>{'\u00A0-\u00A0'}</span> : null}
             {this.renderSender()}
           </div>
         </div>

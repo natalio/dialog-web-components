@@ -13,7 +13,7 @@ export type Props = {
   className?: string,
   title: string,
   status: string,
-  isVerified?: ?boolean
+  isVerified?: ?boolean,
 };
 
 class ToolbarInfo extends PureComponent<Props> {

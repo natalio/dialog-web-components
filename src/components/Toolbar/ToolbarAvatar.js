@@ -14,7 +14,7 @@ export type Props = {
   className?: string,
   peerInfo: PeerInfo,
   isFavourite: boolean,
-  onFavouriteChange: (isFavourite: boolean) => void
+  onFavouriteChange: (isFavourite: boolean) => void,
 };
 
 class ToolbarAvatar extends PureComponent<Props> {
@@ -27,10 +27,7 @@ class ToolbarAvatar extends PureComponent<Props> {
 
     return (
       <div className={className}>
-        <PeerAvatar
-          peer={this.props.peerInfo}
-          size={40}
-        />
+        <PeerAvatar peer={this.props.peerInfo} size={40} />
         <ToolbarFavouriteButton
           value={this.props.isFavourite}
           onClick={this.handleFavouriteToggle}

@@ -12,7 +12,12 @@ import CountryCodeSelector from '../CountryCodeSelector/CountryCodeSelector';
 import InputNext from '../InputNext/InputNext';
 import PhoneInput from '../PhoneInput/PhoneInput';
 import getHumanTime from '../../utils/getHumanTime';
-import { LOGIN_SENT, CODE_REQUESTED, CODE_SENT, RESEND_TIMEOUT } from './constants';
+import {
+  LOGIN_SENT,
+  CODE_REQUESTED,
+  CODE_SENT,
+  RESEND_TIMEOUT,
+} from './constants';
 import styles from './Authorization.css';
 
 export type Props = {
@@ -23,12 +28,12 @@ export type Props = {
   autoFocus?: boolean,
   onChange: (value: PhoneValue) => mixed,
   onRetry: () => mixed,
-  onResendCode: () => mixed
+  onResendCode: () => mixed,
 };
 
 export type State = {
   isCodeResendRequested: boolean,
-  resendTimeout: number
+  resendTimeout: number,
 };
 
 class AuthorizationByPhone extends PureComponent<Props, State> {
@@ -40,7 +45,7 @@ class AuthorizationByPhone extends PureComponent<Props, State> {
 
     this.state = {
       isCodeResendRequested: false,
-      resendTimeout: RESEND_TIMEOUT
+      resendTimeout: RESEND_TIMEOUT,
     };
   }
 
@@ -55,7 +60,10 @@ class AuthorizationByPhone extends PureComponent<Props, State> {
   componentWillReceiveProps(nextProps: Props): void {
     if (nextProps.step < CODE_REQUESTED || nextProps.step > CODE_SENT) {
       this.handleIntervalClear();
-    } else if (this.props.step === LOGIN_SENT && nextProps.step === CODE_REQUESTED) {
+    } else if (
+      this.props.step === LOGIN_SENT &&
+      nextProps.step === CODE_REQUESTED
+    ) {
       this.setState({ isCodeResendRequested: true });
       this.handleIntervalClear();
       this.interval = setInterval(this.handleIntervalUpdate, 1000);
@@ -71,8 +79,8 @@ class AuthorizationByPhone extends PureComponent<Props, State> {
       type: this.props.value.type,
       credentials: {
         ...this.props.value.credentials,
-        [event.target.name]: value
-      }
+        [event.target.name]: value,
+      },
     });
   };
 
@@ -82,8 +90,8 @@ class AuthorizationByPhone extends PureComponent<Props, State> {
       credentials: {
         ...this.props.value.credentials,
         phone,
-        country: country || this.props.value.credentials.country
-      }
+        country: country || this.props.value.credentials.country,
+      },
     });
   };
 
@@ -93,8 +101,8 @@ class AuthorizationByPhone extends PureComponent<Props, State> {
       credentials: {
         ...this.props.value.credentials,
         phone: country.code,
-        country
-      }
+        country,
+      },
     });
 
     if (this.phoneInput) {
@@ -110,15 +118,18 @@ class AuthorizationByPhone extends PureComponent<Props, State> {
   };
 
   handleIntervalUpdate = (): void => {
-    this.setState(({ resendTimeout }) => {
-      return {
-        resendTimeout: resendTimeout - 1
-      };
-    }, () => {
-      if (this.state.resendTimeout <= 0) {
-        this.handleIntervalClear();
-      }
-    });
+    this.setState(
+      ({ resendTimeout }) => {
+        return {
+          resendTimeout: resendTimeout - 1,
+        };
+      },
+      () => {
+        if (this.state.resendTimeout <= 0) {
+          this.handleIntervalClear();
+        }
+      },
+    );
   };
 
   handleIntervalClear = (): void => {
@@ -126,7 +137,7 @@ class AuthorizationByPhone extends PureComponent<Props, State> {
       clearInterval(this.interval);
       this.setState({
         isCodeResendRequested: false,
-        resendTimeout: RESEND_TIMEOUT
+        resendTimeout: RESEND_TIMEOUT,
       });
       this.interval = null;
     }
@@ -140,7 +151,7 @@ class AuthorizationByPhone extends PureComponent<Props, State> {
 
       return {
         hint: error.message,
-        status: 'error'
+        status: 'error',
       };
     }
 
@@ -178,7 +189,14 @@ class AuthorizationByPhone extends PureComponent<Props, State> {
       return null;
     }
 
-    return <Text id="Authorization.wrong" onClick={this.props.onRetry} className={styles.retry} tagName="a" />;
+    return (
+      <Text
+        id="Authorization.wrong"
+        onClick={this.props.onRetry}
+        className={styles.retry}
+        tagName="a"
+      />
+    );
   }
 
   renderResendCode() {
@@ -200,12 +218,21 @@ class AuthorizationByPhone extends PureComponent<Props, State> {
     }
 
     return (
-      <Text tagName="a" className={styles.resend} id="Authorization.resend_code" onClick={this.handleCodeResend} />
+      <Text
+        tagName="a"
+        className={styles.resend}
+        id="Authorization.resend_code"
+        onClick={this.handleCodeResend}
+      />
     );
   }
 
   renderPhoneInput() {
-    const { step, id, value: { credentials } } = this.props;
+    const {
+      step,
+      id,
+      value: { credentials },
+    } = this.props;
 
     return (
       <div className={styles.inputWrapper}>
@@ -256,7 +283,11 @@ class AuthorizationByPhone extends PureComponent<Props, State> {
     }
 
     return (
-      <Text tagName="div" className={styles.dataProcessingAgreement} id="Authorization.data_processing_agreement" />
+      <Text
+        tagName="div"
+        className={styles.dataProcessingAgreement}
+        id="Authorization.data_processing_agreement"
+      />
     );
   }
 

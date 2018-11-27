@@ -25,12 +25,12 @@ export type Card = {
   peer: Peer,
   joined?: boolean,
   members?: number,
-  creator?: string
+  creator?: string,
 };
 
 export type Props = Card & {
   className?: string,
-  onGoToPeer: (peer: Peer) => mixed
+  onGoToPeer: (peer: Peer) => mixed,
 };
 
 class DiscoverCard extends PureComponent<Props> {
@@ -47,7 +47,11 @@ class DiscoverCard extends PureComponent<Props> {
   };
 
   renderAvatar() {
-    const { avatar, title, peer: { id } } = this.props;
+    const {
+      avatar,
+      title,
+      peer: { id },
+    } = this.props;
     const placeholder = getAvatarPlaceholder(id);
 
     return (
@@ -88,7 +92,11 @@ class DiscoverCard extends PureComponent<Props> {
     return (
       <div className={styles.creator}>
         <Text id="DiscoverCard.creator" />
-        <PeerInfoTitle title={creator} className={styles.creatorTitle} emojiSize={16} />
+        <PeerInfoTitle
+          title={creator}
+          className={styles.creatorTitle}
+          emojiSize={16}
+        />
       </div>
     );
   }
@@ -126,11 +134,7 @@ class DiscoverCard extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <div className={styles.shortname}>
-        {`@${shortname}`}
-      </div>
-    );
+    return <div className={styles.shortname}>{`@${shortname}`}</div>;
   }
 
   renderDescription() {
@@ -141,7 +145,11 @@ class DiscoverCard extends PureComponent<Props> {
     }
 
     return (
-      <Markdown text={description} emojiSize={17} className={styles.description} />
+      <Markdown
+        text={description}
+        emojiSize={17}
+        className={styles.description}
+      />
     );
   }
 
@@ -150,7 +158,11 @@ class DiscoverCard extends PureComponent<Props> {
     const className = classNames(styles.container, this.props.className);
 
     return (
-      <div className={className} onClick={this.handleClick} id={`discover_card_${this.props.peer.id}`}>
+      <div
+        className={className}
+        onClick={this.handleClick}
+        id={`discover_card_${this.props.peer.id}`}
+      >
         <div className={styles.body}>
           {this.renderAvatar()}
           <div className={styles.info}>
@@ -162,7 +174,12 @@ class DiscoverCard extends PureComponent<Props> {
         <footer className={styles.footer}>
           {this.renderMembers()}
           {this.renderCreator()}
-          <Button wide theme="primary" rounded={false} className={styles.button}>
+          <Button
+            wide
+            theme="primary"
+            rounded={false}
+            className={styles.button}
+          >
             <Text id={`DiscoverCard.${joined ? 'enter' : 'open'}.${type}`} />
           </Button>
         </footer>

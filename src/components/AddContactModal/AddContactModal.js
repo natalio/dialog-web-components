@@ -33,7 +33,7 @@ export type Props = {
   onChange: (query: string) => mixed,
   onSearch: (query: string) => mixed,
   onAdd: (id: number) => mixed,
-  onOpenChat: (id: number) => mixed
+  onOpenChat: (id: number) => mixed,
 };
 
 class AddContactModal extends PureComponent<Props> {
@@ -83,24 +83,20 @@ class AddContactModal extends PureComponent<Props> {
   };
 
   isLocked(): boolean {
-    const { pending, contact } = this.props;
+    const { pending, contact, query } = this.props;
 
-    return pending || !contact;
+    return pending || !contact || query === '';
   }
 
   renderStatus() {
     const { query, pending, contact } = this.props;
 
     if (!query) {
-      return (
-        <Text id="AddContactModal.hint" className={styles.hint} />
-      );
+      return <Text id="AddContactModal.hint" className={styles.hint} />;
     }
 
     if (pending) {
-      return (
-        <Spinner type="round" size="large" />
-      );
+      return <Spinner type="round" size="large" />;
     }
 
     if (contact) {
@@ -151,9 +147,7 @@ class AddContactModal extends PureComponent<Props> {
       );
     }
 
-    return (
-      <Text id="AddContactModal.not_found" className={styles.hint} />
-    );
+    return <Text id="AddContactModal.not_found" className={styles.hint} />;
   }
 
   renderContact() {
@@ -181,9 +175,7 @@ class AddContactModal extends PureComponent<Props> {
               size={32}
             />
           </div>
-          <ErrorMessage className={styles.error}>
-            {error.message}
-          </ErrorMessage>
+          <ErrorMessage className={styles.error}>{error.message}</ErrorMessage>
         </div>
       );
     }
@@ -221,9 +213,7 @@ class AddContactModal extends PureComponent<Props> {
 
     if (added) {
       return (
-        <ModalBody className={styles.body}>
-          {this.renderContact()}
-        </ModalBody>
+        <ModalBody className={styles.body}>{this.renderContact()}</ModalBody>
       );
     }
 
@@ -238,17 +228,15 @@ class AddContactModal extends PureComponent<Props> {
           placeholder="AddContactModal.placeholder"
           onChange={this.handleQueryChange}
         />
-        <div className={styles.status}>
-          {this.renderStatus()}
-        </div>
+        <div className={styles.status}>{this.renderStatus()}</div>
       </ModalBody>
     );
   }
 
   renderFooter() {
-    const { error, added, contact } = this.props;
+    const { error, added, contact, query } = this.props;
 
-    if (added || (contact && contact.isContact)) {
+    if (added || (contact && contact.isContact && query !== '')) {
       return (
         <ModalFooter className={styles.footer}>
           <Button
@@ -289,7 +277,10 @@ class AddContactModal extends PureComponent<Props> {
         <Modal className={className} onClose={this.props.onClose}>
           <ModalHeader withBorder>
             <Text id="AddContactModal.title" />
-            <ModalClose onClick={this.props.onClose} id="add_contact_close_button" />
+            <ModalClose
+              onClick={this.props.onClose}
+              id="add_contact_close_button"
+            />
           </ModalHeader>
           {this.renderBody()}
           {this.renderFooter()}

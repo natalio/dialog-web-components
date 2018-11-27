@@ -15,7 +15,7 @@ type Props = {
   call: Call,
   onCall: boolean,
   withVideo: boolean,
-  onClick?: ?() => mixed
+  onClick?: ?() => mixed,
 };
 
 class CallInfo extends PureComponent<Props> {
@@ -23,7 +23,7 @@ class CallInfo extends PureComponent<Props> {
     const { call } = this.props;
     const className = classNames(styles.container, this.props.className, {
       [styles.onCall]: this.props.onCall,
-      [styles.withVideo]: this.props.withVideo
+      [styles.withVideo]: this.props.withVideo,
     });
 
     return (

@@ -14,23 +14,33 @@ type Props = {
   dotClassName?: string,
   statusClassName?: string,
   status: UserStatusType,
-  withoutDot?: boolean
+  withoutDot?: boolean,
 };
 
 class UserStatus extends PureComponent<Props> {
   static defaultProps = {
-    status: 'unset'
+    status: 'unset',
   };
 
   render() {
     const className = classNames(styles.container, this.props.className);
-    const dotClassName = classNames(styles.dot, styles[this.props.status], this.props.dotClassName);
-    const statusClassName = classNames(styles.status, this.props.statusClassName);
+    const dotClassName = classNames(
+      styles.dot,
+      styles[this.props.status],
+      this.props.dotClassName,
+    );
+    const statusClassName = classNames(
+      styles.status,
+      this.props.statusClassName,
+    );
 
     return (
       <div className={className}>
         {this.props.withoutDot ? null : <div className={dotClassName} />}
-        <Text id={`UserStatus.${this.props.status}`} className={statusClassName} />
+        <Text
+          id={`UserStatus.${this.props.status}`}
+          className={statusClassName}
+        />
       </div>
     );
   }

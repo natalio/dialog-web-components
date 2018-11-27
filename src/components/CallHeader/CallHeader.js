@@ -20,11 +20,11 @@ type Props = {
   call: Call,
   isVisible: boolean,
   withVideo: boolean,
-  onClick?: ?() => mixed
+  onClick?: ?() => mixed,
 };
 
 type State = {
-  showFingerprint: boolean
+  showFingerprint: boolean,
 };
 
 class CallHeader extends PureComponent<Props, State> {
@@ -32,7 +32,7 @@ class CallHeader extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      showFingerprint: false
+      showFingerprint: false,
     };
   }
 
@@ -53,11 +53,11 @@ class CallHeader extends PureComponent<Props, State> {
           enter: styles.enter,
           enterActive: styles.enterActive,
           leave: styles.leave,
-          exitActive: styles.leaveActive
+          exitActive: styles.leaveActive,
         }}
         timeout={{
           enter: 150,
-          exit: 150
+          exit: 150,
         }}
         unmountOnExit
         in={this.state.showFingerprint}
@@ -84,11 +84,11 @@ class CallHeader extends PureComponent<Props, State> {
           enter: styles.enter,
           enterActive: styles.enterActive,
           leave: styles.leave,
-          exitActive: styles.leaveActive
+          exitActive: styles.leaveActive,
         }}
         timeout={{
           enter: 150,
-          exit: 150
+          exit: 150,
         }}
         unmountOnExit
         in={!this.state.showFingerprint}
@@ -130,7 +130,7 @@ class CallHeader extends PureComponent<Props, State> {
     const onCall = isOnCall(call.state);
     const className = classNames(styles.container, {
       [styles.hide]: !isVisible,
-      [styles.withVideo]: withVideo
+      [styles.withVideo]: withVideo,
     });
     const avatarSize = withVideo ? 40 : 50;
 

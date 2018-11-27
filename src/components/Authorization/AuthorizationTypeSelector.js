@@ -15,7 +15,7 @@ export type Props = {
   disabled: boolean,
   id: string,
   allowed: AuthType[],
-  onChange: (type: string) => mixed
+  onChange: (type: string) => mixed,
 };
 
 class AuthorizationTypeSelector extends PureComponent<Props> {
@@ -24,7 +24,12 @@ class AuthorizationTypeSelector extends PureComponent<Props> {
 
     return this.props.allowed.map((type) => {
       return (
-        <Radio value={type} key={type} className={styles.type} id={`${id}_type_${type}`}>
+        <Radio
+          value={type}
+          key={type}
+          className={styles.type}
+          id={`${id}_type_${type}`}
+        >
           <Text id={`Authorization.type.${type}`} />
         </Radio>
       );

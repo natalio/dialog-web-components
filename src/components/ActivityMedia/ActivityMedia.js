@@ -15,7 +15,7 @@ export type Props = {
   className?: string,
   messages: Message[],
   onGoToMessage: (message: Message) => mixed,
-  onLightboxOpen: (message: Message) => mixed
+  onLightboxOpen: (message: Message) => mixed,
 };
 
 class ActivityMedia extends PureComponent<Props> {
@@ -46,9 +46,7 @@ class ActivityMedia extends PureComponent<Props> {
     const className = classNames(styles.container, this.props.className);
 
     return (
-      <ActivityList className={className}>
-        {this.renderMessages()}
-      </ActivityList>
+      <ActivityList className={className}>{this.renderMessages()}</ActivityList>
     );
   }
 }

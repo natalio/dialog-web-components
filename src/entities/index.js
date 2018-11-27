@@ -18,13 +18,13 @@ function peerIntoToQueryString(info: PeerInfo): string {
 export const PeerInfoSelectorState = createSelectorState(
   'PeerInfoSelectorState',
   peerIntoToQueryString,
-  true
+  true,
 );
 
 export const MemberSelectorState = createSelectorState(
   'MemberSelectorState',
   (member: GroupMember) => peerIntoToQueryString(member.peerInfo),
-  true
+  true,
 );
 
 export type { SelectorState };

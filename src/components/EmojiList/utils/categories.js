@@ -10,20 +10,24 @@ export type EmojiCategory = {
   name: string,
   glyph: string,
   chars: string[],
-  height: number
+  height: number,
 };
 
 type Result = {
   categories: EmojiCategory[],
-  height: number
+  height: number,
 };
 
-function createEmojiCategory(name: string, glyph: string, chars: string[]): EmojiCategory {
+function createEmojiCategory(
+  name: string,
+  glyph: string,
+  chars: string[],
+): EmojiCategory {
   return {
     name,
     glyph,
     chars,
-    height: calculateEmojiCategoryHeight(chars.length)
+    height: calculateEmojiCategoryHeight(chars.length),
   };
 }
 
@@ -34,18 +38,30 @@ export function createEmojiCategories(recent: ?(string[])): Result {
   }
 
   result.push(
-    createEmojiCategory('people', 'emoji_smile', categories['smileys & people']),
-    createEmojiCategory('nature', 'emoji_nature', categories['animals & nature']),
+    createEmojiCategory(
+      'people',
+      'emoji_smile',
+      categories['smileys & people'],
+    ),
+    createEmojiCategory(
+      'nature',
+      'emoji_nature',
+      categories['animals & nature'],
+    ),
     createEmojiCategory('food', 'emoji_food', categories['food & drink']),
     createEmojiCategory('objects', 'emoji_party', categories.objects),
-    createEmojiCategory('travel', 'emoji_travel', categories['travel & places']),
+    createEmojiCategory(
+      'travel',
+      'emoji_travel',
+      categories['travel & places'],
+    ),
     createEmojiCategory('activity', 'emoji_activity', categories.activities),
     createEmojiCategory('symbols', 'emoji_symbols', categories.symbols),
-    createEmojiCategory('flags', 'emoji_flag', categories.flags)
+    createEmojiCategory('flags', 'emoji_flag', categories.flags),
   );
 
   return {
     categories: result,
-    height: result.reduce((height, category) => height + category.height, 0)
+    height: result.reduce((height, category) => height + category.height, 0),
   };
 }

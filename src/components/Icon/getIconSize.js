@@ -6,7 +6,7 @@
 const SIZES = {
   small: 18,
   default: 24,
-  large: 42
+  large: 42,
 };
 
 export type IconSize = $Enum<typeof SIZES> | number;

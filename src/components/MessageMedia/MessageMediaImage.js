@@ -13,12 +13,18 @@ export type Props = {
   className?: string,
   media: MessageMediaImageType,
   maxWidth: number,
-  maxHeight: number
+  maxHeight: number,
 };
 
 function MessageMediaImage(props: Props) {
   const className = classNames(styles.container, styles.image, props.className);
-  const { media: { content: { url, width, height } }, maxWidth, maxHeight } = props;
+  const {
+    media: {
+      content: { url, width, height },
+    },
+    maxWidth,
+    maxHeight,
+  } = props;
 
   return (
     <Image

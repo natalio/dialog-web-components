@@ -13,7 +13,7 @@ export type Props = {
   children?: Node,
   active: boolean,
   renderCaption?: () => Node,
-  onClick: () => mixed
+  onClick: () => mixed,
 };
 
 class Overlay extends PureComponent<Props> {
@@ -30,15 +30,13 @@ class Overlay extends PureComponent<Props> {
           enter: styles.enter,
           enterActive: styles.enterActive,
           exit: styles.leave,
-          exitActive: styles.leaveActive
+          exitActive: styles.leaveActive,
         }}
         timeout={{ enter: 100, exit: 100 }}
       >
         <div className={styles.overlay} onClick={this.props.onClick}>
           {this.props.renderCaption ? (
-            <div className={styles.caption}>
-              {this.props.renderCaption()}
-            </div>
+            <div className={styles.caption}>{this.props.renderCaption()}</div>
           ) : null}
         </div>
       </CSSTransition>
@@ -50,9 +48,7 @@ class Overlay extends PureComponent<Props> {
 
     return (
       <div className={className}>
-        <TransitionGroup>
-          {this.renderOverlay()}
-        </TransitionGroup>
+        <TransitionGroup>{this.renderOverlay()}</TransitionGroup>
         {this.props.children}
       </div>
     );

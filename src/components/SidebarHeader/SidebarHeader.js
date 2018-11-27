@@ -9,17 +9,13 @@ import styles from './SidebarHeader.css';
 
 export type Props = {
   className?: string,
-  children: Node
+  children: Node,
 };
 
 function SidebarHeader(props: Props) {
   const className = classNames(styles.container, props.className);
 
-  return (
-    <header className={className}>
-      {props.children}
-    </header>
-  );
+  return <header className={className}>{props.children}</header>;
 }
 
 export default SidebarHeader;

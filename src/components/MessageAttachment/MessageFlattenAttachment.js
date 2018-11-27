@@ -3,7 +3,11 @@
  * @flow
  */
 
-import type { Peer, Message, MessageAttachment as MessageAttachmentType } from '@dlghq/dialog-types';
+import type {
+  Peer,
+  Message,
+  MessageAttachment as MessageAttachmentType,
+} from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import MessageAttachment from './MessageAttachment';
 import flattenMessageAttachment from './utils/flatten';
@@ -15,7 +19,7 @@ type Props = {
   maxWidth: number,
   onGoToPeer: (peer: Peer) => mixed,
   onGoToMessage: (peer: ?Peer, message: Message) => mixed,
-  onForwardLightboxOpen?: (messages: Message[], focus: Message) => mixed
+  onForwardLightboxOpen?: (messages: Message[], focus: Message) => mixed,
 };
 
 class MessageFlattenAttachment extends PureComponent<Props> {
@@ -26,26 +30,24 @@ class MessageFlattenAttachment extends PureComponent<Props> {
   };
 
   render() {
-    const children = flattenMessageAttachment(this.props.attachment).map((attachment, key) => {
-      return (
-        <MessageAttachment
-          key={key}
-          className={this.props.className}
-          attachment={attachment}
-          maxWidth={this.props.maxWidth}
-          maxHeight={this.props.maxHeight}
-          onLightboxOpen={this.handleLightboxOpen}
-          onGoToPeer={this.props.onGoToPeer}
-          onGoToMessage={this.props.onGoToMessage}
-        />
-      );
-    });
-
-    return (
-      <div>
-        {children}
-      </div>
+    const children = flattenMessageAttachment(this.props.attachment).map(
+      (attachment, key) => {
+        return (
+          <MessageAttachment
+            key={key}
+            className={this.props.className}
+            attachment={attachment}
+            maxWidth={this.props.maxWidth}
+            maxHeight={this.props.maxHeight}
+            onLightboxOpen={this.handleLightboxOpen}
+            onGoToPeer={this.props.onGoToPeer}
+            onGoToMessage={this.props.onGoToMessage}
+          />
+        );
+      },
     );
+
+    return <div>{children}</div>;
   }
 }
 
