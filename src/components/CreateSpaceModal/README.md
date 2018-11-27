@@ -10,7 +10,7 @@ const initial = {
     shortname: '',
     avatar: null,
     members: PeerInfoSelectorState.create(contacts),
-  }
+  },
 };
 initialState = initial;
 
@@ -24,20 +24,20 @@ const handleSubmit = (request) => {
 };
 
 <div>
-  <Button theme="primary" onClick={handleOpen}>Create new space</Button>
-  {
-    state.isOpen ? (
-      <CreateSpaceModal
-        isOpen={state.isOpen}
-        step={state.step}
-        request={state.request}
-        shortnamePrefix="https://dlg.im/@"
-        onClose={handleClose}
-        onRequestChange={handleRequestChange}
-        onStepChange={handleStepChange}
-        onSubmit={handleSubmit}
-      />
-    ) : null
-  }
-</div>
+  <Button theme="primary" onClick={handleOpen}>
+    Create new space
+  </Button>
+  {state.isOpen ? (
+    <CreateSpaceModal
+      isOpen={state.isOpen}
+      step={state.step}
+      request={state.request}
+      shortnamePrefix="https://dlg.im/@"
+      onClose={handleClose}
+      onRequestChange={handleRequestChange}
+      onStepChange={handleStepChange}
+      onSubmit={handleSubmit}
+    />
+  ) : null}
+</div>;
 ```

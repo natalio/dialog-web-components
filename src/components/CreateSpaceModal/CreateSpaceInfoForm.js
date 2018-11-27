@@ -23,29 +23,29 @@ export type Props = {
   onSubmit: (event: SyntheticEvent<>) => void,
   onChange: (value: string, event: SyntheticInputEvent<>) => void,
   onAvatarRemove: () => void,
-  onAvatarChange: (avatar: File) => void
+  onAvatarChange: (avatar: File) => void,
 };
 
 export type State = {
-  avatar: ?string
+  avatar: ?string,
 };
 
 export type Context = ProviderContext;
 
 class CreateSpaceInfoForm extends PureComponent<Props, State> {
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   static defaultProps = {
-    vertical: false
+    vertical: false,
   };
 
   constructor(props: Props, context: Context) {
     super(props, context);
 
     this.state = {
-      avatar: null
+      avatar: null,
     };
   }
 
@@ -95,21 +95,28 @@ class CreateSpaceInfoForm extends PureComponent<Props, State> {
     const className = classNames(
       styles.info,
       {
-        [styles.vertical]: vertical
+        [styles.vertical]: vertical,
       },
-      this.props.className
+      this.props.className,
     );
 
     return (
       <div className={className}>
         {this.renderAvatar()}
-        <form id={id} autoComplete="off" className={styles.form} onSubmit={this.handleSubmit}>
+        <form
+          id={id}
+          autoComplete="off"
+          className={styles.form}
+          onSubmit={this.handleSubmit}
+        >
           <InputNext
             className={styles.input}
             id={`${id}_title`}
             name="title"
             onChange={this.props.onChange}
-            placeholder={l10n.formatText('CreateSpaceModal.info.title.placeholder')}
+            placeholder={l10n.formatText(
+              'CreateSpaceModal.info.title.placeholder',
+            )}
             label={l10n.formatText('CreateSpaceModal.info.title.label')}
             value={title}
             htmlAutoFocus

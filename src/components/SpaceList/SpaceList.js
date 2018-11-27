@@ -21,16 +21,16 @@ export type Props = {
     title: string,
     image?: string,
     placeholder?: AvatarPlaceholder,
-    className?: string
+    className?: string,
   }>,
   onPick: (current: string) => mixed,
-  onClick: () => mixed
+  onClick: () => mixed,
 };
 
 class SpaceList extends PureComponent<Props> {
   static defaultProps = {
     size: 40,
-    width: 240
+    width: 240,
   };
 
   render() {
@@ -69,17 +69,12 @@ class SpaceList extends PureComponent<Props> {
         style={{
           maxHeight: size + DEFAULT_GAP_UNDER_SPACE_ROW,
           height: size + DEFAULT_GAP_UNDER_SPACE_ROW,
-          width
+          width,
         }}
       >
-        <div className={styles.wrapper}>
-          {spaceAvatars}
-        </div>
+        <div className={styles.wrapper}>{spaceAvatars}</div>
 
-        <SpaceAdd
-          size={size}
-          onClick={this.props.onClick}
-        />
+        <SpaceAdd size={size} onClick={this.props.onClick} />
       </div>
     );
   }
