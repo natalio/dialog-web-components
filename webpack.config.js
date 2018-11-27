@@ -24,6 +24,14 @@ const globalStyles = [
   resolve('src/styleguide/styles.css'),
 ];
 
+const postcssOptions = {
+  env: {
+    features: {
+      'all-property': false,
+    },
+  },
+};
+
 module.exports = {
   mode: 'development',
   module: {
@@ -62,13 +70,7 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               plugins() {
-                return require('@dlghq/postcss-dialog')({
-                  env: {
-                    features: {
-                      'all-property': false,
-                    },
-                  },
-                });
+                return require('@dlghq/postcss-dialog')(postcssOptions);
               },
             },
           },
@@ -93,7 +95,7 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               plugins() {
-                return require('@dlghq/postcss-dialog')();
+                return require('@dlghq/postcss-dialog')(postcssOptions);
               },
             },
           },
