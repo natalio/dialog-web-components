@@ -25,16 +25,13 @@ class SpaceInfoModal extends PureComponent<Props> {
     super(props);
 
     this.state = {
-      screen: 'members',
+      screen: 'info',
       confirmScreen: 'leave',
       /**
        * our info component and confirmation component are both modal;
        * render only one of them;
        */
       confirmEnabled: false,
-      invitationLink: 'someLink',
-      invitationLinkPending: false,
-      onlineMessage: '9 members, 3 online',
       space: {
         name: props.space.name,
         shortname: props.space.shortname,
@@ -42,14 +39,6 @@ class SpaceInfoModal extends PureComponent<Props> {
       }
     };
   }
-
-  handleNotificationChange = (): void => {
-    const { notificationEnabled } = this.state;
-
-    this.setState({
-      notificationEnabled: !notificationEnabled
-    });
-  };
 
   handleConfirmShow = () => {
     this.setState({
@@ -99,18 +88,6 @@ class SpaceInfoModal extends PureComponent<Props> {
     });
   };
 
-  handleRevoke = (): void => {
-    console.log('revoke link');
-  };
-
-  handleLeaveSpace = (): void => {
-    console.log('leave');
-  };
-
-  handleDeleteSpace = (): void => {
-    console.log('delete');
-  };
-
   renderConfirmLeave() {
     return (
       <Confirm
@@ -118,7 +95,7 @@ class SpaceInfoModal extends PureComponent<Props> {
         submit="Leave"
         cancel="Cancel"
         theme="danger"
-        onSubmit={this.handleLeaveSpace}
+        onSubmit={this.props.onLeaveSpace}
         onClose={this.handleConfirmHide}
       />
     );
@@ -131,7 +108,7 @@ class SpaceInfoModal extends PureComponent<Props> {
         submit="Delete"
         cancel="Cancel"
         theme="danger"
-        onSubmit={this.handleDeleteSpace}
+        onSubmit={this.props.onDeleteSpace}
         onClose={this.handleConfirmHide}
       />
     );
@@ -144,9 +121,9 @@ class SpaceInfoModal extends PureComponent<Props> {
       case 'info':
         return (
           <SpaceInfoScreen
-            isCreator={false} //this
-            onlineMessage={this.state.onlineMessage}
             onClose={this.props.onClose}
+            isCreator={this.props.isCreator}
+            onlineMessage={this.props.onlineMessage}
             notificationEnabled={this.props.notificationEnabled}
             onNotificationChange={this.props.onNotificationChange}
             onAddMemberClick={this.handleAddMembersScreen}
@@ -159,9 +136,9 @@ class SpaceInfoModal extends PureComponent<Props> {
       case 'members':
         return (
           <SpaceMembersScreen
-            onlineMessage={this.state.onlineMessage}
             onPrevScreen={this.handlePrevScreen}
             onClose={this.props.onClose}
+            onlineMessage={this.props.onlineMessage}
           >
             {this.props.membersList}
           </SpaceMembersScreen>
@@ -169,10 +146,11 @@ class SpaceInfoModal extends PureComponent<Props> {
       case 'addMembers':
         return (
           <SpaceAddMembersScreen
+            onPrevScreen={this.handlePrevScreen}
+            autoFocus={this.props.addMemberAutoFocus}
+            onClose={this.props.onClose}
             selector={this.props.membersSelector}
             onChange={this.props.onMembersChange}
-            onPrevScreen={this.handlePrevScreen}
-            onClose={this.props.onClose}
           />
         );
       case 'invitationLink':
@@ -180,9 +158,9 @@ class SpaceInfoModal extends PureComponent<Props> {
           <SpaceInvitationLinkScreen
             onPrevScreen={this.handlePrevScreen}
             onClose={this.props.onClose}
-            onRevoke={this.handleRevoke}
-            link={this.state.invitationLink}
-            pending={this.state.invitationLinkPending}
+            onRevoke={this.props.onRevoke}
+            link={this.props.invitationLink}
+            pending={this.props.invitationLinkPending}
           />
         );
       default:

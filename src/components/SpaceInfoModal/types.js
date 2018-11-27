@@ -29,10 +29,23 @@ export type Props = {
   className?: string,
   space: Space,
   onClose: () => void,
+
   membersSelector: SelectorState<PeerInfo>,
   onMembersChange: (selector: SelectorState<PeerInfo>) => mixed,
+  addMemberAutoFocus: boolean,
+
   notificationEnabled: boolean,
-  onNotificationChange: () => void
+  onNotificationChange: () => void,
+
+  invitationLink: string,
+  handleRevoke: () => void,
+  invitationLinkPending: boolean,
+
+  onLeaveSpace: () => void,
+  onDeleteSpace: () => void,
+
+  onlineMessage: string,
+  isCreator: boolean
 }
 
 export type State = {
