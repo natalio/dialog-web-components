@@ -17,10 +17,6 @@ import SpaceMembersScreen from './SpaceMembersScreen/SpaceMembersScreen';
 import styles from './SpaceInfoModal.css';
 
 class SpaceInfoModal extends PureComponent<Props> {
-  static defaultProps = {
-    id: 'space_info_modal'
-  };
-
   constructor(props: Props) {
     super(props);
 
@@ -144,11 +140,11 @@ class SpaceInfoModal extends PureComponent<Props> {
       case 'info':
         return (
           <SpaceInfoScreen
-            onClose={this.props.onClose}
             isCreator={this.props.isCreator}
             onlineMessage={this.props.onlineMessage}
             notificationEnabled={this.props.notificationEnabled}
             onNotificationChange={this.props.onNotificationChange}
+            onClose={this.props.onClose}
             onAddMemberClick={this.handleAddMembersScreen}
             onInvitationLinkClick={this.handleInvitationLinkScreen}
             onMembersScreenClick={this.handleMembersScreen}
@@ -159,21 +155,24 @@ class SpaceInfoModal extends PureComponent<Props> {
       case 'members':
         return (
           <SpaceMembersScreen
+            uid={this.props.uid}
+            onlineMessage={this.props.onlineMessage}
+            members={this.props.members}
             onPrevScreen={this.handlePrevScreen}
             onClose={this.props.onClose}
-            onlineMessage={this.props.onlineMessage}
-          >
-            {this.props.membersList}
-          </SpaceMembersScreen>
+          />
         );
       case 'addMembers':
         return (
           <SpaceAddMembersScreen
-            onPrevScreen={this.handlePrevScreen}
-            autoFocus={this.props.addMemberAutoFocus}
-            onClose={this.props.onClose}
+            spaceId={this.props.space.id}
+            autoFocus={this.props.autoFocusAddMember}
+            pending={this.props.pendingAddMembers}
             selector={this.props.membersSelector}
+            onPrevScreen={this.handlePrevScreen}
+            onClose={this.props.onClose}
             onChange={this.props.onMembersChange}
+            onSubmit={this.props.onSubmitAddMembers}
           />
         );
       case 'invitationLink':

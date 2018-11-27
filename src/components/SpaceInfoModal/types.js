@@ -3,7 +3,7 @@
  * @flow
  */
 import type { SelectorState } from '../../entities';
-import type { PeerInfo, Group } from '@dlghq/dialog-types';
+import type { PeerInfo, GroupMember } from '@dlghq/dialog-types';
 
 export type Screen = 'info' | 'members' | 'addMembers' | 'invitationLink';
 export type ConfirmScreen = 'leave' | 'delete';
@@ -24,15 +24,28 @@ type Space = {
   shortname: string
 }
 
+export type SpaceMember = GroupMember & {
+  kickState: {
+    pending: boolean,
+    error: ?string
+  }
+};
+
 export type Props = {
-  id: string,
+  uid: number,
   className?: string,
   space: Space,
+
+  isCreator: boolean,
+  isAdmin: boolean,
+
   onClose: () => void,
 
   membersSelector: SelectorState<PeerInfo>,
   onMembersChange: (selector: SelectorState<PeerInfo>) => mixed,
-  addMemberAutoFocus: boolean,
+  autoFocusAddMember: boolean,
+  onSubmitAddMembers: (gid: number, uids: number[]) => mixed,
+  pendingAddMembers: boolean,
 
   notificationEnabled: boolean,
   onNotificationChange: () => void,
@@ -45,7 +58,7 @@ export type Props = {
   onDeleteSpace: () => void,
 
   onlineMessage: string,
-  isCreator: boolean
+  members: SpaceMember[]
 }
 
 export type State = {

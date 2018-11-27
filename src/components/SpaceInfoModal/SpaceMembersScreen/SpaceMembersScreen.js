@@ -18,9 +18,12 @@ import IconButton from '../../IconButton/IconButton';
 import ActivityList from '../../ActivityList/ActivityList';
 import ActivityListSwitcher from '../../ActivityList/ActivityListSwitcher';
 import ActivityListItem from '../../ActivityList/ActivityListItem';
+import SpaceMember from './SpaceMember/SpaceMember';
 import styles from './SpaceMembersScreen.css';
 
 type Props = {
+  uid: number,
+  members: SpaceMember[],
   onClose: () => void,
   onPrevScreen: () => void,
   onlineMessage: string
@@ -28,6 +31,8 @@ type Props = {
 
 class SpaceMembersScreen extends PureComponent<Props> {
   render() {
+    console.log(this.props.members);
+
     return (
       <div className={styles.container}>
         <ModalHeader withBorder>
@@ -47,7 +52,11 @@ class SpaceMembersScreen extends PureComponent<Props> {
             >
               {this.props.onlineMessage}
             </ActivityListItem>
-            {this.props.children}
+            {
+              this.props.members.map((member) => (
+                <span key={member.id}>{member.id}</span>
+              ))
+            }
           </ActivityList>
         </ModalBody>
       </div>

@@ -4,7 +4,7 @@
  */
 
 import type { SelectorState } from '../../../entities';
-import type { PeerInfo, Group } from '@dlghq/dialog-types';
+import type { PeerInfo } from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { Text } from '@dlghq/react-l10n';
@@ -19,7 +19,7 @@ import styles from './SpaceAddMembersScreen.css';
 
 export type Props = {
   className?: string,
-  group: Group,
+  spaceId: number,
   pending: boolean,
   selector: SelectorState<PeerInfo>,
   autoFocus: boolean,
@@ -44,9 +44,9 @@ class SpaceAddMembersScreen extends PureComponent<Props> {
 
   handleSubmit = (): void => {
     const selected = this.props.selector.getSelected();
-    console.log(selected);
+
     this.props.onSubmit(
-      this.props.group.id,
+      this.props.spaceId,
       selected.map((contact) => contact.peer.id).toArray()
     );
   };

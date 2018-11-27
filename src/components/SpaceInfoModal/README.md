@@ -3,7 +3,26 @@
 const { PeerInfoSelectorState } = require('../../entities');
 const contacts = require('../../fixtures/contacts.json');
 
+const members = contacts.map((member) => {
+  return {
+    kickState: {
+      pending: false,
+      error: null
+    },
+    peerInfo: {
+      avatar: member.avatar,
+      bigAvatar: member.avatar,
+      peer: member.peer,
+      placeholder: 'yellow',
+      title: member.title,
+      type: 'user',
+      userName: null
+    }
+  }
+})
+
 const initial = {
+  uid: 1337,
   isOpen: true,
   selector: PeerInfoSelectorState.create(contacts),
   notificationEnabled: false,
@@ -11,7 +30,9 @@ const initial = {
   invitationLinkPending: false,
   onlineMessage: '9 members, 3 online',
   isCreator: true,
+  isAdmin: true,
   addMemberAutofocus: false,
+  members: members,
   request: {
     type: 'group',
     title: '',
@@ -35,6 +56,7 @@ const handleSubmit = (request) => {
 const handleRevoke = () => setState({ invitationLink: state.invitationLink + 1337 })
 const handleLeaveSpace = () => alert('leave space!');
 const handleDeleteSpace = () => alert('delete space!');
+const onSubmitAddMembers = () => console.log(state.selector);
 
 const space = {
   id: 1337,
@@ -49,11 +71,18 @@ const space = {
     state.isOpen ? (
       <SpaceInfoModal
         isOpen={state.isOpen}
+        uid={state.uid}
         onClose={handleClose}
         space={space}
+        
+        isCreate={state.isCreator}
+        isAdmin={state.isAdmin}
+        
         membersSelector={state.selector}
         onMembersChange={(selector) => setState({ selector })}
-        addMemberAutoFocus={state.addMemberAutoFocus}
+        autoFocusAddMember={state.autoFocusAddMember}
+        onSubmitAddMembers={onSubmitAddMembers}
+        pendingAddMembers={false}
         
         notificationEnabled={state.notificationEnabled}
         onNotificationChange={handleNotificationChange}
@@ -66,7 +95,7 @@ const space = {
         onDeleteSpace={handleDeleteSpace}
         
         onlineMessage={state.onlineMessage}
-        membersList={123312}
+        members={state.members}
       />
     ) : null
   }
