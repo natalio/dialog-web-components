@@ -133,7 +133,7 @@
 .submenuWrapper {
   position: absolute;
   left: calc(100% - var(--default-padding-small));
-  top: -var(--dropdown-padding-top);
+  top: calc(0px - var(--dropdown-padding-top));
   width: 100%;
 }
 
