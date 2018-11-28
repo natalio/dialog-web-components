@@ -1,0 +1,7 @@
+title: Update space info
+avatar: Edit avatar
+submit: Update info
+form:
+  label: Space title
+  placeholder: Name this space
+  shortname: Space link

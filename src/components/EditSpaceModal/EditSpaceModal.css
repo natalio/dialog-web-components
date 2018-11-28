@@ -1,0 +1,40 @@
+/*
+ * Copyright 2018 dialog LLC <info@dlg.im>
+ */
+
+@import '../../styles/variables.css';
+
+:root {
+  --modal-space-edit-font-family: var(--default-font-family);
+  --modal-space-edit-width: 600px;
+  --modal-space-edit-size: 28px;
+  --modal-space-edit-color: color(#000 alpha(40%));
+  --modal-space-edit-color-hover: color(#000 alpha(60%));
+  --modal-space-edit-transition-duration: var(--default-transition-duration);
+}
+
+/* Styles */
+.container {
+  width: var(--modal-space-edit-width);
+  font-family: var(--modal-space-edit-font-family);
+}
+
+.back {
+  width: var(--modal-space-edit-size);
+  height: var(--modal-space-edit-size);
+  margin-right: 16px;
+  transition: color var(--modal-space-edit-transition-duration) linear;
+  color: var(--modal-space-edit-color);
+
+&:hover {
+   color: var(--modal-space-edit-color-hover);
+ }
+}
+
+.body {
+  padding: 0;
+}
+
+.footer {
+  padding: 0;
+}
