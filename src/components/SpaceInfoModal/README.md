@@ -2,7 +2,17 @@
 ```jsx
 const { PeerInfoSelectorState } = require('../../entities');
 const contacts = require('../../fixtures/contacts.json');
-const { space } = require('../../fixtures/peerInfo.js');
+
+const space = {
+  avatar: 'https://avatars2.githubusercontent.com/u/19669610',
+  bigAvatar: 'https://avatars2.githubusercontent.com/u/19669610',
+  name: 'subSpace',
+  shortname: 'subspace',
+  creator: 'Steve Rodgers',
+  placeholder: 'blue',
+  type: 'space',
+  adminId: 13
+};
 
 const members = contacts.map((member) => {
   return {

@@ -17,16 +17,15 @@ type SpaceUpdate = {
 /**
  * TODO: Space type to @dlghq/dialog-types; need info to know, what data will be represented in this interface
  */
-type Space = {
+export type Space = {
   avatar: string,
-  title: string,
+  bigAvatar: string,
+  name: string,
+  shortname: string,
+  creator: string,
   placeholder: AvatarPlaceholder,
   type: string,
-  shortName: string,
-  peer: {
-    id: number,
-    type: string
-  }
+  adminId: number
 }
 
 export type SpaceMember = GroupMember & {

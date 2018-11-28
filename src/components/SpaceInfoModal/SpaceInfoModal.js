@@ -6,7 +6,6 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import type { Props } from './types';
-import Text from '@dlghq/react-l10n/src/Text';
 import Modal from '../Modal/Modal';
 import Confirm from '../Confirm/Confirm';
 import HotKeys from '../HotKeys/HotKeys';
@@ -137,6 +136,7 @@ class SpaceInfoModal extends PureComponent<Props> {
       case 'info':
         return (
           <SpaceInfoScreen
+            space={this.props.space}
             isCreator={this.props.isCreator}
             onlineMessage={this.props.onlineMessage}
             notificationEnabled={this.props.notificationEnabled}

@@ -5,18 +5,12 @@
 
 import React, { PureComponent } from 'react';
 import Text from '@dlghq/react-l10n/src/Text';
-import { AutoSizer, List, CellMeasurer, CellMeasurerCache } from 'react-virtualized';
+import { List } from 'react-virtualized';
 import ModalHeader from '../../Modal/ModalHeader';
 import ModalBody from '../../Modal/ModalBody';
-import ModalFooter from '../../Modal/ModalFooter';
 import ModalClose from '../../Modal/ModalClose';
-import ActivityInvite from '../../ActivityInvite/ActivityInvite';
-import Button from '../../Button/Button';
 import Icon from '../../Icon/Icon';
-import ActivityProfile from '../../ActivityProfile/ActivityProfile';
-import IconButton from '../../IconButton/IconButton';
 import ActivityList from '../../ActivityList/ActivityList';
-import ActivityListSwitcher from '../../ActivityList/ActivityListSwitcher';
 import ActivityListItem from '../../ActivityList/ActivityListItem';
 import SpaceMember from './SpaceMember/SpaceMember';
 import styles from './SpaceMembersScreen.css';
