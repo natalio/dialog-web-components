@@ -2,9 +2,11 @@
 ```jsx
 const { PeerInfoSelectorState } = require('../../entities');
 const contacts = require('../../fixtures/contacts.json');
+const { space } = require('../../fixtures/peerInfo.js');
 
 const members = contacts.map((member) => {
   return {
+    canKick: true,
     kickState: {
       pending: false,
       error: null
@@ -57,13 +59,8 @@ const handleRevoke = () => setState({ invitationLink: state.invitationLink + 133
 const handleLeaveSpace = () => alert('leave space!');
 const handleDeleteSpace = () => alert('delete space!');
 const onSubmitAddMembers = () => console.log(state.selector);
-
-const space = {
-  id: 1337,
-  name: 'Sub space',
-  shortname: 'subspace',
-  avatar: 'https://picsum.photos/200/200/?1'
-};
+const handleMemberClick = (peer) => console.log(peer);
+const handleMemberKick = (peer) => console.log(peer);
 
 <div>
   <Button theme="primary" onClick={handleOpen}>Space info</Button>
@@ -96,6 +93,8 @@ const space = {
         
         onlineMessage={state.onlineMessage}
         members={state.members}
+        onMemberClick={handleMemberClick}
+        onMemberKick={handleMemberKick}
       />
     ) : null
   }

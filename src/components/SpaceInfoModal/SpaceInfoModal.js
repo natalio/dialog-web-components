@@ -5,8 +5,8 @@
 
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-
 import type { Props } from './types';
+import Text from '@dlghq/react-l10n/src/Text';
 import Modal from '../Modal/Modal';
 import Confirm from '../Confirm/Confirm';
 import HotKeys from '../HotKeys/HotKeys';
@@ -27,12 +27,7 @@ class SpaceInfoModal extends PureComponent<Props> {
        * our info component and confirmation component are both modal;
        * render only one of them;
        */
-      confirmEnabled: false,
-      space: {
-        name: props.space.name,
-        shortname: props.space.shortname,
-        avatar: props.space.avatar
-      }
+      confirmEnabled: false
     };
   }
 
@@ -110,10 +105,11 @@ class SpaceInfoModal extends PureComponent<Props> {
   renderConfirmLeave() {
     return (
       <Confirm
-        message="Are you going to leave this space?"
-        submit="Leave"
-        cancel="Cancel"
+        message="SpaceInfoModal.confirmation.leave.question"
+        submit="SpaceInfoModal.confirmation.leave.action"
+        cancel="SpaceInfoModal.confirmation.leave.cancel"
         theme="danger"
+        action={this.props.leaveSpaceAction}
         onSubmit={this.props.onLeaveSpace}
         onClose={this.handleConfirmHide}
       />
@@ -123,10 +119,11 @@ class SpaceInfoModal extends PureComponent<Props> {
   renderConfirmDelete() {
     return (
       <Confirm
-        message="Are you going to delete this space?"
-        submit="Delete"
-        cancel="Cancel"
+        message="SpaceInfoModal.confirmation.delete.question"
+        submit="SpaceInfoModal.confirmation.delete.action"
+        cancel="SpaceInfoModal.confirmation.delete.cancel"
         theme="danger"
+        action={this.props.deleteSpaceAction}
         onSubmit={this.props.onDeleteSpace}
         onClose={this.handleConfirmHide}
       />
@@ -160,12 +157,14 @@ class SpaceInfoModal extends PureComponent<Props> {
             members={this.props.members}
             onPrevScreen={this.handlePrevScreen}
             onClose={this.props.onClose}
+            onMemberKick={this.props.onMemberKick}
+            onMemberClick={this.props.onMemberClick}
           />
         );
       case 'addMembers':
         return (
           <SpaceAddMembersScreen
-            spaceId={this.props.space.id}
+            spaceId={this.props.space.peer.id}
             autoFocus={this.props.autoFocusAddMember}
             pending={this.props.pendingAddMembers}
             selector={this.props.membersSelector}

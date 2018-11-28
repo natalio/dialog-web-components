@@ -5,7 +5,7 @@
 
 import type { Peer } from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
-import type { SpaceMember } from '../../types';
+import type { SpaceMember as SpaceMemberType } from '../../types';
 import PeerInfoTitle from '../../../PeerInfoTitle/PeerInfoTitle';
 import PeerAvatarWithStatus from '../../../PeerAvatarWithStatus/PeerAvatarWithStatus';
 import SpaceMemberKick from './SpaceMemberKick';
@@ -13,13 +13,13 @@ import styles from './SpaceMember.css';
 
 type Props = {
   uid: number,
-  member: SpaceMember,
+  member: SpaceMemberType,
   canKick: boolean,
   onKick: (peer: Peer) => mixed,
   onClick: (peer: Peer) => mixed
 };
 
-class ChatActivityGroupMember extends PureComponent<Props> {
+class SpaceMember extends PureComponent<Props> {
   handleClick = () => {
     this.props.onClick(this.props.member.peerInfo.peer);
   };
@@ -67,4 +67,4 @@ class ChatActivityGroupMember extends PureComponent<Props> {
   }
 }
 
-export default ChatActivityGroupMember;
+export default SpaceMember;

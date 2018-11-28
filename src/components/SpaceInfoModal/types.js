@@ -3,7 +3,7 @@
  * @flow
  */
 import type { SelectorState } from '../../entities';
-import type { PeerInfo, GroupMember } from '@dlghq/dialog-types';
+import type { Peer, PeerInfo, GroupMember, AvatarPlaceholder } from '@dlghq/dialog-types';
 
 export type Screen = 'info' | 'members' | 'addMembers' | 'invitationLink';
 export type ConfirmScreen = 'leave' | 'delete';
@@ -18,10 +18,15 @@ type SpaceUpdate = {
  * TODO: Space type to @dlghq/dialog-types; need info to know, what data will be represented in this interface
  */
 type Space = {
-  id: number,
-  name: string,
-  avatar: ?string,
-  shortname: string
+  avatar: string,
+  title: string,
+  placeholder: AvatarPlaceholder,
+  type: string,
+  shortName: string,
+  peer: {
+    id: number,
+    type: string
+  }
 }
 
 export type SpaceMember = GroupMember & {
@@ -56,9 +61,13 @@ export type Props = {
 
   onLeaveSpace: () => void,
   onDeleteSpace: () => void,
+  deleteSpaceAction: mixed,
+  leaveSpaceAction: mixed,
 
   onlineMessage: string,
-  members: SpaceMember[]
+  members: SpaceMember[],
+  onMemberClick: (peer: Peer) => mixed,
+  onMemberKick: (peer: Peer) => mixed
 }
 
 export type State = {

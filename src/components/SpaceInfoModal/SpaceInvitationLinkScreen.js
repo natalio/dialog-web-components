@@ -31,7 +31,7 @@ class SpaceInfoScreen extends PureComponent<Props> {
             onClick={this.props.onPrevScreen}
             className={styles.back}
           />
-          <Text id="SpaceInfoModal.title" />
+          <Text id="SpaceInfoModal.invitationLink" />
           <ModalClose onClick={this.props.onClose} id="space_add_members_close_button" />
         </ModalHeader>
         <ModalBody className={styles.invitationBody}>

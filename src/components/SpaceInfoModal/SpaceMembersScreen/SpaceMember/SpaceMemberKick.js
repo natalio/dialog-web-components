@@ -48,7 +48,7 @@ class SpaceMemberKick extends PureComponent<Props> {
 
     return (
       <div className={styles.kick} onClick={this.props.onClick}>
-        <Text id="ChatActivity.kick" />
+        <Text id="SpaceInfoModal.members.kick" />
       </div>
     );
   }

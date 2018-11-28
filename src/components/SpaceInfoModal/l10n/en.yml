@@ -1,2 +1,27 @@
-delete: Delete space
-leave: Leave space
+info:
+  button:
+    leave: Leave space
+    delete: Delete space
+  notifications: Notifications
+  invitationLink: Invitation link
+  addMembers: Add members
+
+members:
+  title: Members
+  kick: kick
+
+addMembers:
+  title: Add members to space
+  button: Add members
+
+invitationLink: Invitation link
+
+confirmation:
+  delete:
+    question: Are you going to delete this space?
+    action: Delete
+    cancel: Cancel
+  leave:
+    question: Are you going to leave this space?
+    action: Leave
+    cancel: Cancel

@@ -70,7 +70,7 @@ class SpaceAddMembersScreen extends PureComponent<Props> {
             onClick={this.handlePrevClick}
             className={styles.back}
           />
-          <Text id="SpaceInfoModal.title" />
+          <Text id="SpaceInfoModal.addMembers.title" />
           <ModalClose onClick={this.handleClose} id="space_add_members_close_button" />
         </ModalHeader>
         <ModalBody className={styles.body}>
@@ -89,7 +89,7 @@ class SpaceAddMembersScreen extends PureComponent<Props> {
             onClick={this.handleSubmit}
             id="space_add_members_add_button"
           >
-            <Text id="SpaceInfoModal.button_add" />
+            <Text id="SpaceInfoModal.addMembers.button" />
           </Button>
         </ModalFooter>
       </div>

@@ -5,8 +5,6 @@
 
 import React, { PureComponent } from 'react';
 import Text from '@dlghq/react-l10n/src/Text';
-
-import ModalHeader from '../../Modal/ModalHeader';
 import ModalBody from '../../Modal/ModalBody';
 import ModalFooter from '../../Modal/ModalFooter';
 import ModalClose from '../../Modal/ModalClose';
@@ -45,7 +43,7 @@ class SpaceInfoScreen extends PureComponent<Props> {
           onClick={this.props.onDeleteSpaceConfirmClick}
           id="space_info_screen_delete_space_button"
         >
-          <Text id="SpaceInfoModal.delete" />
+          <Text id="SpaceInfoModal.info.button.delete" />
         </Button>
       );
     }
@@ -60,7 +58,7 @@ class SpaceInfoScreen extends PureComponent<Props> {
         onClick={this.props.onLeaveSpaceConfirmClick}
         id="space_info_screen_leave_space_button"
       >
-        <Text id="SpaceInfoModal.leave" />
+        <Text id="SpaceInfoModal.info.button.leave" />
       </Button>
     );
   }
@@ -90,7 +88,6 @@ class SpaceInfoScreen extends PureComponent<Props> {
           <div className={styles.activityProfileWrapper}>
             <ActivityProfile
               info={group}
-              onAboutEdit={onAboutEdit}
               type="group"
             />
             <ActivityList>
@@ -99,19 +96,19 @@ class SpaceInfoScreen extends PureComponent<Props> {
                 onChange={this.props.onNotificationChange}
                 icon={{ glyph: 'notifications', theme: 'danger' }}
               >
-                Notifications
+                <Text id="SpaceInfoModal.info.notifications" />
               </ActivityListSwitcher>
               <ActivityListItem
                 onClick={this.props.onInvitationLinkClick}
                 icon={{ glyph: 'link', theme: 'success' }}
               >
-                Invitation link
+                <Text id="SpaceInfoModal.info.invitationLink" />
               </ActivityListItem>
               <ActivityListItem
                 onClick={this.props.onAddMemberClick}
                 icon={{ glyph: 'add_member', theme: 'info' }}
               >
-                Add members
+                <Text id="SpaceInfoModal.info.addMembers" />
               </ActivityListItem>
               <ActivityListItem
                 onClick={this.props.onMembersScreenClick}
