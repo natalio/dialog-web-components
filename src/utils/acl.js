@@ -8,7 +8,7 @@ import type { Group, GroupMemberPermission } from '@dlghq/dialog-types';
 export function hasPermission(
   uid: number,
   group: Group,
-  permission: GroupMemberPermission
+  permission: GroupMemberPermission,
 ): boolean {
   // owner always has all permissions
   if (uid === group.adminId) {
@@ -26,7 +26,10 @@ export function hasPermission(
   }
 
   // all members can send messages and invite others
-  if (group.type === 'group' && (permission === 'invite' || permission === 'send_message')) {
+  if (
+    group.type === 'group' &&
+    (permission === 'invite' || permission === 'send_message')
+  ) {
     return true;
   }
 
@@ -36,7 +39,13 @@ export function hasPermission(
 export function getDefaultPermissions(group: Group): GroupMemberPermission[] {
   switch (group.type) {
     case 'channel':
-      return ['invite', 'update_info', 'send_message', 'edit_message', 'delete_message'];
+      return [
+        'invite',
+        'update_info',
+        'send_message',
+        'edit_message',
+        'delete_message',
+      ];
 
     default:
       return [
@@ -46,7 +55,7 @@ export function getDefaultPermissions(group: Group): GroupMemberPermission[] {
         'send_message',
         'edit_message',
         'delete_message',
-        'get_integration_token'
+        'get_integration_token',
       ];
   }
 }

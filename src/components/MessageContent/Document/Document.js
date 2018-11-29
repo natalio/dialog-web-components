@@ -15,7 +15,7 @@ type Props = {
   fileSize: ?string,
   // fileExtension: ?string,
   isUploading: boolean,
-  maxWidth: number
+  maxWidth: number,
 };
 
 class Document extends PureComponent<Props> {
@@ -26,11 +26,13 @@ class Document extends PureComponent<Props> {
   render() {
     const { fileUrl, fileName, fileSize, isUploading, maxWidth } = this.props;
     const className = classNames(styles.container, this.props.className, {
-      [styles.uploading]: isUploading
+      [styles.uploading]: isUploading,
     });
 
     const TagName = isUploading ? 'div' : 'a';
-    const tagProps = isUploading ? {} : { href: fileUrl, download: fileName, rel: 'noopener noreferrer' };
+    const tagProps = isUploading
+      ? {}
+      : { href: fileUrl, download: fileName, rel: 'noopener noreferrer' };
 
     return (
       <TagName
@@ -47,9 +49,7 @@ class Document extends PureComponent<Props> {
             </div>
           </div>
           <div className={styles.sizeBlock}>
-            <span className={styles.size}>
-              {fileSize}
-            </span>
+            <span className={styles.size}>{fileSize}</span>
           </div>
         </div>
       </TagName>

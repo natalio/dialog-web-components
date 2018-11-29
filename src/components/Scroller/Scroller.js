@@ -13,7 +13,7 @@ import styles from './Scroller.css';
 export type Dimensions = {
   scrollTop: number,
   scrollHeight: number,
-  offsetHeight: number
+  offsetHeight: number,
 };
 
 export type Props = {
@@ -23,11 +23,11 @@ export type Props = {
   onUserScroll?: () => mixed,
   onJSScroll?: () => mixed,
   onResize?: (size: { width: number, height: number }) => mixed,
-  fromBottom: boolean
+  fromBottom: boolean,
 };
 
 type State = {
-  isUserInteraction: boolean
+  isUserInteraction: boolean,
 };
 
 class Scroller extends Component<Props, State> {
@@ -35,40 +35,60 @@ class Scroller extends Component<Props, State> {
   listeners: ?({ remove(): void }[]);
 
   static defaultProps = {
-    fromBottom: false
+    fromBottom: false,
   };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      isUserInteraction: false
+      isUserInteraction: false,
     };
   }
 
   componentDidMount(): void {
     if (this.container) {
       this.listeners = [
-        listen(this.container, 'user_scroll', this.handleScrollByUser, { passive: true }),
-        listen(this.container, 'js_scroll', this.handleScrollByJS, { passive: true }),
+        listen(this.container, 'user_scroll', this.handleScrollByUser, {
+          passive: true,
+        }),
+        listen(this.container, 'js_scroll', this.handleScrollByJS, {
+          passive: true,
+        }),
         listen(this.container, 'scroll', this.handleScroll, { passive: true }),
 
-        listen(this.container, 'mousedown', this.handleUserInteractionStart, { passive: true }),
-        listen(this.container, 'mouseup', this.handleUserInteractionEnd, { passive: true }),
-        listen(this.container, 'wheel', this.handleMouseWheel, { passive: true }),
+        listen(this.container, 'mousedown', this.handleUserInteractionStart, {
+          passive: true,
+        }),
+        listen(this.container, 'mouseup', this.handleUserInteractionEnd, {
+          passive: true,
+        }),
+        listen(this.container, 'wheel', this.handleMouseWheel, {
+          passive: true,
+        }),
 
-        listen(this.container, 'touchstart', this.handleUserInteractionStart, { passive: true }),
-        listen(this.container, 'touchend', this.handleUserInteractionEnd, { passive: true }),
-        listen(this.container, 'touchmove', this.handleTouchMove, { passive: true }),
+        listen(this.container, 'touchstart', this.handleUserInteractionStart, {
+          passive: true,
+        }),
+        listen(this.container, 'touchend', this.handleUserInteractionEnd, {
+          passive: true,
+        }),
+        listen(this.container, 'touchmove', this.handleTouchMove, {
+          passive: true,
+        }),
 
-        listen(this.container, 'keydown', this.handleKeyDown, { passive: true })
+        listen(this.container, 'keydown', this.handleKeyDown, {
+          passive: true,
+        }),
       ];
     }
   }
 
   shouldComponentUpdate(nextProps: Props): boolean {
-    return nextProps.children !== this.props.children ||
-           nextProps.className !== this.props.className;
+    return (
+      nextProps.children !== this.props.children ||
+      nextProps.className !== this.props.className
+    );
   }
 
   componentWillUnmount(): void {
@@ -145,7 +165,7 @@ class Scroller extends Component<Props, State> {
       return {
         scrollTop: this.container.scrollTop,
         scrollHeight: this.container.scrollHeight,
-        offsetHeight: this.container.offsetHeight
+        offsetHeight: this.container.offsetHeight,
       };
     }
 
@@ -180,13 +200,15 @@ class Scroller extends Component<Props, State> {
   scrollToNode(node: HTMLElement, withGap: boolean = false): void {
     if (this.container) {
       const gap = withGap ? Math.floor(this.container.clientHeight * 0.4) : 0;
-      this.scrollTo(Math.min(node.offsetTop - gap, this.container.scrollHeight));
+      this.scrollTo(
+        Math.min(node.offsetTop - gap, this.container.scrollHeight),
+      );
     }
   }
 
   render() {
     const className = classNames(styles.container, {
-      [styles.fromBottom]: this.props.fromBottom
+      [styles.fromBottom]: this.props.fromBottom,
     });
 
     return (

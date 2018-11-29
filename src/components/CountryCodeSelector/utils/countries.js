@@ -8,7 +8,7 @@ import { getCountries } from '@dlghq/country-codes';
 export type Country = {
   code: string,
   flag: ?string,
-  alpha: string
+  alpha: string,
 };
 
 const countries: Country[] = [];
@@ -18,7 +18,7 @@ getCountries().forEach((country) => {
     countries.push({
       code,
       flag: country.emoji,
-      alpha: country.alpha
+      alpha: country.alpha,
     });
   });
 });

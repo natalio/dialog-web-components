@@ -3,7 +3,11 @@
  * @flow
  */
 
-import type { Peer, Message, MessageAttachment as MessageAttachmentType } from '@dlghq/dialog-types';
+import type {
+  Peer,
+  Message,
+  MessageAttachment as MessageAttachmentType,
+} from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import MessageAttachmentReply from './MessageAttachmentReply';
 import MessageAttachmentForward from './MessageAttachmentForward';
@@ -15,7 +19,7 @@ type Props = {
   maxWidth: number,
   onGoToPeer: (peer: Peer) => mixed,
   onGoToMessage: (peer: ?Peer, message: Message) => mixed,
-  onLightboxOpen?: (message: Message) => mixed
+  onLightboxOpen?: (message: Message) => mixed,
 };
 
 class MessageAttachment extends PureComponent<Props> {
@@ -50,7 +54,9 @@ class MessageAttachment extends PureComponent<Props> {
         );
 
       default:
-        console.error(`Unsupported message attachment type: ${attachment.type}`);
+        console.error(
+          `Unsupported message attachment type: ${attachment.type}`,
+        );
 
         return null;
     }

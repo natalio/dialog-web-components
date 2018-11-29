@@ -22,14 +22,14 @@ export type Props = {
   value: ?JSONValue,
   schema: JSONSchema,
   uiSchema?: ?JSONSchema,
-  onChange: (value: JSONValue) => mixed
+  onChange: (value: JSONValue) => mixed,
 };
 
 class CustomForm extends PureComponent<Props> {
   widgets: Object;
 
   static defaultProps = {
-    liveValidate: true
+    liveValidate: true,
   };
 
   constructor(props: Props) {
@@ -39,7 +39,7 @@ class CustomForm extends PureComponent<Props> {
       TextWidget,
       PasswordWidget,
       TextareaWidget,
-      CheckboxWidget
+      CheckboxWidget,
     };
   }
 

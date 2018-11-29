@@ -12,7 +12,7 @@ export type Props = {
   onClose?: () => mixed,
   onBack?: () => mixed,
   children?: Node,
-  className?: string
+  className?: string,
 };
 
 class ActivityHeader extends PureComponent<Props> {

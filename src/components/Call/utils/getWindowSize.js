@@ -9,27 +9,27 @@ import isOnCall from './isOnCall';
 
 export type Size = {
   width: number,
-  height: number
+  height: number,
 };
 
 function getWindowSize(call: Call): Size {
   if (!isOnCall(call.state)) {
     return {
       width: 340,
-      height: 380
+      height: 380,
     };
   }
 
   if (hasTheirVideos(call)) {
     return {
       width: 355,
-      height: 200
+      height: 200,
     };
   }
 
   return {
     width: 300,
-    height: 138
+    height: 138,
   };
 }
 

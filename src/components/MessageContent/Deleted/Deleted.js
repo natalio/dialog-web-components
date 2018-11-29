@@ -10,7 +10,7 @@ import styles from './Deleted.css';
 
 type Props = {
   className?: string,
-  maxWidth: number
+  maxWidth: number,
 };
 
 class Deleted extends PureComponent<Props> {
@@ -21,7 +21,11 @@ class Deleted extends PureComponent<Props> {
       <div className={className}>
         <Text
           className={styles.text}
-          id={this.props.maxWidth > 300 ? 'MessageContent.deleted' : 'MessageContent.deleted_short'}
+          id={
+            this.props.maxWidth > 300
+              ? 'MessageContent.deleted'
+              : 'MessageContent.deleted_short'
+          }
         />
       </div>
     );

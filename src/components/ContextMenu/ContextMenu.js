@@ -5,8 +5,9 @@
 
 import type { Props } from './types';
 import type { ProviderContext } from '@dlghq/react-l10n';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import { LocalizationContextType } from '@dlghq/react-l10n';
+
 import styles from './ContextMenu.css';
 import Trigger from '../Trigger/Trigger';
 import Dropdown from '../Dropdown/Dropdown';
@@ -18,10 +19,10 @@ class ContextMenu extends PureComponent<Props> {
   context: Context;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
-  renderMenuItems() {
+  renderMenuItems(): Node {
     const items = this.props.getMenu();
 
     return items.map(({ title, handler }, index) => {
@@ -37,7 +38,10 @@ class ContextMenu extends PureComponent<Props> {
     return (
       <Dropdown
         className={styles.container}
-        style={{ left: window.pageXOffset + position.x, top: window.pageYOffset + position.y }}
+        style={{
+          left: window.pageXOffset + position.x,
+          top: window.pageYOffset + position.y,
+        }}
       >
         {this.renderMenuItems()}
       </Dropdown>
@@ -45,11 +49,7 @@ class ContextMenu extends PureComponent<Props> {
   };
 
   renderTrigger = (newProps: Object) => {
-    return (
-      <span {...newProps}>
-        {this.props.children}
-      </span>
-    );
+    return <span {...newProps}>{this.props.children}</span>;
   };
 
   render() {
@@ -60,9 +60,9 @@ class ContextMenu extends PureComponent<Props> {
       constraints: [
         {
           to: 'window',
-          attachment: 'together'
-        }
-      ]
+          attachment: 'together',
+        },
+      ],
     };
 
     return (

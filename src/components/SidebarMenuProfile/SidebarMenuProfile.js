@@ -16,7 +16,7 @@ type Props = {
   name: string,
   avatar: ?string,
   placeholder: AvatarPlaceholder,
-  status: UserStatusType
+  status: UserStatusType,
 };
 
 class SidebarMenuProfile extends PureComponent<Props> {
@@ -27,7 +27,10 @@ class SidebarMenuProfile extends PureComponent<Props> {
     return (
       <div className={className}>
         <Avatar
-          size={42} title={name} image={avatar} placeholder={placeholder}
+          size={42}
+          title={name}
+          image={avatar}
+          placeholder={placeholder}
           className={styles.avatar}
         />
         <div className={styles.info}>

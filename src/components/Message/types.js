@@ -10,7 +10,7 @@ import type {
   MessageState as MessageStateType,
   PeerInfo,
   Peer,
-  MessageMediaInteractiveConfirm
+  MessageMediaInteractiveConfirm,
 } from '@dlghq/dialog-types';
 
 export type Props = {
@@ -36,10 +36,17 @@ export type Props = {
   onReaction?: (char: string) => mixed,
   onGoToPeer: (peer: Peer) => mixed,
   onGoToMessage: (peer: ?Peer, message: MessageType) => mixed,
-  onInteractiveAction: (id: string, value: string, confirm?: ?MessageMediaInteractiveConfirm) => mixed,
-  onForwardLightboxOpen?: (messages: MessageType[], focus: MessageType) => mixed
+  onInteractiveAction: (
+    id: string,
+    value: string,
+    confirm?: ?MessageMediaInteractiveConfirm,
+  ) => mixed,
+  onForwardLightboxOpen?: (
+    messages: MessageType[],
+    focus: MessageType,
+  ) => mixed,
 };
 
 export type State = {
-  hover: boolean
+  hover: boolean,
 };

@@ -12,7 +12,7 @@ export type Props = {
   className?: string,
   current: string,
   variants: Array<{ id: string, title: string }>,
-  onPick: (current: string) => mixed
+  onPick: (current: string) => mixed,
 };
 
 class Tabs extends PureComponent<Props> {
@@ -34,11 +34,7 @@ class Tabs extends PureComponent<Props> {
       );
     });
 
-    return (
-      <ul className={className}>
-        {tabs}
-      </ul>
-    );
+    return <ul className={className}>{tabs}</ul>;
   }
 }
 

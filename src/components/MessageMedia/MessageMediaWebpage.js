@@ -13,26 +13,30 @@ import styles from './MessageMedia.css';
 export type Props = {
   className?: string,
   media: MessageMediaWebsite,
-  maxWidth: number
+  maxWidth: number,
 };
 
 class MessageMediaWebpage extends PureComponent<Props> {
   renderTitle() {
-    const { media: { content: { title } } } = this.props;
+    const {
+      media: {
+        content: { title },
+      },
+    } = this.props;
 
     if (!title) {
       return null;
     }
 
-    return (
-      <h4 className={styles.webpageTitle}>
-        {title}
-      </h4>
-    );
+    return <h4 className={styles.webpageTitle}>{title}</h4>;
   }
 
   renderDescription() {
-    const { media: { content: { description } } } = this.props;
+    const {
+      media: {
+        content: { description },
+      },
+    } = this.props;
 
     if (!description) {
       return null;
@@ -50,7 +54,11 @@ class MessageMediaWebpage extends PureComponent<Props> {
   }
 
   renderImage() {
-    const { media: { content: { image, title } } } = this.props;
+    const {
+      media: {
+        content: { image, title },
+      },
+    } = this.props;
 
     if (!image) {
       return null;
@@ -70,23 +78,37 @@ class MessageMediaWebpage extends PureComponent<Props> {
   }
 
   renderURL() {
-    const { media: { content: { url } } } = this.props;
+    const {
+      media: {
+        content: { url },
+      },
+    } = this.props;
 
     if (!url) {
       return null;
     }
 
     return (
-      <a className={styles.webpageLink} href={url} target="_blank" rel="noopener noreferrer">
+      <a
+        className={styles.webpageLink}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {url}
       </a>
     );
   }
 
   render() {
-    const className = classNames(styles.container, styles.webpage, {
-      [styles.vertical]: this.props.maxWidth < 400
-    }, this.props.className);
+    const className = classNames(
+      styles.container,
+      styles.webpage,
+      {
+        [styles.vertical]: this.props.maxWidth < 400,
+      },
+      this.props.className,
+    );
 
     return (
       <blockquote className={className}>

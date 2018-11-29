@@ -12,7 +12,7 @@ import styles from './ToolbarFavouriteButton.css';
 export type Props = {
   className?: string,
   value: boolean,
-  onClick: () => void
+  onClick: () => void,
 };
 
 function ToolbarFavouriteButton(props: Props) {
@@ -20,8 +20,16 @@ function ToolbarFavouriteButton(props: Props) {
 
   if (props.value) {
     return (
-      <div className={className} onClick={props.onClick} id="toolbar_favourite_button">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className={styles.icon}>
+      <div
+        className={className}
+        onClick={props.onClick}
+        id="toolbar_favourite_button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 32 32"
+          className={styles.icon}
+        >
           <defs>
             <linearGradient
               id="favouriteGradient"
@@ -45,8 +53,17 @@ function ToolbarFavouriteButton(props: Props) {
   }
 
   return (
-    <div className={className} onClick={props.onClick} id="toolbar_favourite_button">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className={styles.icon} shapeRendering="auto">
+    <div
+      className={className}
+      onClick={props.onClick}
+      id="toolbar_favourite_button"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 32 32"
+        className={styles.icon}
+        shapeRendering="auto"
+      >
         <path
           fill="rgba(0,0,0,.38)"
           transform="translate(0, -1)"

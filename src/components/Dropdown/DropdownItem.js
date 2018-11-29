@@ -15,11 +15,11 @@ export type Props = {
   wrapperClassName?: string,
   active?: ?boolean,
   onClick?: (event: SyntheticMouseEvent<>) => mixed,
-  renderSubmenu?: () => Node
+  renderSubmenu?: () => Node,
 };
 
 type State = {
-  hover: boolean
+  hover: boolean,
 };
 
 class DropdownItem extends PureComponent<Props, State> {
@@ -27,7 +27,7 @@ class DropdownItem extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      hover: false
+      hover: false,
     };
   }
 
@@ -41,25 +41,29 @@ class DropdownItem extends PureComponent<Props, State> {
     }
 
     return (
-      <div className={styles.submenuWrapper}>
-        {this.props.renderSubmenu()}
-      </div>
+      <div className={styles.submenuWrapper}>{this.props.renderSubmenu()}</div>
     );
   }
 
   renderClickableItem() {
     const className = classNames(styles.item, this.props.className, {
       [styles.active]: this.state.hover || this.props.active,
-      [styles.clickable]: this.props.onClick
+      [styles.clickable]: this.props.onClick,
     });
-    const wrapperClassName = classNames(styles.wrapper, this.props.wrapperClassName);
+    const wrapperClassName = classNames(
+      styles.wrapper,
+      this.props.wrapperClassName,
+    );
 
     return (
-      <Hover className={className} id={this.props.id} onHover={this.handleHover} onClick={this.props.onClick}>
+      <Hover
+        className={className}
+        id={this.props.id}
+        onHover={this.handleHover}
+        onClick={this.props.onClick}
+      >
         <div className={wrapperClassName}>
-          <div className={styles.content}>
-            {this.props.children}
-          </div>
+          <div className={styles.content}>{this.props.children}</div>
           {this.renderSubmenu()}
         </div>
       </Hover>
@@ -68,16 +72,17 @@ class DropdownItem extends PureComponent<Props, State> {
 
   renderDefaultItem() {
     const className = classNames(styles.item, this.props.className, {
-      [styles.active]: this.props.active
+      [styles.active]: this.props.active,
     });
-    const wrapperClassName = classNames(styles.wrapper, this.props.wrapperClassName);
+    const wrapperClassName = classNames(
+      styles.wrapper,
+      this.props.wrapperClassName,
+    );
 
     return (
       <div className={className} id={this.props.id}>
         <div className={wrapperClassName}>
-          <div className={styles.content}>
-            {this.props.children}
-          </div>
+          <div className={styles.content}>{this.props.children}</div>
         </div>
       </div>
     );

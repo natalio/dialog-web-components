@@ -3,7 +3,10 @@
  * @flow
  */
 
-import type { MessageContentText, MessageAttachment } from '@dlghq/dialog-types';
+import type {
+  MessageContentText,
+  MessageAttachment,
+} from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import { Text } from '@dlghq/react-l10n';
 import Markdown from '../../Markdown/Markdown';
@@ -16,27 +19,23 @@ export type Props = {
   content: MessageContentText,
   attachment?: ?MessageAttachment,
   emojiSize: number,
-  decorators?: typeof decorators
+  decorators?: typeof decorators,
 };
 
 class TextMessagePreview extends PureComponent<Props> {
   static defaultProps = {
-    decorators
+    decorators,
   };
 
   render() {
     const { content, attachment } = this.props;
 
     if (content.text.startsWith('```')) {
-      return (
-        <Text className={styles.highlight} id="SidebarRecentItem.code" />
-      );
+      return <Text className={styles.highlight} id="SidebarRecentItem.code" />;
     }
 
     if (content.text.startsWith('>')) {
-      return (
-        <Text className={styles.highlight} id="SidebarRecentItem.quote" />
-      );
+      return <Text className={styles.highlight} id="SidebarRecentItem.quote" />;
     }
 
     if (content.text === '' && attachment) {

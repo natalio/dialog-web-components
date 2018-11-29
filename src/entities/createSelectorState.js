@@ -10,7 +10,7 @@ import { calculateCursor, filterByQuery } from '@dlghq/dialog-utils';
 function createSelectorState<T>(
   name: string,
   getValue: (item: T) => string,
-  clearAfterSelection: boolean = false
+  clearAfterSelection: boolean = false,
 ): SelectorStateCreator<T> {
   const defaultRecord = {
     query: '',
@@ -18,7 +18,7 @@ function createSelectorState<T>(
     items: List(),
     filtered: List(),
     selected: OrderedSet(),
-    hoverIndex: 0
+    hoverIndex: 0,
   };
 
   function filter(query: string, items: List<T>): List<T> {
@@ -120,7 +120,9 @@ function createSelectorState<T>(
     toggleSelected(item: T): SelectorState {
       const selected = this.get('selected');
 
-      return selected.has(item) ? this.deleteSelected(item) : this.addSelected(item);
+      return selected.has(item)
+        ? this.deleteSelected(item)
+        : this.addSelected(item);
     }
 
     clearSelection(): SelectorState {
@@ -177,9 +179,9 @@ function createSelectorState<T>(
 
       return new SelectorState({
         items: list,
-        filtered: list
+        filtered: list,
       });
-    }
+    },
   };
 }
 

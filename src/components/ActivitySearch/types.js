@@ -9,11 +9,11 @@ export type SearchEntity = {
   info: PeerInfo,
   focus: Message,
   before: Message[],
-  after: Message[]
+  after: Message[],
 };
 
 export type SearchOptions = {
-  ordering: 'recent' | 'relevant'
+  ordering: 'recent' | 'relevant',
 };
 
 export type ActivitySearchProps = {
@@ -25,5 +25,5 @@ export type ActivitySearchProps = {
   onChangeOptions: (options: SearchOptions) => mixed,
   onClose: () => mixed,
   onGoToPeer: (peer: Peer) => mixed,
-  onGoToMessage: (peer: Peer, message: Message) => mixed
+  onGoToMessage: (peer: Peer, message: Message) => mixed,
 };

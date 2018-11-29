@@ -21,7 +21,7 @@ import HotKeys from '../HotKeys/HotKeys';
 
 class EditGroupModal extends PureComponent<Props, State> {
   static defaultProps = {
-    isPublicGroupsEnabled: true
+    isPublicGroupsEnabled: true,
   };
 
   constructor(props: Props) {
@@ -33,8 +33,8 @@ class EditGroupModal extends PureComponent<Props, State> {
         name: props.group.name,
         about: props.group.about,
         shortname: props.group.shortname,
-        avatar: props.group.avatar
-      }
+        avatar: props.group.avatar,
+      },
     };
   }
 
@@ -43,8 +43,8 @@ class EditGroupModal extends PureComponent<Props, State> {
       return {
         group: {
           ...group,
-          [target.name]: value
-        }
+          [target.name]: value,
+        },
       };
     });
   };
@@ -55,8 +55,8 @@ class EditGroupModal extends PureComponent<Props, State> {
         screen: 'info',
         group: {
           ...group,
-          avatar
-        }
+          avatar,
+        },
       };
     });
   };
@@ -66,8 +66,8 @@ class EditGroupModal extends PureComponent<Props, State> {
       return {
         group: {
           ...group,
-          avatar: null
-        }
+          avatar: null,
+        },
       };
     });
   };
@@ -78,8 +78,8 @@ class EditGroupModal extends PureComponent<Props, State> {
         screen: 'avatar',
         group: {
           ...group,
-          avatar
-        }
+          avatar,
+        },
       };
     });
   };
@@ -90,8 +90,8 @@ class EditGroupModal extends PureComponent<Props, State> {
         screen: 'info',
         group: {
           ...group,
-          avatar: this.props.group.avatar
-        }
+          avatar: this.props.group.avatar,
+        },
       };
     });
   };
@@ -116,16 +116,22 @@ class EditGroupModal extends PureComponent<Props, State> {
   };
 
   isChanged(): boolean {
-    const { context: { avatar, name, about, shortname } } = this.props;
+    const {
+      context: { avatar, name, about, shortname },
+    } = this.props;
 
-    return this.state.group.name !== name.value ||
-           this.state.group.about !== about.value ||
-           this.state.group.shortname !== shortname.value ||
-           this.state.group.avatar !== avatar.value;
+    return (
+      this.state.group.name !== name.value ||
+      this.state.group.about !== about.value ||
+      this.state.group.shortname !== shortname.value ||
+      this.state.group.avatar !== avatar.value
+    );
   }
 
   isPending(): boolean {
-    const { context: { avatar, name, about, shortname } } = this.props;
+    const {
+      context: { avatar, name, about, shortname },
+    } = this.props;
 
     return avatar.pending || name.pending || about.pending || shortname.pending;
   }
@@ -154,7 +160,11 @@ class EditGroupModal extends PureComponent<Props, State> {
               size={28}
             />
             <Text id="EditGroupModal.title.avatar" />
-            <ModalClose pending={this.isPending()} onClick={this.props.onClose} id="edit_group_close_button" />
+            <ModalClose
+              pending={this.isPending()}
+              onClick={this.props.onClose}
+              id="edit_group_close_button"
+            />
           </ModalHeader>
         );
       default:
@@ -169,7 +179,10 @@ class EditGroupModal extends PureComponent<Props, State> {
         group={this.props.group}
         name={{ ...this.props.context.name, value: this.state.group.name }}
         about={{ ...this.props.context.about, value: this.state.group.about }}
-        shortname={{ ...this.props.context.shortname, value: this.state.group.shortname }}
+        shortname={{
+          ...this.props.context.shortname,
+          value: this.state.group.shortname,
+        }}
         avatar={this.state.group.avatar}
         shortnamePrefix={this.props.shortnamePrefix}
         isPublicGroupsEnabled={this.props.isPublicGroupsEnabled}
@@ -182,7 +195,10 @@ class EditGroupModal extends PureComponent<Props, State> {
   }
 
   renderAvatarEdit() {
-    if (this.state.group.avatar && typeof this.state.group.avatar !== 'string') {
+    if (
+      this.state.group.avatar &&
+      typeof this.state.group.avatar !== 'string'
+    ) {
       return (
         <ImageEdit
           image={this.state.group.avatar}
@@ -197,14 +213,11 @@ class EditGroupModal extends PureComponent<Props, State> {
     return null;
   }
 
-
   renderBody() {
     switch (this.state.screen) {
       case 'info':
         return (
-          <ModalBody className={styles.body}>
-            {this.renderForm()}
-          </ModalBody>
+          <ModalBody className={styles.body}>{this.renderForm()}</ModalBody>
         );
       case 'avatar':
         return (
@@ -253,6 +266,5 @@ class EditGroupModal extends PureComponent<Props, State> {
     );
   }
 }
-
 
 export default EditGroupModal;

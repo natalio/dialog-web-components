@@ -17,7 +17,7 @@ export type Props = {
   isOwner?: ?boolean,
   about?: string,
   createdAt?: ?string,
-  renderActions?: () => Node
+  renderActions?: () => Node,
 };
 
 class WelcomeMessageChannel extends PureComponent<Props> {
@@ -28,11 +28,7 @@ class WelcomeMessageChannel extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <span className={styles.createdDate}>
-        {createdAt}
-      </span>
-    );
+    return <span className={styles.createdDate}>{createdAt}</span>;
   }
 
   renderCreated() {
@@ -41,7 +37,10 @@ class WelcomeMessageChannel extends PureComponent<Props> {
     if (isOwner) {
       return (
         <div className={styles.created}>
-          <Text id="WelcomeMessage.channel.created_by_you" className={styles.createdText} />
+          <Text
+            id="WelcomeMessage.channel.created_by_you"
+            className={styles.createdText}
+          />
           {this.renderCreatedAt()}
         </div>
       );
@@ -65,11 +64,7 @@ class WelcomeMessageChannel extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <div className={styles.actions}>
-        {this.props.renderActions()}
-      </div>
-    );
+    return <div className={styles.actions}>{this.props.renderActions()}</div>;
   }
 
   renderHint() {
@@ -81,7 +76,11 @@ class WelcomeMessageChannel extends PureComponent<Props> {
 
     return (
       <div className={styles.hint}>
-        <Text id="WelcomeMessage.channel.hint" className={styles.hintText} tagName="div" />
+        <Text
+          id="WelcomeMessage.channel.hint"
+          className={styles.hintText}
+          tagName="div"
+        />
       </div>
     );
   }
@@ -94,7 +93,11 @@ class WelcomeMessageChannel extends PureComponent<Props> {
       <div className={className}>
         <div className={styles.group}>
           {this.renderHint()}
-          <PeerInfoTitle title={title} titleClassName={styles.title} emojiSize={36} />
+          <PeerInfoTitle
+            title={title}
+            titleClassName={styles.title}
+            emojiSize={36}
+          />
           {this.renderCreated()}
           {this.renderAbout()}
         </div>

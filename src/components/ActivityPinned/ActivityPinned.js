@@ -5,7 +5,7 @@
 
 import type { Message, PeerInfo, Peer } from '@dlghq/dialog-types';
 import { Text } from '@dlghq/react-l10n';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import classNames from 'classnames';
 import ActivityList from '../ActivityList/ActivityList';
 import styles from './ActivityPinned.css';
@@ -18,11 +18,11 @@ export type Props = {
   onGoToPeer?: (peer: Peer) => mixed,
   onGoToMessage?: (peer: Peer, message: Message) => mixed,
   onDeleteMessage?: (message: Message) => mixed,
-  onLightboxOpen?: (message: Message) => mixed
+  onLightboxOpen?: (message: Message) => mixed,
 };
 
 class ActivityPinned extends PureComponent<Props> {
-  renderMessages() {
+  renderMessages(): Node {
     const { messages, info } = this.props;
 
     if (!messages.length) {
@@ -52,9 +52,7 @@ class ActivityPinned extends PureComponent<Props> {
     const className = classNames(styles.container, this.props.className);
 
     return (
-      <ActivityList className={className}>
-        {this.renderMessages()}
-      </ActivityList>
+      <ActivityList className={className}>{this.renderMessages()}</ActivityList>
     );
   }
 }

@@ -15,7 +15,7 @@ type Props = {
   onGoToPeer: (peer: Peer) => mixed,
   onGoToMessage: (peer: ?Peer, message: Message) => mixed,
   maxHeight: number,
-  maxWidth: number
+  maxWidth: number,
 };
 
 class MessageAttachmentReply extends PureComponent<Props> {
@@ -43,11 +43,7 @@ class MessageAttachmentReply extends PureComponent<Props> {
       );
     });
 
-    return (
-      <div className={className}>
-        {children}
-      </div>
-    );
+    return <div className={className}>{children}</div>;
   }
 }
 

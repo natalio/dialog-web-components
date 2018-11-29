@@ -15,7 +15,7 @@ export type Props = {
   className?: string,
   type: PermissionType,
   onClose: () => mixed,
-  onPermissionRequest: () => mixed
+  onPermissionRequest: () => mixed,
 };
 
 class PermissionBanner extends PureComponent<Props> {
@@ -25,13 +25,27 @@ class PermissionBanner extends PureComponent<Props> {
   };
 
   render() {
-    const className = classNames(styles.container, styles[this.props.type], this.props.className);
+    const className = classNames(
+      styles.container,
+      styles[this.props.type],
+      this.props.className,
+    );
 
     return (
       <div className={className}>
-        <Icon glyph="close" className={styles.close} onClick={this.props.onClose} size={22} />
+        <Icon
+          glyph="close"
+          className={styles.close}
+          onClick={this.props.onClose}
+          size={22}
+        />
         <div className={styles.wrapper}>
-          <Text id={`PermissionBanner.text.${this.props.type}`} className={styles.text} tagName="div" html />
+          <Text
+            id={`PermissionBanner.text.${this.props.type}`}
+            className={styles.text}
+            tagName="div"
+            html
+          />
           <Text
             id={`PermissionBanner.request.${this.props.type}`}
             className={styles.request}

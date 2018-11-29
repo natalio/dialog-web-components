@@ -28,11 +28,11 @@ export type Props = {
   onSubmit: (event: SyntheticEvent<>) => void,
   onChange: (value: string, event: SyntheticInputEvent<>) => void,
   onAvatarRemove: () => void,
-  onAvatarChange: (avatar: File) => void
+  onAvatarChange: (avatar: File) => void,
 };
 export type State = {
   avatar: ?string,
-  isPublic: boolean
+  isPublic: boolean,
 };
 
 export type Context = ProviderContext;
@@ -41,12 +41,12 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
   shortnameInput: ?InputNext;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   static defaultProps = {
     aboutMaxLength: 3000,
-    vertical: false
+    vertical: false,
   };
 
   constructor(props: Props, context: Context) {
@@ -54,7 +54,7 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
 
     this.state = {
       avatar: null,
-      isPublic: Boolean(props.shortname)
+      isPublic: Boolean(props.shortname),
     };
   }
 
@@ -103,7 +103,7 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
     return (
       <div className={styles.avatarBlock}>
         <AvatarSelector
-          name={title}
+          title={title}
           placeholder="empty"
           avatar={avatar}
           size={140}
@@ -151,21 +151,28 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
     const className = classNames(
       styles.info,
       {
-        [styles.vertical]: vertical
+        [styles.vertical]: vertical,
       },
-      this.props.className
+      this.props.className,
     );
 
     return (
       <div className={className}>
         {this.renderAvatar()}
-        <form id={id} autoComplete="off" className={styles.form} onSubmit={this.handleSubmit}>
+        <form
+          id={id}
+          autoComplete="off"
+          className={styles.form}
+          onSubmit={this.handleSubmit}
+        >
           <InputNext
             className={styles.input}
             id={`${id}_title`}
             name="title"
             onChange={this.props.onChange}
-            placeholder={l10n.formatText(`CreateNewModal.${type}.info.title.placeholder`)}
+            placeholder={l10n.formatText(
+              `CreateNewModal.${type}.info.title.placeholder`,
+            )}
             label={l10n.formatText(`CreateNewModal.${type}.info.title.label`)}
             value={title}
             htmlAutoFocus
@@ -175,8 +182,12 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
             id={`${id}_about`}
             name="about"
             onChange={this.props.onChange}
-            label={l10n.formatText(`CreateNewModal.${type}.info.description.label`)}
-            placeholder={l10n.formatText(`CreateNewModal.${type}.info.description.placeholder`)}
+            label={l10n.formatText(
+              `CreateNewModal.${type}.info.description.label`,
+            )}
+            placeholder={l10n.formatText(
+              `CreateNewModal.${type}.info.description.placeholder`,
+            )}
             type="textarea"
             value={about || ''}
             maxLength={aboutMaxLength}

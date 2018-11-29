@@ -18,9 +18,7 @@ class ActivitySearch extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <ActivitySearchFilter />
-    );
+    return <ActivitySearchFilter />;
   }
 
   render() {
@@ -29,7 +27,11 @@ class ActivitySearch extends PureComponent<Props> {
     return (
       <div className={className}>
         <ActivityHeader onClose={this.props.onClose} className={styles.header}>
-          <Text id="ActivitySearch.header" tagName="div" className={styles.headerText} />
+          <Text
+            id="ActivitySearch.header"
+            tagName="div"
+            className={styles.headerText}
+          />
         </ActivityHeader>
 
         {this.renderFilter()}

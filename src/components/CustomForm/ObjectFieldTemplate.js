@@ -13,14 +13,14 @@ type Property = {
   content: Node,
   readonly: boolean,
   disabled: boolean,
-  required: boolean
+  required: boolean,
 };
 
 type Props = {
   title?: ?string,
   uiSchema?: ?JSONSchema,
   description?: ?string,
-  properties: Property[]
+  properties: Property[],
 };
 
 export default class ObjectFieldTemplate extends PureComponent<Props> {
@@ -29,14 +29,10 @@ export default class ObjectFieldTemplate extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <div className={styles.description}>
-        {this.props.description}
-      </div>
-    );
+    return <div className={styles.description}>{this.props.description}</div>;
   }
 
-  renderProperties() {
+  renderProperties(): Node {
     return this.props.properties.map((property: Property) => {
       if (this.props.uiSchema) {
         if (

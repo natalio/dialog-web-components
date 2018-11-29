@@ -18,17 +18,19 @@ class CountryCodeSelector extends PureComponent<Props> {
   select: ?VirtualizedSelect;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   static defaultProps = {
-    countries
+    countries,
   };
 
   componentWillMount() {
     const preferredCountryCode = getPreferredCountryCode();
     if (preferredCountryCode) {
-      const currentCountry = this.props.countries.find((country) => country.alpha === preferredCountryCode);
+      const currentCountry = this.props.countries.find(
+        (country) => country.alpha === preferredCountryCode,
+      );
       if (currentCountry) {
         this.props.onChange(currentCountry);
       }
@@ -53,16 +55,22 @@ class CountryCodeSelector extends PureComponent<Props> {
     }
 
     return (
-      <Text className={styles.label} id={label} onClick={this.handleLabelClick} />
+      <Text
+        className={styles.label}
+        id={label}
+        onClick={this.handleLabelClick}
+      />
     );
   }
 
   render() {
-    const { l10n: { formatText } } = this.context;
+    const {
+      l10n: { formatText },
+    } = this.context;
     const className = classNames(
       styles.container,
       this.props.className,
-      this.props.disabled ? styles.disabled : null
+      this.props.disabled ? styles.disabled : null,
     );
 
     return (

@@ -4,7 +4,10 @@
  */
 
 import type { ProviderContext as Context } from '@dlghq/react-l10n';
-import type { MessageMediaInteractiveActionGroup, MessageMediaInteractiveConfirm } from '@dlghq/dialog-types';
+import type {
+  MessageMediaInteractiveActionGroup,
+  MessageMediaInteractiveConfirm,
+} from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import { LocalizationContextType } from '@dlghq/react-l10n';
 import classNames from 'classnames';
@@ -15,7 +18,11 @@ import MessageMediaInteractiveAction from '../MessageMediaInteractiveAction/Mess
 export type Props = {
   className?: string,
   group: MessageMediaInteractiveActionGroup,
-  onSubmit?: (id: string, value: string, confirm?: ?MessageMediaInteractiveConfirm) => mixed
+  onSubmit?: (
+    id: string,
+    value: string,
+    confirm?: ?MessageMediaInteractiveConfirm,
+  ) => mixed,
 };
 
 class MessageMediaInteractiveGroup extends PureComponent<Props> {
@@ -23,7 +30,7 @@ class MessageMediaInteractiveGroup extends PureComponent<Props> {
   context: Context;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   renderTitle() {
@@ -73,14 +80,16 @@ class MessageMediaInteractiveGroup extends PureComponent<Props> {
 
   renderActions() {
     const children = this.props.group.actions.map((action) => {
-      return <MessageMediaInteractiveAction key={action.id} action={action} onSubmit={this.props.onSubmit} />;
+      return (
+        <MessageMediaInteractiveAction
+          key={action.id}
+          action={action}
+          onSubmit={this.props.onSubmit}
+        />
+      );
     });
 
-    return (
-      <div className={styles.actions}>
-        {children}
-      </div>
-    );
+    return <div className={styles.actions}>{children}</div>;
   }
 
   render() {

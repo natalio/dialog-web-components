@@ -3,7 +3,10 @@
  * @flow
  */
 
-import type { RegistrationProps as Props, InputState } from '../Authorization/types';
+import type {
+  RegistrationProps as Props,
+  InputState,
+} from '../Authorization/types';
 import classNames from 'classnames';
 import React, { PureComponent } from 'react';
 import InputNext from '../InputNext/InputNext';
@@ -14,7 +17,7 @@ class Registration extends PureComponent<Props> {
   input: ?InputNext;
 
   static defaultProps = {
-    id: 'registration'
+    id: 'registration',
   };
 
   componentDidMount() {
@@ -28,14 +31,14 @@ class Registration extends PureComponent<Props> {
   handleChange = (value: mixed, { target }: $FlowIssue): void => {
     this.props.onChange({
       ...this.props.info,
-      [target.name]: value
+      [target.name]: value,
     });
   };
 
   handleGenderChange = (value: string): void => {
     this.props.onChange({
       ...this.props.info,
-      gender: value
+      gender: value,
     });
   };
 
@@ -47,7 +50,7 @@ class Registration extends PureComponent<Props> {
 
       return {
         hint: `Authorization.errors.${error.tag}`,
-        status: 'error'
+        status: 'error',
       };
     }
 

@@ -17,11 +17,7 @@ function FakeMessage() {
     }
 
     return linesArray.map((lineWidth, index) => (
-      <div
-        key={index}
-        className={styles.line}
-        style={{ width: lineWidth }}
-      />
+      <div key={index} className={styles.line} style={{ width: lineWidth }} />
     ));
   }
 
@@ -33,9 +29,7 @@ function FakeMessage() {
           <div className={styles.lineHeader} style={{ width: 136 }} />
           <div className={styles.lineHeader} style={{ width: 50 }} />
         </header>
-        <div className={styles.text}>
-          {renderText()}
-        </div>
+        <div className={styles.text}>{renderText()}</div>
       </div>
     </div>
   );

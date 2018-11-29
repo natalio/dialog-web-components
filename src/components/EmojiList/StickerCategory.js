@@ -4,7 +4,8 @@
  */
 
 import type { StickerPack } from '@dlghq/dialog-types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
+
 import styles from './EmojiList.css';
 import StickerItem from './StickerItem';
 
@@ -15,11 +16,11 @@ type Props = {
   isActive: boolean,
   isVisible: boolean,
   isAtBottom: boolean,
-  onClick: (sticker: Object) => mixed
+  onClick: (sticker: Object) => mixed,
 };
 
 class StickerCategory extends PureComponent<Props> {
-  renderPacks() {
+  renderPacks(): Node {
     if (!this.props.isVisible) {
       return null;
     }
@@ -40,7 +41,7 @@ class StickerCategory extends PureComponent<Props> {
 
     const containerStyles: Object = {
       width: this.props.width,
-      height: this.props.height
+      height: this.props.height,
     };
 
     const titleStyles = {};
@@ -59,13 +60,15 @@ class StickerCategory extends PureComponent<Props> {
     }
 
     return (
-      <div className={styles.category} style={containerStyles} data-category={pack.id}>
+      <div
+        className={styles.category}
+        style={containerStyles}
+        data-category={pack.id}
+      >
         <div className={styles.categoryTitle} style={titleStyles}>
           {pack.title}
         </div>
-        <div className={styles.categoryList}>
-          {this.renderPacks()}
-        </div>
+        <div className={styles.categoryList}>{this.renderPacks()}</div>
       </div>
     );
   }

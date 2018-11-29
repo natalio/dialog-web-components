@@ -10,7 +10,7 @@ import styles from './ActivityMediaVoice.css';
 type Props = {
   url: ?string,
   duration: ?number,
-  sender: ?string
+  sender: ?string,
 };
 
 class ActivityMediaVoice extends PureComponent<Props> {

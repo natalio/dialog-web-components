@@ -14,8 +14,8 @@ const group = {
     'Dialog is a handy and feature rich enterprise multi-device messenger available for server or cloud – Slack-like, but not Slack-limited.',
   peer: {
     id: 10101,
-    type: 'group'
-  }
+    type: 'group',
+  },
 };
 
 const channel = {
@@ -28,8 +28,8 @@ const channel = {
   userName: 'kirsan_news_eng',
   peer: {
     id: 111,
-    type: 'group'
-  }
+    type: 'group',
+  },
 };
 
 const user = {
@@ -42,8 +42,8 @@ const user = {
   peer: {
     id: 1709029441,
     type: 'user',
-    key: 'u1709029441'
-  }
+    key: 'u1709029441',
+  },
 };
 
 const bot = {
@@ -56,13 +56,13 @@ const bot = {
     "The security bot sees a world where you're not afraid of opening the wrong link. This security integration works silently in the background alerting users when a malicious or unwanted link has been detected in a public channel.",
   peer: {
     id: 12239,
-    type: 'user'
-  }
+    type: 'user',
+  },
 };
 
 module.exports = {
   user,
   group,
   channel,
-  bot
+  bot,
 };

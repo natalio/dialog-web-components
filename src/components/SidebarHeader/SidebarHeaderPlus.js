@@ -11,14 +11,18 @@ import styles from './SidebarHeader.css';
 
 export type Props = {
   className?: string,
-  renderMenu: () => Node
+  renderMenu: () => Node,
 };
 
 class SidebarHeaderPlus extends PureComponent<Props> {
   renderTrigger = (handlers: Object, isActive: boolean) => {
-    const plusClassName = classNames(styles.plus, {
-      [styles.plusActive]: isActive
-    }, this.props.className);
+    const plusClassName = classNames(
+      styles.plus,
+      {
+        [styles.plusActive]: isActive,
+      },
+      this.props.className,
+    );
 
     return (
       <Icon
@@ -39,10 +43,10 @@ class SidebarHeaderPlus extends PureComponent<Props> {
         {
           to: 'scrollParent',
           attachment: 'together',
-          pin: true
-        }
+          pin: true,
+        },
       ],
-      targetOffset: '0 0'
+      targetOffset: '0 0',
     };
 
     return (

@@ -9,7 +9,7 @@ import createKeyHotKey from 'key-event-to-string';
 
 type Props = {
   children: Node,
-  onHotKey: (trigger: string, event: KeyboardEvent) => mixed
+  onHotKey: (trigger: string, event: KeyboardEvent) => mixed,
 };
 
 class HotKeys extends Component<Props> {
@@ -23,7 +23,9 @@ class HotKeys extends Component<Props> {
   }
 
   componentDidMount(): void {
-    this.listener = listen(window, 'keydown', this.handleKeyDown, { capture: true });
+    this.listener = listen(window, 'keydown', this.handleKeyDown, {
+      capture: true,
+    });
   }
 
   componentWillUnmount(): void {

@@ -19,7 +19,7 @@ type Props = {
   onGoToPeer?: (peer: Peer) => mixed,
   onGoToMessage?: (peer: Peer, message: Message) => mixed,
   onDeleteMessage?: (message: Message) => mixed,
-  onLightboxOpen?: (message: Message) => mixed
+  onLightboxOpen?: (message: Message) => mixed,
 };
 
 class ActivityPinnedMessage extends PureComponent<Props> {
@@ -69,7 +69,14 @@ class ActivityPinnedMessage extends PureComponent<Props> {
       return null;
     }
 
-    return <Icon glyph="close" size={16} onClick={this.handleRemoveFromPin} className={styles.remove} />;
+    return (
+      <Icon
+        glyph="close"
+        size={16}
+        onClick={this.handleRemoveFromPin}
+        className={styles.remove}
+      />
+    );
   }
 
   render() {
@@ -77,9 +84,9 @@ class ActivityPinnedMessage extends PureComponent<Props> {
     const className = classNames(
       styles.container,
       {
-        [styles.clickable]: this.props.onGoToMessage
+        [styles.clickable]: this.props.onGoToMessage,
       },
-      this.props.className
+      this.props.className,
     );
 
     const sender = this.getSender();
@@ -97,10 +104,15 @@ class ActivityPinnedMessage extends PureComponent<Props> {
             <PeerInfoTitle
               className={styles.title}
               title={sender.title}
-              onTitleClick={this.props.onGoToPeer ? this.handleGoToPeer : undefined}
+              onTitleClick={
+                this.props.onGoToPeer ? this.handleGoToPeer : undefined
+              }
               emojiSize={20}
             />
-            <time className={styles.time} dateTime={message.fullDate.toISOString()}>
+            <time
+              className={styles.time}
+              dateTime={message.fullDate.toISOString()}
+            >
               {message.date}
             </time>
             {this.renderRemoveButton()}
@@ -110,7 +122,9 @@ class ActivityPinnedMessage extends PureComponent<Props> {
               className={styles.content}
               rid={message.rid}
               content={message.content}
-              onLightboxOpen={this.props.onLightboxOpen ? this.handleLightboxOpen : undefined}
+              onLightboxOpen={
+                this.props.onLightboxOpen ? this.handleLightboxOpen : undefined
+              }
               maxHeight={100}
               maxWidth={248}
             />

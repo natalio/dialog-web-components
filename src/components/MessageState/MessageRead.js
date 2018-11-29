@@ -4,7 +4,7 @@
  */
 
 import type { PeerInfo } from '@dlghq/dialog-types';
-import React, { Component } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import classNames from 'classnames';
 import { Text } from '@dlghq/react-l10n';
 import { peerToString } from '@dlghq/dialog-types/utils';
@@ -12,11 +12,11 @@ import PeerAvatar from '../PeerAvatar/PeerAvatar';
 import styles from './MessageState.css';
 
 type Props = {
-  readBy?: PeerInfo[]
+  readBy?: PeerInfo[],
 };
 
-class MessageRead extends Component<Props> {
-  renderAvatars() {
+class MessageRead extends PureComponent<Props> {
+  renderAvatars(): Node {
     const { readBy } = this.props;
     if (!readBy) {
       return null;
@@ -27,7 +27,7 @@ class MessageRead extends Component<Props> {
         key={peerToString(reader.peer)}
         className={styles.avatar}
         peer={reader}
-        size="tiny"
+        size={14}
       />
     ));
   }
@@ -42,7 +42,7 @@ class MessageRead extends Component<Props> {
 
     const isInline = readBy.length > 4;
     const className = classNames(styles.read, {
-      [styles.inline]: isInline
+      [styles.inline]: isInline,
     });
 
     if (isInline) {

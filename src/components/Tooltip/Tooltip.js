@@ -24,14 +24,14 @@ export type Props = {
    * [Tether options](http://tether.io/#options)
    */
   options?: Object,
-  theme: ColorTheme
+  theme: ColorTheme,
 };
 
 class Tooltip extends Component<Props> {
   trigger: ?Trigger;
 
   static defaultProps = {
-    theme: 'default'
+    theme: 'default',
   };
 
   componentWillUpdate(): void {
@@ -54,11 +54,15 @@ class Tooltip extends Component<Props> {
           timeout={{ appear: 100 }}
           classNames={{
             appear: styles.appear,
-            appearActive: styles.appearActive
+            appearActive: styles.appearActive,
           }}
         >
           <div className={className}>
-            {typeof this.props.text === 'string' ? <Text id={this.props.text} /> : this.props.text}
+            {typeof this.props.text === 'string' ? (
+              <Text id={this.props.text} />
+            ) : (
+              this.props.text
+            )}
           </div>
         </CSSTransition>
       </TransitionGroup>
@@ -83,10 +87,10 @@ class Tooltip extends Component<Props> {
         {
           to: 'scrollParent',
           attachment: 'together',
-          pin: true
-        }
+          pin: true,
+        },
       ],
-      ...this.props.options
+      ...this.props.options,
     };
 
     return (

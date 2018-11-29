@@ -18,7 +18,7 @@ export type Props = {
   renderText: typeof renderText,
   renderBlocks: typeof renderBlocks,
   emojiSize?: number,
-  renderBigEmoji: boolean
+  renderBigEmoji: boolean,
 };
 
 class Markdown extends Component<Props> {
@@ -27,11 +27,14 @@ class Markdown extends Component<Props> {
     renderText,
     renderBlocks,
     emojiSize: 16,
-    renderBigEmoji: true
+    renderBigEmoji: true,
   };
 
   shouldComponentUpdate(nextProps: Props): boolean {
-    return nextProps.text !== this.props.text || nextProps.className !== this.props.className;
+    return (
+      nextProps.text !== this.props.text ||
+      nextProps.className !== this.props.className
+    );
   }
 
   render() {
@@ -53,7 +56,11 @@ class Markdown extends Component<Props> {
 
     return (
       <TagName className={className}>
-        {this.props.renderBlocks(tokens, this.props.emojiSize, this.props.renderBigEmoji)}
+        {this.props.renderBlocks(
+          tokens,
+          this.props.emojiSize,
+          this.props.renderBigEmoji,
+        )}
       </TagName>
     );
   }

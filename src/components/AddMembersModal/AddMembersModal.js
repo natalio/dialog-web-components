@@ -26,7 +26,7 @@ export type Props = {
   autoFocus: boolean,
   onClose: () => mixed,
   onSubmit: (gid: number, uids: number[]) => mixed,
-  onChange: (selector: SelectorState<PeerInfo>) => mixed
+  onChange: (selector: SelectorState<PeerInfo>) => mixed,
 };
 
 class AddMembersModal extends PureComponent<Props> {
@@ -40,7 +40,7 @@ class AddMembersModal extends PureComponent<Props> {
     const selected = this.props.selector.getSelected();
     this.props.onSubmit(
       this.props.group.id,
-      selected.map((contact) => contact.peer.id).toArray()
+      selected.map((contact) => contact.peer.id).toArray(),
     );
   };
 
@@ -60,7 +60,10 @@ class AddMembersModal extends PureComponent<Props> {
         <Modal className={className} onClose={this.handleClose}>
           <ModalHeader withBorder>
             <Text id="AddMembersModal.title" />
-            <ModalClose onClick={this.handleClose} id="add_members_close_button" />
+            <ModalClose
+              onClick={this.handleClose}
+              id="add_members_close_button"
+            />
           </ModalHeader>
           <ModalBody className={styles.body}>
             <ContactSelector

@@ -3,11 +3,11 @@
  * @flow
  */
 
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import { Text } from '@dlghq/react-l10n';
+
 import styles from './EmojiList.css';
 import EmojiListItem from './EmojiListItem';
-
 
 type Props = {
   name: string,
@@ -17,11 +17,11 @@ type Props = {
   isActive: boolean,
   isVisible: boolean,
   isAtBottom: boolean,
-  onClick: (char: string) => mixed
+  onClick: (char: string) => mixed,
 };
 
 class EmojiCategory extends PureComponent<Props> {
-  renderChars() {
+  renderChars(): Node {
     if (!this.props.isVisible) {
       return null;
     }
@@ -41,7 +41,7 @@ class EmojiCategory extends PureComponent<Props> {
   render() {
     const containerStyles: Object = {
       width: this.props.width,
-      height: this.props.height
+      height: this.props.height,
     };
 
     const titleStyles = {};
@@ -60,16 +60,18 @@ class EmojiCategory extends PureComponent<Props> {
     }
 
     return (
-      <div className={styles.category} style={containerStyles} data-category={this.props.name}>
+      <div
+        className={styles.category}
+        style={containerStyles}
+        data-category={this.props.name}
+      >
         <Text
           id={`EmojiList.${this.props.name}`}
           tagName="div"
           className={styles.categoryTitle}
           style={titleStyles}
         />
-        <div className={styles.categoryList}>
-          {this.renderChars()}
-        </div>
+        <div className={styles.categoryList}>{this.renderChars()}</div>
       </div>
     );
   }

@@ -9,7 +9,9 @@ import React from 'react';
 import ActivityUserProfile from './ActivityUserProfile';
 import ActivityGroupProfile from './ActivityGroupProfile';
 
-export type Props = ({ type: 'user' } & UserProps) | ({ type: 'group' } & GroupProps);
+export type Props =
+  | ({ type: 'user' } & UserProps)
+  | ({ type: 'group' } & GroupProps);
 
 function ActivityProfile(props: Props) {
   switch (props.type) {

@@ -12,7 +12,7 @@ export type Request = {
   shortname: string,
   about: string,
   avatar: ?File,
-  members: SelectorState<PeerInfo>
+  members: SelectorState<PeerInfo>,
 };
 
 export type Step = 'type' | 'info' | 'avatar' | 'members';
@@ -30,5 +30,5 @@ export type Props = {
   onClose: () => mixed,
   onSubmit: (request: Request) => mixed,
   onStepChange: (step: Step) => mixed,
-  onRequestChange: (request: Request) => mixed
-}
+  onRequestChange: (request: Request) => mixed,
+};

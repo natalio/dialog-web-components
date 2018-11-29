@@ -4,7 +4,7 @@
 /* eslint-disable */
 
 import React, { PureComponent } from 'react';
-import CodeMirror from 'react-codemirror2';
+import { Controlled as CodeMirror } from 'react-codemirror2';
 import MessageMediaInteractive from '../MessageMediaInteractive';
 import 'codemirror/mode/javascript/javascript';
 import { interactive } from '../../../fixtures/messagesMedia';
@@ -13,7 +13,7 @@ import './CodeMirror.css';
 
 type Props = {};
 type State = {
-  code: string
+  code: string,
 };
 
 class MessageMediaInteractiveExample extends PureComponent<Props, State> {
@@ -21,11 +21,15 @@ class MessageMediaInteractiveExample extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      code: JSON.stringify(interactive.content, null, 2)
+      code: JSON.stringify(interactive.content, null, 2),
     };
   }
 
-  handleCodeChange = (editor: $FlowIssue, metadata: $FlowIssue, value: string): void => {
+  handleCodeChange = (
+    editor: $FlowIssue,
+    metadata: $FlowIssue,
+    value: string,
+  ): void => {
     this.setState({ code: value });
   };
 
@@ -37,15 +41,17 @@ class MessageMediaInteractiveExample extends PureComponent<Props, State> {
     return (
       <div className={styles.container}>
         <div className={styles.code}>
-          <h3 className={styles.heading}>Enter your interactive message content as JSON</h3>
+          <h3 className={styles.heading}>
+            Enter your interactive message content as JSON
+          </h3>
           <CodeMirror
             value={this.state.code}
             options={{
               mode: 'javascript',
               theme: 'dracula',
-              lineNumbers: true
+              lineNumbers: true,
             }}
-            onChange={this.handleCodeChange}
+            onBeforeChange={this.handleCodeChange}
           />
         </div>
         <div className={styles.result}>
@@ -54,7 +60,7 @@ class MessageMediaInteractiveExample extends PureComponent<Props, State> {
             media={{
               type: 'interactive',
               content: JSON.parse(this.state.code),
-              messages: interactive.messages
+              messages: interactive.messages,
             }}
             onSubmit={this.handleSubmit}
           />

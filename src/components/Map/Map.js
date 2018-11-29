@@ -10,17 +10,20 @@ export type Props = {
   width: number,
   height: number,
   latitude: number,
-  longitude: number
+  longitude: number,
 };
 
 function Map(props: Props) {
-  const href = `https://maps.google.com/?z=16&q=loc:${props.latitude},${props.longitude}`;
-  let src = 'https://maps.googleapis.com/maps/api/staticmap?' +
-                 `center=${props.latitude},${props.longitude}` +
-                 '&zoom=16' +
-                 '&scale=2' +
-                 `&size=${props.width}x${props.height}` +
-                 `&markers=color:0x6b00cb|${props.latitude},${props.longitude}`;
+  const href = `https://maps.google.com/?z=16&q=loc:${props.latitude},${
+    props.longitude
+  }`;
+  let src =
+    'https://maps.googleapis.com/maps/api/staticmap?' +
+    `center=${props.latitude},${props.longitude}` +
+    '&zoom=16' +
+    '&scale=2' +
+    `&size=${props.width}x${props.height}` +
+    `&markers=color:0x6b00cb|${props.latitude},${props.longitude}`;
 
   if (props.apiKey) {
     src += `&key=${props.apiKey}`;

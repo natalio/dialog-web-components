@@ -18,7 +18,7 @@ export type Props = {
   size: 'small' | 'normal' | 'large',
   href: string,
   target?: string,
-  id?: string
+  id?: string,
 };
 
 class LinkButton extends PureComponent<Props> {
@@ -27,11 +27,21 @@ class LinkButton extends PureComponent<Props> {
     view: 'button',
     size: 'normal',
     wide: false,
-    rounded: true
+    rounded: true,
   };
 
   render() {
-    const { theme, size, wide, rounded, children, view, target, href, id } = this.props;
+    const {
+      theme,
+      size,
+      wide,
+      rounded,
+      children,
+      view,
+      target,
+      href,
+      id,
+    } = this.props;
     const className = classNames(
       styles.container,
       styles[theme],
@@ -39,9 +49,9 @@ class LinkButton extends PureComponent<Props> {
       styles[size],
       {
         [styles.wide]: wide,
-        [styles.rounded]: rounded
+        [styles.rounded]: rounded,
       },
-      this.props.className
+      this.props.className,
     );
 
     return (

@@ -10,13 +10,17 @@
   --sidebar-call-item-right-padding: 14px;
   --sidebar-call-item-bottom-padding: 9px;
   --sidebar-call-item-left-padding: 10px;
-  --sidebar-call-item-height: 60px;
-  --sidebar-call-item-default-color: color(#000 alpha(50%));
+  --sidebar-call-item-height: 73px;
+  --sidebar-call-item-default-color: color-mod(#000 alpha(50%));
   --sidebar-call-item-hover-background-color: #e6e6e6;
   --sidebar-call-item-hover-color: #000;
-  --sidebar-call-item-active-background-color: color(var(--sidebar-call-item-hover-background-color) shade(2%));
-  --sidebar-call-item-text-height: 37px;
+  --sidebar-call-item-active-color: var(--lipstick);
+  --sidebar-call-item-active-background-color: color-mod(
+    var(--sidebar-call-item-hover-background-color) shade(2%)
+  );
+  --sidebar-call-item-text-height: 54px;
   --sidebar-call-item-font-size: var(--default-recent-item-font-size);
+  --sidebar-call-item-title-font-size: 14px;
   --sidebar-call-item-time-font-size: 13px;
 }
 
@@ -53,28 +57,45 @@
   }
 
   & .avatar {
-    margin-right: 8px;
+    margin-right: 11px;
     flex: 0 0 auto;
     align-self: auto;
     cursor: inherit;
   }
 }
 
-.text {
+.title {
+  font-size: var(--sidebar-call-item-title-font-size);
+}
+
+.content {
   display: flex;
   flex-flow: column;
   vertical-align: middle;
   flex: 1 1 auto;
   height: var(--sidebar-call-item-text-height);
   position: relative;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .state {
-  font-weight: 500;
   line-height: 20px;
   font-size: var(--sidebar-call-item-font-size);
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
+}
+
+.stateActive {
+  color: var(--sidebar-call-item-active-color);
+}
+
+.icon {
+  color: inherit;
+}
+
+.text {
+  margin-left: 4px;
+  color: inherit;
+  text-transform: lowercase;
 }
 
 .time {
@@ -82,7 +103,11 @@
   font-size: var(--sidebar-call-item-time-font-size);
   vertical-align: middle;
   letter-spacing: -0.25px;
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
+
+  &:first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .duration {

@@ -16,18 +16,18 @@ import styles from './PreferencesModal.css';
 export type Settings = {
   isSendByEnter: boolean,
   isDebugEnabled: boolean,
-  isSoundEffectsEnabled: boolean
+  isSoundEffectsEnabled: boolean,
 };
 
 export type Props = {
   settings: Settings,
-  onChange: (settings: $Shape<Settings>) => mixed
+  onChange: (settings: $Shape<Settings>) => mixed,
 };
 
 class PreferencesGeneral extends PureComponent<Props> {
   handleSendByChange = (value: string): void => {
     this.props.onChange({
-      isSendByEnter: value === 'enter'
+      isSendByEnter: value === 'enter',
     });
   };
 
@@ -37,7 +37,7 @@ class PreferencesGeneral extends PureComponent<Props> {
 
   handleDebugChange = (isDebugEnabled: boolean): void => {
     this.props.onChange({ isDebugEnabled });
-  }
+  };
 
   render() {
     const sendBy = this.props.settings.isSendByEnter ? 'enter' : 'shift_enter';
@@ -47,15 +47,30 @@ class PreferencesGeneral extends PureComponent<Props> {
     return (
       <div className={styles.screen}>
         <Fieldset legend="PreferencesModal.general.legend.sending">
-          <RadioGroup name="sendBy" value={sendBy} onChange={this.handleSendByChange}>
+          <RadioGroup
+            name="sendBy"
+            value={sendBy}
+            onChange={this.handleSendByChange}
+          >
             <Field>
               <Radio value="enter" id="preferences_general_send_by_enter">
-                <Text id="PreferencesModal.general.sendByEnter.enable" values={{ keyOS }} html />
+                <Text
+                  id="PreferencesModal.general.sendByEnter.enable"
+                  values={{ keyOS }}
+                  html
+                />
               </Radio>
             </Field>
             <Field>
-              <Radio value="shift_enter" id="preferences_general_send_by_shift_enter">
-                <Text id="PreferencesModal.general.sendByEnter.disable" values={{ keyOS }} html />
+              <Radio
+                value="shift_enter"
+                id="preferences_general_send_by_shift_enter"
+              >
+                <Text
+                  id="PreferencesModal.general.sendByEnter.disable"
+                  values={{ keyOS }}
+                  html
+                />
               </Radio>
             </Field>
           </RadioGroup>

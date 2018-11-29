@@ -13,7 +13,7 @@ type Props = {
   number: string,
   onChange: (number: string) => mixed,
   onFocus: () => mixed,
-  onBlur: () => mixed
+  onBlur: () => mixed,
 };
 
 class PadNumber extends PureComponent<Props> {

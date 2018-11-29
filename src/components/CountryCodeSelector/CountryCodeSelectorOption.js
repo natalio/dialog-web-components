@@ -18,15 +18,23 @@ type Props = {
   isFocused: boolean,
   isSelected: boolean,
   onFocus: (country: Country) => void,
-  onSelect: (country: Country) => void
+  onSelect: (country: Country) => void,
 };
 
 class CountryCodeSelectorOption extends PureComponent<Props> {
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
-  static renderOption({ focusedOption, focusOption, key, option, selectValue, style, valueArray }: $FlowIssue) {
+  static renderOption({
+    focusedOption,
+    focusOption,
+    key,
+    option,
+    selectValue,
+    style,
+    valueArray,
+  }: $FlowIssue) {
     return (
       <CountryCodeSelectorOption
         key={key}
@@ -64,11 +72,7 @@ class CountryCodeSelectorOption extends PureComponent<Props> {
     const { country } = this.props;
     if (country.flag) {
       return (
-        <Emoji
-          className={styles.optionFlag}
-          char={country.flag}
-          size={26}
-        />
+        <Emoji className={styles.optionFlag} char={country.flag} size={26} />
       );
     }
 
@@ -76,13 +80,15 @@ class CountryCodeSelectorOption extends PureComponent<Props> {
   }
 
   render() {
-    const { l10n: { locale } } = this.context;
+    const {
+      l10n: { locale },
+    } = this.context;
     const { style, country, isFocused, isSelected } = this.props;
 
     const className = classNames(
       styles.option,
       isFocused ? styles.optionFocused : null,
-      isSelected ? styles.optionSelected : null
+      isSelected ? styles.optionSelected : null,
     );
     const title = getCountryName(country.alpha, locale);
 
@@ -94,12 +100,8 @@ class CountryCodeSelectorOption extends PureComponent<Props> {
         onMouseEnter={this.handleMouseEnter}
       >
         {this.renderFlag()}
-        <div className={styles.optionLabel}>
-          {title}
-        </div>
-        <span className={styles.optionCode}>
-          {country.code}
-        </span>
+        <div className={styles.optionLabel}>{title}</div>
+        <span className={styles.optionCode}>{country.code}</span>
       </div>
     );
   }

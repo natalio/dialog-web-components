@@ -17,7 +17,7 @@ export type Props = {
   current: string,
   onClose?: () => mixed,
   onBack?: () => mixed,
-  onChange?: (type: string) => mixed
+  onChange?: (type: string) => mixed,
 };
 
 const MEDIA_TYPES = ['all', 'photo', 'document', 'voice', 'video'];
@@ -26,13 +26,24 @@ class ActivityMediaHeader extends PureComponent<Props> {
   renderTrigger = (handlers: Object, isActive: boolean) => {
     const { current } = this.props;
     const className = classNames(styles.current, {
-      [styles.currentActive]: isActive
+      [styles.currentActive]: isActive,
     });
 
     return (
-      <div className={className} {...handlers} id="activity_media_header_type_current">
-        <Text id={`ActivityMediaHeader.${current}`} className={styles.currentText} />
-        <Icon className={styles.arrow} glyph={isActive ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} size={24} />
+      <div
+        className={className}
+        {...handlers}
+        id="activity_media_header_type_current"
+      >
+        <Text
+          id={`ActivityMediaHeader.${current}`}
+          className={styles.currentText}
+        />
+        <Icon
+          className={styles.arrow}
+          glyph={isActive ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+          size={24}
+        />
       </div>
     );
   };
@@ -55,11 +66,7 @@ class ActivityMediaHeader extends PureComponent<Props> {
       );
     });
 
-    return (
-      <Dropdown>
-        {children}
-      </Dropdown>
-    );
+    return <Dropdown>{children}</Dropdown>;
   };
 
   renderBackButton() {
@@ -102,10 +109,10 @@ class ActivityMediaHeader extends PureComponent<Props> {
         {
           to: 'window',
           attachment: 'together',
-          pin: true
-        }
+          pin: true,
+        },
       ],
-      targetOffset: '10px 0'
+      targetOffset: '10px 0',
     };
 
     return (

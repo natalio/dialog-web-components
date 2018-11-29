@@ -12,7 +12,7 @@ export type Props = {
   id: string,
   title: string,
   active: boolean,
-  onPick: (id: string) => mixed
+  onPick: (id: string) => mixed,
 };
 
 class Tab extends PureComponent<Props> {
@@ -23,11 +23,15 @@ class Tab extends PureComponent<Props> {
   render() {
     const { title, active, id } = this.props;
     const className = classNames(styles.tab, {
-      [styles.active]: active
+      [styles.active]: active,
     });
 
     return (
-      <li className={className} onClick={this.handleClick} id={`tabs_tab_${id}`}>
+      <li
+        className={className}
+        onClick={this.handleClick}
+        id={`tabs_tab_${id}`}
+      >
         <Text id={title} />
       </li>
     );

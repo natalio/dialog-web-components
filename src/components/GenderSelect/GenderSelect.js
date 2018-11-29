@@ -14,18 +14,18 @@ class GenderSelect extends PureComponent<Props> {
     options: [
       {
         value: 'unknown',
-        title: 'GenderSelect.unknown'
+        title: 'GenderSelect.unknown',
       },
       {
         value: 'female',
-        title: 'GenderSelect.female'
+        title: 'GenderSelect.female',
       },
       {
         value: 'male',
-        title: 'GenderSelect.male'
-      }
+        title: 'GenderSelect.male',
+      },
     ],
-    id: 'gender_select'
+    id: 'gender_select',
   };
 
   render() {

@@ -4,11 +4,12 @@
  */
 
 import type { Peer, Message, PeerInfo } from '@dlghq/dialog-types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import { format } from 'date-fns';
 import { Text } from '@dlghq/react-l10n';
 import { hasSelection } from '@dlghq/dialog-utils';
 import classNames from 'classnames';
+
 import SidebarSearchItemMessage from '../SidebarSearchItemMessage/SidebarSearchItemMessage';
 import styles from './SidebarSearchItem.css';
 import PeerInfoTitle from '../../PeerInfoTitle/PeerInfoTitle';
@@ -20,11 +21,11 @@ type Props = {
   before: Message[],
   after: Message[],
   onGoToPeer: (peer: Peer) => mixed,
-  onGoToMessage: (peer: Peer, message: Message) => mixed
-}
+  onGoToMessage: (peer: Peer, message: Message) => mixed,
+};
 
 type State = {
-  collapsed: boolean
+  collapsed: boolean,
 };
 
 class SidebarSearchItem extends PureComponent<Props, State> {
@@ -32,7 +33,7 @@ class SidebarSearchItem extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      collapsed: true
+      collapsed: true,
     };
   }
 
@@ -48,7 +49,7 @@ class SidebarSearchItem extends PureComponent<Props, State> {
     if (!hasSelection()) {
       this.setState(({ collapsed }) => {
         return {
-          collapsed: !collapsed
+          collapsed: !collapsed,
         };
       });
     }
@@ -67,20 +68,14 @@ class SidebarSearchItem extends PureComponent<Props, State> {
           />
         </div>
         <div className={styles.headerInfo} onClick={this.handleJumpToMessage}>
-          <time dateTime={focus.fullDate.toISOString()}>
-            {messageDate}
-          </time>
-          ・
-          <Text
-            id="ActivitySearch.jump"
-            className={styles.headerInfoJump}
-          />
+          <time dateTime={focus.fullDate.toISOString()}>{messageDate}</time>・
+          <Text id="ActivitySearch.jump" className={styles.headerInfoJump} />
         </div>
       </div>
     );
   }
 
-  renderBeforeMessages() {
+  renderBeforeMessages(): Node {
     const { info, before } = this.props;
 
     if (!before.length) {
@@ -131,7 +126,7 @@ class SidebarSearchItem extends PureComponent<Props, State> {
     );
   }
 
-  renderAfterMessages() {
+  renderAfterMessages(): Node {
     const { info, after } = this.props;
 
     if (!after.length) {
@@ -168,7 +163,9 @@ class SidebarSearchItem extends PureComponent<Props, State> {
 
   render() {
     const className = classNames(styles.container, this.props.className);
-    const messagesClassName = classNames(this.state.collapsed ? styles.messagesCollapsed : styles.messages);
+    const messagesClassName = classNames(
+      this.state.collapsed ? styles.messagesCollapsed : styles.messages,
+    );
 
     return (
       <div className={className}>
