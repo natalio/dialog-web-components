@@ -17,7 +17,7 @@ export type Props = {
   space: Space,
   name: Field<string>,
   shortname: Field<?string>,
-  avatar: File,
+  avatar: ?(string | File),
   shortnamePrefix?: ?string,
   onChange: () => void,
   onSubmit: () => void,
@@ -43,7 +43,7 @@ class EditSpaceModalForm extends PureComponent<Props, State> {
       avatar: props.avatar
     };
 
-    if (props.avatar) {
+    if (props.avatar && typeof props.avatar !== 'string') {
       fileToBase64(props.avatar, (avatar) => {
         this.setState({ avatar });
       });
@@ -51,7 +51,9 @@ class EditSpaceModalForm extends PureComponent<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.avatar !== this.props.avatar && this.props.avatar) {
+    if (prevProps.avatar !== this.props.avatar &&
+      typeof this.props.avatar !== 'string' &&
+      this.props.avatar) {
       fileToBase64(this.props.avatar, (avatar) => this.setState({ avatar }));
     }
   }

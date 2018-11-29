@@ -3,7 +3,7 @@
  * @flow
  */
 
-import type { Field, AvatarPlaceholder } from '@dlghq/dialog-types';
+import type { Field, AvatarPlaceholder, GroupMember } from '@dlghq/dialog-types';
 
 type SpaceUpdate = {
   name: string,
@@ -11,13 +11,19 @@ type SpaceUpdate = {
   avatar: ?(string | File)
 }
 
+export type SpaceType = 'space';
+
 export type Space = {
   id: number,
-  type: string,
-  avatar: File,
+  type: SpaceType,
   name: string,
   shortname: string,
-  placeholder: AvatarPlaceholder
+  avatar: ?string,
+  bigAvatar: ?string,
+  placeholder: AvatarPlaceholder,
+  adminId: number,
+  isMember: boolean,
+  members: GroupMember[]
 }
 
 export type Props = {

@@ -177,6 +177,10 @@ class EditSpaceModal extends PureComponent<Props, State> {
   }
 
   renderAvatarEdit() {
+    if (!this.state.space.avatar || typeof this.state.space.avatar === 'string') {
+      return null;
+    }
+
     return (
       <ImageEdit
         image={this.state.space.avatar}
