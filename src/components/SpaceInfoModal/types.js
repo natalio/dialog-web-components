@@ -8,12 +8,6 @@ import type { Peer, PeerInfo, GroupMember, AvatarPlaceholder } from '@dlghq/dial
 export type Screen = 'info' | 'members' | 'addMembers' | 'invitationLink';
 export type ConfirmScreen = 'leave' | 'delete';
 
-type SpaceUpdate = {
-  name: string,
-  shortname: string,
-  avatar: ?(string | File)
-}
-
 type SpaceType = 'space';
 
 /**

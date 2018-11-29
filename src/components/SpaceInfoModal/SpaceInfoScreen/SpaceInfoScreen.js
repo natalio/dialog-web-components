@@ -74,10 +74,8 @@ class SpaceInfoScreen extends PureComponent<Props> {
           <div>
             <ActivityProfile
               info={this.props.space}
-              type="group"
-            >
-              <div />
-            </ActivityProfile>
+              type="space"
+            />
             <ActivityList>
               <ActivityListSwitcher
                 id="space_info_screen_notification_switcher"
