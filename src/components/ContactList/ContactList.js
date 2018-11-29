@@ -5,8 +5,7 @@
 
 import type { PeerInfo } from '@dlghq/dialog-types';
 import type { SelectorState } from '../../entities';
-
-import * as React from 'react';
+import React, { PureComponent, type Node } from 'react';
 import classNames from 'classnames';
 import SelectList from '../SelectList/SelectList';
 import ContactListItem from './ContactListItem';
@@ -14,26 +13,39 @@ import styles from './ContactList.css';
 
 export type Props = {
   className?: string,
+  width: number,
+  itemHeight: number,
+  itemVisibleCount: number,
   selector: SelectorState<PeerInfo>,
   onChange: (selector: SelectorState<PeerInfo>) => mixed,
+  renderEmpty?: () => Node,
 };
 
-function ContactList(props: Props) {
-  const className = classNames(styles.container, props.className);
+class ContactList extends PureComponent<Props> {
+  static defaultProps = {
+    width: 500,
+    itemHeight: 60,
+    itemVisibleCount: 7.5,
+  };
 
-  return (
-    <div className={styles.list}>
-      <SelectList
-        className={className}
-        width={500}
-        itemHeight={56}
-        itemVisibleCount={8.5}
-        selector={props.selector}
-        onChange={props.onChange}
-        renderItem={ContactListItem.render}
-      />
-    </div>
-  );
+  render() {
+    const className = classNames(styles.container, this.props.className);
+
+    return (
+      <div className={styles.list}>
+        <SelectList
+          className={className}
+          width={this.props.width}
+          itemHeight={this.props.itemHeight}
+          itemVisibleCount={this.props.itemVisibleCount}
+          selector={this.props.selector}
+          onChange={this.props.onChange}
+          renderItem={ContactListItem.render}
+          renderEmpty={this.props.renderEmpty}
+        />
+      </div>
+    );
+  }
 }
 
 export default ContactList;
