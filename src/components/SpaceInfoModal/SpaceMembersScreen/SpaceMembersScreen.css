@@ -3,6 +3,7 @@
  */
 
 @import '../../../styles/variables.css';
+@import '../SpaceInfoModal.css';
 
 :root {
   --space-info-modal-font-family: var(--default-font-family);
@@ -21,22 +22,11 @@
 }
 
 .back {
-  width: var(--modal-create-new-close-size);
-  height: var(--modal-create-new-close-size);
-  margin-right: 16px;
-  transition: color var(--modal-create-new-transition-duration) linear;
-  line-height: var(--modal-create-new-close-size);
-  color: var(--modal-create-new-close-color);
-
-&:hover {
-   color: var(--modal-create-new-close-color-hover);
- }
+  @apply --space-info-modal-back;
 }
 
 .close {
-  position: absolute;
-  top: 16px;
-  right: 32px;
+  @apply --space-info-modal-close;
 }
 
 .body {

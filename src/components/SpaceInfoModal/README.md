@@ -3,17 +3,6 @@
 const { PeerInfoSelectorState } = require('../../entities');
 const contacts = require('../../fixtures/contacts.json');
 
-const space = {
-  avatar: 'https://avatars2.githubusercontent.com/u/19669610',
-  bigAvatar: 'https://avatars2.githubusercontent.com/u/19669610',
-  name: 'subSpace',
-  shortname: 'subspace',
-  creator: 'Steve Rodgers',
-  placeholder: 'blue',
-  type: 'space',
-  adminId: 13
-};
-
 const members = contacts.map((member) => {
   return {
     canKick: true,
@@ -32,6 +21,18 @@ const members = contacts.map((member) => {
     }
   }
 })
+
+const space = {
+  id: 13,
+  type: 'space',
+  name: 'subSpace',
+  shortname: 'subspace',
+  avatar: 'https://avatars2.githubusercontent.com/u/19669610',
+  bigAvatar: 'https://avatars2.githubusercontent.com/u/19669610',
+  placeholder: 'blue',
+  adminId: 14,
+  members: members
+};
 
 const initial = {
   uid: 1337,

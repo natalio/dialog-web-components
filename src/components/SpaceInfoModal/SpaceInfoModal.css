@@ -6,6 +6,35 @@
 
 :root {
   --space-info-modal-font-family: var(--default-font-family);
+
+  --space-info-modal-font-size: var(--default-font-size);
+  --space-info-modal-close-size: 28px;
+  --space-info-modal-close-color: color(#000 alpha(40%));
+  --space-info-modal-close-color-hover: color(#000 alpha(60%));
+  --space-info-modal-transition-duration: var(--default-transition-duration);
+  --space-info-modal-width: 500px;
+  --space-info-modal-hint-color: var(--default-font-color-light);;
+  --space-info-modal-hint-font-size: var(--space-info-modal-font-size);
+  --space-info-modal-label-font-size: var(--default-font-size-large);
+
+  --space-info-modal-close: {
+    position: absolute;
+    top: 16px;
+    right: 32px;
+  }
+
+  --space-info-modal-back: {
+    width: var(--space-info-modal-close-size);
+    height: var(--space-info-modal-close-size);
+    margin-right: 16px;
+    transition: color var(--space-info-modal-transition-duration) linear;
+    line-height: var(--space-info-modal-close-size);
+    color: var(--space-info-modal-close-color);
+
+    &::hover {
+       color: var(--space-info-modal-close-color-hover);
+    }
+  }
 }
 
 /* Styles */
@@ -14,16 +43,7 @@
 }
 
 .back {
-  width: var(--modal-create-new-close-size);
-  height: var(--modal-create-new-close-size);
-  margin-right: 16px;
-  transition: color var(--modal-create-new-transition-duration) linear;
-  line-height: var(--modal-create-new-close-size);
-  color: var(--modal-create-new-close-color);
-
-&:hover {
-   color: var(--modal-create-new-close-color-hover);
- }
+  @apply --space-info-modal-back;
 }
 
 .invitationWrapper {

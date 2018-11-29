@@ -71,7 +71,7 @@ class SpaceAddMembersScreen extends PureComponent<Props> {
             className={styles.back}
           />
           <Text id="SpaceInfoModal.addMembers.title" />
-          <ModalClose onClick={this.handleClose} id="space_add_members_close_button" />
+          <ModalClose onClick={this.handleClose} className={styles.close} id="space_add_members_close_button" />
         </ModalHeader>
         <ModalBody className={styles.body}>
           <ContactSelector

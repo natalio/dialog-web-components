@@ -14,18 +14,22 @@ type SpaceUpdate = {
   avatar: ?(string | File)
 }
 
+type SpaceType = 'space';
+
 /**
  * TODO: Space type to @dlghq/dialog-types; need info to know, what data will be represented in this interface
  */
 export type Space = {
-  avatar: string,
-  bigAvatar: string,
+  id: number,
+  type: SpaceType,
   name: string,
   shortname: string,
-  creator: string,
+  avatar: ?string,
+  bigAvatar: ?string,
   placeholder: AvatarPlaceholder,
-  type: string,
-  adminId: number
+  adminId: number,
+  isMember: boolean,
+  members: GroupMember[]
 }
 
 export type SpaceMember = GroupMember & {
@@ -55,7 +59,7 @@ export type Props = {
   onNotificationChange: () => void,
 
   invitationLink: string,
-  handleRevoke: () => void,
+  onRevoke: () => void,
   invitationLinkPending: boolean,
 
   onLeaveSpace: () => void,
@@ -73,5 +77,4 @@ export type State = {
   screen: Screen,
   confirmEnabled: boolean,
   confirmScreen: ConfirmScreen,
-  space: SpaceUpdate,
 }

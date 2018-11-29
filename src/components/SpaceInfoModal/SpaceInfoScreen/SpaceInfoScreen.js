@@ -5,6 +5,7 @@
 
 import React, { PureComponent } from 'react';
 import Text from '@dlghq/react-l10n/src/Text';
+import type { Space } from '../types';
 import ModalBody from '../../Modal/ModalBody';
 import ModalFooter from '../../Modal/ModalFooter';
 import ModalClose from '../../Modal/ModalClose';
@@ -13,7 +14,6 @@ import ActivityList from '../../ActivityList/ActivityList';
 import ActivityListItem from '../../ActivityList/ActivityListItem';
 import ActivityListSwitcher from '../../ActivityList/ActivityListSwitcher';
 import Button from '../../Button/Button';
-import Space from '../types';
 import styles from './SpaceInfoScreen.css';
 
 type Props = {
@@ -64,18 +64,20 @@ class SpaceInfoScreen extends PureComponent<Props> {
   render() {
     return (
       <div className={styles.container}>
-        <ModalBody className={styles.modalBody}>
+        <ModalBody className={styles.body}>
           <ModalClose
-            className={styles.modalClose}
+            className={styles.close}
             onClick={this.props.onClose}
             id="space_info_screen_close_button"
           />
 
-          <div className={styles.activityProfileWrapper}>
+          <div>
             <ActivityProfile
               info={this.props.space}
               type="group"
-            />
+            >
+              <div />
+            </ActivityProfile>
             <ActivityList>
               <ActivityListSwitcher
                 id="space_info_screen_notification_switcher"
@@ -109,7 +111,7 @@ class SpaceInfoScreen extends PureComponent<Props> {
             </ActivityList>
           </div>
         </ModalBody>
-        <ModalFooter className={styles.modalFooter}>
+        <ModalFooter className={styles.footer}>
           {this.renderFooter()}
         </ModalFooter>
       </div>

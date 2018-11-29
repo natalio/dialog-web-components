@@ -6,6 +6,8 @@
 import React, { PureComponent } from 'react';
 import Text from '@dlghq/react-l10n/src/Text';
 import { List } from 'react-virtualized';
+import type { Peer } from '@dlghq/dialog-types';
+import type { SpaceMember as SpaceMemberType } from '../types';
 import ModalHeader from '../../Modal/ModalHeader';
 import ModalBody from '../../Modal/ModalBody';
 import ModalClose from '../../Modal/ModalClose';
@@ -17,10 +19,12 @@ import styles from './SpaceMembersScreen.css';
 
 type Props = {
   uid: number,
-  members: SpaceMember[],
+  members: SpaceMemberType[],
   onClose: () => void,
   onPrevScreen: () => void,
-  onlineMessage: string
+  onlineMessage: string,
+  onMemberClick: (peer: Peer) => mixed,
+  onMemberKick: (peer: Peer) => mixed
 }
 
 class SpaceMembersScreen extends PureComponent<Props> {

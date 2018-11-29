@@ -5,7 +5,7 @@
 
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import type { Props } from './types';
+import type { Props, State } from './types';
 import Modal from '../Modal/Modal';
 import Confirm from '../Confirm/Confirm';
 import HotKeys from '../HotKeys/HotKeys';
@@ -15,7 +15,7 @@ import SpaceInvitationLinkScreen from './SpaceInvitationLinkScreen';
 import SpaceMembersScreen from './SpaceMembersScreen/SpaceMembersScreen';
 import styles from './SpaceInfoModal.css';
 
-class SpaceInfoModal extends PureComponent<Props> {
+class SpaceInfoModal extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -164,7 +164,7 @@ class SpaceInfoModal extends PureComponent<Props> {
       case 'addMembers':
         return (
           <SpaceAddMembersScreen
-            spaceId={this.props.space.peer.id}
+            spaceId={this.props.space.id}
             autoFocus={this.props.autoFocusAddMember}
             pending={this.props.pendingAddMembers}
             selector={this.props.membersSelector}
