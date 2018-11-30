@@ -21,31 +21,29 @@ export type Props = {
   renderEmpty?: () => Node,
 };
 
-class ContactList extends PureComponent<Props> {
-  static defaultProps = {
-    width: 500,
-    itemHeight: 60,
-    itemVisibleCount: 7.5,
-  };
+function ContactList(props: Props) {
+  const className = classNames(styles.container, this.props.className);
 
-  render() {
-    const className = classNames(styles.container, this.props.className);
-
-    return (
-      <div className={styles.list}>
-        <SelectList
-          className={className}
-          width={this.props.width}
-          itemHeight={this.props.itemHeight}
-          itemVisibleCount={this.props.itemVisibleCount}
-          selector={this.props.selector}
-          onChange={this.props.onChange}
-          renderItem={ContactListItem.render}
-          renderEmpty={this.props.renderEmpty}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className={styles.list}>
+      <SelectList
+        className={className}
+        width={this.props.width}
+        itemHeight={this.props.itemHeight}
+        itemVisibleCount={this.props.itemVisibleCount}
+        selector={this.props.selector}
+        onChange={this.props.onChange}
+        renderItem={ContactListItem.render}
+        renderEmpty={this.props.renderEmpty}
+      />
+    </div>
+  );
 }
+
+ContactList.defaultProps = {
+  width: 500,
+  itemHeight: 60,
+  itemVisibleCount: 7.5,
+};
 
 export default ContactList;
