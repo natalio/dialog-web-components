@@ -119,12 +119,12 @@ class ImageEdit extends PureComponent<Props, State> {
         .result({
           type: 'blob',
           size: 'viewport',
-          format: 'jpeg',
+          format: 'png',
           circle: false,
         })
         .then((blob) => {
           const fileName = format(new Date(), 'YYYY.MM.DD-HH:mm:ss.SSS');
-          this.props.onSubmit(new File([blob], `${fileName}.jpeg`));
+          this.props.onSubmit(new File([blob], `${fileName}.png`));
         })
         .catch((error) => {
           throw new Error(error);
