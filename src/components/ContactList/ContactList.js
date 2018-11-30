@@ -5,7 +5,7 @@
 
 import type { PeerInfo } from '@dlghq/dialog-types';
 import type { SelectorState } from '../../entities';
-import React, { PureComponent, type Node } from 'react';
+import React, { type Node } from 'react';
 import classNames from 'classnames';
 import SelectList from '../SelectList/SelectList';
 import ContactListItem from './ContactListItem';
@@ -22,19 +22,19 @@ export type Props = {
 };
 
 function ContactList(props: Props) {
-  const className = classNames(styles.container, this.props.className);
+  const className = classNames(styles.container, props.className);
 
   return (
     <div className={styles.list}>
       <SelectList
         className={className}
-        width={this.props.width}
-        itemHeight={this.props.itemHeight}
-        itemVisibleCount={this.props.itemVisibleCount}
-        selector={this.props.selector}
-        onChange={this.props.onChange}
+        width={props.width}
+        itemHeight={props.itemHeight}
+        itemVisibleCount={props.itemVisibleCount}
+        selector={props.selector}
+        onChange={props.onChange}
         renderItem={ContactListItem.render}
-        renderEmpty={this.props.renderEmpty}
+        renderEmpty={props.renderEmpty}
       />
     </div>
   );
