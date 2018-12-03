@@ -14,9 +14,9 @@ import styles from '../CreateNewModal/CreateNewModal.css';
 
 type InputTarget = {
   target: {
-    name: SpaceFields
-  }
-}
+    name: SpaceFields,
+  },
+};
 
 export type Props = {
   space: Space,
@@ -27,18 +27,18 @@ export type Props = {
   onChange: (value: mixed, field: SpaceFields) => void,
   onSubmit: () => void,
   onAvatarChange: (avatar: File) => void,
-  onAvatarRemove: () => void
+  onAvatarRemove: () => void,
 };
 
 export type State = {
-  avatar: ?File
+  avatar: ?File,
 };
 
 export type Context = ProviderContext;
 
 class EditSpaceModalForm extends PureComponent<Props, State> {
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   handleSubmit = (event: SyntheticEvent<>) => {
@@ -55,7 +55,7 @@ class EditSpaceModalForm extends PureComponent<Props, State> {
     if (this.props[field].error) {
       return {
         status: 'error',
-        hint: this.props[field].error
+        hint: this.props[field].error,
       };
     }
 
@@ -68,7 +68,7 @@ class EditSpaceModalForm extends PureComponent<Props, State> {
     return (
       <div className={styles.avatarBlock}>
         <AvatarSelector
-          name={name.value}
+          title={name.value}
           placeholder={space.placeholder}
           avatar={avatar}
           size={140}
@@ -85,7 +85,11 @@ class EditSpaceModalForm extends PureComponent<Props, State> {
     return (
       <div className={styles.info}>
         {this.renderAvatar()}
-        <form className={styles.form} autoComplete="off" onSubmit={this.handleSubmit}>
+        <form
+          className={styles.form}
+          autoComplete="off"
+          onSubmit={this.handleSubmit}
+        >
           <InputNext
             className={styles.input}
             id="edit_space_form_name"
