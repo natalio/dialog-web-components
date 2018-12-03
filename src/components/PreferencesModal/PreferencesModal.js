@@ -31,7 +31,7 @@ class PreferencesModal extends PureComponent<Props> {
   handleSettingsChange = (settings: $Shape<ProfileSettings>): void => {
     this.props.onSettingsChange({
       ...this.props.settings,
-      ...settings
+      ...settings,
     });
   };
 
@@ -76,10 +76,20 @@ class PreferencesModal extends PureComponent<Props> {
 
     switch (screen) {
       case 'general':
-        return <PreferencesGeneral settings={settings} onChange={this.handleSettingsChange} />;
+        return (
+          <PreferencesGeneral
+            settings={settings}
+            onChange={this.handleSettingsChange}
+          />
+        );
 
       case 'notifications':
-        return <PreferencesNotifications settings={settings} onChange={this.handleSettingsChange} />;
+        return (
+          <PreferencesNotifications
+            settings={settings}
+            onChange={this.handleSettingsChange}
+          />
+        );
 
       case 'security':
         if (!sessions.value) {
@@ -99,7 +109,12 @@ class PreferencesModal extends PureComponent<Props> {
           return spinner;
         }
 
-        return <PreferencesBlocked blocked={blocked.value} onUnblockUser={this.props.onUnblockUser} />;
+        return (
+          <PreferencesBlocked
+            blocked={blocked.value}
+            onUnblockUser={this.props.onUnblockUser}
+          />
+        );
 
       default:
         return null;
@@ -114,7 +129,11 @@ class PreferencesModal extends PureComponent<Props> {
       <Modal className={className} onClose={this.props.onClose}>
         <ModalHeader withBorder>
           <Text id="PreferencesModal.title" />
-          <ModalClose pending={this.isPending()} onClick={this.props.onClose} id="preferences_modal_close" />
+          <ModalClose
+            pending={this.isPending()}
+            onClick={this.props.onClose}
+            id="preferences_modal_close"
+          />
         </ModalHeader>
         <ModalBody className={styles.body}>
           <Tabs
@@ -123,27 +142,25 @@ class PreferencesModal extends PureComponent<Props> {
             variants={[
               {
                 id: 'general',
-                title: 'PreferencesModal.general.title'
+                title: 'PreferencesModal.general.title',
               },
               {
                 id: 'notifications',
-                title: 'PreferencesModal.notifications.title'
+                title: 'PreferencesModal.notifications.title',
               },
               {
                 id: 'security',
-                title: 'PreferencesModal.security.title'
+                title: 'PreferencesModal.security.title',
               },
               {
                 id: 'blocked',
-                title: 'PreferencesModal.blocked.title'
-              }
+                title: 'PreferencesModal.blocked.title',
+              },
             ]}
             onPick={this.handleScreenChange}
           />
           <div className={styles.scroller}>
-            <Scroller>
-              {this.renderScreen()}
-            </Scroller>
+            <Scroller>{this.renderScreen()}</Scroller>
           </div>
         </ModalBody>
       </Modal>

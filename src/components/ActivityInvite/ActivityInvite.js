@@ -16,7 +16,7 @@ export type Props = {
   className?: string,
   link: string,
   pending: boolean,
-  onRevoke: ?() => mixed
+  onRevoke: ?() => mixed,
 };
 
 class ActivityInvite extends PureComponent<Props> {
@@ -54,12 +54,15 @@ class ActivityInvite extends PureComponent<Props> {
     return (
       <div className={styles.block}>
         <div className={styles.linkContainer}>
-          <span className={styles.link}>
-            {this.props.link}
-          </span>
+          <span className={styles.link}>{this.props.link}</span>
         </div>
         <CopyOnly block />
-        <CopyButton id="activity_invite_copy_button" wide disabled={this.props.pending} text={this.props.link} />
+        <CopyButton
+          id="activity_invite_copy_button"
+          wide
+          disabled={this.props.pending}
+          text={this.props.link}
+        />
         {this.renderRevoke()}
       </div>
     );
@@ -68,11 +71,7 @@ class ActivityInvite extends PureComponent<Props> {
   render() {
     const className = classNames(styles.container, this.props.className);
 
-    return (
-      <div className={className}>
-        {this.renderContent()}
-      </div>
-    );
+    return <div className={className}>{this.renderContent()}</div>;
   }
 }
 

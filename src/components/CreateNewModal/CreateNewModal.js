@@ -3,7 +3,6 @@
  * @flow
  */
 
-
 import type { PeerInfo } from '@dlghq/dialog-types';
 import type { Props } from './types';
 import type { SelectorState } from '../../entities';
@@ -27,7 +26,7 @@ import HotKeys from '../HotKeys/HotKeys';
 class CreateNewModal extends PureComponent<Props> {
   static defaultProps = {
     id: 'create_new_modal',
-    isPublicGroupsEnabled: true
+    isPublicGroupsEnabled: true,
   };
 
   handlePrevStepClick = (): void => {
@@ -57,21 +56,21 @@ class CreateNewModal extends PureComponent<Props> {
   handleChange = (value: string, { target }: SyntheticInputEvent<>) => {
     this.props.onRequestChange({
       ...this.props.request,
-      [target.name]: value
+      [target.name]: value,
     });
   };
 
   handleMembersChange = (members: SelectorState<PeerInfo>): void => {
     this.props.onRequestChange({
       ...this.props.request,
-      members
+      members,
     });
   };
 
   handleAvatarChange = (avatar: File): void => {
     this.props.onRequestChange({
       ...this.props.request,
-      avatar
+      avatar,
     });
     this.props.onStepChange('info');
   };
@@ -79,14 +78,14 @@ class CreateNewModal extends PureComponent<Props> {
   handleAvatarRemove = (): void => {
     this.props.onRequestChange({
       ...this.props.request,
-      avatar: null
+      avatar: null,
     });
   };
 
   handleAvatarEdit = (avatar: File): void => {
     this.props.onRequestChange({
       ...this.props.request,
-      avatar
+      avatar,
     });
     this.props.onStepChange('avatar');
   };
@@ -127,21 +126,25 @@ class CreateNewModal extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <div className={styles.error}>
-        {error}
-      </div>
-    );
+    return <div className={styles.error}>{error}</div>;
   }
 
   renderTypeStep() {
-    const { id, request: { type }, step } = this.props;
+    const {
+      id,
+      request: { type },
+      step,
+    } = this.props;
 
     return (
       <div className={styles.wrapper}>
         <ModalHeader className={styles.header} withBorder>
           <Text id={`CreateNewModal.${type}.title`} />
-          <ModalClose pending={this.props.pending} onClick={this.props.onClose} id={`${this.props.id}_close_button`} />
+          <ModalClose
+            pending={this.props.pending}
+            onClick={this.props.onClose}
+            id={`${this.props.id}_close_button`}
+          />
         </ModalHeader>
         <ModalBody className={styles.body}>
           <CreateGroupTypeForm
@@ -169,7 +172,12 @@ class CreateNewModal extends PureComponent<Props> {
   }
 
   renderInfoStep() {
-    const { id, step, request: { type, about, title, shortname, avatar }, shortnamePrefix } = this.props;
+    const {
+      id,
+      step,
+      request: { type, about, title, shortname, avatar },
+      shortnamePrefix,
+    } = this.props;
 
     return (
       <div className={styles.wrapper}>
@@ -180,7 +188,11 @@ class CreateNewModal extends PureComponent<Props> {
             className={styles.back}
           />
           <Text id={`CreateNewModal.${type}.title`} />
-          <ModalClose pending={this.props.pending} onClick={this.props.onClose} id={`${this.props.id}_close_button`} />
+          <ModalClose
+            pending={this.props.pending}
+            onClick={this.props.onClose}
+            id={`${this.props.id}_close_button`}
+          />
         </ModalHeader>
         {this.renderError()}
         <ModalBody className={styles.body}>
@@ -217,7 +229,9 @@ class CreateNewModal extends PureComponent<Props> {
   }
 
   renderAvatarStep() {
-    const { request: { avatar } } = this.props;
+    const {
+      request: { avatar },
+    } = this.props;
 
     if (avatar && typeof avatar !== 'string') {
       return (
@@ -254,7 +268,10 @@ class CreateNewModal extends PureComponent<Props> {
   }
 
   renderMembersStep() {
-    const { id, request: { type, members } } = this.props;
+    const {
+      id,
+      request: { type, members },
+    } = this.props;
 
     return (
       <div className={styles.wrapper}>
@@ -283,7 +300,6 @@ class CreateNewModal extends PureComponent<Props> {
         </ModalBody>
         <ModalFooter className={styles.footer}>
           <Button
-            className={styles.halfButton}
             onClick={this.handleSubmit}
             rounded={false}
             form={id}

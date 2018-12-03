@@ -8,7 +8,7 @@ export type SidebarFooterButtonVariant = {
   title: string,
   glyph: string,
   pending: boolean,
-  counter: number
+  counter: number,
 };
 
 export type Props = {
@@ -17,5 +17,5 @@ export type Props = {
   variants: SidebarFooterButtonVariant[],
   onPick: (current: string) => mixed,
   isUpdateAvailable: boolean,
-  onUpdate: () => mixed
+  onUpdate: () => mixed,
 };

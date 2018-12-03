@@ -10,7 +10,7 @@ import styles from './CallVideo.css';
 type Props = {
   className: string,
   stream: MediaSource,
-  isMirrored: boolean
+  isMirrored: boolean,
 };
 
 class CallVideoStream extends PureComponent<Props> {
@@ -47,15 +47,10 @@ class CallVideoStream extends PureComponent<Props> {
   render() {
     const className = classNames(
       this.props.className,
-      this.props.isMirrored ? styles.mirrored : null
+      this.props.isMirrored ? styles.mirrored : null,
     );
 
-    return (
-      <video
-        ref={this.setVideo}
-        className={className}
-      />
-    );
+    return <video ref={this.setVideo} className={className} />;
   }
 }
 

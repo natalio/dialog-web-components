@@ -8,7 +8,10 @@ import { getCountryNamesArray } from '@dlghq/country-codes';
 import { memoize } from 'lodash';
 
 const normalize = memoize((text: string) => {
-  return text.toLowerCase().replace(/\s/g, '').replace(/ё/g, 'е');
+  return text
+    .toLowerCase()
+    .replace(/\s/g, '')
+    .replace(/ё/g, 'е');
 });
 
 export function isCountryMatches(country: Country, query: string): boolean {

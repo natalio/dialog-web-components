@@ -14,11 +14,11 @@ type Props = {
   size?: 'small' | 'normal' | 'large',
   wide: ?boolean,
   id?: string,
-  disabled: boolean
+  disabled: boolean,
 };
 
 type State = {
-  copied: ?boolean
+  copied: ?boolean,
 };
 
 class CopyButton extends Component<Props, State> {
@@ -30,7 +30,7 @@ class CopyButton extends Component<Props, State> {
     super(props);
 
     this.state = {
-      copied: null
+      copied: null,
     };
   }
 
@@ -45,7 +45,7 @@ class CopyButton extends Component<Props, State> {
           this.setState({ copied: null });
 
           return this.props.text;
-        }
+        },
       });
 
       clipboard.on('error', this.handleCopyError);

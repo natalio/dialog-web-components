@@ -62,7 +62,9 @@ class Call extends PureComponent<Props> {
         onGoToPeer={this.props.onGoToPeer}
         onMuteToggle={this.handleMuteToggle}
         onCameraToggle={isVideoEnabled ? this.handleCameraToggle : null}
-        onScreenShareToggle={isScreenSharingEnabled ? this.handleScreenShareToggle : null}
+        onScreenShareToggle={
+          isScreenSharingEnabled ? this.handleScreenShareToggle : null
+        }
       />
     );
   }

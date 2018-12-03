@@ -17,7 +17,15 @@ export type Props = {
   wrapperClassName?: string,
   prefixClassName?: string,
   id: string,
-  type: 'text' | 'number' | 'email' | 'search' | 'tel' | 'url' | 'password' | 'textarea',
+  type:
+    | 'text'
+    | 'number'
+    | 'email'
+    | 'search'
+    | 'tel'
+    | 'url'
+    | 'password'
+    | 'textarea',
   value: string | number,
   name?: string,
   label?: string,
@@ -32,16 +40,23 @@ export type Props = {
   tabIndex?: number,
   htmlAutoFocus?: boolean,
   spellcheck?: boolean,
-  onChange: (value: string, event: SyntheticInputEvent<HTMLAbstractInputElement>) => mixed,
+  onChange: (
+    value: string,
+    event: SyntheticInputEvent<HTMLAbstractInputElement>,
+  ) => mixed,
   onFocus?: (event: SyntheticFocusEvent<HTMLAbstractInputElement>) => mixed,
   onBlur?: (event: SyntheticFocusEvent<HTMLAbstractInputElement>) => mixed,
   onKeyUp?: (event: SyntheticKeyboardEvent<HTMLAbstractInputElement>) => mixed,
-  onKeyDown?: (event: SyntheticKeyboardEvent<HTMLAbstractInputElement>) => mixed,
-  onKeyPress?: (event: SyntheticKeyboardEvent<HTMLAbstractInputElement>) => mixed
+  onKeyDown?: (
+    event: SyntheticKeyboardEvent<HTMLAbstractInputElement>,
+  ) => mixed,
+  onKeyPress?: (
+    event: SyntheticKeyboardEvent<HTMLAbstractInputElement>,
+  ) => mixed,
 };
 
 export type State = {
-  isFocused: boolean
+  isFocused: boolean,
 };
 
 export type Context = ProviderContext;
@@ -55,18 +70,18 @@ class Input extends PureComponent<Props, State> {
   static defaultProps = {
     type: 'text',
     status: 'normal',
-    spellcheck: false
+    spellcheck: false,
   };
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   constructor(props: Props, context: Context) {
     super(props, context);
 
     this.state = {
-      isFocused: false
+      isFocused: false,
     };
   }
 
@@ -150,7 +165,11 @@ class Input extends PureComponent<Props, State> {
     }
 
     return (
-      <label className={styles.label} htmlFor={id} onMouseDown={this.handleLabelMouseDown}>
+      <label
+        className={styles.label}
+        htmlFor={id}
+        onMouseDown={this.handleLabelMouseDown}
+      >
         {l10n.formatText(label)}
       </label>
     );
@@ -164,11 +183,7 @@ class Input extends PureComponent<Props, State> {
       return null;
     }
 
-    return (
-      <p className={styles.hint}>
-        {l10n.formatText(hint)}
-      </p>
-    );
+    return <p className={styles.hint}>{l10n.formatText(hint)}</p>;
   }
 
   renderPrefix() {
@@ -180,7 +195,11 @@ class Input extends PureComponent<Props, State> {
     const className = classNames(styles.prefix, this.props.prefixClassName);
 
     return (
-      <label htmlFor={id} className={className} onMouseDown={this.handleLabelMouseDown}>
+      <label
+        htmlFor={id}
+        className={className}
+        onMouseDown={this.handleLabelMouseDown}
+      >
         {prefix}
       </label>
     );
@@ -200,9 +219,9 @@ class Input extends PureComponent<Props, State> {
         onKeyUp,
         onKeyDown,
         onKeyPress,
-        spellcheck
+        spellcheck,
       },
-      context: { l10n }
+      context: { l10n },
     } = this;
 
     const props = {
@@ -221,7 +240,7 @@ class Input extends PureComponent<Props, State> {
       onFocus: this.handleFocus,
       onKeyDown,
       onKeyPress,
-      onKeyUp
+      onKeyUp,
     };
 
     if (type === 'textarea') {
@@ -232,7 +251,10 @@ class Input extends PureComponent<Props, State> {
   }
 
   render() {
-    const { props: { value, disabled, status, large }, state: { isFocused } } = this;
+    const {
+      props: { value, disabled, status, large },
+      state: { isFocused },
+    } = this;
 
     const className = classNames(
       styles.container,
@@ -241,10 +263,13 @@ class Input extends PureComponent<Props, State> {
       value ? styles.filled : null,
       isFocused ? styles.focused : null,
       disabled ? styles.disabled : null,
-      large ? styles.large : null
+      large ? styles.large : null,
     );
 
-    const wrapperClassName = classNames(styles.inputWrapper, this.props.wrapperClassName);
+    const wrapperClassName = classNames(
+      styles.inputWrapper,
+      this.props.wrapperClassName,
+    );
 
     return (
       <div className={className}>

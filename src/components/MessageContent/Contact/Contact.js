@@ -2,8 +2,10 @@
  * Copyright 2018 dialog LLC <info@dlg.im>
  * @flow
  */
-import React, { PureComponent } from 'react';
+
+import React, { PureComponent, type Node } from 'react';
 import classNames from 'classnames';
+
 import Icon from '../../Icon/Icon';
 import styles from './Contact.css';
 
@@ -12,7 +14,7 @@ export type Props = {|
   photo64: string,
   phones: string[],
   emails: string[],
-  maxWidth: number
+  maxWidth: number,
 |};
 
 class Contact extends PureComponent<Props> {
@@ -49,7 +51,7 @@ class Contact extends PureComponent<Props> {
     );
   }
 
-  renderEmails() {
+  renderEmails(): Node {
     const { emails } = this.props;
 
     if (!emails.length) {
@@ -68,7 +70,7 @@ class Contact extends PureComponent<Props> {
     });
   }
 
-  renderPhones() {
+  renderPhones(): Node {
     const { phones } = this.props;
 
     if (!phones.length) {
@@ -90,16 +92,14 @@ class Contact extends PureComponent<Props> {
   render() {
     const { name, maxWidth } = this.props;
     const className = classNames(styles.container, {
-      [styles.vertical]: maxWidth < 300
+      [styles.vertical]: maxWidth < 300,
     });
 
     return (
       <div className={className} style={{ width: maxWidth }}>
         {this.renderAvatar()}
         <div className={styles.credentials}>
-          <div className={styles.name}>
-            {name}
-          </div>
+          <div className={styles.name}>{name}</div>
           {this.renderPhones()}
           {this.renderEmails()}
         </div>

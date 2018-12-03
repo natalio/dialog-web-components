@@ -16,13 +16,13 @@ export type Props = {
   active: boolean,
   counter: number,
   online?: ?boolean,
-  onSelect: (peer: Peer) => mixed
+  onSelect: (peer: Peer) => mixed,
 };
 
 class SidebarPeerItem extends PureComponent<Props> {
   static defaultProps = {
     counter: 0,
-    active: false
+    active: false,
   };
 
   handleClick = (): void => {
@@ -32,11 +32,7 @@ class SidebarPeerItem extends PureComponent<Props> {
   renderCounter() {
     const { counter } = this.props;
     if (counter > 0) {
-      return (
-        <div className={styles.counter}>
-          {counter}
-        </div>
-      );
+      return <div className={styles.counter}>{counter}</div>;
     }
 
     return null;
@@ -46,14 +42,27 @@ class SidebarPeerItem extends PureComponent<Props> {
     const { active, counter, info, online } = this.props;
     const className = classNames(styles.container, this.props.className, {
       [styles.active]: active,
-      [styles.unread]: counter !== 0
+      [styles.unread]: counter !== 0,
     });
 
     return (
-      <div className={className} onClick={this.handleClick} id={`sidebar_peer_item_${info.peer.id}`}>
-        <PeerAvatar className={styles.avatar} peer={info} online={online} />
+      <div
+        className={className}
+        onClick={this.handleClick}
+        id={`sidebar_peer_item_${info.peer.id}`}
+      >
+        <PeerAvatar
+          className={styles.avatar}
+          peer={info}
+          online={online}
+          size={32}
+        />
         <div className={styles.text}>
-          <PeerInfoTitle title={info.title} titleClassName={styles.title} emojiSize={15} />
+          <PeerInfoTitle
+            title={info.title}
+            titleClassName={styles.title}
+            emojiSize={15}
+          />
         </div>
         {this.renderCounter()}
       </div>

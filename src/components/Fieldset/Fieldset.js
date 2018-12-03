@@ -11,7 +11,7 @@ import styles from './Fieldset.css';
 type Props = {
   className?: string,
   legend?: ?string,
-  children: React.Node
+  children: React.Node,
 };
 
 function Fieldset(props: Props) {
@@ -19,7 +19,9 @@ function Fieldset(props: Props) {
 
   return (
     <fieldset className={className}>
-      {props.legend ? <Text id={props.legend} className={styles.legend} tagName="legend" /> : null}
+      {props.legend ? (
+        <Text id={props.legend} className={styles.legend} tagName="legend" />
+      ) : null}
       {props.children}
     </fieldset>
   );

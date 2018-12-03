@@ -15,7 +15,7 @@ function createMessage(attachment: ?MessageAttachment, text: string = 'test') {
     sender: null,
     content: {
       text,
-      type: 'text'
+      type: 'text',
     },
     reactions: [],
     state: 'unknown',
@@ -23,7 +23,7 @@ function createMessage(attachment: ?MessageAttachment, text: string = 'test') {
     sortDate: 1,
     isOut: true,
     isOnServer: true,
-    attachment
+    attachment,
   };
 }
 
@@ -62,6 +62,9 @@ describe('Flatten message attachments', () => {
     const message1 = createMessage(reply0, 'message1');
     const reply1 = createReply([message1, message0]);
 
-    expect(flatten(reply1)).toEqual([createReply([message0]), createReply([message1])]);
+    expect(flatten(reply1)).toEqual([
+      createReply([message0]),
+      createReply([message1]),
+    ]);
   });
 });

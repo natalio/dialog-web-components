@@ -12,7 +12,7 @@ import styles from './Typing.css';
 
 export type TypingProps = {
   typing: TypingType,
-  className?: string
+  className?: string,
 };
 
 class Typing extends PureComponent<TypingProps> {
@@ -29,15 +29,13 @@ class Typing extends PureComponent<TypingProps> {
           enter: styles.enter,
           enterActive: styles.enterActive,
           exit: styles.leave,
-          exitActive: styles.leaveActive
+          exitActive: styles.leaveActive,
         }}
         timeout={{ enter: 100, exit: 100 }}
       >
         <div className={styles.typing}>
           <Spinner type="dotted" className={styles.indicator} />
-          <div className={styles.text}>
-            {typing.typing}
-          </div>
+          <div className={styles.text}>{typing.typing}</div>
         </div>
       </CSSTransition>
     );
@@ -48,9 +46,7 @@ class Typing extends PureComponent<TypingProps> {
 
     return (
       <div className={className}>
-        <TransitionGroup>
-          {this.renderTyping()}
-        </TransitionGroup>
+        <TransitionGroup>{this.renderTyping()}</TransitionGroup>
       </div>
     );
   }

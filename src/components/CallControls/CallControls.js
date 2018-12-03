@@ -22,7 +22,7 @@ export type Props = {
   onAnswer: () => mixed,
   onMuteToggle?: () => mixed,
   onCameraToggle?: ?() => mixed,
-  onScreenShareToggle?: ?() => mixed
+  onScreenShareToggle?: ?() => mixed,
 };
 
 class CallControls extends PureComponent<Props> {
@@ -32,10 +32,10 @@ class CallControls extends PureComponent<Props> {
       [styles.hide]: !isVisible,
       [styles.onCall]: onCall,
       [styles.withVideo]: withVideo,
-      [styles.large]: size === 'large'
+      [styles.large]: size === 'large',
     });
     const buttonClassName = classNames(styles.button, {
-      [styles.bigButton]: size === 'large'
+      [styles.bigButton]: size === 'large',
     });
 
     const buttons = [];
@@ -51,7 +51,7 @@ class CallControls extends PureComponent<Props> {
           glyph="call"
           className={buttonClassName}
           onClick={this.props.onAnswer}
-        />
+        />,
       );
     }
 
@@ -65,7 +65,7 @@ class CallControls extends PureComponent<Props> {
         glyph="call_end"
         className={buttonClassName}
         onClick={this.props.onEnd}
-      />
+      />,
     );
 
     if (this.props.onMuteToggle) {
@@ -79,10 +79,9 @@ class CallControls extends PureComponent<Props> {
           glyph={this.props.isMuted ? 'mic_material_off' : 'mic_material'}
           className={buttonClassName}
           onClick={this.props.onMuteToggle}
-        />
+        />,
       );
     }
-
 
     if (this.props.onCameraToggle) {
       buttons.push(
@@ -95,7 +94,7 @@ class CallControls extends PureComponent<Props> {
           glyph={this.props.isCameraOn ? 'videocam_off' : 'videocam'}
           className={buttonClassName}
           onClick={this.props.onCameraToggle}
-        />
+        />,
       );
     }
 
@@ -107,18 +106,16 @@ class CallControls extends PureComponent<Props> {
           id="call_controls_screen_share_button"
           size="normal"
           theme="info"
-          glyph={this.props.isScreenSharingOn ? 'screen_share_stop' : 'screen_share'}
+          glyph={
+            this.props.isScreenSharingOn ? 'screen_share_stop' : 'screen_share'
+          }
           className={buttonClassName}
           onClick={this.props.onScreenShareToggle}
-        />
+        />,
       );
     }
 
-    return (
-      <div className={className}>
-        {buttons}
-      </div>
-    );
+    return <div className={className}>{buttons}</div>;
   }
 }
 

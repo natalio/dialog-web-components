@@ -16,7 +16,7 @@ type Props = {
   errors: ?{ [field: string]: AuthError },
   pending: boolean,
   autoFocus?: boolean,
-  onChange: (value: UserNameValue) => mixed
+  onChange: (value: UserNameValue) => mixed,
 };
 
 class AuthorizationByUsername extends PureComponent<Props> {
@@ -35,8 +35,8 @@ class AuthorizationByUsername extends PureComponent<Props> {
       type: 'username',
       credentials: {
         ...this.props.value.credentials,
-        [target.name]: value
-      }
+        [target.name]: value,
+      },
     });
   };
 
@@ -68,7 +68,11 @@ class AuthorizationByUsername extends PureComponent<Props> {
   };
 
   render() {
-    const { id, pending, value: { credentials } } = this.props;
+    const {
+      id,
+      pending,
+      value: { credentials },
+    } = this.props;
 
     return (
       <div className={styles.formWrapper}>

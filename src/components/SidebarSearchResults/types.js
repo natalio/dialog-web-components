@@ -9,7 +9,7 @@ export type SearchEntity = {
   info: PeerInfo,
   focus: Message,
   before: Message[],
-  after: Message[]
+  after: Message[],
 };
 
 export type SidebarSearchResultsProps = {
@@ -18,5 +18,5 @@ export type SidebarSearchResultsProps = {
   peers: PeerInfo[],
   messages: Field<SearchEntity[]>,
   onGoToPeer: (peer: Peer) => mixed,
-  onGoToMessage: (peer: Peer, message: Message) => mixed
+  onGoToMessage: (peer: Peer, message: Message) => mixed,
 };

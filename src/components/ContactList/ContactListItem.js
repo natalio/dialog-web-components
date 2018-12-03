@@ -20,7 +20,7 @@ class ContactListItem extends PureComponent<ItemProps<PeerInfo>> {
   render() {
     const { item, hovered, selected } = this.props;
     const className = classNames(styles.contact, {
-      [styles.hovered]: hovered
+      [styles.hovered]: hovered,
     });
 
     return (
@@ -35,7 +35,11 @@ class ContactListItem extends PureComponent<ItemProps<PeerInfo>> {
               emojiSize={18}
             />
           </div>
-          <CheckButton className={styles.selector} theme="success" checked={selected} />
+          <CheckButton
+            className={styles.selector}
+            theme="success"
+            checked={selected}
+          />
         </div>
       </div>
     );

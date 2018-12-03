@@ -9,7 +9,7 @@ export function scrollToCategory<T>(
   items: T[],
   nextId: string,
   getId: (item: T) => string,
-  getHeight: (item: T) => number
+  getHeight: (item: T) => number,
 ): number {
   let scrollTo = 0;
   for (const item of items) {
@@ -27,7 +27,7 @@ export function handleScroll<T>(
   scrollTop: number,
   items: T[],
   getId: (item: T) => string,
-  getHeight: (item: T) => number
+  getHeight: (item: T) => number,
 ) {
   let fullHeight = 0;
   for (const item of items) {
@@ -36,7 +36,7 @@ export function handleScroll<T>(
     if (fullHeight > scrollTop) {
       return {
         current: getId(item),
-        isAtBottom: offset <= scrollTop
+        isAtBottom: offset <= scrollTop,
       };
     }
   }

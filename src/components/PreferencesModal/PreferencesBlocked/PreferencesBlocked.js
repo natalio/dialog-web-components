@@ -4,9 +4,10 @@
  */
 
 import type { User } from '@dlghq/dialog-types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import { Text, LocalizationContextType } from '@dlghq/react-l10n';
 import { filterByQuery } from '@dlghq/dialog-utils';
+
 import Fieldset from '../../Fieldset/Fieldset';
 import SearchInput from './SearchInput';
 import BlockedUser from './BlockedUser';
@@ -15,25 +16,25 @@ import styles from './Blocked.css';
 
 export type Props = {
   blocked: User[],
-  onUnblockUser: (id: number) => mixed
+  onUnblockUser: (id: number) => mixed,
 };
 
 export type State = {
-  query: string
-}
+  query: string,
+};
 
 class PreferencesSecurity extends PureComponent<Props, State> {
   handleQueryChange: (value: string) => void;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      query: ''
+      query: '',
     };
 
     this.handleQueryChange = this.handleQueryChange.bind(this);
@@ -54,12 +55,14 @@ class PreferencesSecurity extends PureComponent<Props, State> {
     return (
       <SearchInput
         onChange={this.handleQueryChange}
-        placeholder={l10n.formatText('PreferencesModal.blocked.search_placeholder')}
+        placeholder={l10n.formatText(
+          'PreferencesModal.blocked.search_placeholder',
+        )}
       />
     );
   }
 
-  renderBlockedUsers() {
+  renderBlockedUsers(): Node {
     const { blocked } = this.props;
     const { query } = this.state;
 
@@ -70,7 +73,7 @@ class PreferencesSecurity extends PureComponent<Props, State> {
           id="PreferencesModal.blocked.empty"
           className={styles.empty}
           tagName="div"
-        />
+        />,
       ];
     }
 
@@ -83,7 +86,7 @@ class PreferencesSecurity extends PureComponent<Props, State> {
           id="PreferencesModal.blocked.not_found"
           className={styles.notFound}
           tagName="div"
-        />
+        />,
       ];
     }
 

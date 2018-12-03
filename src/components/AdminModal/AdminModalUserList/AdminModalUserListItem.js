@@ -13,12 +13,20 @@ import PeerInfoTitle from '../../PeerInfoTitle/PeerInfoTitle';
 
 type Props = {
   user: GroupMember,
-  hovered: boolean
+  hovered: boolean,
 };
 
 class AdminModalUserListItem extends PureComponent<Props> {
   renderAvatar() {
-    const { user: { peerInfo: { avatar, title, peer: { id } } } } = this.props;
+    const {
+      user: {
+        peerInfo: {
+          avatar,
+          title,
+          peer: { id },
+        },
+      },
+    } = this.props;
     const placeholder = getAvatarPlaceholder(id);
 
     return (
@@ -33,9 +41,13 @@ class AdminModalUserListItem extends PureComponent<Props> {
   }
 
   render() {
-    const { user: { peerInfo: { title } } } = this.props;
+    const {
+      user: {
+        peerInfo: { title },
+      },
+    } = this.props;
     const className = classNames(styles.user, {
-      [styles.userHovered]: this.props.hovered
+      [styles.userHovered]: this.props.hovered,
     });
 
     return (

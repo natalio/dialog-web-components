@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import {
   calculateStickerCategoryHeight,
   calculateEmojiCategoryWidth,
-  calculateStickerCategoryWidth
+  calculateStickerCategoryWidth,
 } from './utils/calculator';
 import { createEmojiCategories } from './utils/categories';
 import EmojiTab from './EmojiTab';
@@ -28,7 +28,7 @@ export type Props = {
   stickers?: StickerPack[],
   categoryHeight: number,
   onClick: (char: string) => mixed,
-  onStickerClick: (sticker: Sticker) => mixed
+  onStickerClick: (sticker: Sticker) => mixed,
 };
 
 type Screen = 'emoji' | 'stickers';
@@ -36,7 +36,7 @@ type Screen = 'emoji' | 'stickers';
 export type State = {
   current: string,
   screen: Screen,
-  isAtBottom: boolean
+  isAtBottom: boolean,
 };
 
 class EmojiList extends PureComponent<Props, State> {
@@ -46,7 +46,7 @@ class EmojiList extends PureComponent<Props, State> {
   listener: ?{ remove(): void };
 
   static defaultProps = {
-    categoryHeight: 38
+    categoryHeight: 38,
   };
 
   constructor(props: Props) {
@@ -56,7 +56,7 @@ class EmojiList extends PureComponent<Props, State> {
     this.state = {
       screen: 'emoji',
       current: categories[0].name,
-      isAtBottom: false
+      isAtBottom: false,
     };
 
     this.height = height;
@@ -65,7 +65,9 @@ class EmojiList extends PureComponent<Props, State> {
 
   componentDidMount(): void {
     if (this.container) {
-      this.listener = listen(this.container, 'scroll', this.handleScroll, { passive: true });
+      this.listener = listen(this.container, 'scroll', this.handleScroll, {
+        passive: true,
+      });
     }
   }
 
@@ -95,7 +97,7 @@ class EmojiList extends PureComponent<Props, State> {
       case 'emoji': {
         this.setState({
           screen: nextScreen,
-          current: this.categories[0].name
+          current: this.categories[0].name,
         });
 
         break;
@@ -106,7 +108,7 @@ class EmojiList extends PureComponent<Props, State> {
         if (stickers && stickers.length) {
           this.setState({
             screen: nextScreen,
-            current: String(stickers[0].id)
+            current: String(stickers[0].id),
           });
         }
 
@@ -127,7 +129,7 @@ class EmojiList extends PureComponent<Props, State> {
           this.categories,
           next,
           (category) => category.name,
-          (category) => category.height
+          (category) => category.height,
         );
 
         if (scrollTo !== -1) {
@@ -143,7 +145,7 @@ class EmojiList extends PureComponent<Props, State> {
             this.props.stickers,
             next,
             (pack) => String(pack.id),
-            (pack) => calculateStickerCategoryHeight(pack.stickers.length)
+            (pack) => calculateStickerCategoryHeight(pack.stickers.length),
           );
 
           if (scrollTo !== -1) {
@@ -168,7 +170,7 @@ class EmojiList extends PureComponent<Props, State> {
           scrollTop,
           this.categories,
           (category) => category.name,
-          (category) => category.height
+          (category) => category.height,
         );
         if (nextState) {
           this.setState(nextState);
@@ -183,7 +185,7 @@ class EmojiList extends PureComponent<Props, State> {
             scrollTop,
             this.props.stickers,
             (pack) => String(pack.id),
-            (pack) => calculateStickerCategoryHeight(pack.stickers.length)
+            (pack) => calculateStickerCategoryHeight(pack.stickers.length),
           );
           if (nextState) {
             this.setState(nextState);
@@ -222,7 +224,8 @@ class EmojiList extends PureComponent<Props, State> {
           const isVisible =
             isActive ||
             (idx > 0 && current === this.categories[idx - 1].name) ||
-            (idx + 1 < this.categories.length && current === this.categories[idx + 1].name);
+            (idx + 1 < this.categories.length &&
+              current === this.categories[idx + 1].name);
 
           return (
             <EmojiCategory
@@ -248,7 +251,8 @@ class EmojiList extends PureComponent<Props, State> {
             const isVisible =
               isActive ||
               (idx > 0 && current === String(stickers[idx - 1].id)) ||
-              (idx + 1 < stickers.length && current === String(stickers[idx + 1].id));
+              (idx + 1 < stickers.length &&
+                current === String(stickers[idx + 1].id));
 
             return (
               <StickerCategory
@@ -288,11 +292,7 @@ class EmojiList extends PureComponent<Props, State> {
           );
         });
 
-        return (
-          <footer className={styles.footer}>
-            {children}
-          </footer>
-        );
+        return <footer className={styles.footer}>{children}</footer>;
       }
 
       case 'stickers': {

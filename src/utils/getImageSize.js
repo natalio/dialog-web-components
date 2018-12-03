@@ -5,14 +5,14 @@
 
 export type ImageSize = {
   width: number,
-  height: number
+  height: number,
 };
 
 function getImageSize(
   width: number,
   height: number,
   maxWidth?: ?number,
-  maxHeight?: ?number
+  maxHeight?: ?number,
 ): ImageSize {
   if (maxWidth && maxHeight) {
     if (maxWidth > width && maxHeight > height) {
@@ -23,7 +23,7 @@ function getImageSize(
 
     return {
       width: width * ratio,
-      height: height * ratio
+      height: height * ratio,
     };
   }
 

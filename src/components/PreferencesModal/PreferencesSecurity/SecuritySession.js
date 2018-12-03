@@ -17,14 +17,14 @@ import UAParser from 'ua-parser-js';
 
 export type Props = {
   session: AuthSession,
-  onSessionTerminate?: (id: number) => mixed
+  onSessionTerminate?: (id: number) => mixed,
 };
 
 class Session extends PureComponent<Props> {
   context: ProviderContext;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   handleTerminateClick = (): void => {
@@ -60,7 +60,10 @@ class Session extends PureComponent<Props> {
     const locale = getDateFnsLocale(this.context.l10n.locale);
 
     return (
-      <time className={styles.sessionAuthTime} dateTime={session.authTime.toISOString()}>
+      <time
+        className={styles.sessionAuthTime}
+        dateTime={session.authTime.toISOString()}
+      >
         {formatDate(session.authTime, format, locale)}
       </time>
     );
@@ -91,11 +94,7 @@ class Session extends PureComponent<Props> {
       deviceTitle = session.deviceTitle;
     }
 
-    return (
-      <div className={styles.sessionDeviceTitle}>
-        {deviceTitle}
-      </div>
-    );
+    return <div className={styles.sessionDeviceTitle}>{deviceTitle}</div>;
   }
 
   render() {
@@ -104,9 +103,7 @@ class Session extends PureComponent<Props> {
     return (
       <Field className={styles.session}>
         <div className={styles.sessionMeta}>
-          <div className={styles.sessionTitle}>
-            {session.appTitle}
-          </div>
+          <div className={styles.sessionTitle}>{session.appTitle}</div>
           {this.renderAuthTime()}
           {this.renderDeviceTitle()}
         </div>

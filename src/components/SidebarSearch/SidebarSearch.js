@@ -22,7 +22,7 @@ export type Props = {
   onBlur: () => mixed,
   onCancel: () => mixed,
   onChange: (query: string) => mixed,
-  onSearch: (query: string) => mixed
+  onSearch: (query: string) => mixed,
 };
 
 export type Context = ProviderContext;
@@ -32,7 +32,7 @@ class SidebarSearch extends Component<Props> {
   input: ?HTMLInputElement;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   constructor(props: Props) {
@@ -93,13 +93,24 @@ class SidebarSearch extends Component<Props> {
       return null;
     }
 
-    return <Icon glyph="close" className={styles.cancel} size={20} onClick={this.handleCancel} />;
+    return (
+      <Icon
+        glyph="close"
+        className={styles.cancel}
+        size={20}
+        onClick={this.handleCancel}
+      />
+    );
   }
 
   render() {
     const { l10n } = this.context;
 
-    const className = classNames(styles.container, this.props.query ? styles.filled : null, this.props.className);
+    const className = classNames(
+      styles.container,
+      this.props.query ? styles.filled : null,
+      this.props.className,
+    );
     const inputClassName = classNames(styles.input, this.props.inputClassName);
 
     const placeholder = l10n.formatText('SidebarSearch.placeholder');

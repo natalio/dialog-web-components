@@ -19,21 +19,21 @@ import HotKeys from '../HotKeys/HotKeys';
 
 type Feedback = {
   text: string,
-  addLogs: boolean
+  addLogs: boolean,
 };
 
 type Props = {
   id: string,
   className?: string,
   onSubmit: (feedback: Feedback) => mixed,
-  onClose: () => mixed
+  onClose: () => mixed,
 };
 
 type State = Feedback;
 
 class FeedbackModal extends PureComponent<Props, State> {
   static defaultProps = {
-    id: 'feedback_modal'
+    id: 'feedback_modal',
   };
 
   constructor(props: Props) {
@@ -41,7 +41,7 @@ class FeedbackModal extends PureComponent<Props, State> {
 
     this.state = {
       text: '',
-      addLogs: true
+      addLogs: true,
     };
   }
 
@@ -75,10 +75,17 @@ class FeedbackModal extends PureComponent<Props, State> {
     return (
       <HotKeys onHotKey={this.handleHotkey}>
         <Modal className={className} onClose={this.props.onClose}>
-          <form id={this.props.id} autoComplete="off" onSubmit={this.handleSubmit}>
+          <form
+            id={this.props.id}
+            autoComplete="off"
+            onSubmit={this.handleSubmit}
+          >
             <ModalHeader withBorder>
               <Text id="FeedbackModal.title" />
-              <ModalClose onClick={this.props.onClose} id={this.props.id + '_close_button'} />
+              <ModalClose
+                onClick={this.props.onClose}
+                id={this.props.id + '_close_button'}
+              />
             </ModalHeader>
             <ModalBody className={styles.body}>
               <InputNext

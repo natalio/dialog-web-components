@@ -17,8 +17,4 @@ function hasVideos(call: Call): boolean {
   return Boolean(hasOwnVideos(call) || hasTheirVideos(call));
 }
 
-export {
-  hasVideos,
-  hasOwnVideos,
-  hasTheirVideos
-};
+export { hasVideos, hasOwnVideos, hasTheirVideos };

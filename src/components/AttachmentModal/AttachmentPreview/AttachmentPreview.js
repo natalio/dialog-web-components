@@ -49,7 +49,13 @@ class AttachmentPreview extends PureComponent<Props> {
     const extension = this.getExtension();
 
     return (
-      <div className={classNames(styles.file, styles[type], this.props.fileClassName)}>
+      <div
+        className={classNames(
+          styles.file,
+          styles[type],
+          this.props.fileClassName,
+        )}
+      >
         {extension}
       </div>
     );

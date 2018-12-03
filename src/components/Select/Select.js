@@ -4,7 +4,7 @@
  */
 
 import type { Props } from './types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import { Text, LocalizationContextType } from '@dlghq/react-l10n';
 import classNames from 'classnames';
 import Icon from '../Icon/Icon';
@@ -15,11 +15,11 @@ class Select extends PureComponent<Props> {
 
   static defaultProps = {
     size: 'normal',
-    theme: 'default'
+    theme: 'default',
   };
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   handleChange = (event: SyntheticInputEvent<HTMLSelectElement>): void => {
@@ -44,7 +44,7 @@ class Select extends PureComponent<Props> {
     }
   }
 
-  renderOptions() {
+  renderOptions(): Node {
     const options = this.props.options.map((option) => {
       return (
         <Text
@@ -60,7 +60,7 @@ class Select extends PureComponent<Props> {
       options.unshift(
         <option key="__placeholder__" value="" disabled>
           {this.props.placeholder}
-        </option>
+        </option>,
       );
     }
 
@@ -88,10 +88,19 @@ class Select extends PureComponent<Props> {
 
   render() {
     const { id, name, disabled, size, theme } = this.props;
-    const className = classNames(styles.container, styles[size], styles[theme], {
-      [styles.disabled]: disabled
-    }, this.props.className);
-    const wrapperClassName = classNames(styles.wrapper, this.props.wrapperClassName);
+    const className = classNames(
+      styles.container,
+      styles[size],
+      styles[theme],
+      {
+        [styles.disabled]: disabled,
+      },
+      this.props.className,
+    );
+    const wrapperClassName = classNames(
+      styles.wrapper,
+      this.props.wrapperClassName,
+    );
 
     return (
       <div className={className}>
@@ -109,11 +118,7 @@ class Select extends PureComponent<Props> {
           >
             {this.renderOptions()}
           </select>
-          <Icon
-            size={32}
-            glyph="arrow_drop_down"
-            className={styles.arrow}
-          />
+          <Icon size={32} glyph="arrow_drop_down" className={styles.arrow} />
         </div>
       </div>
     );

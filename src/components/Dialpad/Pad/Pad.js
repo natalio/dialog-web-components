@@ -3,30 +3,27 @@
  * @flow
  */
 
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import classNames from 'classnames';
+
 import styles from './Pad.css';
 import PadButton from '../PadButton/PadButton';
 
 type Props = {
   className?: string,
   buttons: string[],
-  onPress: (value: string) => mixed
+  onPress: (value: string) => mixed,
 };
 
 class Pad extends PureComponent<Props> {
   static defaultProps = {
-    buttons: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#']
+    buttons: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'],
   };
 
-  renderButtons() {
+  renderButtons(): Node {
     return this.props.buttons.map((value) => {
       return (
-        <PadButton
-          key={value}
-          value={value}
-          onClick={this.props.onPress}
-        />
+        <PadButton key={value} value={value} onClick={this.props.onPress} />
       );
     });
   }
@@ -34,11 +31,7 @@ class Pad extends PureComponent<Props> {
   render() {
     const className = classNames(styles.container, this.props.className);
 
-    return (
-      <div className={className}>
-        {this.renderButtons()}
-      </div>
-    );
+    return <div className={className}>{this.renderButtons()}</div>;
   }
 }
 

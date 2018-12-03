@@ -10,9 +10,9 @@ import { LocalizationContextType } from '@dlghq/react-l10n';
 import { Text } from '@dlghq/react-l10n';
 import { formatTime } from '@dlghq/dialog-utils';
 import classNames from 'classnames';
-import DoublePeerAvatar from '../DoublePeerAvatar/DoublePeerAvatar';
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
-import getDateFnsLocale from '../../utils/getDateFnsLocale';
+import PeerAvatarDouble from '../PeerAvatarDouble/PeerAvatarDouble';
+import Icon from '../Icon/Icon';
+import formatRelative from '../../utils/formatRelative';
 import styles from './SidebarCallItem.css';
 
 export type CallState = 'outgoing' | 'incoming' | 'canceled' | 'missed';
@@ -21,7 +21,7 @@ export type Props = {
   className?: string,
   call: CallInfo,
   uid: number,
-  onSelect: (call: CallInfo) => mixed
+  onSelect: (call: CallInfo) => mixed,
 };
 
 type Context = ProviderContext;
@@ -30,7 +30,7 @@ class SidebarCallItem extends PureComponent<Props> {
   context: Context;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   handleClick = (): void => {
@@ -38,7 +38,10 @@ class SidebarCallItem extends PureComponent<Props> {
   };
 
   getCallState = (): CallState => {
-    const { uid, call: { initiator, isAnswered } } = this.props;
+    const {
+      uid,
+      call: { initiator, isAnswered },
+    } = this.props;
 
     let state = '';
 
@@ -61,39 +64,53 @@ class SidebarCallItem extends PureComponent<Props> {
 
   renderAvatar() {
     return (
-      <DoublePeerAvatar
+      <PeerAvatarDouble
         className={styles.avatar}
-        size={40}
-        peerBig={this.props.call.initiator}
-        peerSmall={this.props.call.recipient}
+        size={37}
+        big={this.props.call.initiator}
+        small={this.props.call.recipient}
       />
     );
   }
 
+  renderTitle() {
+    const {
+      call: { recipient },
+    } = this.props;
+
+    return <Text id={recipient.title} className={styles.title} />;
+  }
+
   renderState() {
     const state = this.getCallState();
+    const className = classNames(styles.state, {
+      [styles.stateActive]: state === 'missed',
+    });
+    const glyph = state === 'incoming' ? 'incoming' : 'outgoing';
 
     return (
-      <div className={styles.state}>
-        <Text id={`SidebarCallItem.${state}`} />
+      <div className={className}>
+        <Icon glyph={`call_${glyph}`} size={12} className={styles.icon} />
+        <Text id={`SidebarCallItem.${state}`} className={styles.text} />
         {this.renderDuration()}
       </div>
     );
   }
 
   renderTime() {
-    const { call: { date } } = this.props;
-    const locale = getDateFnsLocale(this.context.l10n.locale);
+    const {
+      call: { date },
+    } = this.props;
+    const locale = this.context.l10n.locale;
+    const time = formatRelative(date, new Date(), { locale });
 
-    return (
-      <time className={styles.time}>
-        {distanceInWordsToNow(date, { addSuffix: true, includeSeconds: true, locale })}
-      </time>
-    );
+    return <time className={styles.time}>{time}</time>;
   }
 
   renderDuration() {
-    const { call: { duration, isAnswered } } = this.props;
+    const {
+      call: { duration, isAnswered },
+    } = this.props;
 
     if (!isAnswered) {
       return null;
@@ -106,9 +123,10 @@ class SidebarCallItem extends PureComponent<Props> {
     );
   }
 
-  renderText() {
+  renderContent() {
     return (
-      <div className={styles.text}>
+      <div className={styles.content}>
+        {this.renderTitle()}
         {this.renderState()}
         {this.renderTime()}
       </div>
@@ -119,9 +137,13 @@ class SidebarCallItem extends PureComponent<Props> {
     const className = classNames(styles.container, this.props.className);
 
     return (
-      <div className={className} onClick={this.handleClick} id={`sidebar_call_item_${this.props.call.id}`}>
+      <div
+        className={className}
+        onClick={this.handleClick}
+        id={`sidebar_call_item_${this.props.call.id}`}
+      >
         {this.renderAvatar()}
-        {this.renderText()}
+        {this.renderContent()}
       </div>
     );
   }

@@ -14,7 +14,7 @@ export type ItemProps<T> = {
   item: T,
   hovered: boolean,
   selected: boolean,
-  isScrolling: boolean
+  isScrolling: boolean,
 };
 
 export type Props<T> = {
@@ -25,21 +25,17 @@ export type Props<T> = {
   selector: SelectorState<T>,
   onChange: (selector: SelectorState<T>) => mixed,
   renderItem: (props: ItemProps<T>) => Node,
-  renderEmpty?: () => Node
+  renderEmpty?: () => Node,
 };
 
 class SelectList<T> extends PureComponent<Props<T>, void> {
   handleHover = (index: number): void => {
-    this.props.onChange(
-      this.props.selector.setHoverIndex(index)
-    );
+    this.props.onChange(this.props.selector.setHoverIndex(index));
   };
 
   handleSelect = (index: number): void => {
     this.props.onChange(
-      this.props.selector.toggleSelected(
-        this.props.selector.getItem(index)
-      )
+      this.props.selector.toggleSelected(this.props.selector.getItem(index)),
     );
   };
 
@@ -61,7 +57,7 @@ class SelectList<T> extends PureComponent<Props<T>, void> {
           item,
           hovered,
           selected,
-          isScrolling
+          isScrolling,
         })}
       </SelectRow>
     );

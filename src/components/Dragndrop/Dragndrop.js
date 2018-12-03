@@ -10,7 +10,7 @@ import Icon from '../Icon/Icon';
 import styles from './Dragndrop.css';
 
 export type Props = {
-  className?: string
+  className?: string,
 };
 
 class Dragndrop extends PureComponent<Props> {

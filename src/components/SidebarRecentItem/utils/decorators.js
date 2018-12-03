@@ -9,16 +9,9 @@ import {
   italic,
   strike,
   emoji,
-  namedEmoji
+  namedEmoji,
 } from '@dlghq/markdown/src/decorators';
 
-const decorators = [
-  code,
-  bold,
-  italic,
-  strike,
-  emoji,
-  namedEmoji
-];
+const decorators = [code, bold, italic, strike, emoji, namedEmoji];
 
 export default decorators;

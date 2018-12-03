@@ -17,7 +17,7 @@ export type Props = {
   info: Group,
   children: Node,
   onAvatarClick?: () => mixed,
-  onCreatorClick: (peer: Peer) => mixed
+  onCreatorClick: (peer: Peer) => mixed,
 };
 
 class ActivityGroupProfile extends PureComponent<Props> {
@@ -30,7 +30,9 @@ class ActivityGroupProfile extends PureComponent<Props> {
   };
 
   getCreator = () => {
-    const { info: { members, adminId } } = this.props;
+    const {
+      info: { members, adminId },
+    } = this.props;
 
     return members.find((member) => {
       return member.peerInfo.peer.id === adminId;
@@ -38,7 +40,9 @@ class ActivityGroupProfile extends PureComponent<Props> {
   };
 
   renderAvatar() {
-    const { info: { name, bigAvatar, placeholder } } = this.props;
+    const {
+      info: { name, bigAvatar, placeholder },
+    } = this.props;
 
     return (
       <Avatar
@@ -53,7 +57,9 @@ class ActivityGroupProfile extends PureComponent<Props> {
   }
 
   renderTitle() {
-    const { info: { name, shortname } } = this.props;
+    const {
+      info: { name, shortname },
+    } = this.props;
 
     return (
       <PeerInfoTitle
@@ -67,7 +73,9 @@ class ActivityGroupProfile extends PureComponent<Props> {
   }
 
   renderCreator() {
-    const { info: { type } } = this.props;
+    const {
+      info: { type },
+    } = this.props;
 
     if (type !== 'group') {
       return null;
@@ -93,7 +101,9 @@ class ActivityGroupProfile extends PureComponent<Props> {
   }
 
   renderAbout() {
-    const { info: { about } } = this.props;
+    const {
+      info: { about },
+    } = this.props;
 
     if (!about) {
       return null;
@@ -101,7 +111,11 @@ class ActivityGroupProfile extends PureComponent<Props> {
 
     return (
       <div className={styles.wrapper}>
-        <Text className={styles.title} tagName="div" id="ActivityProfile.about" />
+        <Text
+          className={styles.title}
+          tagName="div"
+          id="ActivityProfile.about"
+        />
         <Markdown text={about} className={styles.about} emojiSize={18} />
       </div>
     );
@@ -114,11 +128,7 @@ class ActivityGroupProfile extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <div className={styles.actions}>
-        {children}
-      </div>
-    );
+    return <div className={styles.actions}>{children}</div>;
   }
 
   render() {

@@ -4,17 +4,17 @@
  */
 
 import type { CallVideo as CallVideoType } from '@dlghq/dialog-types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import CallVideoStream from './CallVideoStream';
 import styles from './CallVideo.css';
 
 export type Props = {
   ownVideos?: CallVideoType[],
-  theirVideos: CallVideoType[]
+  theirVideos: CallVideoType[],
 };
 
 class CallVideo extends PureComponent<Props> {
-  renderTheirVideos() {
+  renderTheirVideos(): Node {
     const { theirVideos } = this.props;
 
     return theirVideos.map(({ stream, isMirrored }) => {
@@ -30,7 +30,7 @@ class CallVideo extends PureComponent<Props> {
     });
   }
 
-  renderOwnVideos() {
+  renderOwnVideos(): Node | null {
     const { ownVideos } = this.props;
 
     if (!ownVideos) {
@@ -49,19 +49,13 @@ class CallVideo extends PureComponent<Props> {
       );
     });
 
-    return (
-      <div className={styles.ownVideos}>
-        {videos}
-      </div>
-    );
+    return <div className={styles.ownVideos}>{videos}</div>;
   }
 
   render() {
     return (
       <div className={styles.container}>
-        <div className={styles.videoContainer}>
-          {this.renderTheirVideos()}
-        </div>
+        <div className={styles.videoContainer}>{this.renderTheirVideos()}</div>
         {this.renderOwnVideos()}
       </div>
     );

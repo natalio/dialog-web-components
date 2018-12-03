@@ -5,7 +5,7 @@
 
 import type {
   MessageMediaInteractiveStyle,
-  MessageMediaInteractiveButton
+  MessageMediaInteractiveButton,
 } from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
@@ -16,7 +16,7 @@ export type Props = {
   className?: string,
   style?: ?MessageMediaInteractiveStyle,
   widget: MessageMediaInteractiveButton,
-  onSubmit: (value: string) => mixed
+  onSubmit: (value: string) => mixed,
 };
 
 class MessageMediaInteractiveWidgetButton extends PureComponent<Props> {
@@ -37,7 +37,7 @@ class MessageMediaInteractiveWidgetButton extends PureComponent<Props> {
           view="outline"
           onClick={this.handleClick}
         >
-          {widget.label}
+          {widget.label || ''}
         </Button>
       </div>
     );

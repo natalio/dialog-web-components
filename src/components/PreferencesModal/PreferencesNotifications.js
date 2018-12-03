@@ -13,36 +13,36 @@ export type Settings = {
   isCounterIncludeMuted: boolean,
   isOnlyMentionNotifications: boolean,
   isGroupsNotificationsEnabled: boolean,
-  isShowNotificationsTextEnabled: boolean
+  isShowNotificationsTextEnabled: boolean,
 };
 
 export type Props = {
   settings: Settings,
-  onChange: (settings: $Shape<Settings>) => mixed
+  onChange: (settings: $Shape<Settings>) => mixed,
 };
 
 class PreferencesNotifications extends PureComponent<Props> {
   handleOnlyMentionChange = (value: boolean) => {
     this.props.onChange({
-      isOnlyMentionNotifications: value
+      isOnlyMentionNotifications: value,
     });
   };
 
   handleGroupsChange = (value: boolean) => {
     this.props.onChange({
-      isGroupsNotificationsEnabled: value
+      isGroupsNotificationsEnabled: value,
     });
   };
 
   handleShowTextChange = (value: boolean) => {
     this.props.onChange({
-      isShowNotificationsTextEnabled: value
+      isShowNotificationsTextEnabled: value,
     });
   };
 
   handleIncludeMutedChange = (value: boolean) => {
     this.props.onChange({
-      isCounterIncludeMuted: value
+      isCounterIncludeMuted: value,
     });
   };
 

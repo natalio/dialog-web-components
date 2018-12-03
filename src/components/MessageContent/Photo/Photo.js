@@ -18,17 +18,26 @@ export type Props = {
   preview: ?string,
   fileUrl: ?string,
   fileName: ?string,
-  onClick?: (event: SyntheticMouseEvent<>) => mixed
+  onClick?: (event: SyntheticMouseEvent<>) => mixed,
 };
 
 function Photo(props: Props) {
-  const { fileUrl, fileName, preview, width, height, rid, maxWidth, maxHeight } = props;
+  const {
+    fileUrl,
+    fileName,
+    preview,
+    width,
+    height,
+    rid,
+    maxWidth,
+    maxHeight,
+  } = props;
   const className = classNames(
     styles.container,
     {
-      [styles.clickable]: props.onClick
+      [styles.clickable]: props.onClick,
     },
-    props.className
+    props.className,
   );
 
   return (

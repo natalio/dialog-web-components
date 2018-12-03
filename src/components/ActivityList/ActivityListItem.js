@@ -15,10 +15,10 @@ export type Props = {
   children: Node,
   icon?: ?{
     glyph: string,
-    theme: ColorTheme
+    theme: ColorTheme,
   },
   withoutArrow?: boolean,
-  onClick?: (event: SyntheticMouseEvent<>) => mixed
+  onClick?: (event: SyntheticMouseEvent<>) => mixed,
 };
 
 class ActivityListItem extends PureComponent<Props> {
@@ -44,24 +44,28 @@ class ActivityListItem extends PureComponent<Props> {
       return null;
     }
 
-    return <Icon glyph="keyboard_arrow_right" className={styles.arrow} size={24} />;
+    return (
+      <Icon glyph="keyboard_arrow_right" className={styles.arrow} size={24} />
+    );
   }
 
   render() {
     const className = classNames(
       styles.item,
       {
-        [styles.clickable]: this.props.onClick
+        [styles.clickable]: this.props.onClick,
       },
-      this.props.className
+      this.props.className,
     );
 
     return (
-      <div className={className} onClick={this.props.onClick} id={this.props.id}>
+      <div
+        className={className}
+        onClick={this.props.onClick}
+        id={this.props.id}
+      >
         {this.renderIcon()}
-        <div className={styles.content}>
-          {this.props.children}
-        </div>
+        <div className={styles.content}>{this.props.children}</div>
         {this.renderArrow()}
       </div>
     );

@@ -19,7 +19,7 @@ export type Props = {
   flat: boolean,
   disabled: boolean,
   active?: boolean,
-  onClick: (event: SyntheticMouseEvent<>) => mixed
+  onClick: (event: SyntheticEvent<HTMLButtonElement>) => mixed,
 };
 
 class IconButton extends PureComponent<Props> {
@@ -29,7 +29,7 @@ class IconButton extends PureComponent<Props> {
     size: 'normal',
     flat: false,
     theme: 'default',
-    disabled: false
+    disabled: false,
   };
 
   getIconSize = (): number => {
@@ -76,9 +76,9 @@ class IconButton extends PureComponent<Props> {
         [styles.defaultStyle]: !flat,
         [styles.flat]: flat,
         [styles[theme]]: flat,
-        [styles.active]: active
+        [styles.active]: active,
       },
-      className
+      className,
     );
 
     return (
@@ -91,9 +91,7 @@ class IconButton extends PureComponent<Props> {
         onClick={onClick}
         {...otherProps}
       >
-        <span className={styles.fix}>
-          {this.renderIcon()}
-        </span>
+        <span className={styles.fix}>{this.renderIcon()}</span>
       </button>
     );
   }

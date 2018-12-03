@@ -19,12 +19,12 @@ export type Props = {
   message: string,
   submit: string,
   theme: ColorTheme,
-  onSubmit: () => void
+  onSubmit: () => void,
 };
 
 class Alert extends PureComponent<Props> {
   static defaultProps = {
-    theme: 'default'
+    theme: 'default',
   };
 
   handleSubmit = (): void => {
@@ -40,7 +40,7 @@ class Alert extends PureComponent<Props> {
         this.handleSubmit();
         break;
       default:
-        // do nothing
+      // do nothing
     }
   };
 
@@ -52,7 +52,11 @@ class Alert extends PureComponent<Props> {
         <Modal isOpen className={className} overlayClassName={styles.overlay}>
           <div className={modalStyles.wrapper}>
             <ModalBody className={styles.body}>
-              <Text id={this.props.message} tagName="h3" className={styles.message} />
+              <Text
+                id={this.props.message}
+                tagName="h3"
+                className={styles.message}
+              />
             </ModalBody>
             <ModalFooter className={styles.footer}>
               <Button

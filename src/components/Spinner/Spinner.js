@@ -10,13 +10,13 @@ import styles from './Spinner.css';
 export type Props = {
   className?: string,
   type: 'round' | 'wave' | 'dotted',
-  size: 'small' | 'normal' | 'large'
+  size: 'small' | 'normal' | 'large',
 };
 
 class Spinner extends PureComponent<Props> {
   static defaultProps = {
     type: 'round',
-    size: 'small'
+    size: 'small',
   };
 
   render() {
@@ -24,7 +24,7 @@ class Spinner extends PureComponent<Props> {
       styles.container,
       this.props.className,
       styles[this.props.type],
-      styles[this.props.size]
+      styles[this.props.size],
     );
 
     switch (this.props.type) {
@@ -53,8 +53,12 @@ class Spinner extends PureComponent<Props> {
         return (
           <svg viewBox="0 0 50 50" className={className} shapeRendering="auto">
             <circle
-              className={styles.path} cx="25" cy="25" r="20"
-              fill="none" strokeMiterlimit="10"
+              className={styles.path}
+              cx="25"
+              cy="25"
+              r="20"
+              fill="none"
+              strokeMiterlimit="10"
             />
           </svg>
         );

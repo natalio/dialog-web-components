@@ -18,7 +18,7 @@ export type Props = {
   counter?: number,
   active: boolean,
   pending: boolean,
-  onPick: (id: string) => mixed
+  onPick: (id: string) => mixed,
 };
 
 class SidebarFooterButton extends PureComponent<Props> {
@@ -52,13 +52,12 @@ class SidebarFooterButton extends PureComponent<Props> {
     }
 
     const isBig = counter > 99;
-    const counterClassName = classNames(styles.counter, isBig ? styles.counterBig : null);
-
-    return (
-      <div className={counterClassName}>
-        {isBig ? '99+' : counter}
-      </div>
+    const counterClassName = classNames(
+      styles.counter,
+      isBig ? styles.counterBig : null,
     );
+
+    return <div className={counterClassName}>{isBig ? '99+' : counter}</div>;
   }
 
   render() {
@@ -66,14 +65,18 @@ class SidebarFooterButton extends PureComponent<Props> {
     const className = classNames(
       styles.button,
       {
-        [styles.active]: active
+        [styles.active]: active,
       },
-      this.props.className
+      this.props.className,
     );
 
     return (
       <Tooltip text={title} key={id} className={styles.tooltip}>
-        <div className={className} onClick={this.handleClick} id={`sidebar_footer_${id}_button`}>
+        <div
+          className={className}
+          onClick={this.handleClick}
+          id={`sidebar_footer_${id}_button`}
+        >
           <div className={styles.wrapper}>
             {this.renderIcon()}
             {this.renderCounter()}

@@ -16,11 +16,11 @@ import styles from './CallFingerprint.css';
 type Props = {
   fingerprint: string,
   className?: string,
-  isVideoRuning: boolean
+  isVideoRuning: boolean,
 };
 
 type State = {
-  show: boolean
+  show: boolean,
 };
 
 class CallFingerprint extends PureComponent<Props, State> {
@@ -30,7 +30,7 @@ class CallFingerprint extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      show: true
+      show: true,
     };
   }
 
@@ -66,17 +66,21 @@ class CallFingerprint extends PureComponent<Props, State> {
           enter: styles.enter,
           enterActive: styles.enterActive,
           leave: styles.leave,
-          exitActive: styles.leaveActive
+          exitActive: styles.leaveActive,
         }}
         timeout={{
           enter: 250,
-          exit: 250
+          exit: 250,
         }}
         unmountOnExit
         in={this.state.show}
       >
         <div className={styles.fingerprint}>
-          <Markdown renderBigEmoji={false} text={this.props.fingerprint} emojiSize={24} />
+          <Markdown
+            renderBigEmoji={false}
+            text={this.props.fingerprint}
+            emojiSize={24}
+          />
         </div>
       </CSSTransition>
     );
@@ -89,11 +93,11 @@ class CallFingerprint extends PureComponent<Props, State> {
           enter: styles.hintEnter,
           enterActive: styles.hintEnterActive,
           leave: styles.hintLeave,
-          exitActive: styles.hintLeaveActive
+          exitActive: styles.hintLeaveActive,
         }}
         timeout={{
           enter: 250,
-          exit: 250
+          exit: 250,
         }}
         unmountOnExit
         in={this.state.show}
@@ -107,7 +111,7 @@ class CallFingerprint extends PureComponent<Props, State> {
     const className = classNames(
       styles.container,
       this.props.isVideoRuning ? styles.withVideo : null,
-      this.props.className
+      this.props.className,
     );
 
     return (

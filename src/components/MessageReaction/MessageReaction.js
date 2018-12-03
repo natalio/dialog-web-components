@@ -4,7 +4,10 @@
  */
 
 import type { Map } from 'immutable';
-import type { PeerInfo, MessageReaction as MessageReactionType } from '@dlghq/dialog-types';
+import type {
+  PeerInfo,
+  MessageReaction as MessageReactionType,
+} from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import { Text } from '@dlghq/react-l10n';
 import { getEmojiByChar } from '@dlghq/emoji';
@@ -16,8 +19,8 @@ type Props = {
   className?: string,
   users: Map<number, PeerInfo>,
   reaction: MessageReactionType,
-  onToggle: (char: string) => mixed
-}
+  onToggle: (char: string) => mixed,
+};
 
 class MessageReaction extends PureComponent<Props> {
   renderTooltip() {
@@ -34,17 +37,11 @@ class MessageReaction extends PureComponent<Props> {
         const nickname = user.userName ? '@' + user.userName : user.title;
 
         if (children.length > 0) {
-          children.push(
-            <span key={i}>
-              {', '}
-            </span>
-          );
+          children.push(<span key={i}>{', '}</span>);
         }
 
         children.push(
-          <strong key={peerToString(user.peer)}>
-            {nickname}
-          </strong>
+          <strong key={peerToString(user.peer)}>{nickname}</strong>,
         );
       }
     }

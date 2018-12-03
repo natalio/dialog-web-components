@@ -15,7 +15,7 @@ type Props = {
   src: ?string,
   duration?: ?number,
   pending?: ?boolean,
-  sender?: ?string
+  sender?: ?string,
 };
 
 type State = {
@@ -23,7 +23,7 @@ type State = {
   error: ?MediaError,
   duration: number,
   isPlaying: boolean,
-  currentTime: number
+  currentTime: number,
 };
 
 class AudioPlayer extends PureComponent<Props, State> {
@@ -38,7 +38,7 @@ class AudioPlayer extends PureComponent<Props, State> {
       error: null,
       duration: props.duration || 0,
       isPlaying: false,
-      currentTime: 0
+      currentTime: 0,
     };
   }
 
@@ -49,7 +49,7 @@ class AudioPlayer extends PureComponent<Props, State> {
       this.setState({
         error,
         isPlaying: false,
-        currentTime: 0
+        currentTime: 0,
       });
 
       console.error(error); // eslint-disable-line
@@ -69,7 +69,7 @@ class AudioPlayer extends PureComponent<Props, State> {
             key: String(Math.random()),
             error: null,
             isPlaying: true,
-            currentTime: 0
+            currentTime: 0,
           };
         }
 
@@ -101,7 +101,8 @@ class AudioPlayer extends PureComponent<Props, State> {
 
     if (this.rewind && !this.state.error) {
       const rewindRect = this.rewind.getBoundingClientRect();
-      const rewindPosition = (event.clientX - rewindRect.left) / rewindRect.width;
+      const rewindPosition =
+        (event.clientX - rewindRect.left) / rewindRect.width;
 
       if (this.audio) {
         this.audio.currentTime = this.audio.duration * rewindPosition;
@@ -164,16 +165,24 @@ class AudioPlayer extends PureComponent<Props, State> {
 
   renderPlayerSeeker() {
     const { currentTime, duration } = this.state;
-    const progress = currentTime / duration * 100;
+    const progress = (currentTime / duration) * 100;
     const current = getHumanTime(currentTime);
 
     const className = classNames(styles.seeker, {
-      [styles.seekerError]: this.state.error
+      [styles.seekerError]: this.state.error,
     });
 
     return (
-      <div className={className} onClick={this.handleRewind} ref={this.setRewind} title={current}>
-        <div className={styles.seekerPlayed} style={{ width: progress + '%' }} />
+      <div
+        className={className}
+        onClick={this.handleRewind}
+        ref={this.setRewind}
+        title={current}
+      >
+        <div
+          className={styles.seekerPlayed}
+          style={{ width: progress + '%' }}
+        />
       </div>
     );
   }
@@ -207,9 +216,7 @@ class AudioPlayer extends PureComponent<Props, State> {
     }
 
     return (
-      <div className={styles.state}>
-        {getHumanTime(this.state.duration)}
-      </div>
+      <div className={styles.state}>{getHumanTime(this.state.duration)}</div>
     );
   }
 
