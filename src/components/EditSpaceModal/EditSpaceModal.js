@@ -6,6 +6,7 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { Text } from '@dlghq/react-l10n';
+import { fileToBase64 } from '@dlghq/dialog-utils';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import ModalHeader from '../Modal/ModalHeader';
@@ -25,70 +26,27 @@ class EditSpaceModal extends PureComponent<Props, State> {
 
     this.state = {
       screen: 'info',
-      space: {
-        name: props.space.name,
-        shortname: props.space.shortname,
-        avatar: props.space.avatar
-      }
+      avatar: null
     };
   }
 
-  handleChange = (value: mixed, { target }: $FlowIssue) => {
-    this.setState(({ space }) => {
-      return {
-        space: {
-          ...space,
-          [target.name]: value
-        }
-      };
+  handleAvatarEdit = (avatar: File): void => {
+    fileToBase64(avatar, (newAvatar) => {
+      this.props.onAvatarEdit(newAvatar);
+
+      this.setState({
+        screen: 'info',
+        avatar: null
+      });
     });
   };
 
   handleAvatarChange = (avatar: File): void => {
-    this.setState(({ space }) => {
-      return {
-        screen: 'info',
-        space: {
-          ...space,
-          avatar
-        }
-      };
-    });
+    this.setState({ screen: 'avatar', avatar });
   };
 
-  handleAvatarRemove = (): void => {
-    this.setState(({ space }) => {
-      return {
-        space: {
-          ...space,
-          avatar: null
-        }
-      };
-    });
-  };
-
-  handleAvatarEdit = (avatar: File): void => {
-    this.setState(({ space }) => {
-      return {
-        screen: 'avatar',
-        space: {
-          ...space,
-          avatar
-        }
-      };
-    });
-  };
-
-  handleGoToInfo = (): void => {
-    this.setState(({ space }) => {
-      return {
-        screen: 'info',
-        space: {
-          ...space,
-          avatar: this.props.space.avatar
-        }
-      };
-    });
+  handleGoBack = (): void => {
+    this.setState({ screen: 'info' });
   };
 
   handleSubmit = (event?: SyntheticEvent<>): void => {
@@ -96,7 +54,7 @@ class EditSpaceModal extends PureComponent<Props, State> {
       event.preventDefault();
     }
 
-    this.props.onSubmit(this.props.space, this.state.space);
+    this.props.onSubmit();
   };
 
   handleHotkey = (hotkey: string, event: KeyboardEvent): void => {
@@ -109,14 +67,6 @@ class EditSpaceModal extends PureComponent<Props, State> {
       }
     }
   };
-
-  isChanged(): boolean {
-    const { context: { avatar, name, shortname } } = this.props;
-
-    return this.state.space.name !== name.value ||
-      this.state.space.shortname !== shortname.value ||
-      this.state.space.avatar !== avatar.value;
-  }
 
   isPending(): boolean {
     const { context: { avatar, name, shortname } } = this.props;
@@ -142,7 +92,7 @@ class EditSpaceModal extends PureComponent<Props, State> {
           <ModalHeader withBorder>
             <Icon
               glyph="arrow_back"
-              onClick={this.handleGoToInfo}
+              onClick={this.handleGoBack}
               className={styles.back}
               id="edit_space_back_button"
               size={28}
@@ -164,34 +114,33 @@ class EditSpaceModal extends PureComponent<Props, State> {
     return (
       <EditSpaceModalForm
         space={this.props.space}
-        name={{ ...this.props.context.name, value: this.state.space.name }}
-        shortname={{ ...this.props.context.shortname, value: this.state.space.shortname }}
-        avatar={this.state.space.avatar}
+        name={{ ...this.props.context.name, value: this.props.space.name }}
+        shortname={{ ...this.props.context.shortname, value: this.props.space.shortname }}
+        avatar={this.props.space.avatar}
         shortnamePrefix={this.props.shortnamePrefix}
-        onChange={this.handleChange}
+        onChange={this.props.onFieldChange}
         onSubmit={this.handleSubmit}
-        onAvatarChange={this.handleAvatarEdit}
-        onAvatarRemove={this.handleAvatarRemove}
+        onAvatarChange={this.handleAvatarChange}
+        onAvatarRemove={this.props.onAvatarRemove}
       />
     );
   }
 
   renderAvatarEdit() {
-    if (!this.state.space.avatar || typeof this.state.space.avatar === 'string') {
+    if (!this.state.avatar) {
       return null;
     }
 
     return (
       <ImageEdit
-        image={this.state.space.avatar}
+        image={this.state.avatar}
         type="circle"
         size={250}
         height={400}
-        onSubmit={this.handleAvatarChange}
+        onSubmit={this.handleAvatarEdit}
       />
     );
   }
-
 
   renderBody() {
     switch (this.state.screen) {
@@ -221,7 +170,7 @@ class EditSpaceModal extends PureComponent<Props, State> {
             theme="success"
             rounded={false}
             loading={this.isPending()}
-            disabled={!this.isChanged() || this.isPending()}
+            disabled={!this.props.isChanged || this.isPending()}
             onClick={this.handleSubmit}
             id="edit_space_submit_button"
           >

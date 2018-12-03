@@ -5,28 +5,33 @@
 
 import type { ProviderContext } from '@dlghq/react-l10n';
 import type { Field } from '@dlghq/dialog-types';
-import type { Space } from './types';
+import type { Space, SpaceFields } from './types';
 import React, { PureComponent } from 'react';
 import { LocalizationContextType } from '@dlghq/react-l10n';
-import { fileToBase64 } from '@dlghq/dialog-utils';
 import AvatarSelector from '../AvatarSelector/AvatarSelector';
 import InputNext from '../InputNext/InputNext';
 import styles from '../CreateNewModal/CreateNewModal.css';
+
+type InputTarget = {
+  target: {
+    name: SpaceFields
+  }
+}
 
 export type Props = {
   space: Space,
   name: Field<string>,
   shortname: Field<?string>,
-  avatar: ?(string | File),
+  avatar: ?string,
   shortnamePrefix?: ?string,
-  onChange: () => void,
+  onChange: (value: mixed, field: SpaceFields) => void,
   onSubmit: () => void,
   onAvatarChange: (avatar: File) => void,
   onAvatarRemove: () => void
 };
 
 export type State = {
-  avatar: ?(string | File)
+  avatar: ?File
 };
 
 export type Context = ProviderContext;
@@ -36,35 +41,17 @@ class EditSpaceModalForm extends PureComponent<Props, State> {
     l10n: LocalizationContextType
   };
 
-  constructor(props: Props, context: Context) {
-    super(props, context);
-
-    this.state = {
-      avatar: props.avatar
-    };
-
-    if (props.avatar && typeof props.avatar !== 'string') {
-      fileToBase64(props.avatar, (avatar) => {
-        this.setState({ avatar });
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.avatar !== this.props.avatar &&
-      typeof this.props.avatar !== 'string' &&
-      this.props.avatar) {
-      fileToBase64(this.props.avatar, (avatar) => this.setState({ avatar }));
-    }
-  }
-
   handleSubmit = (event: SyntheticEvent<>) => {
     event.preventDefault();
 
     this.props.onSubmit();
   };
 
-  getInputState = (field: string): Object => {
+  handleChange = (value: mixed, { target }: InputTarget) => {
+    this.props.onChange(value, target.name);
+  };
+
+  getInputState = (field: SpaceFields): Object => {
     if (this.props[field].error) {
       return {
         status: 'error',
@@ -76,8 +63,7 @@ class EditSpaceModalForm extends PureComponent<Props, State> {
   };
 
   renderAvatar() {
-    const { space, name } = this.props;
-    const { avatar } = this.state;
+    const { space, name, avatar } = this.props;
 
     return (
       <div className={styles.avatarBlock}>
@@ -104,7 +90,7 @@ class EditSpaceModalForm extends PureComponent<Props, State> {
             className={styles.input}
             id="edit_space_form_name"
             name="name"
-            onChange={this.props.onChange}
+            onChange={this.handleChange}
             status={name.error ? 'error' : 'normal'}
             label="EditSpaceModal.form.label"
             placeholder="EditSpaceModal.form.placeholder"
@@ -115,7 +101,7 @@ class EditSpaceModalForm extends PureComponent<Props, State> {
           <InputNext
             id="edit_space_form_shortname"
             name="shortname"
-            onChange={this.props.onChange}
+            onChange={this.handleChange}
             prefix={this.props.shortnamePrefix}
             value={shortname.value}
             label="EditSpaceModal.form.shortname"

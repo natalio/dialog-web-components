@@ -4,7 +4,7 @@ const initial = {
   space: {
     id: '1001',
     type: 'space',
-    avatar: null,
+    avatar: 'https://picsum.photos/200/200/?1',
     name: 'Example space',
     shortname: null
   },
@@ -24,11 +24,14 @@ const initial = {
   }
 };
 initialState = initial;
-const handleClose = () => setState(initial);
-const handleSubmit = (space) => {
-  console.debug(space);
+const handleClose = () => setState({ isOpen: false });
+const handleSubmit = () => {
+  console.log(state);
   setState(initial);
 };
+const handleAvatarRemove = () => setState({ space: { ...state.space, avatar: null } });
+const handleAvatarEdit = (avatar) => setState({ space: { ...state.space, avatar } });
+const handleFieldChange = (value, field) => setState({ space: { ...state.space, [field]: value } });
 
 <div>
   <Button theme="primary" onClick={() => setState({ isOpen: true })}>Edit Space</Button>
@@ -40,6 +43,10 @@ const handleSubmit = (space) => {
           context={state.context}
           onClose={handleClose}
           onSubmit={handleSubmit}
+          onAvatarRemove={handleAvatarRemove}
+          onAvatarEdit={handleAvatarEdit}
+          onFieldChange={handleFieldChange}
+          isChanged={true}
         />
       : null
   }

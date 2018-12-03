@@ -5,13 +5,8 @@
 
 import type { Field, AvatarPlaceholder, GroupMember } from '@dlghq/dialog-types';
 
-type SpaceUpdate = {
-  name: string,
-  shortname: ?string,
-  avatar: ?(string | File)
-}
-
 export type SpaceType = 'space';
+export type SpaceFields = 'name' | 'shortname';
 
 export type Space = {
   id: number,
@@ -36,10 +31,14 @@ export type Props = {
   className?: string,
   shortnamePrefix?: ?string,
   onClose: () => void,
-  onSubmit: (space: Space, update: SpaceUpdate) => mixed
+  onSubmit: () => void,
+  onAvatarRemove: () => void,
+  onAvatarEdit: (avatar: string) => void,
+  onFieldChange: (value: mixed, field: ?(string |SpaceFields)) => void,
+  isChanged: boolean
 };
 
 export type State = {
   screen: 'info' | 'avatar',
-  space: SpaceUpdate
+  avatar: ?File
 }
