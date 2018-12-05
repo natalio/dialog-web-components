@@ -17,16 +17,21 @@ import EditSpaceModalForm from './EditSpaceModalForm';
 import ImageEdit from '../ImageEdit/ImageEdit';
 import Icon from '../Icon/Icon';
 import styles from './EditSpaceModal.css';
-import type { Props, State } from './types';
+import type { Props, State, Step } from './types';
 import HotKeys from '../HotKeys/HotKeys';
 
 class EditSpaceModal extends PureComponent<Props, State> {
+  static defaultProps = {
+    isPublicSpaceEnabled: true,
+    aboutMaxLength: 3000,
+  };
+
   constructor(props: Props) {
     super(props);
 
     this.state = {
       screen: 'info',
-      avatar: null
+      avatar: null,
     };
   }
 
@@ -36,17 +41,23 @@ class EditSpaceModal extends PureComponent<Props, State> {
 
       this.setState({
         screen: 'info',
-        avatar: null
+        avatar: null,
       });
     });
   };
 
   handleAvatarChange = (avatar: File): void => {
-    this.setState({ screen: 'avatar', avatar });
+    this.setState({ avatar });
+
+    this.handleScreenChange('avatar');
   };
 
   handleGoBack = (): void => {
     this.setState({ screen: 'info' });
+  };
+
+  handleScreenChange = (screen: Step) => {
+    this.setState({ screen });
   };
 
   handleSubmit = (event?: SyntheticEvent<>): void => {
@@ -69,9 +80,11 @@ class EditSpaceModal extends PureComponent<Props, State> {
   };
 
   isPending(): boolean {
-    const { context: { avatar, name, shortname } } = this.props;
+    const {
+      context: { avatar, name, shortname, about },
+    } = this.props;
 
-    return avatar.pending || name.pending || shortname.pending;
+    return avatar.pending || name.pending || shortname.pending || about.pending;
   }
 
   renderHeader() {
@@ -115,13 +128,21 @@ class EditSpaceModal extends PureComponent<Props, State> {
       <EditSpaceModalForm
         space={this.props.space}
         name={{ ...this.props.context.name, value: this.props.space.name }}
-        shortname={{ ...this.props.context.shortname, value: this.props.space.shortname }}
+        shortname={{
+          ...this.props.context.shortname,
+          value: this.props.space.shortname,
+        }}
         avatar={this.props.space.avatar}
+        about={{ ...this.props.context.about, value: this.props.space.about }}
+        aboutMaxLength={this.props.aboutMaxLength}
         shortnamePrefix={this.props.shortnamePrefix}
+        isPublicSpaceEnabled={this.props.isPublicSpaceEnabled}
+        isPublic={this.props.isPublic}
         onChange={this.props.onFieldChange}
         onSubmit={this.handleSubmit}
         onAvatarChange={this.handleAvatarChange}
         onAvatarRemove={this.props.onAvatarRemove}
+        onIsPublicChange={this.props.onIsPublicChange}
       />
     );
   }
@@ -146,9 +167,7 @@ class EditSpaceModal extends PureComponent<Props, State> {
     switch (this.state.screen) {
       case 'info':
         return (
-          <ModalBody className={styles.body}>
-            {this.renderForm()}
-          </ModalBody>
+          <ModalBody className={styles.body}>{this.renderForm()}</ModalBody>
         );
       case 'avatar':
         return (
@@ -197,6 +216,5 @@ class EditSpaceModal extends PureComponent<Props, State> {
     );
   }
 }
-
 
 export default EditSpaceModal;
