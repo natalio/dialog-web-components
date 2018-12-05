@@ -4,6 +4,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 function resolve(...paths) {
   return fs.realpathSync(path.join(__dirname, ...paths));
@@ -123,4 +124,16 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: './node_modules/opus-recorder/dist/encoderWorker.min.js',
+        to: 'encoderWorker.min.js',
+      },
+      {
+        from: './node_modules/opus-recorder/dist/encoderWorker.min.wasm',
+        to: 'encoderWorker.min.wasm',
+      },
+    ]),
+  ],
 };
