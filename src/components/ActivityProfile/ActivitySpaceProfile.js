@@ -9,6 +9,8 @@ import classNames from 'classnames';
 import Avatar from '../Avatar/Avatar';
 import PeerInfoTitle from '../PeerInfoTitle/PeerInfoTitle';
 import styles from './ActivityProfile.css';
+import Text from '@dlghq/react-l10n/src/Text';
+import Markdown from '../Markdown/Markdown';
 
 export type Props = {
   className?: string,
@@ -44,6 +46,21 @@ class ActivityGroupProfile extends PureComponent<Props> {
     );
   }
 
+  renderAbout() {
+    const { info: { about } } = this.props;
+
+    if (!about) {
+      return null;
+    }
+
+    return (
+      <div className={styles.wrapper}>
+        <Text className={styles.title} tagName="div" id="ActivityProfile.about" />
+        <Markdown text={about} className={styles.about} emojiSize={18} />
+      </div>
+    );
+  }
+
   render() {
     const className = classNames(styles.container, this.props.className);
 
@@ -53,6 +70,7 @@ class ActivityGroupProfile extends PureComponent<Props> {
           {this.renderAvatar()}
           {this.renderTitle()}
         </div>
+        {this.renderAbout()}
       </div>
     );
   }

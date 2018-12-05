@@ -31,7 +31,8 @@ const space = {
   bigAvatar: 'https://avatars2.githubusercontent.com/u/19669610',
   placeholder: 'blue',
   adminId: 14,
-  members: members
+  members: members,
+  about: 'some space'
 };
 
 const initial = {

@@ -18,12 +18,13 @@ export type Space = {
   type: SpaceType,
   name: string,
   shortname: string,
+  about: ?string,
   avatar: ?string,
   bigAvatar: ?string,
   placeholder: AvatarPlaceholder,
   adminId: number,
   isMember: boolean,
-  members: GroupMember[]
+  members: GroupMember[],
 }
 
 export type SpaceMember = GroupMember & {
