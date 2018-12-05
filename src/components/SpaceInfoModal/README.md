@@ -37,7 +37,7 @@ const space = {
 
 const initial = {
   uid: 1337,
-  isOpen: true,
+  isOpen: false,
   selector: PeerInfoSelectorState.create(contacts),
   notificationEnabled: false,
   invitationLink: 0,
