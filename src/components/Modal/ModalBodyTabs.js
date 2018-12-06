@@ -62,7 +62,7 @@ class ModalBodyTabs extends PureComponent<Props, State> {
     return (
       <div className={className}>
         {this.renderTabs()}
-        <ModalBody className={styles.currentTab}>
+        <ModalBody className={classNames(current ? styles.currentTab : null)}>
           {this.props.children({ current })}
         </ModalBody>
       </div>
