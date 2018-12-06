@@ -139,6 +139,7 @@
   padding: var(--default-padding) calc(var(--default-padding) * 2);
   font-size: var(--modal-font-size);
   flex: 1 1 auto;
+  @mixin flex-fix;
 }
 
 .footer {
@@ -198,4 +199,21 @@
 
 .spinner {
   vertical-align: inherit;
+}
+
+.bodyWapper {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.tabs {
+  flex: 0 0 auto !important;
+  padding: var(--default-padding-small) !important;
+  padding-right: 0 !important;
+}
+
+.currentTab {
+  width: 100%;
+  padding: 0;
 }

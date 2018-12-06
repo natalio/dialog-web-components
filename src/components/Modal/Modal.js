@@ -27,7 +27,7 @@ type ReactModalProps = {
   children: Node,
 };
 
-class ReactModal extends React.PureComponent<ReactModalProps> {
+class ReactModal extends PureComponent<ReactModalProps> {
   static defaultProps = {
     shouldCloseOnOverlayClick: true,
   };
