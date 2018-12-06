@@ -43,7 +43,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  min-width: var(--modal-min-width);
   margin: calc(var(--default-padding-large) * 3) 0 0;
   border-radius: var(--modal-border-radius);
   outline: none;
@@ -52,6 +51,7 @@
   font-family: var(--modal-font-family);
   flex: 0 0 auto;
   @mixin flex-fix;
+  min-width: var(--modal-min-width);
 }
 
 .overlay {
