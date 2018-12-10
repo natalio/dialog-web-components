@@ -202,7 +202,7 @@ class SpaceInfoModal extends PureComponent<Props, State> {
     }
   }
 
-  renderModal() {
+  render() {
     const { confirmEnabled } = this.state;
 
     if (confirmEnabled) {
@@ -218,10 +218,6 @@ class SpaceInfoModal extends PureComponent<Props, State> {
         </Modal>
       </HotKeys>
     );
-  }
-
-  render() {
-    return this.renderModal();
   }
 }
 

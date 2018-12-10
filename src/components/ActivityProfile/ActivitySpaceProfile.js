@@ -18,34 +18,6 @@ export type Props = {
 };
 
 class ActivityGroupProfile extends PureComponent<Props> {
-  renderAvatar() {
-    const { info: { name, bigAvatar, placeholder } } = this.props;
-
-    return (
-      <Avatar
-        className={styles.avatar}
-        size={140}
-        title={name}
-        image={bigAvatar}
-        placeholder={placeholder}
-      />
-    );
-  }
-
-  renderTitle() {
-    const { info: { name, shortname } } = this.props;
-
-    return (
-      <PeerInfoTitle
-        title={name}
-        userName={shortname}
-        titleClassName={styles.name}
-        userNameClassName={styles.nick}
-        emojiSize={24}
-      />
-    );
-  }
-
   renderAbout() {
     const { info: { about } } = this.props;
 
@@ -63,12 +35,25 @@ class ActivityGroupProfile extends PureComponent<Props> {
 
   render() {
     const className = classNames(styles.container, this.props.className);
+    const { info: { name, bigAvatar, placeholder, shortname } } = this.props;
 
     return (
       <div className={className}>
         <div className={styles.header}>
-          {this.renderAvatar()}
-          {this.renderTitle()}
+          <Avatar
+            className={styles.avatar}
+            size={140}
+            title={name}
+            image={bigAvatar}
+            placeholder={placeholder}
+          />
+          <PeerInfoTitle
+            title={name}
+            userName={shortname}
+            titleClassName={styles.name}
+            userNameClassName={styles.nick}
+            emojiSize={24}
+          />
         </div>
         {this.renderAbout()}
       </div>
