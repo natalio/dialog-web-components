@@ -171,6 +171,7 @@ export { default as Confirm } from './components/Confirm/Confirm';
 export { default as HotKeys } from './components/HotKeys/HotKeys';
 export { default as CopyButton } from './components/CopyButton/CopyButton';
 export { default as ImagePreloader } from './components/ImagePreloader/ImagePreloader';
+export { default as Notification } from './components/Notification/Notification';
 
 // Other
 export { default as Error } from './components/Error/Error';

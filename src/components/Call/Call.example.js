@@ -23,6 +23,7 @@ function getVideoStream(callback) {
     navigator.mediaDevices
       .getUserMedia({
         video: true,
+        audio: true,
       })
       .then((stream) => {
         callback({
@@ -32,6 +33,7 @@ function getVideoStream(callback) {
       })
       .catch((error) => {
         console.error(error); // eslint-disable-line
+        console.log(555333);
       });
   }
 }
