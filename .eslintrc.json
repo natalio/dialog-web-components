@@ -6,11 +6,12 @@
     "react/prop-types": 0,
     "lines-around-comment": 0,
     "max-lines": 0,
-    "react/no-multi-comp": "off",
-    "react/jsx-one-expression-per-line": "off",
-    "react/no-did-mount-set-state": "off",
-    "react/jsx-max-props-per-line": "off",
-    "react/jsx-curly-brace-presence": "off"
+    "react/no-multi-comp": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/no-did-mount-set-state": 0,
+    "react/jsx-max-props-per-line": 0,
+    "react/jsx-curly-brace-presence": 0,
+    "no-negated-condition": 0
   },
   "env": {
     "jest": true
