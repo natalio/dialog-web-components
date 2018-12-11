@@ -1,6 +1,6 @@
 {
   "name": "@dlghq/dialog-components",
-  "version": "0.193.0",
+  "version": "0.195.0",
   "description": "dialog Web Components",
   "main": "src/index.js",
   "files": [
