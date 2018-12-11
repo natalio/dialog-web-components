@@ -14,7 +14,6 @@ export type PreferencesScreen =
 
 export type Props = {
   className?: string,
-  screen: string,
   settings: ProfileSettings,
   sessions: {
     value: ?(AuthSession[]),
@@ -27,7 +26,6 @@ export type Props = {
     pending: boolean,
   },
   onClose: () => mixed,
-  onScreenChange: (screen: string) => mixed,
   onSettingsChange: (value: ProfileSettings) => mixed,
   onSessionsLoad: () => mixed,
   onSessionTerminate: (id: number) => mixed,

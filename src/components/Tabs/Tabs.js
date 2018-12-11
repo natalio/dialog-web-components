@@ -10,7 +10,7 @@ import styles from './Tabs.css';
 
 export type Props = {
   className?: string,
-  current: string,
+  current: string | null,
   variants: Array<{ id: string, title: string }>,
   onPick: (current: string) => mixed,
 };
