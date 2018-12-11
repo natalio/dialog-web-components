@@ -29,7 +29,7 @@ class ModalBodyTabs extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      current: props.tabs && props.tabs.length ? props.tabs[0].id : null,
+      current: props.tabs[0].id,
     };
   }
 
@@ -41,7 +41,7 @@ class ModalBodyTabs extends PureComponent<Props, State> {
     const { tabs } = this.props;
     const { current } = this.state;
 
-    if (!tabs || (tabs && !tabs.length)) {
+    if (tabs.length === 0) {
       return null;
     }
 
