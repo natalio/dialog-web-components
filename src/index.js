@@ -160,6 +160,7 @@ export {
   default as FeedbackModal,
 } from './components/FeedbackModal/FeedbackModal';
 export { default as AdminModal } from './components/AdminModal/AdminModal';
+export { default as EditSpaceModal } from './components/EditSpaceModal/EditSpaceModal';
 export {
   default as CreateSpaceModal,
 } from './components/CreateSpaceModal/CreateSpaceModal';
@@ -293,6 +294,7 @@ export { default as Trigger } from './components/Trigger/Trigger';
 export { default as Alert } from './components/Alert/Alert';
 export { default as Confirm } from './components/Confirm/Confirm';
 export { default as HotKeys } from './components/HotKeys/HotKeys';
+
 export { default as CopyButton } from './components/CopyButton/CopyButton';
 export {
   default as ImagePreloader,
