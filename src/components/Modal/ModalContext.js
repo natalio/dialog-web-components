@@ -3,7 +3,7 @@
  * @flow
  */
 
-import React, { type Node, type Context } from 'react';
+import React, { PureComponent, type Node, type Context } from 'react';
 
 type ModalProviderProps = {
   modalRootId?: string,
@@ -18,7 +18,7 @@ export const ModalContext: Context<ModalProviderState> = React.createContext({
   modalRoot: null,
 });
 
-export class ModalProvider extends React.PureComponent<
+export class ModalProvider extends PureComponent<
   ModalProviderProps,
   ModalProviderState,
 > {
