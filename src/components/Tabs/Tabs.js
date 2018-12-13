@@ -20,7 +20,7 @@ type Props<T> = {
   onPick: (current: T) => mixed,
 };
 
-class Tabs<T> extends PureComponent<Props<T>> {
+class Tabs<T: string> extends PureComponent<Props<T>> {
   render() {
     const { current, variants } = this.props;
     const className = classNames(styles.container, this.props.className);
@@ -31,7 +31,7 @@ class Tabs<T> extends PureComponent<Props<T>> {
       return (
         <Tab
           id={id}
-          key={String(id)}
+          key={id}
           title={title}
           active={active}
           onPick={this.props.onPick}

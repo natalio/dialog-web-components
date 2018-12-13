@@ -15,7 +15,7 @@ export type Props<T> = {
   onPick: (id: T) => mixed,
 };
 
-class Tab<T> extends PureComponent<Props<T>> {
+class Tab<T: string> extends PureComponent<Props<T>> {
   handleClick = (): void => {
     this.props.onPick(this.props.id);
   };
@@ -30,7 +30,7 @@ class Tab<T> extends PureComponent<Props<T>> {
       <li
         className={className}
         onClick={this.handleClick}
-        id={`tabs_tab_${String(id)}`}
+        id={`tabs_tab_${id}`}
       >
         <Text id={title} />
       </li>

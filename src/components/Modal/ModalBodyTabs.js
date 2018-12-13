@@ -16,7 +16,7 @@ export type Props<T> = {
   onChange: (screen: T) => mixed,
 };
 
-class ModalBodyTabs<T> extends PureComponent<Props<T>> {
+class ModalBodyTabs<T: string> extends PureComponent<Props<T>> {
   renderTabs(): Node {
     const { tabs, current } = this.props;
 
