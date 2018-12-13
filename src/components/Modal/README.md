@@ -37,10 +37,7 @@ Modal with tabs:
 ```jsx
 const { ModalHeader, ModalBodyTabs } = require('../../index');
 
-initialState = { isOpen: false };
-
-const handleOpen = () => setState({ isOpen: true });
-const handleClose = () => setState({ isOpen: false });
+initialState = { isOpen: false, current: 'first' };
 
 const tabs = [
   { id: 'first', title: 'Tab one title' },
@@ -49,6 +46,13 @@ const tabs = [
   { id: 'four', title: 'Tab four title' },
 ];
 
+const handleOpen = () => setState({ isOpen: true });
+const handleClose = () => setState({ isOpen: false });
+const handleChange = (screen) => setState({ current: screen });
+const renderCurrentTab = () => {
+  return <div>{state.current}</div>;
+};
+
 <div>
   <Button theme="primary" onClick={handleOpen}>
     Open modal with tabs
@@ -56,14 +60,12 @@ const tabs = [
   {state.isOpen ? (
     <Modal onClose={handleClose}>
       <ModalHeader withBorder>Simple modal</ModalHeader>
-      <ModalBodyTabs tabs={tabs}>
-        {({ current }) => {
-          return current ? (
-            <div>{current} tab</div>
-          ) : (
-            <div>There is no tabs</div>
-          );
-        }}
+      <ModalBodyTabs
+        tabs={tabs}
+        current={state.current}
+        onChange={handleChange}
+      >
+        {renderCurrentTab()}
       </ModalBodyTabs>
     </Modal>
   ) : null}

@@ -15,14 +15,14 @@ export type PreferencesScreen =
 
 export type Props = {
   className?: string,
+  screen: PreferencesScreen,
   settings: ProfileSettings,
   sessions: Field<?Array<AuthSession>>,
   blocked: Field<?Array<User>>,
   onClose: () => mixed,
   onSettingsChange: (value: ProfileSettings) => mixed,
-  onSessionsLoad: () => mixed,
   onSessionTerminate: (id: number) => mixed,
   onAllSessionsTerminate: () => mixed,
-  onBlockedLoad: () => mixed,
   onUnblockUser: (id: number) => mixed,
+  onScreenChange: (screen: PreferencesScreen) => mixed,
 };

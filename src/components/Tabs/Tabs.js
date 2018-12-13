@@ -8,14 +8,19 @@ import classNames from 'classnames';
 import Tab from './Tab';
 import styles from './Tabs.css';
 
-export type Props = {
-  className?: string,
-  current: string | null,
-  variants: Array<{ id: string, title: string }>,
-  onPick: (current: string) => mixed,
+export type TabVariant<T> = {
+  id: T,
+  title: string,
 };
 
-class Tabs extends PureComponent<Props> {
+type Props<T> = {
+  variants: Array<TabVariant<T>>,
+  current: T,
+  className?: string,
+  onPick: (current: T) => mixed,
+};
+
+class Tabs<T> extends PureComponent<Props<T>> {
   render() {
     const { current, variants } = this.props;
     const className = classNames(styles.container, this.props.className);
@@ -26,7 +31,7 @@ class Tabs extends PureComponent<Props> {
       return (
         <Tab
           id={id}
-          key={id}
+          key={String(id)}
           title={title}
           active={active}
           onPick={this.props.onPick}

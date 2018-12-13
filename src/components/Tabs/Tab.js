@@ -8,14 +8,14 @@ import { Text } from '@dlghq/react-l10n';
 import classNames from 'classnames';
 import styles from './Tabs.css';
 
-export type Props = {
-  id: string,
+export type Props<T> = {
+  id: T,
   title: string,
   active: boolean,
-  onPick: (id: string) => mixed,
+  onPick: (id: T) => mixed,
 };
 
-class Tab extends PureComponent<Props> {
+class Tab<T> extends PureComponent<Props<T>> {
   handleClick = (): void => {
     this.props.onPick(this.props.id);
   };
@@ -30,7 +30,7 @@ class Tab extends PureComponent<Props> {
       <li
         className={className}
         onClick={this.handleClick}
-        id={`tabs_tab_${id}`}
+        id={`tabs_tab_${String(id)}`}
       >
         <Text id={title} />
       </li>

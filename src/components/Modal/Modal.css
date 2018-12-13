@@ -205,15 +205,11 @@
   position: relative;
   display: flex;
   flex-flow: row nowrap;
+  align-items: flex-start;
 }
 
 .tabs {
   flex: 0 0 auto !important;
   padding: var(--default-padding-small) !important;
   padding-right: 0 !important;
-}
-
-.currentTab {
-  width: 100%;
-  padding: 0;
 }
