@@ -17,17 +17,9 @@ export type Props = {
 };
 
 class BlockedUser extends PureComponent<Props> {
-  handleUnblock: () => void;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.handleUnblock = this.handleUnblock.bind(this);
-  }
-
-  handleUnblock(): void {
+  handleUnblock = (): void => {
     this.props.onUnblockUser(this.props.user.id);
-  }
+  };
 
   render() {
     const { user } = this.props;

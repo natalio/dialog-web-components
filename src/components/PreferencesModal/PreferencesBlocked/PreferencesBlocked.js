@@ -27,13 +27,9 @@ class PreferencesBlocked extends PureComponent<Props, State> {
     l10n: LocalizationContextType,
   };
 
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      query: '',
-    };
-  }
+  state = {
+    query: '',
+  };
 
   handleQueryChange = (query: string): void => {
     this.setState({ query });
