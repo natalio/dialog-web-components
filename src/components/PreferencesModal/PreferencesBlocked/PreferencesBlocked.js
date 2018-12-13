@@ -7,7 +7,6 @@ import type { User } from '@dlghq/dialog-types';
 import React, { PureComponent, type Node } from 'react';
 import { Text, LocalizationContextType } from '@dlghq/react-l10n';
 import { filterByQuery } from '@dlghq/dialog-utils';
-
 import Fieldset from '../../Fieldset/Fieldset';
 import SearchInput from './SearchInput';
 import BlockedUser from './BlockedUser';
@@ -15,7 +14,7 @@ import preferencesStyles from '../PreferencesModal.css';
 import styles from './Blocked.css';
 
 export type Props = {
-  blocked: User[],
+  blocked: Array<User>,
   onUnblockUser: (id: number) => mixed,
 };
 
@@ -23,26 +22,18 @@ export type State = {
   query: string,
 };
 
-class PreferencesSecurity extends PureComponent<Props, State> {
-  handleQueryChange: (value: string) => void;
-
+class PreferencesBlocked extends PureComponent<Props, State> {
   static contextTypes = {
     l10n: LocalizationContextType,
   };
 
-  constructor(props: Props) {
-    super(props);
+  state = {
+    query: '',
+  };
 
-    this.state = {
-      query: '',
-    };
-
-    this.handleQueryChange = this.handleQueryChange.bind(this);
-  }
-
-  handleQueryChange(query: string): void {
+  handleQueryChange = (query: string): void => {
     this.setState({ query });
-  }
+  };
 
   renderSearchInput() {
     const { blocked } = this.props;
@@ -113,4 +104,4 @@ class PreferencesSecurity extends PureComponent<Props, State> {
   }
 }
 
-export default PreferencesSecurity;
+export default PreferencesBlocked;
