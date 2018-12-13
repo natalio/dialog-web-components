@@ -6,16 +6,17 @@
 import type { User } from '@dlghq/dialog-types';
 import React, { PureComponent, type Node } from 'react';
 import { Text, LocalizationContextType } from '@dlghq/react-l10n';
-import { filterByQuery } from '@dlghq/dialog-utils';
-
+import { filterByQuery, type Field } from '@dlghq/dialog-utils';
 import Fieldset from '../../Fieldset/Fieldset';
 import SearchInput from './SearchInput';
 import BlockedUser from './BlockedUser';
+import Spinner from '../../Spinner/Spinner';
 import preferencesStyles from '../PreferencesModal.css';
 import styles from './Blocked.css';
 
 export type Props = {
-  blocked: User[],
+  blocked: Field<?Array<User>>,
+  onBlockedLoad: () => mixed,
   onUnblockUser: (id: number) => mixed,
 };
 
@@ -23,9 +24,7 @@ export type State = {
   query: string,
 };
 
-class PreferencesSecurity extends PureComponent<Props, State> {
-  handleQueryChange: (value: string) => void;
-
+class PreferencesBlocked extends PureComponent<Props, State> {
   static contextTypes = {
     l10n: LocalizationContextType,
   };
@@ -36,19 +35,21 @@ class PreferencesSecurity extends PureComponent<Props, State> {
     this.state = {
       query: '',
     };
-
-    this.handleQueryChange = this.handleQueryChange.bind(this);
   }
 
-  handleQueryChange(query: string): void {
+  componentDidMount() {
+    this.props.onBlockedLoad();
+  }
+
+  handleQueryChange = (query: string): void => {
     this.setState({ query });
-  }
+  };
 
   renderSearchInput() {
     const { blocked } = this.props;
     const { l10n } = this.context;
 
-    if (!blocked.length) {
+    if (!blocked.value || (blocked.value && !blocked.value.length)) {
       return null;
     }
 
@@ -66,7 +67,11 @@ class PreferencesSecurity extends PureComponent<Props, State> {
     const { blocked } = this.props;
     const { query } = this.state;
 
-    if (!blocked.length) {
+    if (!blocked.value) {
+      return null;
+    }
+
+    if (!blocked.value.length) {
       return [
         <Text
           key="empty"
@@ -77,7 +82,7 @@ class PreferencesSecurity extends PureComponent<Props, State> {
       ];
     }
 
-    const filtered = filterByQuery(query, blocked, (user) => user.name);
+    const filtered = filterByQuery(query, blocked.value, (user) => user.name);
 
     if (!filtered.length) {
       return [
@@ -102,6 +107,14 @@ class PreferencesSecurity extends PureComponent<Props, State> {
   }
 
   render() {
+    if (this.props.blocked.pending) {
+      return (
+        <div className={preferencesStyles.spinnerScreen}>
+          <Spinner size="large" />
+        </div>
+      );
+    }
+
     return (
       <div className={preferencesStyles.screen}>
         <Fieldset legend="PreferencesModal.blocked.legend">
@@ -113,4 +126,4 @@ class PreferencesSecurity extends PureComponent<Props, State> {
   }
 }
 
-export default PreferencesSecurity;
+export default PreferencesBlocked;

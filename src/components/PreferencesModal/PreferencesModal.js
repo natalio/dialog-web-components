@@ -13,7 +13,6 @@ import Modal from '../Modal/Modal';
 import ModalHeader from '../Modal/ModalHeader';
 import ModalClose from '../Modal/ModalClose';
 import ModalBodyTabs from '../Modal/ModalBodyTabs';
-import Spinner from '../Spinner/Spinner';
 import Scroller from '../Scroller/Scroller';
 import PreferencesGeneral from './PreferencesGeneral';
 import PreferencesNotifications from './PreferencesNotifications';
@@ -28,14 +27,6 @@ class PreferencesModal extends PureComponent<Props> {
       ...settings,
     });
   };
-
-  renderScreenSpinner(): Node {
-    return (
-      <div className={styles.spinnerScreen}>
-        <Spinner size="large" />
-      </div>
-    );
-  }
 
   renderScreenGeneral(): Node {
     const { settings } = this.props;
@@ -62,13 +53,10 @@ class PreferencesModal extends PureComponent<Props> {
   renderScreenSecurity(): Node {
     const { sessions } = this.props;
 
-    if (!sessions.value) {
-      return this.renderScreenSpinner();
-    }
-
     return (
       <PreferencesSecurity
-        sessions={sessions.value}
+        sessions={sessions}
+        onSessionsLoad={this.props.onSessionsLoad}
         onSessionTerminate={this.props.onSessionTerminate}
         onAllSessionsTerminate={this.props.onAllSessionsTerminate}
       />
@@ -78,13 +66,10 @@ class PreferencesModal extends PureComponent<Props> {
   renderScreenBlocked(): Node {
     const { blocked } = this.props;
 
-    if (!blocked.value) {
-      return this.renderScreenSpinner();
-    }
-
     return (
       <PreferencesBlocked
-        blocked={blocked.value}
+        onBlockedLoad={this.props.onBlockedLoad}
+        blocked={blocked}
         onUnblockUser={this.props.onUnblockUser}
       />
     );

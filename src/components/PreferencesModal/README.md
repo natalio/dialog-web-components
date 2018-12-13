@@ -9,23 +9,23 @@ initialState = {
     isSoundEffectsEnabled: false,
     isOnlyMentionNotifications: true,
     isGroupsNotificationsEnabled: false,
-    isShowNotificationsTextEnabled: true
+    isShowNotificationsTextEnabled: true,
   },
   sessions: {
     value: null,
     error: null,
-    pending: true
+    pending: true,
   },
   blocked: {
     value: null,
     error: null,
-    pending: true
-  }
+    pending: true,
+  },
 };
 
 const actions = {
   onClose() {
-    setState({ isOpen: false })
+    setState({ isOpen: false });
   },
   onScreenChange(screen) {
     setState({ screen });
@@ -34,16 +34,16 @@ const actions = {
     setState({ settings });
   },
   onSessionsLoad() {
-
+    console.log('onSessionsLoad');
   },
   onSessionTerminate() {
-
+    console.log('onSessionTerminate');
   },
   onAllSessionsTerminate() {
-
+    console.log('onAllSessionsTerminate');
   },
   onBlockedLoad() {
-
+    console.log('onBlockedLoad');
   },
 };
 
@@ -51,13 +51,6 @@ const actions = {
   <Button theme="primary" onClick={() => setState({ isOpen: true })}>
     Open Preferences
   </Button>
-  {
-    state.isOpen ? (
-      <PreferencesModal
-        {...state}
-        {...actions}
-      />
-    ) : null
-  }
-</div>
+  {state.isOpen ? <PreferencesModal {...state} {...actions} /> : null}
+</div>;
 ```

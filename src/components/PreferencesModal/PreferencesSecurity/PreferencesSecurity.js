@@ -4,25 +4,37 @@
  */
 
 import type { AuthSession } from '@dlghq/dialog-types';
+import type { Field as FieldType } from '@dlghq/dialog-utils';
 import React, { PureComponent } from 'react';
 import { Text } from '@dlghq/react-l10n';
 import Fieldset from '../../Fieldset/Fieldset';
 import Field from '../../Field/Field';
 import Button from '../../Button/Button';
 import Session from './SecuritySession';
+import Spinner from '../../Spinner/Spinner';
 import preferencesStyles from '../PreferencesModal.css';
 import styles from './Security.css';
 
 export type Props = {
-  sessions: AuthSession[],
+  sessions: FieldType<?Array<AuthSession>>,
+  onSessionsLoad: () => mixed,
   onSessionTerminate: (id: number) => mixed,
   onAllSessionsTerminate: () => mixed,
 };
 
 class PreferencesSecurity extends PureComponent<Props> {
+  componentDidMount(): void {
+    this.props.onSessionsLoad();
+  }
+
   renderCurrentSessions() {
     const { sessions } = this.props;
-    const current = sessions.find(
+
+    if (!sessions.value) {
+      return null;
+    }
+
+    const current = sessions.value.find(
       (session) => session.holder === 'THIS_DEVICE',
     );
 
@@ -37,7 +49,11 @@ class PreferencesSecurity extends PureComponent<Props> {
   renderTerminateAllSessions() {
     const { sessions } = this.props;
 
-    if (sessions.length === 1) {
+    if (!sessions.value) {
+      return null;
+    }
+
+    if (sessions.value.length === 1) {
       return null;
     }
 
@@ -59,7 +75,12 @@ class PreferencesSecurity extends PureComponent<Props> {
 
   renderActiveSessions() {
     const { sessions } = this.props;
-    const activeSessions = sessions.filter(
+
+    if (!sessions.value) {
+      return null;
+    }
+
+    const activeSessions = sessions.value.filter(
       (session) => session.holder === 'OTHER_DEVICE',
     );
 
@@ -93,6 +114,14 @@ class PreferencesSecurity extends PureComponent<Props> {
   }
 
   render() {
+    if (this.props.sessions.pending) {
+      return (
+        <div className={preferencesStyles.spinnerScreen}>
+          <Spinner size="large" />
+        </div>
+      );
+    }
+
     return (
       <div className={preferencesStyles.screen}>
         {this.renderCurrentSessions()}

@@ -4,6 +4,7 @@
  */
 
 import type { User, ProfileSettings, AuthSession } from '@dlghq/dialog-types';
+import type { Field } from '@dlghq/dialog-utils';
 
 export type PreferencesScreen =
   | 'general'
@@ -15,16 +16,8 @@ export type PreferencesScreen =
 export type Props = {
   className?: string,
   settings: ProfileSettings,
-  sessions: {
-    value: ?(AuthSession[]),
-    error: ?Error,
-    pending: boolean,
-  },
-  blocked: {
-    value: ?(User[]),
-    error: ?Error,
-    pending: boolean,
-  },
+  sessions: Field<?Array<AuthSession>>,
+  blocked: Field<?Array<User>>,
   onClose: () => mixed,
   onSettingsChange: (value: ProfileSettings) => mixed,
   onSessionsLoad: () => mixed,
