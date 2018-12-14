@@ -37,12 +37,8 @@ class ProfileModal extends PureComponent<Props, State> {
 
     this.state = {
       screen: 'profile',
-      profile:
-        props.profile && props.profile.value ? props.profile.value : null,
-      customProfile:
-        props.customProfile && props.customProfile.value
-          ? props.customProfile.value
-          : null,
+      profile: null,
+      customProfile: null,
       avatar: props.avatar,
     };
   }
