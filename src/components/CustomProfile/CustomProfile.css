@@ -5,7 +5,7 @@
 @import '../../styles/variables.css';
 
 :root {
-  --custom-profile-title-color: #808080;
+  --custom-profile-title-color: var(--color-labels);
   --custom-profile-text-color: #000;
 }
 
@@ -15,17 +15,23 @@
 }
 
 .property {
-  margin-top: var(--default-padding-small);
+  padding: var(--default-padding-small) 0;
 
   &:first-child {
-    margin-top: 0;
+    padding-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
   }
 }
 
 .title {
+  @mixin no-select;
   letter-spacing: -0.27px;
   font-size: var(--default-font-size-small);
   line-height: 20px;
+  margin-bottom: calc(var(--default-padding-small) / 2);
   color: var(--custom-profile-title-color);
 }
 
