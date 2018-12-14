@@ -4,42 +4,21 @@
  */
 
 import React, { PureComponent, type Node } from 'react';
-import classNames from 'classnames';
-import Tabs from '../Tabs/Tabs';
+import Tabs, { type TabVariant } from '../Tabs/Tabs';
 import ModalBody from './ModalBody';
 import styles from './Modal.css';
 
-type Tab = {
-  id: string,
-  title: string,
-};
-
-export type Props = {
+export type Props<T> = {
   className?: string,
-  children: ({ current: string | null }) => Node,
-  tabs: Array<Tab>,
+  children: Node,
+  tabs: Array<TabVariant<T>>,
+  current: T,
+  onChange: (screen: T) => mixed,
 };
 
-export type State = {
-  current: string | null,
-};
-
-class ModalBodyTabs extends PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      current: props.tabs.length !== 0 ? props.tabs[0].id : null,
-    };
-  }
-
-  handleTabChange = (current: string): void => {
-    this.setState({ current });
-  };
-
+class ModalBodyTabs<T: string> extends PureComponent<Props<T>> {
   renderTabs(): Node {
-    const { tabs } = this.props;
-    const { current } = this.state;
+    const { tabs, current } = this.props;
 
     if (tabs.length === 0) {
       return null;
@@ -50,20 +29,17 @@ class ModalBodyTabs extends PureComponent<Props, State> {
         className={styles.tabs}
         current={current}
         variants={tabs}
-        onPick={this.handleTabChange}
+        onPick={this.props.onChange}
       />
     );
   }
 
   render() {
-    const { current } = this.state;
-    const className = classNames(styles.bodyWapper, this.props.className);
-
     return (
-      <div className={className}>
+      <div className={styles.bodyWapper}>
         {this.renderTabs()}
-        <ModalBody className={classNames(current ? styles.currentTab : null)}>
-          {this.props.children({ current })}
+        <ModalBody className={this.props.className}>
+          {this.props.children}
         </ModalBody>
       </div>
     );

@@ -14,7 +14,7 @@ import preferencesStyles from '../PreferencesModal.css';
 import styles from './Security.css';
 
 export type Props = {
-  sessions: AuthSession[],
+  sessions: Array<AuthSession>,
   onSessionTerminate: (id: number) => mixed,
   onAllSessionsTerminate: () => mixed,
 };
@@ -22,6 +22,7 @@ export type Props = {
 class PreferencesSecurity extends PureComponent<Props> {
   renderCurrentSessions() {
     const { sessions } = this.props;
+
     const current = sessions.find(
       (session) => session.holder === 'THIS_DEVICE',
     );
@@ -59,6 +60,7 @@ class PreferencesSecurity extends PureComponent<Props> {
 
   renderActiveSessions() {
     const { sessions } = this.props;
+
     const activeSessions = sessions.filter(
       (session) => session.holder === 'OTHER_DEVICE',
     );

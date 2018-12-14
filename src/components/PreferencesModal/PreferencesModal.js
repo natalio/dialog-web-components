@@ -90,8 +90,10 @@ class PreferencesModal extends PureComponent<Props> {
     );
   }
 
-  renderScreenCurrent = (current: string | null): Node => {
-    switch (current) {
+  renderScreenCurrent = (): Node => {
+    const { screen } = this.props;
+
+    switch (screen) {
       case 'general':
         return this.renderScreenGeneral();
       case 'notifications':
@@ -106,6 +108,7 @@ class PreferencesModal extends PureComponent<Props> {
   };
 
   render() {
+    const { screen } = this.props;
     const className = classNames(styles.container, this.props.className);
     const tabs = [
       {
@@ -135,14 +138,15 @@ class PreferencesModal extends PureComponent<Props> {
             id="preferences_modal_close"
           />
         </ModalHeader>
-        <ModalBodyTabs className={styles.body} tabs={tabs}>
-          {({ current }) => {
-            return (
-              <div className={styles.scroller}>
-                <Scroller>{this.renderScreenCurrent(current)}</Scroller>
-              </div>
-            );
-          }}
+        <ModalBodyTabs
+          className={styles.body}
+          tabs={tabs}
+          current={screen}
+          onChange={this.props.onScreenChange}
+        >
+          <div className={styles.scroller}>
+            <Scroller>{this.renderScreenCurrent()}</Scroller>
+          </div>
         </ModalBodyTabs>
       </Modal>
     );
