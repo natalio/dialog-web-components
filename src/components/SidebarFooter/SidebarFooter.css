@@ -14,10 +14,8 @@
   --sidebar-footer-button-color-active: var(--color-primary);
   --sidebar-footer-button-counter-background: var(--color-danger);
   --sidebar-footer-button-counter-color: #fff;
-  --sidebar-footer-button-counter-size: 14px;
-  --sidebar-footer-button-counter-font-size: calc(
-    var(--sidebar-footer-button-counter-size) - 6
-  );
+  --sidebar-footer-button-counter-size: 16px;
+  --sidebar-footer-button-counter-font-size: 8px;
 }
 
 /* Reset */
@@ -103,10 +101,11 @@
   align-content: center;
   align-items: center;
   justify-content: center;
+  font-weight: 500;
 }
 
 .counterBig {
-  font-size: calc(var(--sidebar-footer-button-counter-font-size) - 2);
+  font-size: calc(var(--sidebar-footer-button-counter-font-size) - 2px);
 }
 
 .update {

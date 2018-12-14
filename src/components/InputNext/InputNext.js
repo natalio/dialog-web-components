@@ -43,6 +43,7 @@ export type Props = {
   spellcheck?: boolean,
   readOnly?: boolean,
   required: boolean,
+  rows?: number,
   description?: ?string,
   autoComplete?: ?string,
   onChange: (
@@ -231,8 +232,7 @@ class InputNext extends PureComponent<Props, State> {
     }
 
     const input = this.input;
-    let value = input && input.value;
-    value = value || '';
+    const value = (input && input.value) || '';
     const length = value.length;
 
     return (
@@ -257,6 +257,7 @@ class InputNext extends PureComponent<Props, State> {
       onKeyPress,
       prefix,
       maxLength,
+      rows,
     } = this.props;
     const {
       l10n: { formatText },
@@ -292,6 +293,7 @@ class InputNext extends PureComponent<Props, State> {
         required={this.props.required}
         readOnly={this.props.readOnly}
         autoComplete={this.props.autoComplete}
+        rows={rows}
       />
     );
   }

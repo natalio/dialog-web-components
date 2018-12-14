@@ -19,11 +19,11 @@ export type Props = {
     theme: ColorTheme,
   },
   value: boolean,
-  onChange: (value: boolean) => void,
+  onChange: (value: boolean) => mixed,
 };
 
 class ActivityListSwitcher extends PureComponent<Props> {
-  handleClick = (event: SyntheticEvent<>): void => {
+  handleClick = (event: SyntheticMouseEvent<>): void => {
     event.preventDefault();
     this.props.onChange(!this.props.value);
   };

@@ -85,10 +85,12 @@
 }
 
 .title {
+  @mixin no-select;
   letter-spacing: -0.27px;
   font-size: var(--default-font-size-small);
   line-height: 20px;
-  color: var(--activity-profile-text-color-light);
+  color: var(--color-labels);
+  margin-bottom: calc(var(--default-padding-small) / 2);
 }
 
 .contactContent {
