@@ -27,3 +27,32 @@ const handleChange = (value) => setState({ value });
   <pre>{JSON.stringify(state.value, null, 2)}</pre>
 </div>;
 ```
+
+### Profile
+
+```jsx
+const {
+  default: { schema, uiSchema },
+} = require('../../fixtures/profileSchema.js');
+
+initialState = {
+  value: {
+    name: 'Rodgers 🦐',
+    about: 'Roundhouse kicking asses since 1940',
+  },
+};
+
+const handleChange = (value) => setState({ value });
+
+<div>
+  <CustomForm
+    id="profile"
+    schema={schema}
+    uiSchema={uiSchema}
+    value={state.value}
+    onChange={handleChange}
+  />
+  <hr />
+  <pre>{JSON.stringify(state.value, null, 2)}</pre>
+</div>;
+```

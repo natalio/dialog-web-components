@@ -3,40 +3,50 @@
  * @flow
  */
 
-import type { Field, User } from '@dlghq/dialog-types';
-import type { JSONValue } from '@dlghq/dialog-utils';
+import type { Field } from '@dlghq/dialog-types';
+import type { JSONValue, JSONSchema } from '@dlghq/dialog-utils';
 
 export type Screen = 'profile' | 'avatar';
 
-export type Profile = {
-  name: string,
-  nick: ?string,
-  about: ?string,
+export type Update = {
   avatar: ?(string | File),
-  customProfile: ?string,
+  profile: ?JSONValue,
+  customProfile: ?JSONValue,
+};
+
+export type CustomForm = {
+  schema: ?JSONSchema,
+  uiSchema: ?JSONSchema,
+  value: ?JSONValue,
+};
+
+export type Contact = {
+  type: 'phone' | 'email',
+  title: string,
+  value: string,
 };
 
 export type Props = {
   className?: string,
-  profile: ?User,
+  uid: number,
+  pending: boolean,
+  avatar: ?string,
+  profile: CustomForm,
+  customProfile: CustomForm,
+  contacts: Array<Contact>,
   context: {
     name: Field<string>,
     nick: Field<?string>,
     about: Field<?string>,
     avatar: Field<?(string | File)>,
   },
-  schema: ?string,
   onClose: () => void,
-  onSubmit: (profile: Profile) => mixed,
+  onSubmit: (update: $Shape<Update>) => mixed,
 };
 
 export type State = {
   screen: Screen,
-  profile: {
-    name: string,
-    nick: ?string,
-    about: ?string,
-    avatar: ?(string | File),
-    customProfile: ?JSONValue,
-  },
+  avatar: ?(string | File),
+  profile: ?JSONValue,
+  customProfile: ?JSONValue,
 };

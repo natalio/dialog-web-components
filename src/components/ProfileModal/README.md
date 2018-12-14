@@ -1,96 +1,106 @@
 ```jsx
-initialState = {
+const profile = require('../../fixtures/profileSchema.js').default;
+const customProfile = require('../../fixtures/customProfileSchema.js').default;
+const initial = {
   isOpen: false,
+  uid: 1010101,
   profile: null,
-  schema: null,
+  customProfile: null,
+  avatar: null,
+  contacts: null,
   context: {
     name: {
       error: null,
-      pending: false
+      pending: false,
     },
     nick: {
       error: null,
-      pending: false
+      pending: false,
     },
     about: {
       error: null,
-      pending: false
+      pending: false,
     },
     avatar: {
       error: null,
-      pending: false
-    }
-  }
-}
-
-const actions = {
-  onSubmit: (profile) => {
-    console.debug(profile);
-    setState({
-      ...state,
-      isOpen: false,
-      profile: {
-        ...state.profile,
-        ...profile
-      }
-    });
+      pending: false,
+    },
   },
-  onAvatarRemove: () => {
-    console.debug('onAvatarRemove');
-    setState({
-      profile: {
-        ...state.profile,
-        avatar: null
-      }
-    });
-  },
-  onClose: () => setState({ isOpen: false })
 };
+
+initialState = initial;
 
 const openModal = () => {
   setState({ isOpen: true });
   setTimeout(() => {
     setState({
       profile: {
-        name: 'Some user',
-        nick: null,
-        about: null,
-        avatar: null,
-        phones: [{
-          number: '+71233218855',
-          title: 'Mobile phone'
-        }],
-        emails: [{
-          email: 'someuser@domain.com',
-          title: 'Email'
-        }],
-        customProfile: JSON.stringify({
-          lastName: 'Rodgers 🦐',
-          age: 97,
-          bio: 'Roundhouse kicking asses since 1940',
-          password: 'noneed',
-          done: true,
-          telephone: '+1 234 567 89 00'
-        })
+        schema: profile.schema,
+        uiSchema: profile.uiSchema,
+        value: {
+          name: 'Steve',
+          nick: 'rodger',
+        },
       },
-      schema: JSON.stringify(require('../../fixtures/cutomProfileSchema.json'))
+      customProfile: {
+        schema: customProfile.schema,
+        uiSchema: customProfile.uiSchema,
+        value: {},
+      },
+      contacts: [
+        {
+          type: 'phone',
+          title: 'Mobile phone',
+          value: '+71233218855',
+        },
+        {
+          type: 'email',
+          title: 'Work email',
+          value: 'someuser@domain.com',
+        },
+      ],
     });
   }, 2000);
 };
 
-<div>
-  <Button theme="primary" onClick={openModal}>Edit profile</Button>
-  {
-    state.isOpen
-      ? (
-       <ProfileModal
-          profile={state.profile}
-          context={state.context}
-          schema={state.schema}
-          {...actions}
-        />
-      )
-      : null
+const onSubmit = (update) => {
+  setState({
+    context: {
+      ...state.context,
+      nick: {
+        ...state.context.nick,
+        pending: true,
+      },
+    },
+  });
+
+  if (state.context.nick.error === null) {
+    console.debug('onSubmit with error', update);
+    setTimeout(() => {
+      setState({
+        context: {
+          ...state.context,
+          nick: {
+            pending: false,
+            error: 'Ops, this is async error',
+          },
+        },
+      });
+    }, 2000);
+  } else {
+    console.debug('onSubmit', update);
+    onClose();
   }
-</div>
+};
+
+const onClose = () => setState(initial);
+
+<div>
+  <Button theme="primary" onClick={openModal}>
+    Edit profile
+  </Button>
+  {state.isOpen ? (
+    <ProfileModal {...state} onSubmit={onSubmit} onClose={onClose} />
+  ) : null}
+</div>;
 ```
