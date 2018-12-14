@@ -10,7 +10,7 @@ export type Screen = 'profile' | 'avatar';
 
 export type FormName = 'profile' | 'customProfile';
 
-export type Update = {
+export type ProfileUpdate = {
   avatar: ?(string | File),
   profile: ?JSONValue,
   customProfile: ?JSONValue,
@@ -43,12 +43,10 @@ export type Props = {
     avatar: Field<?(string | File)>,
   },
   onClose: () => void,
-  onSubmit: (update: $Shape<Update>) => mixed,
+  onSubmit: (update: $Shape<ProfileUpdate>) => mixed,
 };
 
 export type State = {
   screen: Screen,
-  avatar: ?(string | File),
-  profile: ?JSONValue,
-  customProfile: ?JSONValue,
+  ...ProfileUpdate,
 };
