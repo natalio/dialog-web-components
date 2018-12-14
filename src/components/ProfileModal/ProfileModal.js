@@ -4,7 +4,12 @@
  */
 
 import type { JSONValue } from '@dlghq/dialog-utils';
-import type { Props, State, CustomForm as CustomFormType } from './types';
+import type {
+  Props,
+  State,
+  CustomForm as CustomFormType,
+  FormName,
+} from './types';
 import React, { PureComponent, type Node } from 'react';
 import { Text } from '@dlghq/react-l10n';
 import classNames from 'classnames';
@@ -26,16 +31,18 @@ import CustomForm, { type FormErrors } from '../CustomForm/CustomForm';
 import CustomProfileProperty from '../CustomProfile/CustomProfileProperty';
 import styles from './ProfileModal.css';
 
-type FormName = 'profile' | 'customProfile';
-
 class ProfileModal extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 
     this.state = {
       screen: 'profile',
-      profile: props.profile && props.profile.value,
-      customProfile: props.customProfile && props.customProfile.value,
+      profile:
+        props.profile && props.profile.value ? props.profile.value : null,
+      customProfile:
+        props.customProfile && props.customProfile.value
+          ? props.customProfile.value
+          : null,
       avatar: props.avatar,
     };
   }
@@ -149,15 +156,16 @@ class ProfileModal extends PureComponent<Props, State> {
 
   renderAvatar(): Node {
     const { uid } = this.props;
-    const {
-      avatar,
-      profile: { name },
-    } = this.state;
+    const { avatar, profile } = this.state;
+
+    if (!profile) {
+      return null;
+    }
 
     return (
       <div className={styles.avatarBlock}>
         <AvatarSelector
-          title={name}
+          title={String(profile.name)}
           size={140}
           avatar={avatar}
           placeholder={getAvatarPlaceholder(uid)}

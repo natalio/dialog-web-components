@@ -8,6 +8,8 @@ import type { JSONValue, JSONSchema } from '@dlghq/dialog-utils';
 
 export type Screen = 'profile' | 'avatar';
 
+export type FormName = 'profile' | 'customProfile';
+
 export type Update = {
   avatar: ?(string | File),
   profile: ?JSONValue,
