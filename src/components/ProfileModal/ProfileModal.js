@@ -103,7 +103,7 @@ class ProfileModal extends PureComponent<Props, State> {
   handleAvatarRemove = (): void => {
     this.setState({
       screen: 'profile',
-      avatar: this.props.avatar,
+      avatar: null,
     });
   };
 
