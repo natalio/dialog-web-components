@@ -22,7 +22,7 @@
 }
 
 .close {
-  @apply --space-info-modal-close;
+  @mixin --space-info-modal-close;
 }
 
 .body {

@@ -25,9 +25,9 @@
 }
 
 .back {
-  @apply --space-info-modal-back;
+  @mixin --space-info-modal-back;
 }
 
 .close {
-  @apply --space-info-modal-close;
+  @mixin --space-info-modal-close;
 }

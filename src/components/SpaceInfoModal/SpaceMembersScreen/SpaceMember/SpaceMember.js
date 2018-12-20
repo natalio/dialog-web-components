@@ -7,7 +7,7 @@ import type { Peer } from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import type { SpaceMember as SpaceMemberType } from '../../types';
 import PeerInfoTitle from '../../../PeerInfoTitle/PeerInfoTitle';
-import PeerAvatarWithStatus from '../../../PeerAvatarWithStatus/PeerAvatarWithStatus';
+import PeerAvatar from '../../../PeerAvatar/PeerAvatar';
 import SpaceMemberKick from './SpaceMemberKick';
 import styles from './SpaceMember.css';
 
@@ -16,7 +16,7 @@ type Props = {
   member: SpaceMemberType,
   canKick: boolean,
   onKick: (peer: Peer) => mixed,
-  onClick: (peer: Peer) => mixed
+  onClick: (peer: Peer) => mixed,
 };
 
 class SpaceMember extends PureComponent<Props> {
@@ -50,7 +50,7 @@ class SpaceMember extends PureComponent<Props> {
   render() {
     return (
       <div className={styles.container} onClick={this.handleClick}>
-        <PeerAvatarWithStatus
+        <PeerAvatar
           className={styles.avatar}
           size={40}
           peer={this.props.member.peerInfo}
@@ -58,7 +58,11 @@ class SpaceMember extends PureComponent<Props> {
         />
         <div className={styles.body}>
           <div className={styles.titleWrapper}>
-            <PeerInfoTitle title={this.props.member.peerInfo.title} titleClassName={styles.title} emojiSize={18} />
+            <PeerInfoTitle
+              title={this.props.member.peerInfo.title}
+              titleClassName={styles.title}
+              emojiSize={18}
+            />
           </div>
         </div>
         {this.renderActions()}

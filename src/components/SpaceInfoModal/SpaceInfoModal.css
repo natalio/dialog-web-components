@@ -12,38 +12,38 @@
   --space-info-modal-close-color: color(#000 alpha(40%));
   --space-info-modal-close-color-hover: color(#000 alpha(60%));
   --space-info-modal-transition-duration: var(--default-transition-duration);
-  --space-info-modal-width: 500px;
-  --space-info-modal-hint-color: var(--default-font-color-light);;
+  --space-info-modal-hint-color: var(--default-font-color-light);
   --space-info-modal-hint-font-size: var(--space-info-modal-font-size);
   --space-info-modal-label-font-size: var(--default-font-size-large);
+}
 
-  --space-info-modal-close: {
-    position: absolute;
-    top: 16px;
-    right: 32px;
-  }
+@define-mixin --space-info-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 32px;
+}
 
-  --space-info-modal-back: {
-    width: var(--space-info-modal-close-size);
-    height: var(--space-info-modal-close-size);
-    margin-right: 16px;
-    transition: color var(--space-info-modal-transition-duration) linear;
-    line-height: var(--space-info-modal-close-size);
-    color: var(--space-info-modal-close-color);
+@define-mixin --space-info-modal-back {
+  width: var(--space-info-modal-close-size);
+  height: var(--space-info-modal-close-size);
+  margin-right: 16px;
+  transition: color var(--space-info-modal-transition-duration) linear;
+  line-height: var(--space-info-modal-close-size);
+  color: var(--space-info-modal-close-color);
 
-    &::hover {
-       color: var(--space-info-modal-close-color-hover);
-    }
+  &::hover {
+    color: var(--space-info-modal-close-color-hover);
   }
 }
 
 /* Styles */
 .container {
   font-family: var(--space-info-modal-font-family);
+  min-width: 320px;
 }
 
 .back {
-  @apply --space-info-modal-back;
+  @mixin --space-info-modal-back;
 }
 
 .invitationWrapper {
