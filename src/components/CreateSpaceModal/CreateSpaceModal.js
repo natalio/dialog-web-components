@@ -26,6 +26,7 @@ import HotKeys from '../HotKeys/HotKeys';
 class CreateSpaceModal extends PureComponent<Props, State> {
   static defaultProps = {
     id: 'create_space_modal',
+    isPublicSpaceEnabled: false,
   };
 
   constructor() {

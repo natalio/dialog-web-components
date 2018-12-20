@@ -25,7 +25,7 @@ export type Props = {
   request: Request,
   shortnamePrefix?: ?string,
   autoFocus: boolean,
-  isPublicSpaceEnabled: ?boolean,
+  isPublicSpaceEnabled: boolean,
   onClose: () => mixed,
   onSubmit: () => mixed,
   onRequestChange: (request: Request) => mixed,
