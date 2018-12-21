@@ -11,6 +11,7 @@ import styles from './CreateNewModal.css';
 
 type Props = {
   id: string,
+  maxGroupSize: number,
   type: 'group' | 'channel',
   onSubmit: (event: SyntheticEvent<>) => void,
   onChange: (value: string, event: SyntheticInputEvent<>) => void,
@@ -44,6 +45,7 @@ class CreateGroupTypeForm extends PureComponent<Props> {
           <Text
             className={styles.typeHint}
             id="CreateNewModal.group.type.hint"
+            values={{ count: String(this.props.maxGroupSize) }}
             tagName="div"
           />
           <br />

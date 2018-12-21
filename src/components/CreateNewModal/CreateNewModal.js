@@ -126,12 +126,17 @@ class CreateNewModal extends PureComponent<Props> {
       return null;
     }
 
-    return <div className={styles.error}>{error}</div>;
+    return (
+      <div className={styles.error}>
+        <Text id={error} />
+      </div>
+    );
   }
 
   renderTypeStep() {
     const {
       id,
+      maxGroupSize,
       request: { type },
       step,
     } = this.props;
@@ -146,10 +151,12 @@ class CreateNewModal extends PureComponent<Props> {
             id={`${this.props.id}_close_button`}
           />
         </ModalHeader>
+        {this.renderError()}
         <ModalBody className={styles.body}>
           <CreateGroupTypeForm
             id={id}
             type={type}
+            maxGroupSize={maxGroupSize}
             onChange={this.handleChange}
             onSubmit={this.handleNextStepClick}
           />
@@ -289,6 +296,7 @@ class CreateNewModal extends PureComponent<Props> {
             id={`${id}_close_button`}
           />
         </ModalHeader>
+        {this.renderError()}
         <ModalBody className={styles.body}>
           <CreateGroupMembersForm
             id={id}
