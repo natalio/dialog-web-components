@@ -3,7 +3,7 @@
  * @flow
  */
 
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Text } from '@dlghq/react-l10n';
 import Radio from '../Radio/Radio';
 import RadioGroup from '../Radio/RadioGroup';

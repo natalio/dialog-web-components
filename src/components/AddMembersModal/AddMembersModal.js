@@ -68,6 +68,22 @@ class AddMembersModal extends PureComponent<Props> {
     );
   }
 
+  renderMembersCount() {
+    const {
+      maxGroupSize,
+      selector,
+      group: { members },
+    } = this.props;
+    const membersCount = members.length;
+    const selectedCount = selector.getSelected().size;
+
+    return (
+      <small className={styles.membersCount}>
+        {`(${membersCount + selectedCount}/${maxGroupSize})`}
+      </small>
+    );
+  }
+
   render() {
     const className = classNames(styles.container, this.props.className);
 
@@ -76,6 +92,7 @@ class AddMembersModal extends PureComponent<Props> {
         <Modal className={className} onClose={this.handleClose}>
           <ModalHeader withBorder>
             <Text id="AddMembersModal.title" />
+            {this.renderMembersCount()}
             <ModalClose
               onClick={this.handleClose}
               id="add_members_close_button"

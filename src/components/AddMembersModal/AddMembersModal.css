@@ -31,3 +31,10 @@
   font-weight: 500;
   color: #fff;
 }
+
+.membersCount {
+  margin-left: 6px;
+  font-weight: 500;
+  font-size: var(--default-font-size-small);
+  color: var(--cool-grey);
+}

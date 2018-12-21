@@ -4,7 +4,7 @@ const contacts = require('../../fixtures/contacts.json');
 const initial = {
   isOpen: false,
   selector: PeerInfoSelectorState.create(contacts),
-  pending: false
+  pending: false,
 };
 initialState = initial;
 
@@ -12,14 +12,13 @@ initialState = initial;
   <Button theme="primary" onClick={() => setState({ isOpen: true })}>
     Add member
   </Button>
-  {
-    state.isOpen
-      ? <AddMembersModal
-          selector={state.selector}
-          onChange={(selector) => setState({ selector })}
-          onClose={() => setState(initial)}
-        />
-      : null
-  }
-</div>
+  {state.isOpen ? (
+    <AddMembersModal
+      selector={state.selector}
+      maxGroupSize={100}
+      onChange={(selector) => setState({ selector })}
+      onClose={() => setState(initial)}
+    />
+  ) : null}
+</div>;
 ```
