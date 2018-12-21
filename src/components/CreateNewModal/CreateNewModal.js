@@ -299,18 +299,15 @@ class CreateNewModal extends PureComponent<Props> {
         {this.renderError()}
         <ModalBody className={styles.body}>
           <CreateGroupMembersForm
-            id={id}
             members={members}
             autoFocus={this.props.autoFocus}
             onChange={this.handleMembersChange}
-            onSubmit={this.handleSubmit}
           />
         </ModalBody>
         <ModalFooter className={styles.footer}>
           <Button
             onClick={this.handleSubmit}
             rounded={false}
-            form={id}
             type="submit"
             theme="success"
             loading={this.props.pending}

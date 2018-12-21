@@ -13,57 +13,40 @@ type Props = {
   id: string,
   maxGroupSize: number,
   type: 'group' | 'channel',
-  onSubmit: (event: SyntheticEvent<>) => void,
   onChange: (value: string, event: SyntheticInputEvent<>) => void,
 };
 
-class CreateGroupTypeForm extends PureComponent<Props> {
-  handleSubmit = (event: SyntheticEvent<>) => {
-    event.preventDefault();
-
-    this.props.onSubmit(event);
-  };
-
-  render() {
-    return (
-      <form
-        id={this.props.id}
-        className={styles.type}
-        onSubmit={this.handleSubmit}
-      >
-        <RadioGroup
-          name="type"
-          value={this.props.type}
-          onChange={this.props.onChange}
-        >
-          <Radio value="group" htmlAutoFocus id={`${this.props.id}_type_group`}>
-            <Text
-              id="CreateNewModal.group.type.title"
-              className={styles.typeLabel}
-            />
-          </Radio>
+function CreateGroupTypeForm(props: Props) {
+  return (
+    <div className={styles.type}>
+      <RadioGroup name="type" value={props.type} onChange={props.onChange}>
+        <Radio value="group" htmlAutoFocus id={`${props.id}_type_group`}>
           <Text
-            className={styles.typeHint}
-            id="CreateNewModal.group.type.hint"
-            values={{ count: String(this.props.maxGroupSize) }}
-            tagName="div"
+            id="CreateNewModal.group.type.title"
+            className={styles.typeLabel}
           />
-          <br />
-          <Radio value="channel" id={`${this.props.id}_type_channel`}>
-            <Text
-              id="CreateNewModal.channel.type.title"
-              className={styles.typeLabel}
-            />
-          </Radio>
+        </Radio>
+        <Text
+          className={styles.typeHint}
+          id="CreateNewModal.group.type.hint"
+          values={{ count: String(props.maxGroupSize) }}
+          tagName="div"
+        />
+        <br />
+        <Radio value="channel" id={`${props.id}_type_channel`}>
           <Text
-            className={styles.typeHint}
-            id="CreateNewModal.channel.type.hint"
-            tagName="div"
+            id="CreateNewModal.channel.type.title"
+            className={styles.typeLabel}
           />
-        </RadioGroup>
-      </form>
-    );
-  }
+        </Radio>
+        <Text
+          className={styles.typeHint}
+          id="CreateNewModal.channel.type.hint"
+          tagName="div"
+        />
+      </RadioGroup>
+    </div>
+  );
 }
 
 export default CreateGroupTypeForm;
