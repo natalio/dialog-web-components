@@ -24,8 +24,10 @@ export type Props = {
   pending: boolean,
   selector: SelectorState<PeerInfo>,
   autoFocus: boolean,
+  maxGroupSize: number,
+  error: ?string,
   onClose: () => mixed,
-  onSubmit: (gid: number, uids: number[]) => mixed,
+  onSubmit: (group: Group, uids: number[]) => mixed,
   onChange: (selector: SelectorState<PeerInfo>) => mixed,
 };
 
@@ -39,7 +41,7 @@ class AddMembersModal extends PureComponent<Props> {
   handleSubmit = (): void => {
     const selected = this.props.selector.getSelected();
     this.props.onSubmit(
-      this.props.group.id,
+      this.props.group,
       selected.map((contact) => contact.peer.id).toArray(),
     );
   };
@@ -51,6 +53,20 @@ class AddMembersModal extends PureComponent<Props> {
       this.handleSubmit();
     }
   };
+
+  renderError() {
+    const { error } = this.props;
+
+    if (!error) {
+      return null;
+    }
+
+    return (
+      <div className={styles.error}>
+        <Text id={error} />
+      </div>
+    );
+  }
 
   render() {
     const className = classNames(styles.container, this.props.className);
@@ -65,6 +81,7 @@ class AddMembersModal extends PureComponent<Props> {
               id="add_members_close_button"
             />
           </ModalHeader>
+          {this.renderError()}
           <ModalBody className={styles.body}>
             <ContactSelector
               autoFocus={this.props.autoFocus}
@@ -77,7 +94,10 @@ class AddMembersModal extends PureComponent<Props> {
               wide
               theme="success"
               rounded={false}
-              disabled={this.props.pending}
+              disabled={
+                this.props.selector.getSelected().size === 0 ||
+                this.props.pending
+              }
               onClick={this.handleSubmit}
               id="add_members_add_button"
             >
