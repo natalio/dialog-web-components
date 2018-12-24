@@ -4,6 +4,7 @@
  */
 
 /* eslint-disable */
+const contacts = require('./contacts.json');
 
 const group = {
   avatar: 'https://avatars2.githubusercontent.com/u/19669610',
@@ -16,6 +17,11 @@ const group = {
     id: 10101,
     type: 'group',
   },
+  members: [
+    { peerInfo: contacts[0] },
+    { peerInfo: contacts[1] },
+    { peerInfo: contacts[3] },
+  ],
 };
 
 const channel = {
