@@ -9,8 +9,8 @@
   --sidebar-recent-item-font-size: var(--default-recent-item-font-size);
   --sidebar-recent-item-item-height: 60px;
   --sidebar-recent-item-top-padding: 12px;
-  --sidebar-recent-item-right-padding: 14px;
-  --sidebar-recent-item-bottom-padding: 9px;
+  --sidebar-recent-item-right-padding: 12px;
+  --sidebar-recent-item-bottom-padding: 12px;
   --sidebar-recent-item-left-padding: 10px;
   --sidebar-recent-item-background: #fafafa;
   --sidebar-recent-item-default-color: color-mod(
@@ -103,13 +103,12 @@
 }
 
 .avatar {
-  margin-right: 11px;
+  margin-right: 10px;
   flex: 0 0 auto;
   align-self: auto;
 }
 
 .text {
-  height: 37px;
   display: flex;
   flex-flow: column;
   vertical-align: middle;
@@ -166,8 +165,8 @@
 .message {
   letter-spacing: -0.25px;
   font-size: 13px;
-  line-height: 17px;
-  height: 17px;
+  line-height: 16px;
+  height: 16px;
   color: var(--sidebar-recent-item-message-color);
   @mixin text-overflow-ellipsis;
 }
