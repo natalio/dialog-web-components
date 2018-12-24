@@ -6,6 +6,35 @@
 /* eslint-disable */
 const contacts = require('./contacts.json');
 
+const userPeers = [
+  {
+    avatar: 'https://avatars1.githubusercontent.com/u/930121',
+    title: 'Oleg Shilov 💣',
+    placeholder: 'lblue',
+    type: 'user',
+    userName: 'olegshilov',
+    about: 'front-end @ dialog',
+    peer: {
+      id: 2,
+      type: 'user',
+      key: 'u2',
+    },
+  },
+  {
+    avatar: '',
+    title: 'Gusakov Nikita',
+    placeholder: 'red',
+    type: 'user',
+    userName: 'gusnkt',
+    about: '',
+    peer: {
+      id: 1,
+      type: 'user',
+      key: 'u1',
+    },
+  },
+];
+
 const group = {
   avatar: 'https://avatars2.githubusercontent.com/u/19669610',
   title: 'Dialog',
@@ -38,20 +67,6 @@ const channel = {
   },
 };
 
-const user = {
-  avatar: 'https://avatars1.githubusercontent.com/u/930121',
-  title: 'Oleg Shilov 💣',
-  placeholder: 'lblue',
-  type: 'user',
-  userName: 'olegshilov',
-  about: 'front-end @ dialog',
-  peer: {
-    id: 1709029441,
-    type: 'user',
-    key: 'u1709029441',
-  },
-};
-
 const bot = {
   avatar: null,
   title: 'Security Bot',
@@ -67,7 +82,8 @@ const bot = {
 };
 
 module.exports = {
-  user,
+  user: userPeers[0],
+  users: userPeers,
   group,
   channel,
   bot,
