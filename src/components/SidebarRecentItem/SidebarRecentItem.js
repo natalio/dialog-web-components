@@ -48,7 +48,7 @@ class SidebarRecentItem extends PureComponent<Props> {
       return (
         <PeerAvatarDouble
           className={styles.avatar}
-          size={37}
+          size={36}
           big={info}
           small={message.sender}
         />
@@ -58,7 +58,7 @@ class SidebarRecentItem extends PureComponent<Props> {
     return (
       <PeerAvatar
         className={styles.avatar}
-        size={37}
+        size={36}
         peer={info}
         online={online}
       />

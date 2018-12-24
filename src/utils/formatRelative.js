@@ -32,11 +32,10 @@ function formatRelative(date: Date, baseDate: Date, options: Options): string {
   }
 
   let token = '';
-
-  if (diff < 0) {
-    token = 'yesterday';
-  } else if (diff < 1) {
+  if (diff === 1 || diff === 0) {
     token = 'today';
+  } else if (diff < 0 && diff >= -1) {
+    token = 'yesterday';
   } else {
     token = 'other';
   }

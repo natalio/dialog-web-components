@@ -17,6 +17,8 @@ Basic Icon:
   <Icon glyph="call_end" />
   <Icon glyph="call_incoming" />
   <Icon glyph="call_outgoing" />
+  <Icon glyph="call_missed" />
+  <Icon glyph="call_canceled" />
   <Icon glyph="channel" />
   <Icon glyph="chevron_down" />
   <Icon glyph="chevron_left" />

@@ -7,20 +7,18 @@
 :root {
   --sidebar-call-item-font-family: var(--default-font-family);
   --sidebar-call-item-top-padding: 12px;
-  --sidebar-call-item-right-padding: 14px;
-  --sidebar-call-item-bottom-padding: 9px;
+  --sidebar-call-item-right-padding: 12px;
+  --sidebar-call-item-bottom-padding: 12px;
   --sidebar-call-item-left-padding: 10px;
-  --sidebar-call-item-height: 73px;
+  --sidebar-call-item-height: 60px;
+  --sidebar-call-item-background: #fafafa;
   --sidebar-call-item-default-color: color-mod(#000 alpha(50%));
   --sidebar-call-item-hover-background-color: #e6e6e6;
   --sidebar-call-item-hover-color: #000;
-  --sidebar-call-item-active-color: var(--lipstick);
   --sidebar-call-item-active-background-color: color-mod(
     var(--sidebar-call-item-hover-background-color) shade(2%)
   );
-  --sidebar-call-item-text-height: 54px;
-  --sidebar-call-item-font-size: var(--default-recent-item-font-size);
-  --sidebar-call-item-title-font-size: 14px;
+  --sidebar-call-item-title-font-size: var(--default-recent-item-font-size);
   --sidebar-call-item-time-font-size: 13px;
 }
 
@@ -44,8 +42,9 @@
   font-family: var(--sidebar-call-item-font-family);
   flex-wrap: nowrap;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   color: var(--sidebar-call-item-default-color);
+  background-color: var(--sidebar-call-item-background);
 
   &:hover {
     background-color: var(--sidebar-call-item-hover-background-color);
@@ -57,7 +56,7 @@
   }
 
   & .avatar {
-    margin-right: 11px;
+    margin-right: 10px;
     flex: 0 0 auto;
     align-self: auto;
     cursor: inherit;
@@ -65,31 +64,28 @@
 }
 
 .title {
+  line-height: 20px;
   font-size: var(--sidebar-call-item-title-font-size);
+  letter-spacing: -0.27px;
+  font-weight: 500;
 }
 
 .content {
   display: flex;
-  flex-flow: column;
-  vertical-align: middle;
+  flex-flow: column nowrap;
   flex: 1 1 auto;
-  height: var(--sidebar-call-item-text-height);
   position: relative;
   @mixin flex-fix;
 }
 
-.state {
-  line-height: 20px;
-  font-size: var(--sidebar-call-item-font-size);
-  @mixin text-overflow-ellipsis;
-}
-
-.stateActive {
-  color: var(--sidebar-call-item-active-color);
-}
-
 .icon {
+  margin-top: -2px;
   color: inherit;
+  margin-right: 2px;
+}
+
+.iconDanger {
+  color: var(--color-danger);
 }
 
 .text {
@@ -99,9 +95,8 @@
 }
 
 .time {
-  line-height: 17px;
+  line-height: 16px;
   font-size: var(--sidebar-call-item-time-font-size);
-  vertical-align: middle;
   letter-spacing: -0.25px;
   @mixin text-overflow-ellipsis;
 
@@ -111,4 +106,9 @@
 }
 
 .duration {
+  flex: 0 0 auto;
+  font-weight: 500;
+  margin-left: 4px;
+  letter-spacing: -0.25px;
+  font-size: var(--default-font-size-small);
 }
