@@ -201,7 +201,7 @@ class ProfileModal extends PureComponent<Props, State> {
   renderContacts(): Node {
     const { contacts } = this.props;
 
-    if (!contacts || contacts.length === 0) {
+    if (contacts.length === 0) {
       return null;
     }
 
