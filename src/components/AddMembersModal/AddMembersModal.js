@@ -54,8 +54,26 @@ class AddMembersModal extends PureComponent<Props> {
     }
   };
 
+  getMembersCount = (): number => {
+    const {
+      selector,
+      group: { members },
+    } = this.props;
+
+    return members.length + selector.getSelected().size;
+  };
+
   renderError() {
-    const { error } = this.props;
+    const { maxGroupSize, error } = this.props;
+    const membersCount = this.getMembersCount();
+
+    if (membersCount > maxGroupSize) {
+      return (
+        <div className={styles.error}>
+          <Text id="CreateNewModal.group.error.max_group_size" />
+        </div>
+      );
+    }
 
     if (!error) {
       return null;
@@ -68,31 +86,22 @@ class AddMembersModal extends PureComponent<Props> {
     );
   }
 
-  renderMembersCount() {
-    const {
-      maxGroupSize,
-      selector,
-      group: { members },
-    } = this.props;
-    const membersCount = members.length;
-    const selectedCount = selector.getSelected().size;
-
-    return (
-      <small className={styles.membersCount}>
-        {`(${membersCount + selectedCount}/${maxGroupSize})`}
-      </small>
-    );
-  }
-
   render() {
+    const { maxGroupSize } = this.props;
+    const membersCount = this.getMembersCount();
     const className = classNames(styles.container, this.props.className);
+    const membersCountClassNames = classNames(styles.membersCount, {
+      [styles.membersCountError]: membersCount > maxGroupSize,
+    });
 
     return (
       <HotKeys onHotKey={this.handleHotkey}>
         <Modal className={className} onClose={this.handleClose}>
           <ModalHeader withBorder>
             <Text id="AddMembersModal.title" />
-            {this.renderMembersCount()}
+            <small className={membersCountClassNames}>
+              {`(${membersCount}/${maxGroupSize})`}
+            </small>
             <ModalClose
               onClick={this.handleClose}
               id="add_members_close_button"
@@ -113,6 +122,7 @@ class AddMembersModal extends PureComponent<Props> {
               rounded={false}
               disabled={
                 this.props.selector.getSelected().size === 0 ||
+                membersCount > maxGroupSize ||
                 this.props.pending
               }
               onClick={this.handleSubmit}

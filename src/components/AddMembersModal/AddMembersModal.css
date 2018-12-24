@@ -38,3 +38,7 @@
   font-size: var(--default-font-size-small);
   color: var(--cool-grey);
 }
+
+.membersCountError {
+  color: var(--color-danger);
+}
