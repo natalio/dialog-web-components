@@ -7,7 +7,6 @@ import type { CallInfo } from '@dlghq/dialog-types';
 import type { ProviderContext } from '@dlghq/react-l10n';
 import React, { PureComponent } from 'react';
 import { LocalizationContextType } from '@dlghq/react-l10n';
-import { Text } from '@dlghq/react-l10n';
 import { formatTime } from '@dlghq/dialog-utils';
 import classNames from 'classnames';
 import PeerAvatarDouble from '../PeerAvatarDouble/PeerAvatarDouble';
