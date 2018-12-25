@@ -8,13 +8,13 @@ import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 
 import SpaceAvatar from './SpaceAvatar/SpaceAvatar.js';
-import SpaceAdd from './SpaceAdd';
 import styles from './SpaceList.css';
 
 export type Props = {
   className?: string,
   current: string,
   width?: number,
+  height?: number,
   size: number,
   variants: Array<{
     id: string,
@@ -24,26 +24,18 @@ export type Props = {
     className?: string,
   }>,
   onPick: (current: string) => mixed,
-  onClick: () => mixed,
 };
 
 class SpaceList extends PureComponent<Props> {
   static defaultProps = {
     size: 40,
-    width: 240,
+    width: 246,
+    height: 60,
   };
 
   render() {
-    const { current, variants, size, width } = this.props;
+    const { current, variants, size, width, height } = this.props;
     const className = classNames(styles.container, this.props.className);
-
-    /**
-     * in pixels
-     * at this moment I don't know,
-     * how this will be displayed with custom scrollbar.
-     * will fix later
-     */
-    const DEFAULT_GAP_UNDER_SPACE_ROW = 20;
 
     const spaceAvatars = variants.map((variant) => {
       const { id, title, image, placeholder } = variant;
@@ -67,14 +59,12 @@ class SpaceList extends PureComponent<Props> {
       <div
         className={className}
         style={{
-          maxHeight: size + DEFAULT_GAP_UNDER_SPACE_ROW,
-          height: size + DEFAULT_GAP_UNDER_SPACE_ROW,
+          maxHeight: height,
+          height,
           width,
         }}
       >
         <div className={styles.wrapper}>{spaceAvatars}</div>
-
-        <SpaceAdd size={size} onClick={this.props.onClick} />
       </div>
     );
   }

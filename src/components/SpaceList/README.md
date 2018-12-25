@@ -21,7 +21,6 @@ const handlePick = (current) => setState({ current });
     },
   ]}
   onPick={handlePick}
-  onClick={() => alert('clicked')}
 />;
 ```
 
@@ -86,6 +85,5 @@ const handlePick = (current) => setState({ current });
     },
   ]}
   onPick={handlePick}
-  onClick={() => alert('clicked')}
 />;
 ```
