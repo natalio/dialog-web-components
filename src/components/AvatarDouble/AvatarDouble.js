@@ -49,12 +49,12 @@ class AvatarDouble extends PureComponent<Props, State> {
   static defaultProps = {
     size: 32,
     big: {
-      text: null,
+      title: null,
       image: null,
       placeholder: 'empty',
     },
     small: {
-      text: null,
+      title: null,
       image: null,
       placeholder: 'empty',
     },
