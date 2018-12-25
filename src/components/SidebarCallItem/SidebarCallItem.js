@@ -62,6 +62,19 @@ class SidebarCallItem extends PureComponent<Props> {
     return state;
   };
 
+  getTitle = (): string => {
+    const {
+      call: { recipient, initiator },
+    } = this.props;
+    const state = this.getCallState();
+
+    if (state === 'incoming' || state === 'missed') {
+      return initiator.title;
+    }
+
+    return recipient.title;
+  };
+
   renderAvatar() {
     return (
       <PeerAvatarDouble
@@ -75,9 +88,7 @@ class SidebarCallItem extends PureComponent<Props> {
 
   renderTitle() {
     const state = this.getCallState();
-    const {
-      call: { recipient },
-    } = this.props;
+    const title = this.getTitle();
     const iconClassName = classNames(styles.icon, {
       [styles.iconDanger]: state === 'missed' || state === 'canceled',
     });
@@ -85,7 +96,7 @@ class SidebarCallItem extends PureComponent<Props> {
     return (
       <div className={styles.title}>
         <Icon glyph={`call_${state}`} size={18} className={iconClassName} />
-        <Text id={recipient.title} />
+        <span>{title}</span>
       </div>
     );
   }
