@@ -9,8 +9,9 @@ import type { PeerInfo } from '@dlghq/dialog-types';
 export type Request = {
   title: string,
   shortname: string,
-  avatar: ?File,
+  avatar: ?string,
   members: SelectorState<PeerInfo>,
+  about: string,
 };
 
 export type Step = 'info' | 'avatar' | 'members';
@@ -24,9 +25,15 @@ export type Props = {
   request: Request,
   shortnamePrefix?: ?string,
   autoFocus: boolean,
-  isPublicGroupsEnabled: boolean,
+  isPublicSpaceEnabled: boolean,
   onClose: () => mixed,
-  onSubmit: (request: Request) => mixed,
-  onStepChange: (step: Step) => mixed,
+  onSubmit: () => mixed,
   onRequestChange: (request: Request) => mixed,
+  onAvatarRemove: () => void,
+  onAvatarEdit: (avatar: string) => void,
+};
+
+export type State = {
+  step: Step,
+  avatar: ?File,
 };
