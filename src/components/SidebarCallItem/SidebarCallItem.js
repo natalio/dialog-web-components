@@ -7,7 +7,6 @@ import type { CallInfo } from '@dlghq/dialog-types';
 import type { ProviderContext } from '@dlghq/react-l10n';
 import React, { PureComponent } from 'react';
 import { LocalizationContextType } from '@dlghq/react-l10n';
-import { Text } from '@dlghq/react-l10n';
 import { formatTime } from '@dlghq/dialog-utils';
 import classNames from 'classnames';
 import PeerAvatarDouble from '../PeerAvatarDouble/PeerAvatarDouble';
@@ -62,6 +61,19 @@ class SidebarCallItem extends PureComponent<Props> {
     return state;
   };
 
+  getTitle = (): string => {
+    const {
+      call: { recipient, initiator },
+    } = this.props;
+    const state = this.getCallState();
+
+    if (state === 'incoming' || state === 'missed') {
+      return initiator.title;
+    }
+
+    return recipient.title;
+  };
+
   renderAvatar() {
     return (
       <PeerAvatarDouble
@@ -75,9 +87,7 @@ class SidebarCallItem extends PureComponent<Props> {
 
   renderTitle() {
     const state = this.getCallState();
-    const {
-      call: { recipient },
-    } = this.props;
+    const title = this.getTitle();
     const iconClassName = classNames(styles.icon, {
       [styles.iconDanger]: state === 'missed' || state === 'canceled',
     });
@@ -85,7 +95,7 @@ class SidebarCallItem extends PureComponent<Props> {
     return (
       <div className={styles.title}>
         <Icon glyph={`call_${state}`} size={18} className={iconClassName} />
-        <Text id={recipient.title} />
+        <span>{title}</span>
       </div>
     );
   }

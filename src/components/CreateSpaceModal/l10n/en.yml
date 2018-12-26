@@ -3,10 +3,13 @@ info:
   title:
     label: Space title
     placeholder: Name this space
-
   shortname:
     label: Space link
     placeholder: link
+  description:
+    label: Description - optional
+    placeholder: Describe the purpose of this space
+public: Make this space public
 
 finish: Create space
 next:

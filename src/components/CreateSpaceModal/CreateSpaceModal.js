@@ -4,11 +4,12 @@
  */
 
 import type { PeerInfo } from '@dlghq/dialog-types';
-import type { Props } from './types';
+import type { Props, State, Step } from './types';
 import type { SelectorState } from '../../entities';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { Text } from '@dlghq/react-l10n';
+import { fileToBase64 } from '@dlghq/dialog-utils';
 import Modal from '../Modal/Modal';
 import ModalHeader from '../Modal/ModalHeader';
 import ModalClose from '../Modal/ModalClose';
@@ -22,25 +23,35 @@ import ImageEdit from '../ImageEdit/ImageEdit';
 import styles from './CreateSpaceModal.css';
 import HotKeys from '../HotKeys/HotKeys';
 
-class CreateSpaceModal extends PureComponent<Props> {
+class CreateSpaceModal extends PureComponent<Props, State> {
   static defaultProps = {
     id: 'create_space_modal',
+    isPublicSpaceEnabled: false,
   };
 
-  handlePrevStepClick = (): void => {
-    const { step } = this.props;
+  constructor() {
+    super();
 
-    if (step === 'members') {
-      this.props.onStepChange('info');
-    }
+    this.state = {
+      step: 'info',
+      avatar: null,
+    };
+  }
+
+  handlePrevStepClick = (): void => {
+    this.setState({
+      step: 'info',
+    });
   };
 
   handleNextStepClick = (): void => {
-    const { step } = this.props;
+    this.setState({
+      step: 'members',
+    });
+  };
 
-    if (step === 'info') {
-      this.props.onStepChange('members');
-    }
+  handleStepChange = (step: Step): void => {
+    this.setState({ step });
   };
 
   handleChange = (value: string, { target }: SyntheticInputEvent<>) => {
@@ -58,11 +69,13 @@ class CreateSpaceModal extends PureComponent<Props> {
   };
 
   handleAvatarChange = (avatar: File): void => {
-    this.props.onRequestChange({
-      ...this.props.request,
-      avatar,
+    fileToBase64(avatar, (newAvatar) => {
+      this.props.onRequestChange({
+        ...this.props.request,
+        avatar: newAvatar,
+      });
+      this.handleStepChange('info');
     });
-    this.props.onStepChange('info');
   };
 
   handleAvatarRemove = (): void => {
@@ -73,22 +86,22 @@ class CreateSpaceModal extends PureComponent<Props> {
   };
 
   handleAvatarEdit = (avatar: File): void => {
-    this.props.onRequestChange({
-      ...this.props.request,
+    this.setState({
       avatar,
     });
-    this.props.onStepChange('avatar');
+
+    this.handleStepChange('avatar');
   };
 
   handleSubmit = (event: ?SyntheticEvent<>): void => {
     if (event) {
       event.preventDefault();
     }
-    this.props.onSubmit(this.props.request);
+    this.props.onSubmit();
   };
 
   handleCancelAvatarEdit = (): void => {
-    this.props.onStepChange('info');
+    this.handleStepChange('info');
   };
 
   handleHotkey = (hotkey: string, event: KeyboardEvent): void => {
@@ -96,7 +109,7 @@ class CreateSpaceModal extends PureComponent<Props> {
       event.preventDefault();
       event.stopPropagation();
 
-      switch (this.props.step) {
+      switch (this.state.step) {
         case 'avatar':
           // do nothing because ImageEdit has own HotKeys handlers
           break;
@@ -122,10 +135,12 @@ class CreateSpaceModal extends PureComponent<Props> {
   renderInfoStep() {
     const {
       id,
-      step,
-      request: { title, shortname, avatar },
+      request: { title, shortname, avatar, about },
       shortnamePrefix,
+      isPublicSpaceEnabled,
     } = this.props;
+
+    const { step } = this.state;
 
     return (
       <div className={styles.wrapper}>
@@ -145,6 +160,8 @@ class CreateSpaceModal extends PureComponent<Props> {
             title={title}
             avatar={avatar}
             shortname={shortname}
+            about={about}
+            isPublicSpaceEnabled={isPublicSpaceEnabled}
             shortnamePrefix={shortnamePrefix}
             onChange={this.handleChange}
             onSubmit={this.handleNextStepClick}
@@ -169,9 +186,7 @@ class CreateSpaceModal extends PureComponent<Props> {
   }
 
   renderAvatarStep() {
-    const {
-      request: { avatar },
-    } = this.props;
+    const { avatar } = this.state;
 
     if (!avatar) {
       return null;
@@ -259,7 +274,7 @@ class CreateSpaceModal extends PureComponent<Props> {
   }
 
   renderStep() {
-    const { step } = this.props;
+    const { step } = this.state;
 
     switch (step) {
       case 'info':

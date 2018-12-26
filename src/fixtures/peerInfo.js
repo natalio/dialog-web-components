@@ -65,6 +65,14 @@ const channel = {
     id: 111,
     type: 'group',
   },
+  members: [
+    { peerInfo: contacts[0] },
+    { peerInfo: contacts[1] },
+    { peerInfo: contacts[3] },
+    { peerInfo: contacts[4] },
+    { peerInfo: contacts[5] },
+    { peerInfo: contacts[6] },
+  ],
 };
 
 const bot = {
