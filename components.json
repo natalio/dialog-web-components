@@ -88,6 +88,7 @@
       "EditGroupModal",
       "FeedbackModal",
       "AdminModal",
+      "EditSpaceModal",
       "CreateSpaceModal",
       "SelectCertificateModal"
     ]

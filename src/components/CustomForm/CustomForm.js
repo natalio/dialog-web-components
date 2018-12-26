@@ -3,6 +3,8 @@
  * @flow
  */
 
+/* eslint react/jsx-handler-names: 0 */
+
 import type { JSONValue, JSONSchema } from '@dlghq/dialog-utils';
 import React, { PureComponent, type Node } from 'react';
 import classNames from 'classnames';
@@ -14,14 +16,16 @@ import CheckboxWidget from './widgets/CheckboxWidget';
 import ObjectFieldTemplate from './ObjectFieldTemplate';
 import styles from './CustomForm.css';
 
+export type FormErrors = { [key: string]: Object };
+
 export type Props = {
   className?: string,
   id: string,
-  name: string,
   liveValidate: boolean,
   value: ?JSONValue,
   schema: JSONSchema,
   uiSchema?: ?JSONSchema,
+  onValidate?: (value: JSONValue, errors: FormErrors) => mixed,
   onChange: (value: JSONValue) => mixed,
 };
 
@@ -43,7 +47,7 @@ class CustomForm extends PureComponent<Props> {
     };
   }
 
-  handleChange = (value: { formData: JSONValue }) => {
+  handleChange = (value: { formData: JSONValue, errors: FormErrors }) => {
     this.props.onChange(value.formData);
   };
 
@@ -61,11 +65,12 @@ class CustomForm extends PureComponent<Props> {
           formData={this.props.value}
           widgets={this.widgets}
           id={this.props.id}
-          name={this.props.name}
+          idPrefix={this.props.id}
           onChange={this.handleChange}
           ObjectFieldTemplate={ObjectFieldTemplate}
           FieldTemplate={this.getCustomFieldTemplate}
           showErrorList={false}
+          validate={this.props.onValidate}
         >
           <span />
         </Form>

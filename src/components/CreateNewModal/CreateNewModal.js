@@ -119,19 +119,42 @@ class CreateNewModal extends PureComponent<Props> {
     }
   };
 
+  isMaxGroupSizeExceeded(): boolean {
+    const {
+      maxGroupSize,
+      request: { type, members },
+    } = this.props;
+    const membersCount = members.getSelected().size;
+
+    return type === 'group' && membersCount > maxGroupSize;
+  }
+
   renderError() {
     const { error } = this.props;
+
+    if (this.isMaxGroupSizeExceeded()) {
+      return (
+        <div className={styles.error}>
+          <Text id="CreateNewModal.group.error.max_group_size" />
+        </div>
+      );
+    }
 
     if (!error) {
       return null;
     }
 
-    return <div className={styles.error}>{error}</div>;
+    return (
+      <div className={styles.error}>
+        <Text id={error} />
+      </div>
+    );
   }
 
   renderTypeStep() {
     const {
       id,
+      maxGroupSize,
       request: { type },
       step,
     } = this.props;
@@ -146,10 +169,12 @@ class CreateNewModal extends PureComponent<Props> {
             id={`${this.props.id}_close_button`}
           />
         </ModalHeader>
+        {this.renderError()}
         <ModalBody className={styles.body}>
           <CreateGroupTypeForm
             id={id}
             type={type}
+            maxGroupSize={maxGroupSize}
             onChange={this.handleChange}
             onSubmit={this.handleNextStepClick}
           />
@@ -271,7 +296,12 @@ class CreateNewModal extends PureComponent<Props> {
     const {
       id,
       request: { type, members },
+      maxGroupSize,
     } = this.props;
+    const membersCount = members.getSelected().size;
+    const membersCountClassNames = classNames(styles.membersCount, {
+      [styles.membersCountError]: this.isMaxGroupSizeExceeded(),
+    });
 
     return (
       <div className={styles.wrapper}>
@@ -283,30 +313,33 @@ class CreateNewModal extends PureComponent<Props> {
             id={`${id}_back_button`}
           />
           <Text id={`CreateNewModal.${type}.title`} />
+          {type === 'group' ? (
+            <small className={membersCountClassNames}>
+              {`(${membersCount}/${maxGroupSize})`}
+            </small>
+          ) : null}
           <ModalClose
             pending={this.props.pending}
             onClick={this.props.onClose}
             id={`${id}_close_button`}
           />
         </ModalHeader>
+        {this.renderError()}
         <ModalBody className={styles.body}>
           <CreateGroupMembersForm
-            id={id}
             members={members}
             autoFocus={this.props.autoFocus}
             onChange={this.handleMembersChange}
-            onSubmit={this.handleSubmit}
           />
         </ModalBody>
         <ModalFooter className={styles.footer}>
           <Button
             onClick={this.handleSubmit}
             rounded={false}
-            form={id}
             type="submit"
             theme="success"
             loading={this.props.pending}
-            disabled={this.props.pending}
+            disabled={this.isMaxGroupSizeExceeded() || this.props.pending}
             id={`${id}_finish_button`}
             wide
           >

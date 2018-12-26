@@ -4,6 +4,36 @@
  */
 
 /* eslint-disable */
+const contacts = require('./contacts.json');
+
+const userPeers = [
+  {
+    avatar: 'https://avatars1.githubusercontent.com/u/930121',
+    title: 'Oleg Shilov 💣',
+    placeholder: 'lblue',
+    type: 'user',
+    userName: 'olegshilov',
+    about: 'front-end @ dialog',
+    peer: {
+      id: 2,
+      type: 'user',
+      key: 'u2',
+    },
+  },
+  {
+    avatar: '',
+    title: 'Gusakov Nikita',
+    placeholder: 'red',
+    type: 'user',
+    userName: 'gusnkt',
+    about: '',
+    peer: {
+      id: 1,
+      type: 'user',
+      key: 'u1',
+    },
+  },
+];
 
 const group = {
   avatar: 'https://avatars2.githubusercontent.com/u/19669610',
@@ -16,6 +46,11 @@ const group = {
     id: 10101,
     type: 'group',
   },
+  members: [
+    { peerInfo: contacts[0] },
+    { peerInfo: contacts[1] },
+    { peerInfo: contacts[3] },
+  ],
 };
 
 const channel = {
@@ -30,20 +65,14 @@ const channel = {
     id: 111,
     type: 'group',
   },
-};
-
-const user = {
-  avatar: 'https://avatars1.githubusercontent.com/u/930121',
-  title: 'Oleg Shilov 💣',
-  placeholder: 'lblue',
-  type: 'user',
-  userName: 'olegshilov',
-  about: 'front-end @ dialog',
-  peer: {
-    id: 1709029441,
-    type: 'user',
-    key: 'u1709029441',
-  },
+  members: [
+    { peerInfo: contacts[0] },
+    { peerInfo: contacts[1] },
+    { peerInfo: contacts[3] },
+    { peerInfo: contacts[4] },
+    { peerInfo: contacts[5] },
+    { peerInfo: contacts[6] },
+  ],
 };
 
 const bot = {
@@ -61,7 +90,8 @@ const bot = {
 };
 
 module.exports = {
-  user,
+  user: userPeers[0],
+  users: userPeers,
   group,
   channel,
   bot,

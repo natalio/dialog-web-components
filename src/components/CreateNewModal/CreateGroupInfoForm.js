@@ -6,7 +6,6 @@
 import type { ProviderContext } from '@dlghq/react-l10n';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { LocalizationContextType } from '@dlghq/react-l10n';
 import { fileToBase64 } from '@dlghq/dialog-utils';
 import AvatarSelector from '../AvatarSelector/AvatarSelector';
 import InputNext from '../InputNext/InputNext';
@@ -39,10 +38,6 @@ export type Context = ProviderContext;
 
 class CreateGroupInfoForm extends PureComponent<Props, State> {
   shortnameInput: ?InputNext;
-
-  static contextTypes = {
-    l10n: LocalizationContextType,
-  };
 
   static defaultProps = {
     aboutMaxLength: 3000,
@@ -147,7 +142,6 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
 
   render() {
     const { id, type, about, aboutMaxLength, title, vertical } = this.props;
-    const { l10n } = this.context;
     const className = classNames(
       styles.info,
       {
@@ -159,21 +153,14 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
     return (
       <div className={className}>
         {this.renderAvatar()}
-        <form
-          id={id}
-          autoComplete="off"
-          className={styles.form}
-          onSubmit={this.handleSubmit}
-        >
+        <form id={id} autoComplete="off" className={styles.form}>
           <InputNext
             className={styles.input}
             id={`${id}_title`}
             name="title"
             onChange={this.props.onChange}
-            placeholder={l10n.formatText(
-              `CreateNewModal.${type}.info.title.placeholder`,
-            )}
-            label={l10n.formatText(`CreateNewModal.${type}.info.title.label`)}
+            placeholder={`CreateNewModal.${type}.info.title.placeholder`}
+            label={`CreateNewModal.${type}.info.title.label`}
             value={title}
             htmlAutoFocus
           />
@@ -182,12 +169,8 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
             id={`${id}_about`}
             name="about"
             onChange={this.props.onChange}
-            label={l10n.formatText(
-              `CreateNewModal.${type}.info.description.label`,
-            )}
-            placeholder={l10n.formatText(
-              `CreateNewModal.${type}.info.description.placeholder`,
-            )}
+            label={`CreateNewModal.${type}.info.description.label`}
+            placeholder={`CreateNewModal.${type}.info.description.placeholder`}
             type="textarea"
             value={about || ''}
             maxLength={aboutMaxLength}

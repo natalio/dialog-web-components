@@ -49,12 +49,12 @@ class AvatarDouble extends PureComponent<Props, State> {
   static defaultProps = {
     size: 32,
     big: {
-      text: null,
+      title: null,
       image: null,
       placeholder: 'empty',
     },
     small: {
-      text: null,
+      title: null,
       image: null,
       placeholder: 'empty',
     },
@@ -235,7 +235,7 @@ class AvatarDouble extends PureComponent<Props, State> {
     }
 
     const { size } = this.props;
-    const placeholderText = size > 40 ? getAvatarText(title) : null;
+    const placeholderText = size > 20 ? getAvatarText(title) : null;
 
     if (!placeholderText) {
       return null;

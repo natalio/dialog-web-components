@@ -9,9 +9,6 @@ import React, { PureComponent } from 'react';
 import { LocalizationContextType, Text } from '@dlghq/react-l10n';
 import Field from '../../Field/Field';
 import Button from '../../Button/Button';
-import getLocalDateTimeFormat from '../../../utils/getLocalDateTimeFormat';
-import getDateFnsLocale from '../../../utils/getDateFnsLocale';
-import formatDate from 'date-fns/format';
 import styles from './Security.css';
 import UAParser from 'ua-parser-js';
 
@@ -54,17 +51,25 @@ class Session extends PureComponent<Props> {
   }
 
   renderAuthTime() {
-    const { session } = this.props;
-
-    const format = getLocalDateTimeFormat(this.context.l10n.locale);
-    const locale = getDateFnsLocale(this.context.l10n.locale);
+    const {
+      l10n: { locale },
+    } = this.context;
+    const {
+      session: { authTime },
+    } = this.props;
 
     return (
       <time
         className={styles.sessionAuthTime}
-        dateTime={session.authTime.toISOString()}
+        dateTime={authTime.toISOString()}
       >
-        {formatDate(session.authTime, format, locale)}
+        {authTime.toLocaleTimeString(locale, {
+          hour: 'numeric',
+          minute: 'numeric',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
       </time>
     );
   }

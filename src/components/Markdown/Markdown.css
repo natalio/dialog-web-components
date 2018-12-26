@@ -60,7 +60,7 @@
 }
 
 .blockquote {
-  margin: calc(var(--markdown-padding) + 2) 0;
+  margin: calc(var(--markdown-padding) + 2px) 0;
   padding: 4px 12px;
   position: relative;
 

@@ -43,7 +43,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  min-width: var(--modal-min-width);
   margin: calc(var(--default-padding-large) * 3) 0 0;
   border-radius: var(--modal-border-radius);
   outline: none;
@@ -52,6 +51,7 @@
   font-family: var(--modal-font-family);
   flex: 0 0 auto;
   @mixin flex-fix;
+  min-width: var(--modal-min-width);
 }
 
 .overlay {
@@ -139,6 +139,7 @@
   padding: var(--default-padding) calc(var(--default-padding) * 2);
   font-size: var(--modal-font-size);
   flex: 1 1 auto;
+  @mixin flex-fix;
 }
 
 .footer {
@@ -198,4 +199,17 @@
 
 .spinner {
   vertical-align: inherit;
+}
+
+.bodyWapper {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+}
+
+.tabs {
+  flex: 0 0 auto !important;
+  padding: var(--default-padding-small) !important;
+  padding-right: 0 !important;
 }

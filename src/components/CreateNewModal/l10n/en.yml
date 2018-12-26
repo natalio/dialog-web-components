@@ -2,7 +2,7 @@ group:
   title: Create new group
   type:
     title: Group
-    hint: Groups are ideal for limited communities, they can have up to 10000 members
+    hint: Groups are ideal for limited communities, they can have up to {count} members
   info:
     title:
       label: Group title
@@ -13,6 +13,8 @@ group:
     shortname: Group link
   finish: Create group
   public: Make this group public
+  error:
+    max_group_size: You cannot add such many people to the group
 
 channel:
   title: Create new channel

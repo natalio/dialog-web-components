@@ -5,40 +5,26 @@
 
 import type { SelectorState } from '../../entities';
 import type { PeerInfo } from '@dlghq/dialog-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import ContactSelector from '../ContactSelector/ContactSelector';
 import styles from './CreateNewModal.css';
 
 export type Props = {
-  id: string,
-  autoFocus: boolean,
   members: SelectorState<PeerInfo>,
-  onSubmit: (event: SyntheticEvent<>) => void,
+  autoFocus: boolean,
   onChange: (members: SelectorState<PeerInfo>) => mixed,
 };
 
-class CreateGroupMembersForm extends PureComponent<Props> {
-  handleSubmit = (event: SyntheticEvent<>) => {
-    event.preventDefault();
-
-    this.props.onSubmit(event);
-  };
-
-  render() {
-    return (
-      <form
-        className={styles.members}
-        id={this.props.id}
-        onSubmit={this.handleSubmit}
-      >
-        <ContactSelector
-          autoFocus={this.props.autoFocus}
-          selector={this.props.members}
-          onChange={this.props.onChange}
-        />
-      </form>
-    );
-  }
+function CreateGroupMembersForm(props: Props) {
+  return (
+    <div className={styles.members}>
+      <ContactSelector
+        autoFocus={props.autoFocus}
+        selector={props.members}
+        onChange={props.onChange}
+      />
+    </div>
+  );
 }
 
 export default CreateGroupMembersForm;

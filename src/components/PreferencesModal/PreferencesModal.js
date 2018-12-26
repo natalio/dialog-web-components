@@ -2,18 +2,18 @@
  * Copyright 2018 dialog LLC <info@dlg.im>
  * @flow
  */
+/* eslint class-methods-use-this: "warn" */
 
 import type { ProfileSettings } from '@dlghq/dialog-types';
 import type { Props } from './types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import { Text } from '@dlghq/react-l10n';
 import classNames from 'classnames';
 import Modal from '../Modal/Modal';
 import ModalHeader from '../Modal/ModalHeader';
 import ModalClose from '../Modal/ModalClose';
-import ModalBody from '../Modal/ModalBody';
+import ModalBodyTabs from '../Modal/ModalBodyTabs';
 import Spinner from '../Spinner/Spinner';
-import Tabs from '../Tabs/Tabs';
 import Scroller from '../Scroller/Scroller';
 import PreferencesGeneral from './PreferencesGeneral';
 import PreferencesNotifications from './PreferencesNotifications';
@@ -22,12 +22,6 @@ import PreferencesBlocked from './PreferencesBlocked/PreferencesBlocked';
 import styles from './PreferencesModal.css';
 
 class PreferencesModal extends PureComponent<Props> {
-  handleClose = (): void => {
-    if (!this.isPending()) {
-      this.props.onClose();
-    }
-  };
-
   handleSettingsChange = (settings: $Shape<ProfileSettings>): void => {
     this.props.onSettingsChange({
       ...this.props.settings,
@@ -35,134 +29,125 @@ class PreferencesModal extends PureComponent<Props> {
     });
   };
 
-  handleScreenChange = (value: string): void => {
-    this.props.onScreenChange(value);
-    switch (value) {
-      case 'security':
-        this.props.onSessionsLoad();
-        break;
-
-      case 'blocked':
-        this.props.onBlockedLoad();
-        break;
-
-      default:
-      // do nothing
-    }
-  };
-
-  isPending(): boolean {
-    const { screen, sessions, blocked } = this.props;
-    switch (screen) {
-      case 'security':
-        return sessions.pending;
-
-      case 'blocked':
-        return blocked.pending;
-
-      default:
-        return false;
-    }
-  }
-
-  renderScreen() {
-    const { screen, settings, sessions, blocked } = this.props;
-
-    const spinner = (
+  renderScreenSpinner(): Node {
+    return (
       <div className={styles.spinnerScreen}>
         <Spinner size="large" />
       </div>
     );
+  }
+
+  renderScreenGeneral(): Node {
+    const { settings } = this.props;
+
+    return (
+      <PreferencesGeneral
+        settings={settings}
+        onChange={this.handleSettingsChange}
+      />
+    );
+  }
+
+  renderScreenNotifications(): Node {
+    const { settings } = this.props;
+
+    return (
+      <PreferencesNotifications
+        settings={settings}
+        onChange={this.handleSettingsChange}
+      />
+    );
+  }
+
+  renderScreenSecurity(): Node {
+    const { sessions } = this.props;
+
+    if (!sessions.value) {
+      return this.renderScreenSpinner();
+    }
+
+    return (
+      <PreferencesSecurity
+        sessions={sessions.value}
+        onSessionTerminate={this.props.onSessionTerminate}
+        onAllSessionsTerminate={this.props.onAllSessionsTerminate}
+      />
+    );
+  }
+
+  renderScreenBlocked(): Node {
+    const { blocked } = this.props;
+
+    if (!blocked.value) {
+      return this.renderScreenSpinner();
+    }
+
+    return (
+      <PreferencesBlocked
+        blocked={blocked.value}
+        onUnblockUser={this.props.onUnblockUser}
+      />
+    );
+  }
+
+  renderScreenCurrent = (): Node => {
+    const { screen } = this.props;
 
     switch (screen) {
       case 'general':
-        return (
-          <PreferencesGeneral
-            settings={settings}
-            onChange={this.handleSettingsChange}
-          />
-        );
-
+        return this.renderScreenGeneral();
       case 'notifications':
-        return (
-          <PreferencesNotifications
-            settings={settings}
-            onChange={this.handleSettingsChange}
-          />
-        );
-
+        return this.renderScreenNotifications();
       case 'security':
-        if (!sessions.value) {
-          return spinner;
-        }
-
-        return (
-          <PreferencesSecurity
-            sessions={sessions.value}
-            onSessionTerminate={this.props.onSessionTerminate}
-            onAllSessionsTerminate={this.props.onAllSessionsTerminate}
-          />
-        );
-
+        return this.renderScreenSecurity();
       case 'blocked':
-        if (!blocked.value) {
-          return spinner;
-        }
-
-        return (
-          <PreferencesBlocked
-            blocked={blocked.value}
-            onUnblockUser={this.props.onUnblockUser}
-          />
-        );
-
+        return this.renderScreenBlocked();
       default:
         return null;
     }
-  }
+  };
 
   render() {
     const { screen } = this.props;
     const className = classNames(styles.container, this.props.className);
+    const tabs = [
+      {
+        id: 'general',
+        title: 'PreferencesModal.general.title',
+      },
+      {
+        id: 'notifications',
+        title: 'PreferencesModal.notifications.title',
+      },
+      {
+        id: 'security',
+        title: 'PreferencesModal.security.title',
+      },
+      {
+        id: 'blocked',
+        title: 'PreferencesModal.blocked.title',
+      },
+    ];
 
     return (
       <Modal className={className} onClose={this.props.onClose}>
         <ModalHeader withBorder>
           <Text id="PreferencesModal.title" />
           <ModalClose
-            pending={this.isPending()}
             onClick={this.props.onClose}
             id="preferences_modal_close"
           />
         </ModalHeader>
-        <ModalBody className={styles.body}>
-          <Tabs
-            className={styles.tabs}
-            current={screen}
-            variants={[
-              {
-                id: 'general',
-                title: 'PreferencesModal.general.title',
-              },
-              {
-                id: 'notifications',
-                title: 'PreferencesModal.notifications.title',
-              },
-              {
-                id: 'security',
-                title: 'PreferencesModal.security.title',
-              },
-              {
-                id: 'blocked',
-                title: 'PreferencesModal.blocked.title',
-              },
-            ]}
-            onPick={this.handleScreenChange}
-          />
+        <ModalBodyTabs
+          className={styles.body}
+          tabs={tabs}
+          current={screen}
+          onChange={this.props.onScreenChange}
+        >
           <div className={styles.scroller}>
-            <Scroller>{this.renderScreen()}</Scroller>
+            <Scroller>{this.renderScreenCurrent()}</Scroller>
           </div>
-        </ModalBody>
+        </ModalBodyTabs>
       </Modal>
     );
   }

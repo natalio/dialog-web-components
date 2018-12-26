@@ -19,6 +19,7 @@
 .container {
   font-family: var(--modal-about-font-family);
   width: var(--modal-about-width);
+  min-width: var(--modal-about-width);
 }
 
 .body {

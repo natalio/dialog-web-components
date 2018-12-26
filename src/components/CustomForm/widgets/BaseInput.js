@@ -19,8 +19,8 @@ export type Props = {
   disabled: boolean,
   readonly: boolean,
   autofocus: boolean,
-  options: { [key: string]: string },
-  rawErrors?: string[],
+  options: { [key: string]: any },
+  rawErrors?: Array<string>,
   onChange: (value: mixed) => mixed,
   onBlur: (id: string, value: mixed) => mixed,
   onFocus: (id: string, value: mixed) => mixed,
@@ -54,7 +54,7 @@ class BaseInput extends PureComponent<Props> {
   getStatus = (): InputStatus => {
     const { rawErrors } = this.props;
 
-    if (rawErrors) {
+    if (rawErrors && rawErrors.length) {
       return 'error';
     }
 
@@ -67,7 +67,7 @@ class BaseInput extends PureComponent<Props> {
       options: { help },
     } = this.props;
 
-    if (rawErrors) {
+    if (rawErrors && rawErrors.length) {
       return rawErrors.toString();
     }
 
@@ -111,6 +111,8 @@ class BaseInput extends PureComponent<Props> {
         onFocus={this.handleFocus}
         status={this.getStatus()}
         hint={this.getHint()}
+        rows={options.rows}
+        prefix={options.prefix}
       />
     );
   }

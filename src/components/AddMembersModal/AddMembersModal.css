@@ -6,6 +6,7 @@
 
 :root {
   --modal-member-font-family: var(--default-font-family);
+  --modal-member-font-size: var(--default-font-size);
   --modal-member-add-width: 500px;
 }
 
@@ -21,4 +22,23 @@
 
 .footer {
   padding: 0;
+}
+
+.error {
+  padding: var(--default-padding);
+  background-color: var(--color-danger);
+  font-size: var(----modal-member-font-size);
+  font-weight: 500;
+  color: #fff;
+}
+
+.membersCount {
+  margin-left: 6px;
+  font-weight: 500;
+  font-size: var(--default-font-size-small);
+  color: var(--cool-grey);
+}
+
+.membersCountError {
+  color: var(--color-danger);
 }

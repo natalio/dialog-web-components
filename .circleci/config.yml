@@ -71,10 +71,11 @@ jobs:
       - run:
           <<: *git_config
       - run: |
+          [[ $CIRCLE_BRANCH = "develop" ]] && npm_tag="next" || npm_tag=$CIRCLE_BRANCH
           if [ -z "$CIRCLE_PR_USERNAME" -a "$CIRCLE_USERNAME" != "dialog-bot" -a -n "$CIRCLE_USERNAME" ]
           then
             npm version prerelease --preid=${CIRCLE_BRANCH//[\/_]/-}.${CIRCLE_BUILD_NUM} --ignore-scripts
-            npm publish --tag=${CIRCLE_BRANCH}
+            npm publish --tag=${npm_tag}
           fi
 
   npm_publish_release:

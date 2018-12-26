@@ -1,9 +1,17 @@
 ### Markdown
 
 ```jsx
-const text = require("raw-loader!../../fixtures/markdown.md");
+const text = require('raw-loader!../../fixtures/markdown.md');
 
-<Markdown text={text} />
+<Markdown text={text} />;
+```
+
+### Links
+
+```jsx
+const text = require('raw-loader!../../fixtures/links.md');
+
+<Markdown text={text} />;
 ```
 
 ### Emoji only

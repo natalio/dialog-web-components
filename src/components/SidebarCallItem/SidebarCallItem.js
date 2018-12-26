@@ -7,7 +7,6 @@ import type { CallInfo } from '@dlghq/dialog-types';
 import type { ProviderContext } from '@dlghq/react-l10n';
 import React, { PureComponent } from 'react';
 import { LocalizationContextType } from '@dlghq/react-l10n';
-import { Text } from '@dlghq/react-l10n';
 import { formatTime } from '@dlghq/dialog-utils';
 import classNames from 'classnames';
 import PeerAvatarDouble from '../PeerAvatarDouble/PeerAvatarDouble';
@@ -62,11 +61,24 @@ class SidebarCallItem extends PureComponent<Props> {
     return state;
   };
 
+  getTitle = (): string => {
+    const {
+      call: { recipient, initiator },
+    } = this.props;
+    const state = this.getCallState();
+
+    if (state === 'incoming' || state === 'missed') {
+      return initiator.title;
+    }
+
+    return recipient.title;
+  };
+
   renderAvatar() {
     return (
       <PeerAvatarDouble
         className={styles.avatar}
-        size={37}
+        size={36}
         big={this.props.call.initiator}
         small={this.props.call.recipient}
       />
@@ -74,25 +86,16 @@ class SidebarCallItem extends PureComponent<Props> {
   }
 
   renderTitle() {
-    const {
-      call: { recipient },
-    } = this.props;
-
-    return <Text id={recipient.title} className={styles.title} />;
-  }
-
-  renderState() {
     const state = this.getCallState();
-    const className = classNames(styles.state, {
-      [styles.stateActive]: state === 'missed',
+    const title = this.getTitle();
+    const iconClassName = classNames(styles.icon, {
+      [styles.iconDanger]: state === 'missed' || state === 'canceled',
     });
-    const glyph = state === 'incoming' ? 'incoming' : 'outgoing';
 
     return (
-      <div className={className}>
-        <Icon glyph={`call_${glyph}`} size={12} className={styles.icon} />
-        <Text id={`SidebarCallItem.${state}`} className={styles.text} />
-        {this.renderDuration()}
+      <div className={styles.title}>
+        <Icon glyph={`call_${state}`} size={18} className={iconClassName} />
+        <span>{title}</span>
       </div>
     );
   }
@@ -116,18 +119,15 @@ class SidebarCallItem extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <time className={styles.duration}>
-        {`: ${formatTime(Math.floor(duration / 1000))}`}
-      </time>
-    );
+    const humanReadableDuration = formatTime(Math.floor(duration / 1000));
+
+    return <time className={styles.duration}>{humanReadableDuration}</time>;
   }
 
   renderContent() {
     return (
       <div className={styles.content}>
         {this.renderTitle()}
-        {this.renderState()}
         {this.renderTime()}
       </div>
     );
@@ -144,6 +144,7 @@ class SidebarCallItem extends PureComponent<Props> {
       >
         {this.renderAvatar()}
         {this.renderContent()}
+        {this.renderDuration()}
       </div>
     );
   }
