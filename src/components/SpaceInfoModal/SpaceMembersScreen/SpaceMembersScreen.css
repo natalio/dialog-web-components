@@ -1,0 +1,35 @@
+/**
+ * Copyright 2018 dialog LLC <info@dlg.im>
+ */
+
+@import '../../../styles/variables.css';
+@import '../SpaceInfoModal.css';
+
+:root {
+  --space-info-modal-font-family: var(--default-font-family);
+}
+
+/* Reset */
+.container {
+  all: initial;
+}
+
+/* Styles */
+.container {
+  font-family: var(--space-info-modal-font-family);
+  background-color: #ffffff;
+  width: 320px;
+}
+
+.back {
+  @mixin --space-info-modal-back;
+}
+
+.close {
+  @mixin --space-info-modal-close;
+}
+
+.body {
+  position: relative;
+  padding: 0 0 1px;
+}

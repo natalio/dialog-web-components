@@ -90,7 +90,8 @@
       "AdminModal",
       "EditSpaceModal",
       "CreateSpaceModal",
-      "SelectCertificateModal"
+      "SelectCertificateModal",
+      "SpaceInfoModal"
     ]
   },
   {

@@ -35,6 +35,18 @@ const userPeers = [
   },
 ];
 
+const space = {
+  avatar: 'https://avatars2.githubusercontent.com/u/19669610',
+  title: 'subSpace',
+  placeholder: 'blue',
+  type: 'space',
+  shortName: 'subspace',
+  peer: {
+    id: 10101,
+    type: 'space',
+  },
+};
+
 const group = {
   avatar: 'https://avatars2.githubusercontent.com/u/19669610',
   title: 'Dialog',
@@ -95,4 +107,5 @@ module.exports = {
   group,
   channel,
   bot,
+  space,
 };

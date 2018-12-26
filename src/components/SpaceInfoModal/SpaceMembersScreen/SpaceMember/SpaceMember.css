@@ -1,0 +1,99 @@
+/**
+ * Copyright 2017 dialog LLC <info@dlg.im>
+ */
+
+@import '../../../../styles/variables.css';
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex: 1 1 auto;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  padding: 8px 24px;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &::before {
+    position: absolute;
+    bottom: 0;
+    right: 24px;
+    left: 74px;
+    height: 1px;
+    content: '';
+    background-color: #e5e5e5;
+  }
+
+  &:hover {
+    background-color: #f2f2f2;
+  }
+}
+
+.avatar {
+  padding-right: var(--default-padding-small);
+  flex: 0 0 auto;
+  line-height: 0;
+  cursor: inherit;
+}
+
+.body {
+  line-height: 0;
+  flex: 1 1 auto;
+  @mixin flex-fix;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+}
+
+.titleWrapper {
+  @mixin text-overflow-ellipsis;
+}
+
+.title {
+  cursor: pointer;
+  user-select: none;
+  letter-spacing: -0.4px;
+  font-size: var(--default-font-size);
+  line-height: 22px;
+  height: 22px;
+  color: var(--default-font-color);
+  width: 100%;
+}
+
+.status {
+  letter-spacing: -0.27px;
+  font-size: 14px;
+  line-height: 14px;
+  color: var(--default-font-color-light);
+}
+
+.adminStar {
+  margin-left: calc(var(--default-padding-small) / 2);
+  flex: 0 0 auto;
+}
+
+.actions {
+  flex: 0 0 auto;
+}
+
+.kickPending {
+  margin-right: 8px;
+}
+
+.kickError {
+  fill: var(--color-danger);
+}
+
+.kick {
+  cursor: pointer;
+  user-select: none;
+  font-size: var(--default-font-size-small);
+  line-height: 20px;
+  margin-left: 4px;
+  color: var(--color-danger);
+}

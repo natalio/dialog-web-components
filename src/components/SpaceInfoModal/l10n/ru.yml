@@ -1,0 +1,27 @@
+info:
+  button:
+    leave: Покинуть спейс
+    delete: Удалить спейс
+  notifications: Уведомления
+  invitationLink: Пригласительная ссылка
+  addMembers: Добавить участников
+
+members:
+  title: Участники
+  kick: удалить
+
+addMembers:
+  title: Добавить участников в спейс
+  button: Добавить
+
+invitationLink: Пригласительная ссылка
+
+confirmation:
+  delete:
+    question: Вы действительно намерены удалить спейс?
+    action: Удалить
+    cancel: Отмена
+  leave:
+    question: Вы действительно намерены покинуть спейс?
+    action: Покинуть
+    cancel: Отмена

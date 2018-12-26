@@ -5,13 +5,16 @@
 
 import type { Props as UserProps } from './ActivityUserProfile';
 import type { Props as GroupProps } from './ActivityGroupProfile';
+import type { Props as SpaceProps } from './ActivitySpaceProfile';
 import React from 'react';
 import ActivityUserProfile from './ActivityUserProfile';
 import ActivityGroupProfile from './ActivityGroupProfile';
+import ActivitySpaceProfile from './ActivitySpaceProfile';
 
 export type Props =
   | ({ type: 'user' } & UserProps)
-  | ({ type: 'group' } & GroupProps);
+  | ({ type: 'group' } & GroupProps)
+  | ({ type: 'space' } & SpaceProps);
 
 function ActivityProfile(props: Props) {
   switch (props.type) {
@@ -38,6 +41,11 @@ function ActivityProfile(props: Props) {
         >
           {props.children}
         </ActivityGroupProfile>
+      );
+
+    case 'space':
+      return (
+        <ActivitySpaceProfile className={props.className} info={props.info} />
       );
 
     default:
