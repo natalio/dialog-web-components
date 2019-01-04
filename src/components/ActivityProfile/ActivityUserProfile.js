@@ -15,7 +15,7 @@ import styles from './ActivityProfile.css';
 
 export type Props = {
   info: User,
-  online: UserOnline,
+  online: ?UserOnline,
   className?: string,
   schema?: ?string,
   children: Node,
