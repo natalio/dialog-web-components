@@ -68,6 +68,7 @@
   font-size: var(--sidebar-call-item-title-font-size);
   letter-spacing: -0.27px;
   font-weight: 500;
+  @mixin text-overflow-ellipsis;
 }
 
 .content {
