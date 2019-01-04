@@ -13,6 +13,8 @@
 .container {
   box-sizing: border-box;
   font-family: var(--default-font-family);
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 .empty {
@@ -36,5 +38,11 @@
 }
 
 .dialpad {
+  flex: 0 0 auto;
   padding: 0 12px 10px;
+}
+
+.list {
+  flex: 1 1 auto;
+  @mixin flex-fix;
 }
