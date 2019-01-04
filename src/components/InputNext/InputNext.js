@@ -231,7 +231,6 @@ class InputNext extends PureComponent<Props, State> {
       return null;
     }
 
-    const input = this.input;
     const length = String(this.props.value).length;
 
     return (
