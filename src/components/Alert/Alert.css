@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  */
 
 @import '../../styles/variables.css';
@@ -24,7 +24,8 @@
 }
 
 .body {
-  padding: calc(var(--default-padding) * 2) calc(var(--default-padding) * 2) var(--default-padding);
+  padding: calc(var(--default-padding) * 2) calc(var(--default-padding) * 2)
+    var(--default-padding);
 }
 
 .message {
@@ -38,7 +39,8 @@
 }
 
 .footer {
-  padding: var(--default-padding) var(--default-padding) var(--default-padding-large);
+  padding: var(--default-padding) var(--default-padding)
+    var(--default-padding-large);
   text-align: center;
 }
 

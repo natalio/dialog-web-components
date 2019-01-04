@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  */
 
 @import '../../styles/variables.css';
@@ -81,12 +81,24 @@
 
 /* Sizes */
 .small {
-  padding-top: calc(var(--button-next-padding-top) * (1 - var(--button-next-size-modifier)));
-  padding-right: calc(var(--button-next-padding-right) * (1 - var(--button-next-size-modifier)));
-  padding-bottom: calc(var(--button-next-padding-bottom) * (1 - var(--button-next-size-modifier)));
-  padding-left: calc(var(--button-next-padding-left) * (1 - var(--button-next-size-modifier)));
-  font-size: calc(var(--button-next-font-size) * (1 - var(--button-next-size-modifier)));
-  line-height: calc(var(--button-next-line-height) * (1 - var(--button-next-size-modifier)));
+  padding-top: calc(
+    var(--button-next-padding-top) * (1 - var(--button-next-size-modifier))
+  );
+  padding-right: calc(
+    var(--button-next-padding-right) * (1 - var(--button-next-size-modifier))
+  );
+  padding-bottom: calc(
+    var(--button-next-padding-bottom) * (1 - var(--button-next-size-modifier))
+  );
+  padding-left: calc(
+    var(--button-next-padding-left) * (1 - var(--button-next-size-modifier))
+  );
+  font-size: calc(
+    var(--button-next-font-size) * (1 - var(--button-next-size-modifier))
+  );
+  line-height: calc(
+    var(--button-next-line-height) * (1 - var(--button-next-size-modifier))
+  );
 }
 
 .normal {
@@ -99,12 +111,24 @@
 }
 
 .large {
-  padding-top: calc(var(--button-next-padding-top) * (1 + var(--button-next-size-modifier)));
-  padding-right: calc(var(--button-next-padding-right) * (1 + var(--button-next-size-modifier)));
-  padding-bottom: calc(var(--button-next-padding-bottom) * (1 + var(--button-next-size-modifier)));
-  padding-left: calc(var(--button-next-padding-left) * (1 + var(--button-next-size-modifier)));
-  font-size: calc(var(--button-next-font-size) * (1 + var(--button-next-size-modifier)));
-  line-height: calc(var(--button-next-line-height) * (1 + var(--button-next-size-modifier)));
+  padding-top: calc(
+    var(--button-next-padding-top) * (1 + var(--button-next-size-modifier))
+  );
+  padding-right: calc(
+    var(--button-next-padding-right) * (1 + var(--button-next-size-modifier))
+  );
+  padding-bottom: calc(
+    var(--button-next-padding-bottom) * (1 + var(--button-next-size-modifier))
+  );
+  padding-left: calc(
+    var(--button-next-padding-left) * (1 + var(--button-next-size-modifier))
+  );
+  font-size: calc(
+    var(--button-next-font-size) * (1 + var(--button-next-size-modifier))
+  );
+  line-height: calc(
+    var(--button-next-line-height) * (1 + var(--button-next-size-modifier))
+  );
 
   & .spinner {
     margin-top: -6px;

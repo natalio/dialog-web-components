@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -18,8 +18,8 @@ type Props = {
   onPrevScreen: () => void,
   link: string,
   pending: boolean,
-  onRevoke: () => mixed
-}
+  onRevoke: () => mixed,
+};
 
 class SpaceInfoScreen extends PureComponent<Props> {
   render() {
@@ -32,10 +32,17 @@ class SpaceInfoScreen extends PureComponent<Props> {
             className={styles.back}
           />
           <Text id="SpaceInfoModal.invitationLink" />
-          <ModalClose onClick={this.props.onClose} id="space_add_members_close_button" />
+          <ModalClose
+            onClick={this.props.onClose}
+            id="space_add_members_close_button"
+          />
         </ModalHeader>
         <ModalBody className={styles.invitationBody}>
-          <ActivityInvite link={this.props.link} pending={this.props.pending} onRevoke={this.props.onRevoke} />
+          <ActivityInvite
+            link={this.props.link}
+            pending={this.props.pending}
+            onRevoke={this.props.onRevoke}
+          />
         </ModalBody>
       </div>
     );

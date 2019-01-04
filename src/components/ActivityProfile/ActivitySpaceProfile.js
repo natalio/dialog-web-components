@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -14,12 +14,14 @@ import Markdown from '../Markdown/Markdown';
 
 export type Props = {
   className?: string,
-  info: Space
+  info: Space,
 };
 
 class ActivityGroupProfile extends PureComponent<Props> {
   renderAbout() {
-    const { info: { about } } = this.props;
+    const {
+      info: { about },
+    } = this.props;
 
     if (!about) {
       return null;
@@ -27,7 +29,11 @@ class ActivityGroupProfile extends PureComponent<Props> {
 
     return (
       <div className={styles.wrapper}>
-        <Text className={styles.title} tagName="div" id="ActivityProfile.about" />
+        <Text
+          className={styles.title}
+          tagName="div"
+          id="ActivityProfile.about"
+        />
         <Markdown text={about} className={styles.about} emojiSize={18} />
       </div>
     );
@@ -35,7 +41,9 @@ class ActivityGroupProfile extends PureComponent<Props> {
 
   render() {
     const className = classNames(styles.container, this.props.className);
-    const { info: { name, bigAvatar, placeholder, shortname } } = this.props;
+    const {
+      info: { name, bigAvatar, placeholder, shortname },
+    } = this.props;
 
     return (
       <div className={className}>

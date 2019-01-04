@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -24,8 +24,8 @@ type Props = {
   onPrevScreen: () => void,
   onlineMessage: string,
   onMemberClick: (peer: Peer) => mixed,
-  onMemberKick: (peer: Peer) => mixed
-}
+  onMemberKick: (peer: Peer) => mixed,
+};
 
 class SpaceMembersScreen extends PureComponent<Props> {
   renderRow = ({ index, key, style }: *) => {
@@ -59,7 +59,10 @@ class SpaceMembersScreen extends PureComponent<Props> {
             className={styles.back}
           />
           <Text id="SpaceInfoModal.members.title" />
-          <ModalClose onClick={this.props.onClose} id="space_add_members_close_button" />
+          <ModalClose
+            onClick={this.props.onClose}
+            id="space_add_members_close_button"
+          />
         </ModalHeader>
         <ModalBody className={styles.body}>
           <ActivityList>
@@ -77,7 +80,6 @@ class SpaceMembersScreen extends PureComponent<Props> {
               rowHeight={ROW_HEIGHT}
               rowRenderer={this.renderRow}
             />
-
           </ActivityList>
         </ModalBody>
       </div>

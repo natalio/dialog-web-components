@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  */
 
 @import '../../styles/variables.css';
@@ -26,9 +26,9 @@
   transition: color var(--modal-space-edit-transition-duration) linear;
   color: var(--modal-space-edit-color);
 
-&:hover {
-   color: var(--modal-space-edit-color-hover);
- }
+  &:hover {
+    color: var(--modal-space-edit-color-hover);
+  }
 }
 
 .body {

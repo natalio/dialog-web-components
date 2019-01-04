@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -14,7 +14,7 @@ import styles from './SpaceMember.css';
 type Props = {
   error: ?string,
   pending: boolean,
-  onClick: (event: SyntheticMouseEvent<>) => void
+  onClick: (event: SyntheticMouseEvent<>) => void,
 };
 
 class SpaceMemberKick extends PureComponent<Props> {
@@ -36,12 +36,16 @@ class SpaceMemberKick extends PureComponent<Props> {
             constraints: [
               {
                 to: 'window',
-                attachment: 'together'
-              }
-            ]
+                attachment: 'together',
+              },
+            ],
           }}
         >
-          <Icon glyph="error" className={styles.kickError} onClick={this.props.onClick} />
+          <Icon
+            glyph="error"
+            className={styles.kickError}
+            onClick={this.props.onClick}
+          />
         </Tooltip>
       );
     }
