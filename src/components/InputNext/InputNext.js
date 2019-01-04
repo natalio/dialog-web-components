@@ -232,8 +232,7 @@ class InputNext extends PureComponent<Props, State> {
     }
 
     const input = this.input;
-    const value = (input && input.value) || '';
-    const length = value.length;
+    const length = String(this.props.value).length;
 
     return (
       <div className={styles.lengthLimitCounter}>
