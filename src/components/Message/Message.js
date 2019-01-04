@@ -129,6 +129,7 @@ class Message extends PureComponent<Props, State> {
         fullTime={message.fullDate}
         isEdited={message.isEdited && message.content.type !== 'deleted'}
         onClick={this.handleForceSelect}
+        className={styles.state}
       />
     );
   }

@@ -90,6 +90,10 @@
   align-items: baseline;
 }
 
+.state {
+  flex: 0 0 auto;
+}
+
 .sender {
   display: inline-block;
 }
