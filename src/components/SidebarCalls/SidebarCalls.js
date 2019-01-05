@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -81,26 +81,30 @@ class SidebarCalls extends Component<Props> {
   }
 
   renderCallList() {
-    if (this.props.pending && !this.props.calls.length) {
+    const { pending, calls } = this.props;
+
+    if (pending && !calls.length) {
       return null;
     }
 
     return (
-      <AutoSizer>
-        {({ width, height }) => {
-          return (
-            <List
-              width={width}
-              height={height}
-              noRowsRenderer={this.renderEmpty}
-              onRowsRendered={this.handleRowsRendered}
-              rowHeight={60}
-              rowRenderer={this.renderRow}
-              rowCount={this.props.calls.length}
-            />
-          );
-        }}
-      </AutoSizer>
+      <div className={styles.list}>
+        <AutoSizer>
+          {({ width, height }) => {
+            return (
+              <List
+                width={width}
+                height={height}
+                noRowsRenderer={this.renderEmpty}
+                onRowsRendered={this.handleRowsRendered}
+                rowHeight={60}
+                rowRenderer={this.renderRow}
+                rowCount={this.props.calls.length}
+              />
+            );
+          }}
+        </AutoSizer>
+      </div>
     );
   }
 

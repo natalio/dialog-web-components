@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -27,8 +27,8 @@ type Props = {
   onMembersScreenClick: () => void,
   onNotificationChange: () => void,
   onLeaveSpaceConfirmClick: () => void,
-  onDeleteSpaceConfirmClick: () => void
-}
+  onDeleteSpaceConfirmClick: () => void,
+};
 
 class SpaceInfoScreen extends PureComponent<Props> {
   renderFooter() {
@@ -72,10 +72,7 @@ class SpaceInfoScreen extends PureComponent<Props> {
           />
 
           <div>
-            <ActivityProfile
-              info={this.props.space}
-              type="space"
-            />
+            <ActivityProfile info={this.props.space} type="space" />
             <ActivityList>
               <ActivityListSwitcher
                 id="space_info_screen_notification_switcher"

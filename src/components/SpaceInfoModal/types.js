@@ -1,9 +1,14 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 import type { SelectorState } from '../../entities';
-import type { Peer, PeerInfo, GroupMember, AvatarPlaceholder } from '@dlghq/dialog-types';
+import type {
+  Peer,
+  PeerInfo,
+  GroupMember,
+  AvatarPlaceholder,
+} from '@dlghq/dialog-types';
 
 export type Screen = 'info' | 'members' | 'addMembers' | 'invitationLink';
 export type ConfirmScreen = 'leave' | 'delete';
@@ -25,13 +30,13 @@ export type Space = {
   adminId: number,
   isMember: boolean,
   members: GroupMember[],
-}
+};
 
 export type SpaceMember = GroupMember & {
   kickState: {
     pending: boolean,
-    error: ?string
-  }
+    error: ?string,
+  },
 };
 
 export type Props = {
@@ -65,11 +70,11 @@ export type Props = {
   onlineMessage: string,
   members: SpaceMember[],
   onMemberClick: (peer: Peer) => mixed,
-  onMemberKick: (peer: Peer) => mixed
-}
+  onMemberKick: (peer: Peer) => mixed,
+};
 
 export type State = {
   screen: Screen,
   confirmEnabled: boolean,
   confirmScreen: ConfirmScreen,
-}
+};

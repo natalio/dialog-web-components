@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  */
 
 @import '../../styles/variables.css';
@@ -11,7 +11,7 @@
   --sidebar-fake-item-second-line-color: color-mod(
     var(--sidebar-fake-item-line-color) alpha(60%)
   );
-  --sidebar-fake-item-avatar-size: 37px;
+  --sidebar-fake-item-avatar-size: 36px;
   --sidebar-fake-item-avatar-color: #c5c5c5;
   --sidebar-fake-item-counter-size: 24px;
 }
@@ -26,8 +26,8 @@
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
-  height: 61px;
-  padding: 12px 14px 12px 10px;
+  height: 60px;
+  padding: 12px 12px 12px 10px;
   user-select: none;
   flex-wrap: nowrap;
   justify-content: flex-start;
@@ -38,7 +38,7 @@
 .avatar {
   width: var(--sidebar-fake-item-avatar-size);
   height: var(--sidebar-fake-item-avatar-size);
-  margin-right: 11px;
+  margin-right: 10px;
   border-radius: 50%;
   background-color: var(--sidebar-fake-item-avatar-color);
   flex: 0 0 auto;

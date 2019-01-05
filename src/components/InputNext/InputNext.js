@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -231,9 +231,7 @@ class InputNext extends PureComponent<Props, State> {
       return null;
     }
 
-    const input = this.input;
-    const value = (input && input.value) || '';
-    const length = value.length;
+    const length = String(this.props.value).length;
 
     return (
       <div className={styles.lengthLimitCounter}>

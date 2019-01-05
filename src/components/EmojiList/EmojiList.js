@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -26,7 +26,6 @@ export type Props = {
   className?: string,
   recent?: string[],
   stickers?: StickerPack[],
-  categoryHeight: number,
   onClick: (char: string) => mixed,
   onStickerClick: (sticker: Sticker) => mixed,
 };
@@ -42,11 +41,9 @@ export type State = {
 class EmojiList extends PureComponent<Props, State> {
   container: ?HTMLElement;
   height: number;
-  categories: EmojiCategoryType[];
-  listener: ?{ remove(): void };
-
-  static defaultProps = {
-    categoryHeight: 38,
+  categories: Array<EmojiCategoryType>;
+  listener: ?{
+    remove: () => void,
   };
 
   constructor(props: Props) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -26,7 +26,7 @@ export type Props = {
   onClose: () => void,
   onPrevScreen: () => void,
   onSubmit: (gid: number, uids: number[]) => mixed,
-  onChange: (selector: SelectorState<PeerInfo>) => mixed
+  onChange: (selector: SelectorState<PeerInfo>) => mixed,
 };
 
 class SpaceAddMembersScreen extends PureComponent<Props> {
@@ -47,7 +47,7 @@ class SpaceAddMembersScreen extends PureComponent<Props> {
 
     this.props.onSubmit(
       this.props.spaceId,
-      selected.map((contact) => contact.peer.id).toArray()
+      selected.map((contact) => contact.peer.id).toArray(),
     );
   };
 
@@ -71,7 +71,11 @@ class SpaceAddMembersScreen extends PureComponent<Props> {
             className={styles.back}
           />
           <Text id="SpaceInfoModal.addMembers.title" />
-          <ModalClose onClick={this.handleClose} className={styles.close} id="space_add_members_close_button" />
+          <ModalClose
+            onClick={this.handleClose}
+            className={styles.close}
+            id="space_add_members_close_button"
+          />
         </ModalHeader>
         <ModalBody className={styles.body}>
           <ContactSelector

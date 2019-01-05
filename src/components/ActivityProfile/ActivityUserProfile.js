@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -15,7 +15,7 @@ import styles from './ActivityProfile.css';
 
 export type Props = {
   info: User,
-  online: UserOnline,
+  online: ?UserOnline,
   className?: string,
   schema?: ?string,
   children: Node,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 /* eslint max-lines: ["error", 500] */
@@ -129,6 +129,7 @@ class Message extends PureComponent<Props, State> {
         fullTime={message.fullDate}
         isEdited={message.isEdited && message.content.type !== 'deleted'}
         onClick={this.handleForceSelect}
+        className={styles.state}
       />
     );
   }

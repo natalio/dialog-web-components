@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -26,19 +26,19 @@ class SpaceInfoModal extends PureComponent<Props, State> {
        * our info component and confirmation component are both modal;
        * render only one of them;
        */
-      confirmEnabled: false
+      confirmEnabled: false,
     };
   }
 
   handleConfirmShow = () => {
     this.setState({
-      confirmEnabled: true
+      confirmEnabled: true,
     });
   };
 
   handleConfirmHide = () => {
     this.setState({
-      confirmEnabled: false
+      confirmEnabled: false,
     });
   };
 
@@ -56,25 +56,25 @@ class SpaceInfoModal extends PureComponent<Props, State> {
 
   handlePrevScreen = (): void => {
     this.setState({
-      screen: 'info'
+      screen: 'info',
     });
   };
 
   handleAddMembersScreen = (): void => {
     this.setState({
-      screen: 'addMembers'
+      screen: 'addMembers',
     });
   };
 
   handleInvitationLinkScreen = (): void => {
     this.setState({
-      screen: 'invitationLink'
+      screen: 'invitationLink',
     });
   };
 
   handleMembersScreen = (): void => {
     this.setState({
-      screen: 'members'
+      screen: 'members',
     });
   };
 
@@ -86,9 +86,11 @@ class SpaceInfoModal extends PureComponent<Props, State> {
 
     switch (hotkey) {
       case 'Escape':
-        if (screen === 'invitationLink' ||
+        if (
+          screen === 'invitationLink' ||
           screen === 'members' ||
-          screen === 'addMembers') {
+          screen === 'addMembers'
+        ) {
           this.handlePrevScreen();
           break;
         }
