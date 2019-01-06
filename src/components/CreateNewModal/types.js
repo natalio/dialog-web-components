@@ -32,5 +32,5 @@ export type Props = {
   onSubmit: (request: Request) => mixed,
   onStepChange: (step: Step) => mixed,
   onRequestChange: (request: Request) => mixed,
-  isMaxGroupSizeVisible?: boolean,
+  isMaxGroupSizeVisible: boolean,
 };

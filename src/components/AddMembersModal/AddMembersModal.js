@@ -29,7 +29,7 @@ export type Props = {
   onClose: () => mixed,
   onSubmit: (group: Group, uids: number[]) => mixed,
   onChange: (selector: SelectorState<PeerInfo>) => mixed,
-  isMaxGroupSizeVisible?: boolean,
+  isMaxGroupSizeVisible: boolean,
 };
 
 class AddMembersModal extends PureComponent<Props> {
