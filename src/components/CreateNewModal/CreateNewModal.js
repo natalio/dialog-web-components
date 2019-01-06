@@ -27,6 +27,7 @@ class CreateNewModal extends PureComponent<Props> {
   static defaultProps = {
     id: 'create_new_modal',
     isPublicGroupsEnabled: true,
+    isMaxGroupSizeVisible: false,
   };
 
   handlePrevStepClick = (): void => {
@@ -292,16 +293,34 @@ class CreateNewModal extends PureComponent<Props> {
     return null;
   }
 
-  renderMembersStep() {
+  renderMembersCount() {
     const {
-      id,
       request: { type, members },
       maxGroupSize,
+      isMaxGroupSizeVisible,
     } = this.props;
+
+    if (type !== 'group') {
+      return null;
+    }
+
     const membersCount = members.getSelected().size;
     const membersCountClassNames = classNames(styles.membersCount, {
       [styles.membersCountError]: this.isMaxGroupSizeExceeded(),
     });
+
+    return (
+      <small className={membersCountClassNames}>
+        {`(${membersCount}${isMaxGroupSizeVisible ? '/' + maxGroupSize : ''})`}
+      </small>
+    );
+  }
+
+  renderMembersStep() {
+    const {
+      id,
+      request: { type, members },
+    } = this.props;
 
     return (
       <div className={styles.wrapper}>
@@ -313,11 +332,7 @@ class CreateNewModal extends PureComponent<Props> {
             id={`${id}_back_button`}
           />
           <Text id={`CreateNewModal.${type}.title`} />
-          {type === 'group' ? (
-            <small className={membersCountClassNames}>
-              {`(${membersCount}/${maxGroupSize})`}
-            </small>
-          ) : null}
+          {this.renderMembersCount()}
           <ModalClose
             pending={this.props.pending}
             onClick={this.props.onClose}

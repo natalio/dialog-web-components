@@ -29,9 +29,14 @@ export type Props = {
   onClose: () => mixed,
   onSubmit: (group: Group, uids: number[]) => mixed,
   onChange: (selector: SelectorState<PeerInfo>) => mixed,
+  isMaxGroupSizeVisible: boolean,
 };
 
 class AddMembersModal extends PureComponent<Props> {
+  static defaultProps = {
+    isMaxGroupSizeVisible: false,
+  };
+
   handleClose = (): void => {
     if (!this.props.pending) {
       this.props.onClose();
@@ -86,22 +91,46 @@ class AddMembersModal extends PureComponent<Props> {
     );
   }
 
-  render() {
-    const { maxGroupSize } = this.props;
+  renderMembersCount() {
+    const {
+      maxGroupSize,
+      isMaxGroupSizeVisible,
+      group: { type },
+    } = this.props;
+
+    if (type !== 'group') {
+      return null;
+    }
+
     const membersCount = this.getMembersCount();
-    const className = classNames(styles.container, this.props.className);
     const membersCountClassNames = classNames(styles.membersCount, {
       [styles.membersCountError]: membersCount > maxGroupSize,
     });
+
+    return (
+      <small className={membersCountClassNames}>
+        {`(${membersCount}${isMaxGroupSizeVisible ? '/' + maxGroupSize : ''})`}
+      </small>
+    );
+  }
+
+  render() {
+    const {
+      maxGroupSize,
+      selector,
+      autoFocus,
+      pending,
+      group: { type },
+    } = this.props;
+    const className = classNames(styles.container, this.props.className);
+    const membersCount = this.getMembersCount();
 
     return (
       <HotKeys onHotKey={this.handleHotkey}>
         <Modal className={className} onClose={this.handleClose}>
           <ModalHeader withBorder>
             <Text id="AddMembersModal.title" />
-            <small className={membersCountClassNames}>
-              {`(${membersCount}/${maxGroupSize})`}
-            </small>
+            {this.renderMembersCount()}
             <ModalClose
               onClick={this.handleClose}
               id="add_members_close_button"
@@ -110,8 +139,8 @@ class AddMembersModal extends PureComponent<Props> {
           {this.renderError()}
           <ModalBody className={styles.body}>
             <ContactSelector
-              autoFocus={this.props.autoFocus}
-              selector={this.props.selector}
+              autoFocus={autoFocus}
+              selector={selector}
               onChange={this.props.onChange}
             />
           </ModalBody>
@@ -121,10 +150,10 @@ class AddMembersModal extends PureComponent<Props> {
               theme="success"
               rounded={false}
               disabled={
-                this.props.selector.getSelected().size === 0 ||
-                membersCount > maxGroupSize ||
-                this.props.pending
+                selector.getSelected().size === 0 ||
+                (type === 'group' && membersCount > maxGroupSize)
               }
+              loading={pending}
               onClick={this.handleSubmit}
               id="add_members_add_button"
             >
