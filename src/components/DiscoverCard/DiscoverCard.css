@@ -170,7 +170,6 @@
 .enterActive {
   transition: transform var(--default-transition-duration) ease;
   transform: translateY(0%);
-  /* opacity: 1; */
 }
 
 .leave {

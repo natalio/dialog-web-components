@@ -42,7 +42,7 @@ function DiscoverFakeCard() {
       <div className={styles.footer}>
         <div className={styles.members}>
           <div className={styles.membersIcon} />
-          <div className={styles.line} style={{ width: 30 }} />
+          <div className={styles.line} style={{ width: random(10, 30) }} />
         </div>
         <div className={styles.creator}>
           <div className={styles.line} style={{ width: 60 }} />
