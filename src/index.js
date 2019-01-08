@@ -160,14 +160,18 @@ export {
   default as FeedbackModal,
 } from './components/FeedbackModal/FeedbackModal';
 export { default as AdminModal } from './components/AdminModal/AdminModal';
-export { default as EditSpaceModal } from './components/EditSpaceModal/EditSpaceModal';
+export {
+  default as EditSpaceModal,
+} from './components/EditSpaceModal/EditSpaceModal';
 export {
   default as CreateSpaceModal,
 } from './components/CreateSpaceModal/CreateSpaceModal';
 export {
   default as SelectCertificateModal,
 } from './components/SelectCertificateModal/SelectCertificateModal';
-export { default as SpaceInfoModal } from './components/SpaceInfoModal/SpaceInfoModal';
+export {
+  default as SpaceInfoModal,
+} from './components/SpaceInfoModal/SpaceInfoModal';
 
 // Sidebar
 export {
@@ -254,6 +258,9 @@ export { default as Discover } from './components/Discover/Discover';
 export {
   default as DiscoverCard,
 } from './components/DiscoverCard/DiscoverCard';
+export {
+  default as DiscoverFakeCard,
+} from './components/DiscoverFakeCard/DiscoverFakeCard';
 
 // Activity
 export {

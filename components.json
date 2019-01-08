@@ -159,7 +159,7 @@
   },
   {
     "name": "Discover",
-    "components": ["Discover", "DiscoverCard"]
+    "components": ["Discover", "DiscoverCard", "DiscoverFakeCard"]
   },
   {
     "name": "Helpers",

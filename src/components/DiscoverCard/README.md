@@ -10,5 +10,5 @@ const { group } = require('../../fixtures/peerInfo');
   peer={group.peer}
   members={23}
   onGoToPeer={(peer) => console.log({ peer })}
-/>
+/>;
 ```
