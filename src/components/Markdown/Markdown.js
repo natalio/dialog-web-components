@@ -19,6 +19,7 @@ export type Props = {
   renderBlocks: typeof renderBlocks,
   emojiSize?: number,
   renderBigEmoji: boolean,
+  title?: string,
 };
 
 class Markdown extends Component<Props> {
@@ -55,7 +56,7 @@ class Markdown extends Component<Props> {
     const tokens = parse(this.props.text, this.props.decorators);
 
     return (
-      <TagName className={className}>
+      <TagName className={className} title={this.props.title}>
         {this.props.renderBlocks(
           tokens,
           this.props.emojiSize,
