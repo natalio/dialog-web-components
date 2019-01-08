@@ -8,10 +8,12 @@ import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { Text } from '@dlghq/react-l10n';
 import { hasSelection } from '@dlghq/dialog-utils';
+import { CSSTransition } from 'react-transition-group';
 import Avatar from '../Avatar/Avatar';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 import Markdown from '../Markdown/Markdown';
+import Hover from '../Hover/Hover';
 import PeerInfoTitle from '../PeerInfoTitle/PeerInfoTitle';
 import getAvatarPlaceholder from '../../utils/getAvatarPlaceholder';
 import styles from './DiscoverCard.css';
@@ -33,7 +35,15 @@ export type Props = Card & {
   onGoToPeer: (peer: Peer) => mixed,
 };
 
-class DiscoverCard extends PureComponent<Props> {
+export type State = {
+  isHovered: boolean,
+};
+
+class DiscoverCard extends PureComponent<Props, State> {
+  state = {
+    isHovered: false,
+  };
+
   handleClick = (event: SyntheticMouseEvent<>): void => {
     // $FlowFixMe
     if (event.target.tagName === 'A' || hasSelection()) {
@@ -44,6 +54,10 @@ class DiscoverCard extends PureComponent<Props> {
     event.stopPropagation();
 
     this.props.onGoToPeer(this.props.peer);
+  };
+
+  handleHover = (hover: boolean): void => {
+    this.setState({ isHovered: hover });
   };
 
   renderAvatar() {
@@ -76,7 +90,7 @@ class DiscoverCard extends PureComponent<Props> {
 
     return (
       <div className={styles.members}>
-        <Icon glyph="person" className={styles.membersIcon} size={20} />
+        <Icon glyph="person" className={styles.membersIcon} size={18} />
         {members}
       </div>
     );
@@ -146,6 +160,7 @@ class DiscoverCard extends PureComponent<Props> {
 
     return (
       <Markdown
+        title={description}
         text={description}
         emojiSize={17}
         className={styles.description}
@@ -155,12 +170,14 @@ class DiscoverCard extends PureComponent<Props> {
 
   render() {
     const { type, joined } = this.props;
+    const { isHovered } = this.state;
     const className = classNames(styles.container, this.props.className);
 
     return (
-      <div
+      <Hover
         className={className}
         onClick={this.handleClick}
+        onHover={this.handleHover}
         id={`discover_card_${this.props.peer.id}`}
       >
         <div className={styles.body}>
@@ -174,16 +191,28 @@ class DiscoverCard extends PureComponent<Props> {
         <footer className={styles.footer}>
           {this.renderMembers()}
           {this.renderCreator()}
-          <Button
-            wide
-            theme="primary"
-            rounded={false}
-            className={styles.button}
+          <CSSTransition
+            in={isHovered}
+            timeout={150}
+            classNames={{
+              enter: styles.enter,
+              enterActive: styles.enterActive,
+              leave: styles.leave,
+              exitActive: styles.leaveActive,
+            }}
+            unmountOnExit
           >
-            <Text id={`DiscoverCard.${joined ? 'enter' : 'open'}.${type}`} />
-          </Button>
+            <Button
+              wide
+              theme="primary"
+              rounded={false}
+              className={styles.button}
+            >
+              <Text id={`DiscoverCard.${joined ? 'enter' : 'open'}.${type}`} />
+            </Button>
+          </CSSTransition>
         </footer>
-      </div>
+      </Hover>
     );
   }
 }

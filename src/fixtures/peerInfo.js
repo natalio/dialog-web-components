@@ -48,12 +48,15 @@ const space = {
 };
 
 const group = {
-  avatar: 'https://avatars2.githubusercontent.com/u/19669610',
+  avatar: 'https://picsum.photos/200/200/?15',
   title: 'Dialog',
   placeholder: 'blue',
   type: 'group',
+  shortname: 'dialog',
   about:
-    'Dialog is a handy and feature rich enterprise multi-device messenger available for server or cloud – Slack-like, but not Slack-limited.',
+    'Dialog is a handy and *feature rich* enterprise _multi-device messenger_ available for server or cloud – Slack-like, but not Slack-limited.' +
+    '\n' +
+    '[Dialog](https://dlg.im) is a handy and feature rich enterprise multi-device messenger available for server or cloud',
   peer: {
     id: 10101,
     type: 'group',

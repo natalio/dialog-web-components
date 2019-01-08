@@ -15,9 +15,9 @@
   --discover-card-shortname-color: color-mod(#000 alpha(50%));
   --discover-card-description-font-size: 15px;
   --discover-card-description-color: color-mod(#000 alpha(40%));
-  --discover-card-description-lines-to-show: 4;
+  --discover-card-description-lines-to-show: 3;
   --discover-card-members-color: color-mod(#000 alpha(40%));
-  --discover-card-members-font-size: var(--default-font-size);
+  --discover-card-members-font-size: var(--default-font-size-small);
   --discover-card-creator-color: color-mod(#000 alpha(50%));
   --discover-card-creator-font-size: var(--default-font-size-small);
 }
@@ -39,6 +39,7 @@
   background-color: var(--discover-card-background-color);
   overflow: hidden;
   cursor: pointer;
+  height: 180px;
 
   &:hover {
     & .button {
@@ -52,7 +53,7 @@
   flex-flow: row nowrap;
   flex: 1 1 auto;
   box-sizing: border-box;
-  padding: var(--default-padding);
+  padding: var(--default-padding) var(--default-padding) 0;
   @mixin flex-fix;
 }
 
@@ -62,6 +63,7 @@
 }
 
 .info {
+  width: 100%;
   overflow: hidden;
 }
 
@@ -94,11 +96,16 @@
   display: -webkit-box;
   font-size: var(--discover-card-description-font-size);
   color: var(--discover-card-description-color);
-  margin-top: 4px;
+  margin-top: 2px;
   line-height: 18px;
   overflow: hidden;
+  max-height: calc(var(--discover-card-description-lines-to-show) * 18px);
   text-overflow: ellipsis;
   -webkit-line-clamp: var(--discover-card-description-lines-to-show);
+
+  & p {
+    margin: 0;
+  }
 }
 
 .description {
@@ -117,10 +124,10 @@
 
 .button {
   position: absolute;
-  top: 0;
+  z-index: 10;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  display: none;
+  transform: translateZ(0);
 }
 
 .membersIcon {
@@ -153,4 +160,24 @@
 
 .creatorTitle {
   margin-left: 6px;
+}
+
+/* Animation */
+.enter {
+  transform: translateY(100%);
+}
+
+.enterActive {
+  transition: transform var(--default-transition-duration) ease;
+  transform: translateY(0%);
+  /* opacity: 1; */
+}
+
+.leave {
+  transform: translateY(0%);
+}
+
+.leaveActive {
+  transition: transform var(--default-transition-duration) ease;
+  transform: translateY(100%);
 }
