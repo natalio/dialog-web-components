@@ -52,6 +52,7 @@
 }
 
 .headerControls {
+  margin-left: var(--default-padding-small);
   flex: 0 0 auto;
 }
 
@@ -106,4 +107,18 @@
     flex: 0 0 100%;
     max-width: 100%;
   }
+}
+
+.spinner {
+  margin-left: calc(var(--default-padding-small) / 2);
+}
+
+.error {
+  width: 100%;
+  text-align: center;
+  background-color: var(--color-danger);
+  font-size: var(--default-font-size);
+  padding: calc(var(--default-padding) / 2) var(--default-padding-small);
+  line-height: 20px;
+  color: #fff;
 }
