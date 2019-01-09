@@ -213,6 +213,7 @@
   padding: 0 8px 0 10px;
   overflow: hidden;
   @mixin flex-fix;
+  @mixin text-overflow-ellipsis;
 }
 
 .optionCountry {
