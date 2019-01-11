@@ -98,6 +98,7 @@ class CountryCodeSelectorOption extends PureComponent<Props> {
         style={style}
         onClick={this.handleClick}
         onMouseEnter={this.handleMouseEnter}
+        title={title}
       >
         {this.renderFlag()}
         <div className={styles.optionLabel}>{title}</div>
