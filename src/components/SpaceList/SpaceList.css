@@ -49,3 +49,21 @@
 .spaceAdd rect {
   fill: var(--space-list-space-add-icon-color);
 }
+
+.plus {
+  transition: all var(--default-transition-duration) ease-in;
+  transform-origin: 50% 50%;
+  color: var(--sidebar-header-plus-color);
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.plusActive {
+  transform: rotate(90deg);
+}

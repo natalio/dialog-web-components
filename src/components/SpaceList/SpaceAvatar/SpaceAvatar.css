@@ -9,6 +9,7 @@
   --space-avatar-text-color: #fff;
   --space-avatar-font-size: 20px;
   --space-avatar-font-size-active: 30px;
+  --avatar-unreaded-color: var(--color-danger);
 }
 
 /* Reset */
@@ -20,6 +21,7 @@
 .container {
   display: inline-block;
   line-height: 0;
+  position: relative;
 }
 
 .container.nonactive g {
@@ -56,4 +58,13 @@
 
 .nonactive text {
   font-size: var(--space-avatar-font-size);
+}
+
+.unreaded {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  position: absolute;
+  background-color: var(--avatar-unreaded-color);
 }

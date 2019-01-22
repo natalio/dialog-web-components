@@ -3,9 +3,9 @@
  * @flow
  */
 
-import type { AvatarPlaceholder } from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+import type { Space } from '../types';
 
 import createSequence from '../../../utils/createSequence';
 import getAvatarText from '../../Avatar/utils/getAvatarText';
@@ -13,14 +13,12 @@ import getAvatarColor from '../../Avatar/utils/getAvatarColor';
 import styles from './SpaceAvatar.css';
 
 export type Props = {
-  id: string,
-  title: string,
   size: number,
-  placeholder: AvatarPlaceholder,
-  image?: string,
   className?: string,
+  onPick: (current: Space) => mixed,
+  space: Space,
   active: boolean,
-  onPick: (current: string) => mixed,
+  unreaded: boolean,
 };
 
 const seq = createSequence();
@@ -44,7 +42,7 @@ class SpaceAvatar extends PureComponent<Props> {
   }
 
   handleClick = (): void => {
-    this.props.onPick(this.props.id);
+    this.props.onPick(this.props.space);
   };
 
   svgShape() {
@@ -71,10 +69,22 @@ class SpaceAvatar extends PureComponent<Props> {
     );
   }
 
-  renderDefs() {
-    const { image, placeholder } = this.props;
+  renderUnreadedDot() {
+    const { unreaded, active } = this.props;
 
-    if (image) {
+    if (!unreaded || active) {
+      return null;
+    }
+
+    return (
+      <div className={styles.unreaded} style={{ top: '66%', right: '14%' }} />
+    );
+  }
+
+  renderDefs() {
+    const { avatar, placeholder } = this.props.space;
+
+    if (avatar) {
       return (
         <pattern
           id={this.svgId}
@@ -87,7 +97,7 @@ class SpaceAvatar extends PureComponent<Props> {
             y="0"
             width="100%"
             height="100%"
-            xlinkHref={image}
+            xlinkHref={avatar}
             preserveAspectRatio="xMidYMid slice"
           />
         </pattern>
@@ -112,9 +122,10 @@ class SpaceAvatar extends PureComponent<Props> {
   }
 
   renderText() {
-    const { title, size, image } = this.props;
+    const { size } = this.props;
+    const { title, avatar } = this.props.space;
 
-    if (image) {
+    if (avatar) {
       return null;
     }
 
@@ -135,7 +146,8 @@ class SpaceAvatar extends PureComponent<Props> {
   }
 
   render() {
-    const { size, id, title, active } = this.props;
+    const { id, title } = this.props.space;
+    const { size, active } = this.props;
     const className = classNames(styles.container, this.props.className, {
       [styles.active]: active,
       [styles.nonactive]: !active,
@@ -166,6 +178,7 @@ class SpaceAvatar extends PureComponent<Props> {
             {this.renderText()}
           </g>
         </svg>
+        {this.renderUnreadedDot()}
       </div>
     );
   }
