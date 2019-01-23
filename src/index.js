@@ -60,6 +60,7 @@ export {
 } from './components/SidebarMenuProfile/SidebarMenuProfile';
 export { default as Markdown } from './components/Markdown/Markdown';
 export { default as SpaceList } from './components/SpaceList/SpaceList';
+export { default as FakeSpaceList } from './components/FakeSpaceList/FakeSpaceList';
 
 // Calls
 export { default as Call } from './components/Call/Call';

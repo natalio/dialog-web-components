@@ -1,0 +1,57 @@
+/**
+ * Copyright 2018 dialog LLC <info@dlg.im>
+ */
+
+@import '../../styles/variables.css';
+
+:root {
+  --fake-space-list-font-family: var(--default-font-family);
+  --fake-space-avatar-color: #c5c5c5;
+  --fake-space-actions-icon-size: 28px;
+  --fake-space-name-height: 14px;
+  --fake-space-name-width: 160px;
+}
+
+/* Reset */
+.container {
+  all: initial;
+}
+
+/* Styles */
+.container {
+  font-family: var(--fake-space-list-font-family);
+}
+
+.avatar {
+  fill: var(--fake-space-avatar-color);
+}
+
+.spaceNameWrapper {
+  border-bottom: 1px solid var(--fake-space-avatar-color);
+  display: flex;
+  align-items: center;
+}
+
+.spaceName {
+  flex: 1 1;
+  position: relative;
+  height: var(--fake-space-name-height);
+}
+
+.spaceNameInner {
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  width: var(--fake-space-name-width);
+  height: var(--fake-space-name-height);
+  background-color: var(--fake-space-avatar-color);
+  border-radius: calc(var(--fake-space-name-height) / 2);
+}
+
+.spaceActionsIcon {
+  background-color: var(--fake-space-avatar-color);
+  width: var(--fake-space-actions-icon-size);
+  height: var(--fake-space-actions-icon-size);
+  border-radius: 50%;
+}
