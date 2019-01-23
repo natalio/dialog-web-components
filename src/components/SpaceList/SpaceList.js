@@ -22,8 +22,8 @@ type variants = {
 export type Props = {
   className?: string,
   width?: number,
-  height?: number,
-  size: ?number,
+  height: number,
+  size: number,
   items: Array<Space>,
   selected: Space,
   unreaded: Array<string>,
@@ -95,30 +95,27 @@ class SpaceList extends PureComponent<Props> {
       return null;
     }
 
+    const { width, height } = this.props;
+
     return (
       <div
         style={{
-          width: this.props.width,
-          maxWidth: this.props.width,
-          height: this.props.height,
-          lineHeight: this.props.height + 'px',
-          borderBottom: '1px solid #dcdcdc',
+          width,
+          maxWidth: width,
+          height,
         }}
+        className={styles.spaceNameWrapper}
       >
-        <span style={{ color: 'rgba(0,0,0,0.8)', fontSize: 18 }}>
-          {this.props.selected.title}
-        </span>
-        <div style={{ display: 'inline-block', float: 'right' }}>
-          <Trigger
-            options={options}
-            renderTrigger={this.renderTrigger}
-            renderChild={this.renderDropdown}
-            openHandler={['onClick']}
-            closeHandler={['onClick']}
-            closeOnDocumentClick
-            closeOnDocumentScroll
-          />
-        </div>
+        <span className={styles.spaceName}>{this.props.selected.title}</span>
+        <Trigger
+          options={options}
+          renderTrigger={this.renderTrigger}
+          renderChild={this.renderDropdown}
+          openHandler={['onClick']}
+          closeHandler={['onClick']}
+          closeOnDocumentClick
+          closeOnDocumentScroll
+        />
       </div>
     );
   };

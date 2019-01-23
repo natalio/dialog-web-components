@@ -76,9 +76,7 @@ class SpaceAvatar extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <div className={styles.unreaded} style={{ top: '66%', right: '14%' }} />
-    );
+    return <div className={styles.unreaded} />;
   }
 
   renderDefs() {

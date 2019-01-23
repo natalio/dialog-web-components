@@ -66,5 +66,7 @@
   border-radius: 50%;
   border: 1px solid #ffffff;
   position: absolute;
+  top: 66%;
+  right: 14%;
   background-color: var(--avatar-unreaded-color);
 }

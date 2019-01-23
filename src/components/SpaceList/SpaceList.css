@@ -7,6 +7,9 @@
 :root {
   --space-list-space-add-default-color: var(--color-primary);
   --space-list-space-add-icon-color: #ffffff;
+  --space-name-wrapper-color: var(--indigo);
+  --space-name-font-size: var(--default-font-size-large);
+  --space-name-color: color-mod(#000 alpha(80%));
 }
 
 /* Reset */
@@ -53,7 +56,7 @@
 .plus {
   transition: all var(--default-transition-duration) ease-in;
   transform-origin: 50% 50%;
-  color: var(--sidebar-header-plus-color);
+  color: var(--space-name-wrapper-color);
 
   &:hover {
     opacity: 0.8;
@@ -66,4 +69,18 @@
 
 .plusActive {
   transform: rotate(90deg);
+}
+
+.spaceNameWrapper {
+  border-bottom: 1px solid var(--space-name-wrapper-color);
+  display: flex;
+  align-items: center;
+}
+
+.spaceName {
+  flex: 1 1;
+  letter-spacing: -0.3px;
+  font-size: var(--space-name-font-size);
+  font-weight: 500;
+  color: var(--space-name-color);
 }
