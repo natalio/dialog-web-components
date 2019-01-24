@@ -6,6 +6,7 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import Text from '@dlghq/react-l10n/src/Text';
+
 import type { Space } from './types';
 import Trigger from '../Trigger/Trigger';
 import Dropdown from '../Dropdown/Dropdown';
