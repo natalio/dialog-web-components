@@ -1,6 +1,6 @@
 /*
  * Copyright 2019 dialog LLC <info@dlg.im>
- * @flow
+ * @flow strict
  */
 
 import type { Group, Peer } from '@dlghq/dialog-types';
@@ -12,7 +12,7 @@ import Markdown from '../Markdown/Markdown';
 import PeerInfoTitle from '../PeerInfoTitle/PeerInfoTitle';
 import styles from './ActivityProfile.css';
 
-export type Props = {
+export type ActivityGroupProfileProps = {
   className?: string,
   info: Group,
   children: Node,
@@ -20,7 +20,7 @@ export type Props = {
   onCreatorClick: (peer: Peer) => mixed,
 };
 
-class ActivityGroupProfile extends PureComponent<Props> {
+export class ActivityGroupProfile extends PureComponent<ActivityGroupProfileProps> {
   handleGoToCreator = () => {
     const creator = this.getCreator();
 
@@ -147,5 +147,3 @@ class ActivityGroupProfile extends PureComponent<Props> {
     );
   }
 }
-
-export default ActivityGroupProfile;

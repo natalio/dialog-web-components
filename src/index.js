@@ -1,6 +1,6 @@
 /*
  * Copyright 2019 dialog LLC <info@dlg.im>
- * @flow
+ * @flow strict
  */
 
 // Interface
@@ -161,14 +161,18 @@ export {
   default as FeedbackModal,
 } from './components/FeedbackModal/FeedbackModal';
 export { default as AdminModal } from './components/AdminModal/AdminModal';
-export { default as EditSpaceModal } from './components/EditSpaceModal/EditSpaceModal';
+export {
+  default as EditSpaceModal,
+} from './components/EditSpaceModal/EditSpaceModal';
 export {
   default as CreateSpaceModal,
 } from './components/CreateSpaceModal/CreateSpaceModal';
 export {
   default as SelectCertificateModal,
 } from './components/SelectCertificateModal/SelectCertificateModal';
-export { default as SpaceInfoModal } from './components/SpaceInfoModal/SpaceInfoModal';
+export {
+  default as SpaceInfoModal,
+} from './components/SpaceInfoModal/SpaceInfoModal';
 
 // Sidebar
 export {
@@ -273,9 +277,6 @@ export {
   default as ActivityListSwitcher,
 } from './components/ActivityList/ActivityListSwitcher';
 export {
-  default as ActivityProfile,
-} from './components/ActivityProfile/ActivityProfile';
-export {
   default as ActivityInvite,
 } from './components/ActivityInvite/ActivityInvite';
 export {
@@ -290,6 +291,7 @@ export {
 export {
   default as ActivityPinned,
 } from './components/ActivityPinned/ActivityPinned';
+export * from './components/ActivityProfile/ActivityProfile';
 
 // Helpers
 export { default as Trigger } from './components/Trigger/Trigger';
