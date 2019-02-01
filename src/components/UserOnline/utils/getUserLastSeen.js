@@ -3,12 +3,12 @@
  * @flow strict
  */
 
-import type { UserOnlineState } from '../components/UserOnline/UserOnline';
+import type { Offline } from '../UserOnline';
 import differenceInSeconds from 'date-fns/difference_in_seconds';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
-import getDateFnsLocale from './getDateFnsLocale';
+import getDateFnsLocale from '../../../utils/getDateFnsLocale';
 
-export function getUserLastSeenDate(online: UserOnlineState): Date {
+export function getUserLastSeenDate(online: Offline): Date {
   const { lastSeen, updateDate } = online;
 
   if (lastSeen) {
@@ -22,10 +22,7 @@ export function getUserLastSeenDate(online: UserOnlineState): Date {
   return updateDate;
 }
 
-export function getUserLastSeen(
-  online: UserOnlineState,
-  locale: string,
-): string {
+export function getUserLastSeen(online: Offline, locale: string): string {
   return distanceInWordsToNow(getUserLastSeenDate(online), {
     addSuffix: true,
     includeSeconds: false,

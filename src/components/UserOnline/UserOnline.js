@@ -4,45 +4,39 @@
  */
 
 import React from 'react';
-import {
-  Text,
-  LocalizationContextType,
-  type ProviderContext,
-} from '@dlghq/react-l10n';
+import { Text, L10n } from '@dlghq/react-l10n';
 import classNames from 'classnames';
-import { getUserLastSeen } from '../../utils/getUserLastSeen';
+import { getUserLastSeen } from './utils/getUserLastSeen';
 import styles from './UserOnline.css';
 
-export type UserOnlineState = {
-  online: boolean,
-  updateDate: Date,
-  lastSeen: ?Date,
-};
+export type Online = { online: true, updateDate: Date };
+export type Offline = { online: false, updateDate: Date, lastSeen?: Date };
+export type UserOnlineState = Online | Offline;
 
 export type Props = {
   className?: string,
-  online: ?UserOnlineState,
+  online: UserOnlineState,
 };
 
-export function UserOnline(props: Props, context: ProviderContext) {
+export function UserOnline(props: Props) {
   const { online } = props;
   const classes = classNames(styles.container, props.className);
-
-  if (!online) {
-    return <Text className={classes} id="UserOnline.offline" />;
-  }
 
   if (online.online) {
     return <Text className={classes} id="UserOnline.online" />;
   }
 
-  return (
-    <span className={classes}>
-      {getUserLastSeen(online, context.l10n.locale)}
-    </span>
-  );
-}
+  if (online.lastSeen) {
+    return (
+      <L10n>
+        {({ l10n }) => (
+          <span className={classes}>
+            {getUserLastSeen(online, l10n.locale)}
+          </span>
+        )}
+      </L10n>
+    );
+  }
 
-UserOnline.contextTypes = {
-  l10n: LocalizationContextType,
-};
+  return <Text className={classes} id="UserOnline.offline" />;
+}
