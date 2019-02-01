@@ -94,7 +94,7 @@
 }
 
 .contactContent {
-  margin-top: var(--default-padding-small);
+  margin-top: calc(var(--default-padding-small) * 2);
 
   &:first-child {
     margin-top: 0;

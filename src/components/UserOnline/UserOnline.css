@@ -1,0 +1,22 @@
+/*
+ * Copyright 2019 dialog LLC <info@dlg.im>
+ */
+
+@import '../../styles/variables.css';
+
+:root {
+  --user-online-font-family: var(--default-font-family);
+  --user-online-font-size: var(--default-font-size);
+}
+
+/* Reset */
+.container {
+  all: initial;
+}
+
+.container {
+  display: inline-block;
+  font-family: var(--user-online-font-family);
+  font-size: var(--user-online-font-size);
+  text-transform: lowercase;
+}
